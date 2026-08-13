@@ -11,6 +11,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Supabase Config -->
+    <script src="supabase-config.js"></script>
+    
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
@@ -198,10 +204,6 @@
             list-style: none;
         }
         
-        .admin-sidebar .sidebar-menu li {
-            padding: 0;
-        }
-        
         .admin-sidebar .sidebar-menu li a {
             display: flex;
             align-items: center;
@@ -215,12 +217,7 @@
             text-decoration: none;
         }
         
-        .admin-sidebar .sidebar-menu li a:hover {
-            background: #fce4ec;
-            color: #E0006C;
-            border-left-color: #E0006C;
-        }
-        
+        .admin-sidebar .sidebar-menu li a:hover,
         .admin-sidebar .sidebar-menu li a.active {
             background: #fce4ec;
             color: #E0006C;
@@ -1277,10 +1274,19 @@
 </div>
 
 <!-- ============================================================
-     JAVASCRIPT - COMPLETE ADMIN FUNCTIONALITY
+     JAVASCRIPT - COMPLETE ADMIN WITH SUPABASE
      ============================================================ -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
+        
+        // ============================================================
+        // CHECK IF SUPABASE IS LOADED
+        // ============================================================
+        if (typeof window.supabaseFunctions === 'undefined') {
+            console.error('❌ Supabase functions not loaded! Make sure supabase-config.js is loaded first.');
+            showToast('System error. Please refresh the page.', 'error');
+            return;
+        }
         
         // ============================================================
         // LOAD ADMIN SESSION
@@ -1289,32 +1295,6 @@
         if (adminSession) {
             document.getElementById('adminName').textContent = adminSession.name || 'Admin';
             document.getElementById('adminAvatar').textContent = (adminSession.name || 'Admin').charAt(0);
-        }
-        
-        // ============================================================
-        // INITIALIZE DATA
-        // ============================================================
-        let users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
-        let currentPage = 1;
-        const itemsPerPage = 5;
-        let currentModalUserId = null;
-        let chart1 = null;
-        let chart2 = null;
-        
-        // Create default admin if no users exist
-        if (users.length === 0) {
-            users = [{
-                id: 'admin_' + Date.now(),
-                fullName: 'Admin User',
-                email: 'admin@nairobiraha.com',
-                phone: '0712345678',
-                password: 'Admin@123',
-                role: 'admin',
-                location: 'Nairobi CBD',
-                status: 'approved',
-                createdAt: new Date().toISOString()
-            }];
-            localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
         }
         
         // ============================================================
@@ -1348,6 +1328,16 @@
         const notificationBtn = document.getElementById('notificationBtn');
         
         // ============================================================
+        // STATE
+        // ============================================================
+        let users = [];
+        let currentPage = 1;
+        const itemsPerPage = 5;
+        let currentModalUserId = null;
+        let chart1 = null;
+        let chart2 = null;
+        
+        // ============================================================
         // SET CURRENT DATE
         // ============================================================
         const now = new Date();
@@ -1359,22 +1349,58 @@
         });
         
         // ============================================================
+        // LOAD USERS FROM SUPABASE
+        // ============================================================
+        async function loadUsers() {
+            try {
+                showToast('Loading users...', 'info');
+                
+                const result = await window.supabaseFunctions.getUsers();
+                
+                if (result.success) {
+                    users = result.data || [];
+                    console.log(`✅ Loaded ${users.length} users from Supabase`);
+                    updateStats();
+                    renderUsers();
+                    initCharts();
+                    showToast(`Loaded ${users.length} users`, 'success');
+                } else {
+                    console.error('❌ Failed to load users:', result.error);
+                    showToast('Failed to load users: ' + result.error, 'error');
+                    // Fallback to localStorage if Supabase fails
+                    users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
+                    updateStats();
+                    renderUsers();
+                }
+            } catch (error) {
+                console.error('❌ Error loading users:', error);
+                showToast('Error loading users. Please refresh.', 'error');
+                // Fallback to localStorage
+                users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
+                updateStats();
+                renderUsers();
+            }
+        }
+        
+        // ============================================================
         // UPDATE STATS
         // ============================================================
         function updateStats() {
             const total = users.length;
             const pending = users.filter(u => u.status === 'pending').length;
             const approved = users.filter(u => u.status === 'approved').length;
-            const today = users.filter(u => {
-                const created = new Date(u.createdAt);
-                const todayDate = new Date();
-                return created.toDateString() === todayDate.toDateString();
+            const rejected = users.filter(u => u.status === 'rejected').length;
+            
+            const today = new Date();
+            const newTodayCount = users.filter(u => {
+                const created = new Date(u.created_at || u.createdAt);
+                return created.toDateString() === today.toDateString();
             }).length;
             
             totalUsers.textContent = total;
             pendingUsers.textContent = pending;
             approvedUsers.textContent = approved;
-            newToday.textContent = today;
+            newToday.textContent = newTodayCount;
             pendingBadge.textContent = pending;
             notificationCount.textContent = pending;
         }
@@ -1389,16 +1415,16 @@
             
             let filtered = users.filter(user => {
                 const matchesSearch = 
-                    user.fullName.toLowerCase().includes(searchTerm) ||
-                    user.email.toLowerCase().includes(searchTerm) ||
-                    user.phone.includes(searchTerm);
+                    (user.full_name || '').toLowerCase().includes(searchTerm) ||
+                    (user.email || '').toLowerCase().includes(searchTerm) ||
+                    (user.phone || '').includes(searchTerm);
                 const matchesRole = roleFilter === 'all' || user.role === roleFilter;
                 const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
                 return matchesSearch && matchesRole && matchesStatus;
             });
             
             // Sort by newest first
-            filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            filtered.sort((a, b) => new Date(b.created_at || b.createdAt) - new Date(a.created_at || a.createdAt));
             
             const totalItems = filtered.length;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -1428,25 +1454,27 @@
                     <tr>
                         <td>
                             <div class="user-info">
-                                <div class="user-avatar">${user.fullName.charAt(0)}</div>
+                                <div class="user-avatar">${(user.full_name || 'U').charAt(0)}</div>
                                 <div class="user-details">
-                                    <div class="name">${user.fullName}</div>
-                                    <div class="email">${user.email}</div>
+                                    <div class="name">${user.full_name || 'Unknown'}</div>
+                                    <div class="email">${user.email || 'No email'}</div>
                                 </div>
                             </div>
                         </td>
-                        <td><span class="role-badge">${user.role}</span></td>
+                        <td><span class="role-badge">${user.role || 'client'}</span></td>
                         <td>${user.location || 'N/A'}</td>
-                        <td><span class="status-badge ${user.status}">${user.status}</span></td>
-                        <td>${new Date(user.createdAt).toLocaleDateString()}</td>
+                        <td><span class="status-badge ${user.status || 'pending'}">${user.status || 'pending'}</span></td>
+                        <td>${new Date(user.created_at || user.createdAt).toLocaleDateString()}</td>
                         <td>
                             <div class="action-buttons">
                                 <button class="btn-view" onclick="viewUser('${user.id}')"><i class="fas fa-eye"></i></button>
-                                ${user.status === 'pending' ? `
+                                ${(user.status === 'pending') ? `
                                     <button class="btn-approve" onclick="approveUser('${user.id}')"><i class="fas fa-check"></i></button>
                                     <button class="btn-reject" onclick="rejectUser('${user.id}')"><i class="fas fa-times"></i></button>
                                 ` : ''}
-                                <button class="btn-delete" onclick="deleteUser('${user.id}')"><i class="fas fa-trash"></i></button>
+                                ${user.role !== 'admin' ? `
+                                    <button class="btn-delete" onclick="deleteUser('${user.id}')"><i class="fas fa-trash"></i></button>
+                                ` : ''}
                             </div>
                         </td>
                     </tr>
@@ -1474,7 +1502,7 @@
         };
         
         // ============================================================
-        // USER ACTIONS
+        // USER ACTIONS - WITH SUPABASE
         // ============================================================
         window.viewUser = function(userId) {
             const user = users.find(u => u.id === userId);
@@ -1484,19 +1512,19 @@
             modalBody.innerHTML = `
                 <div class="user-detail">
                     <span class="label">Full Name</span>
-                    <span class="value"><strong>${user.fullName}</strong></span>
+                    <span class="value"><strong>${user.full_name || 'N/A'}</strong></span>
                 </div>
                 <div class="user-detail">
                     <span class="label">Email</span>
-                    <span class="value">${user.email}</span>
+                    <span class="value">${user.email || 'N/A'}</span>
                 </div>
                 <div class="user-detail">
                     <span class="label">Phone</span>
-                    <span class="value">${user.phone}</span>
+                    <span class="value">${user.phone || 'N/A'}</span>
                 </div>
                 <div class="user-detail">
                     <span class="label">Role</span>
-                    <span class="value"><span class="role-badge">${user.role}</span></span>
+                    <span class="value"><span class="role-badge">${user.role || 'client'}</span></span>
                 </div>
                 <div class="user-detail">
                     <span class="label">Location</span>
@@ -1504,11 +1532,11 @@
                 </div>
                 <div class="user-detail">
                     <span class="label">Status</span>
-                    <span class="value"><span class="status-badge ${user.status}">${user.status}</span></span>
+                    <span class="value"><span class="status-badge ${user.status || 'pending'}">${user.status || 'pending'}</span></span>
                 </div>
                 <div class="user-detail">
                     <span class="label">Joined</span>
-                    <span class="value">${new Date(user.createdAt).toLocaleString()}</span>
+                    <span class="value">${new Date(user.created_at || user.createdAt).toLocaleString()}</span>
                 </div>
                 ${user.bio ? `
                 <div class="user-detail">
@@ -1523,45 +1551,103 @@
             userModal.classList.add('show');
         };
         
-        window.approveUser = function(userId) {
+        window.approveUser = async function(userId) {
             const user = users.find(u => u.id === userId);
             if (!user) return;
             
-            if (confirm(`Approve ${user.fullName}?`)) {
-                user.status = 'approved';
-                localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
-                updateStats();
-                renderUsers();
-                showToast(`${user.fullName} has been approved! ✅`, 'success');
-                userModal.classList.remove('show');
+            if (confirm(`Approve ${user.full_name || user.fullName}?`)) {
+                try {
+                    const result = await window.supabaseFunctions.updateUserStatus(userId, 'approved');
+                    
+                    if (result.success) {
+                        // Update local data
+                        user.status = 'approved';
+                        localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
+                        updateStats();
+                        renderUsers();
+                        showToast(`${user.full_name || user.fullName} has been approved! ✅`, 'success');
+                        userModal.classList.remove('show');
+                        
+                        // Log activity
+                        await window.supabaseFunctions.logActivity(
+                            userId,
+                            'admin_approve',
+                            `User ${user.full_name || user.fullName} approved by admin`
+                        );
+                    } else {
+                        showToast('Failed to approve user: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    console.error('Approve error:', error);
+                    showToast('Error approving user', 'error');
+                }
             }
         };
         
-        window.rejectUser = function(userId) {
+        window.rejectUser = async function(userId) {
             const user = users.find(u => u.id === userId);
             if (!user) return;
             
-            if (confirm(`Reject ${user.fullName}?`)) {
-                user.status = 'rejected';
-                localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
-                updateStats();
-                renderUsers();
-                showToast(`${user.fullName} has been rejected.`, 'info');
-                userModal.classList.remove('show');
+            if (confirm(`Reject ${user.full_name || user.fullName}?`)) {
+                try {
+                    const result = await window.supabaseFunctions.updateUserStatus(userId, 'rejected');
+                    
+                    if (result.success) {
+                        user.status = 'rejected';
+                        localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
+                        updateStats();
+                        renderUsers();
+                        showToast(`${user.full_name || user.fullName} has been rejected.`, 'info');
+                        userModal.classList.remove('show');
+                        
+                        await window.supabaseFunctions.logActivity(
+                            userId,
+                            'admin_reject',
+                            `User ${user.full_name || user.fullName} rejected by admin`
+                        );
+                    } else {
+                        showToast('Failed to reject user: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    console.error('Reject error:', error);
+                    showToast('Error rejecting user', 'error');
+                }
             }
         };
         
-        window.deleteUser = function(userId) {
+        window.deleteUser = async function(userId) {
             const user = users.find(u => u.id === userId);
             if (!user) return;
             
-            if (confirm(`Delete ${user.fullName} permanently? This cannot be undone.`)) {
-                users = users.filter(u => u.id !== userId);
-                localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
-                updateStats();
-                renderUsers();
-                showToast(`User deleted successfully.`, 'info');
-                userModal.classList.remove('show');
+            if (user.role === 'admin') {
+                showToast('Cannot delete admin account', 'error');
+                return;
+            }
+            
+            if (confirm(`Delete ${user.full_name || user.fullName} permanently? This cannot be undone.`)) {
+                try {
+                    const result = await window.supabaseFunctions.deleteUser(userId);
+                    
+                    if (result.success) {
+                        users = users.filter(u => u.id !== userId);
+                        localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
+                        updateStats();
+                        renderUsers();
+                        showToast(`User deleted successfully.`, 'info');
+                        userModal.classList.remove('show');
+                        
+                        await window.supabaseFunctions.logActivity(
+                            userId,
+                            'admin_delete',
+                            `User ${user.full_name || user.fullName} deleted by admin`
+                        );
+                    } else {
+                        showToast('Failed to delete user: ' + result.error, 'error');
+                    }
+                } catch (error) {
+                    console.error('Delete error:', error);
+                    showToast('Error deleting user', 'error');
+                }
             }
         };
         
@@ -1605,7 +1691,6 @@
             adminSidebar.classList.toggle('show');
         });
         
-        // Close sidebar on outside click (mobile)
         document.addEventListener('click', (e) => {
             if (window.innerWidth <= 992) {
                 if (!e.target.closest('.admin-sidebar') && !e.target.closest('.sidebar-toggle')) {
@@ -1643,6 +1728,10 @@
         // CHARTS
         // ============================================================
         function initCharts() {
+            // Destroy existing charts
+            if (chart1) { chart1.destroy(); chart1 = null; }
+            if (chart2) { chart2.destroy(); chart2 = null; }
+            
             // Registrations Chart
             const ctx1 = document.getElementById('registrationsChart').getContext('2d');
             const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -1670,22 +1759,11 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: false
-                        }
+                        legend: { display: false }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: 'rgba(0,0,0,0.05)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            }
-                        }
+                        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                        x: { grid: { display: false } }
                     }
                 }
             });
@@ -1716,11 +1794,7 @@
                     plugins: {
                         legend: {
                             position: 'bottom',
-                            labels: {
-                                padding: 15,
-                                usePointStyle: true,
-                                pointStyle: 'circle'
-                            }
+                            labels: { padding: 15, usePointStyle: true, pointStyle: 'circle' }
                         }
                     },
                     cutout: '65%'
@@ -1729,17 +1803,16 @@
         }
         
         function generateRegistrationData() {
-            // Generate realistic looking data based on users
             const data = [];
             const now = new Date();
             for (let i = 6; i >= 0; i--) {
                 const date = new Date(now);
                 date.setDate(date.getDate() - i);
                 const count = users.filter(u => {
-                    const created = new Date(u.createdAt);
+                    const created = new Date(u.created_at || u.createdAt);
                     return created.toDateString() === date.toDateString();
                 }).length;
-                data.push(count || Math.floor(Math.random() * 5) + 1);
+                data.push(count || 0);
             }
             return data;
         }
@@ -1784,22 +1857,54 @@
                 toast.classList.remove('show');
                 adminSidebar.classList.remove('show');
             }
-            // Ctrl+R to refresh data
             if (e.key === 'r' && e.ctrlKey) {
                 e.preventDefault();
-                renderUsers();
-                showToast('Data refreshed!', 'success');
+                loadUsers();
+                showToast('Refreshing data...', 'info');
             }
         });
         
         // ============================================================
+        // CREATE DEFAULT ADMIN IN SUPABASE IF NEEDED
+        // ============================================================
+        async function ensureAdminExists() {
+            try {
+                const result = await window.supabaseFunctions.getUserByEmail('admin@nairobiraha.com');
+                
+                if (!result.success || !result.data) {
+                    // Create default admin
+                    const adminData = {
+                        fullName: 'Admin User',
+                        email: 'admin@nairobiraha.com',
+                        phone: '0712345678',
+                        password: 'Admin@123',
+                        role: 'admin',
+                        location: 'Nairobi CBD',
+                        bio: 'System Administrator',
+                        status: 'approved'
+                    };
+                    
+                    const createResult = await window.supabaseFunctions.createUser(adminData);
+                    if (createResult.success) {
+                        console.log('✅ Default admin created in Supabase!');
+                        console.log('📧 Email: admin@nairobiraha.com');
+                        console.log('🔑 Password: Admin@123');
+                    }
+                } else {
+                    console.log('✅ Admin account exists in Supabase');
+                }
+            } catch (error) {
+                console.log('ℹ️ Admin check: Could not verify admin account', error);
+            }
+        }
+        
+        // ============================================================
         // INITIALIZE
         // ============================================================
-        updateStats();
-        renderUsers();
-        initCharts();
+        await ensureAdminExists();
+        await loadUsers();
         
-        console.log('✅ Admin Dashboard Loaded Successfully!');
+        console.log('✅ Admin Dashboard with Supabase Loaded Successfully!');
         console.log(`👥 Total Users: ${users.length}`);
         console.log(`⏳ Pending Approvals: ${users.filter(u => u.status === 'pending').length}`);
         console.log('📧 Admin: admin@nairobiraha.com');
