@@ -5,7 +5,7 @@
 const SUPABASE_URL = 'https://tikhrcjjaykmrykelnbi.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_ZzF19r4V9_wZpMgkiPnF8Q_AhaVOB_G';
 
-// Initialize Supabase client
+// Initialize Supabase client - ONLY ONCE
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ============================================================
@@ -21,7 +21,7 @@ async function createUser(userData) {
                 full_name: userData.fullName,
                 email: userData.email,
                 phone: userData.phone,
-                password_hash: userData.password, // In production, hash this!
+                password_hash: userData.password,
                 role: userData.role || 'client',
                 location: userData.location || '',
                 bio: userData.bio || '',
@@ -148,7 +148,7 @@ async function deleteUser(userId) {
 }
 
 // ============================================================
-// ESCORTS TABLE FUNCTIONS
+// ESCORTS FUNCTIONS
 // ============================================================
 
 // Get all approved escorts
@@ -206,32 +206,8 @@ async function getEscortById(escortId) {
     }
 }
 
-// Update escort profile
-async function updateEscortProfile(escortId, profileData) {
-    try {
-        const { data, error } = await supabase
-            .from('users')
-            .update({
-                bio: profileData.bio,
-                location: profileData.location,
-                is_premium: profileData.isPremium || false,
-                is_featured: profileData.isFeatured || false,
-                is_verified: profileData.isVerified || false,
-                updated_at: new Date().toISOString()
-            })
-            .eq('id', escortId)
-            .select();
-        
-        if (error) throw error;
-        return { success: true, data: data[0] };
-    } catch (error) {
-        console.error('Update escort profile error:', error);
-        return { success: false, error: error.message };
-    }
-}
-
 // ============================================================
-// REVIEWS TABLE FUNCTIONS
+// REVIEWS FUNCTIONS
 // ============================================================
 
 // Get reviews for an escort
@@ -279,7 +255,7 @@ async function createReview(reviewData) {
 }
 
 // ============================================================
-// MESSAGES TABLE FUNCTIONS
+// MESSAGES FUNCTIONS
 // ============================================================
 
 // Send message
@@ -320,84 +296,6 @@ async function getUserMessages(userId) {
         return { success: true, data: data };
     } catch (error) {
         console.error('Get user messages error:', error);
-        return { success: false, error: error.message };
-    }
-}
-
-// Mark message as read
-async function markMessageRead(messageId) {
-    try {
-        const { data, error } = await supabase
-            .from('messages')
-            .update({ is_read: true })
-            .eq('id', messageId)
-            .select();
-        
-        if (error) throw error;
-        return { success: true, data: data[0] };
-    } catch (error) {
-        console.error('Mark message read error:', error);
-        return { success: false, error: error.message };
-    }
-}
-
-// ============================================================
-// FAVORITES TABLE FUNCTIONS
-// ============================================================
-
-// Add favorite
-async function addFavorite(userId, escortId) {
-    try {
-        const { data, error } = await supabase
-            .from('favorites')
-            .insert([{
-                user_id: userId,
-                escort_id: escortId,
-                created_at: new Date().toISOString()
-            }])
-            .select();
-        
-        if (error) throw error;
-        return { success: true, data: data[0] };
-    } catch (error) {
-        console.error('Add favorite error:', error);
-        return { success: false, error: error.message };
-    }
-}
-
-// Remove favorite
-async function removeFavorite(userId, escortId) {
-    try {
-        const { error } = await supabase
-            .from('favorites')
-            .delete()
-            .eq('user_id', userId)
-            .eq('escort_id', escortId);
-        
-        if (error) throw error;
-        return { success: true };
-    } catch (error) {
-        console.error('Remove favorite error:', error);
-        return { success: false, error: error.message };
-    }
-}
-
-// Get user favorites
-async function getUserFavorites(userId) {
-    try {
-        const { data, error } = await supabase
-            .from('favorites')
-            .select(`
-                *,
-                escort:escort_id (full_name, email, location)
-            `)
-            .eq('user_id', userId)
-            .order('created_at', { ascending: false });
-        
-        if (error) throw error;
-        return { success: true, data: data };
-    } catch (error) {
-        console.error('Get user favorites error:', error);
         return { success: false, error: error.message };
     }
 }
@@ -566,22 +464,18 @@ async function searchEscorts(searchTerm, filters = {}) {
             .eq('role', 'escort')
             .eq('status', 'approved');
         
-        // Apply search term
         if (searchTerm) {
             query = query.ilike('full_name', `%${searchTerm}%`);
         }
         
-        // Apply location filter
         if (filters.location) {
             query = query.eq('location', filters.location);
         }
         
-        // Apply premium filter
         if (filters.premium) {
             query = query.eq('is_premium', true);
         }
         
-        // Apply verified filter
         if (filters.verified) {
             query = query.eq('is_verified', true);
         }
@@ -599,9 +493,7 @@ async function searchEscorts(searchTerm, filters = {}) {
 // ============================================================
 // EXPORT FUNCTIONS
 // ============================================================
-// Make functions available globally
 window.supabaseFunctions = {
-    // Users
     createUser,
     getUsers,
     getUserByEmail,
@@ -609,45 +501,21 @@ window.supabaseFunctions = {
     updateUserStatus,
     updateUser,
     deleteUser,
-    
-    // Escorts
     getEscorts,
     getPremiumEscorts,
     getEscortById,
-    updateEscortProfile,
-    
-    // Reviews
     getEscortReviews,
     createReview,
-    
-    // Messages
     sendMessage,
     getUserMessages,
-    markMessageRead,
-    
-    // Favorites
-    addFavorite,
-    removeFavorite,
-    getUserFavorites,
-    
-    // Statistics
     getStats,
-    
-    // Authentication
     loginUser,
     loginAdmin,
-    
-    // Activity
     logActivity,
     getUserActivity,
-    
-    // Search
     searchEscorts,
-    
-    // Supabase client
     supabase
 };
 
 console.log('✅ Supabase Functions Loaded Successfully!');
 console.log('📊 Connected to:', SUPABASE_URL);
-console.log('🔑 Using key:', SUPABASE_KEY.substring(0, 20) + '...');
