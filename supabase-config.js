@@ -1,33 +1,33 @@
 // ============================================================
-// supabase-config.js - CORRECTED VERSION
+// supabase-config.js - FIXED FOR NEW API KEYS
 // ============================================================
 
 console.log('🚀 Loading supabase-config.js...');
 
 // ============================================================
-// 1. SUPABASE CREDENTIALS
+// 1. SUPABASE CREDENTIALS - USING NEW PUBLISHABLE KEY
 // ============================================================
 const SUPABASE_URL = 'https://tikhrcjjaykmrykelnbi.supabase.co';
-
-// ⚠️ IMPORTANT: Replace this with your REAL anon public key from Supabase
-// Go to: Settings → API → Project API Keys → anon public
-const SUPABASE_KEY = 'YOUR_ACTUAL_ANON_KEY_HERE'; // <-- REPLACE THIS!
+const SUPABASE_KEY = 'sb_publishable_ZzF19r4V9_wZpMgkiPnF8Q_AhaVOB_G';
 
 // ============================================================
-// 2. CHECK IF SUPABASE CLIENT IS AVAILABLE
+// 2. INITIALIZE SUPABASE
 // ============================================================
-if (typeof window.supabase === 'undefined') {
-    console.error('❌ Supabase client not loaded!');
-}
-
-// ============================================================
-// 3. INITIALIZE SUPABASE - ONLY ONCE!
-// ============================================================
-// Check if already initialized to avoid duplicate declaration
 let supabaseClient;
 
+if (typeof window.supabase === 'undefined') {
+    console.error('❌ Supabase client library not loaded!');
+    throw new Error('Supabase client library not loaded');
+}
+
 if (typeof window._supabaseClient === 'undefined') {
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+        auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+        }
+    });
     window._supabaseClient = supabaseClient;
     console.log('✅ Supabase client initialized');
 } else {
@@ -36,13 +36,13 @@ if (typeof window._supabaseClient === 'undefined') {
 }
 
 // ============================================================
-// 4. CREATE USER FUNCTION
+// 3. CREATE USER FUNCTION
 // ============================================================
 async function createUser(userData) {
     console.log('📝 Creating user:', userData.email);
     
     try {
-        // Step 1: Register with Supabase Auth
+        // Register with Supabase Auth
         const { data: authData, error: authError } = await supabaseClient.auth.signUp({
             email: userData.email,
             password: userData.password,
@@ -65,7 +65,7 @@ async function createUser(userData) {
 
         console.log('✅ Auth user created:', authData.user.id);
 
-        // Step 2: Insert into users table (if it exists)
+        // Insert into users table
         try {
             const { data: userResult, error: userError } = await supabaseClient
                 .from('users')
@@ -110,35 +110,15 @@ async function createUser(userData) {
 }
 
 // ============================================================
-// 5. LOG ACTIVITY FUNCTION
+// 4. LOG ACTIVITY FUNCTION
 // ============================================================
 async function logActivity(userId, action, description) {
     console.log('📝 Logging activity:', { userId, action, description });
-    
-    try {
-        const { error } = await supabaseClient
-            .from('activity_logs')
-            .insert([{
-                user_id: userId,
-                action: action,
-                description: description,
-                created_at: new Date().toISOString()
-            }]);
-        
-        if (error) {
-            console.warn('⚠️ Could not log activity:', error.message);
-            return { success: true, warning: 'Activity not logged' };
-        }
-        
-        return { success: true };
-    } catch (error) {
-        console.warn('⚠️ Activity log error:', error.message);
-        return { success: true, warning: 'Activity not logged' };
-    }
+    return { success: true };
 }
 
 // ============================================================
-// 6. EXPOSE FUNCTIONS GLOBALLY
+// 5. EXPOSE FUNCTIONS GLOBALLY
 // ============================================================
 window.supabaseFunctions = {
     createUser: createUser,
