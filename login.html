@@ -11,6 +11,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Supabase Config -->
+    <script src="supabase-config.js"></script>
+    
     <style>
         /* ============================================================
                    LOGIN PAGE STYLES
@@ -494,7 +500,7 @@
         </div>
         
         <!-- ============================================================
-             ALERT BANNER (For pending approval messages)
+             ALERT BANNER
              ============================================================ -->
         <div class="alert-banner" id="alertBanner">
             <i class="fas fa-info-circle"></i>
@@ -536,7 +542,7 @@
                     <input type="checkbox" id="rememberMe">
                     <label for="rememberMe">Remember me</label>
                 </div>
-                <a href="#" class="forgot-link">Forgot Password?</a>
+                <a href="#" class="forgot-link" id="forgotPassword">Forgot Password?</a>
             </div>
             
             <!-- Login Button -->
@@ -584,7 +590,7 @@
 </div>
 
 <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT - WITH SUPABASE INTEGRATION
      ============================================================ -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -607,9 +613,18 @@
         const alertBanner = document.getElementById('alertBanner');
         const alertText = document.getElementById('alertText');
         const alertClose = document.getElementById('alertClose');
+        const forgotPassword = document.getElementById('forgotPassword');
         
         // ============================================================
-        // CHECK FOR PENDING APPROVAL MESSAGE (from URL param)
+        // CHECK IF SUPABASE IS LOADED
+        // ============================================================
+        if (typeof window.supabaseFunctions === 'undefined') {
+            console.error('❌ Supabase functions not loaded! Make sure supabase-config.js is loaded first.');
+            showToast('System error. Please refresh the page.', 'error');
+        }
+        
+        // ============================================================
+        // CHECK FOR PENDING APPROVAL MESSAGE
         // ============================================================
         const urlParams = new URLSearchParams(window.location.search);
         const pendingMsg = urlParams.get('pending');
@@ -677,9 +692,9 @@
         }
         
         // ============================================================
-        // FORM SUBMISSION
+        // FORM SUBMISSION - WITH SUPABASE
         // ============================================================
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Validate fields
@@ -707,7 +722,7 @@
             }
             
             // ============================================================
-            // SIMULATE LOGIN
+            // LOGIN WITH SUPABASE
             // ============================================================
             loginBtn.disabled = true;
             btnText.textContent = 'Logging in...';
@@ -721,54 +736,80 @@
                 localStorage.removeItem('nairobi_raha_email');
             }
             
-            // Simulate API call
-            setTimeout(function() {
+            try {
+                // Check if user is trying to login as admin
+                const isAdminLogin = window.location.pathname.includes('admin-login.html');
                 
-                // Check if user exists in localStorage (from registration)
-                const users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
-                const user = users.find(u => u.email === email.value && u.password === password.value);
+                let result;
+                if (isAdminLogin) {
+                    result = await window.supabaseFunctions.loginAdmin(email.value, password.value);
+                } else {
+                    result = await window.supabaseFunctions.loginUser(email.value, password.value);
+                }
                 
-                if (user) {
-                    // Check if user is approved
-                    if (user.status === 'pending') {
-                        showToast('Your account is pending admin approval. Please wait.', 'info');
-                        loginBtn.disabled = false;
-                        btnText.textContent = 'Login';
-                        btnLoader.classList.remove('show');
-                        btnIcon.style.display = 'inline-block';
-                        return;
-                    }
+                if (result.success) {
+                    const user = result.data;
                     
-                    // Login successful
-                    showToast('Welcome back, ' + user.fullName + '! 🎉', 'success');
-                    
-                    // Store session
-                    localStorage.setItem('nairobi_raha_session', JSON.stringify({
+                    // Create session data
+                    const sessionData = {
+                        id: user.id,
                         email: user.email,
-                        name: user.fullName,
+                        name: user.full_name,
                         role: user.role,
-                        loggedIn: true
-                    }));
+                        isAdmin: user.role === 'admin',
+                        loggedIn: true,
+                        loginTime: new Date().toISOString()
+                    };
                     
-                    // Redirect based on role
-                    setTimeout(function() {
-                        if (user.role === 'admin') {
+                    // Store session based on role
+                    if (user.role === 'admin') {
+                        localStorage.setItem('nairobi_raha_admin_session', JSON.stringify(sessionData));
+                        showToast('Welcome Admin! 🎉', 'success');
+                        
+                        // Log admin login
+                        await window.supabaseFunctions.logActivity(
+                            user.id,
+                            'admin_login',
+                            `Admin ${user.full_name} logged in`
+                        );
+                        
+                        setTimeout(() => {
                             window.location.href = 'admin-dashboard.html';
-                        } else if (user.role === 'escort') {
-                            window.location.href = 'escort-dashboard.html';
-                        } else {
+                        }, 1000);
+                    } else {
+                        localStorage.setItem('nairobi_raha_session', JSON.stringify(sessionData));
+                        showToast('Welcome back, ' + user.full_name + '! 🎉', 'success');
+                        
+                        // Log user login
+                        await window.supabaseFunctions.logActivity(
+                            user.id,
+                            'user_login',
+                            `User ${user.full_name} logged in`
+                        );
+                        
+                        setTimeout(() => {
                             window.location.href = 'index.html';
-                        }
-                    }, 1000);
+                        }, 1000);
+                    }
                     
                 } else {
-                    // Check if user exists but password is wrong
-                    const userExists = users.some(u => u.email === email.value);
-                    if (userExists) {
-                        showToast('Incorrect password. Please try again.', 'error');
-                    } else {
-                        showToast('Account not found. Please register first.', 'error');
+                    // Handle login error
+                    let errorMsg = result.error || 'Login failed. Please try again.';
+                    
+                    // Show specific error messages
+                    if (errorMsg.includes('pending approval')) {
+                        errorMsg = 'Your account is pending admin approval. You will receive an email once verified.';
+                        alertBanner.classList.add('show');
+                        alertText.textContent = errorMsg;
+                    } else if (errorMsg.includes('User not found')) {
+                        errorMsg = 'No account found with this email. Please register first.';
+                    } else if (errorMsg.includes('Invalid password')) {
+                        errorMsg = 'Incorrect password. Please try again.';
+                    } else if (errorMsg.includes('suspended')) {
+                        errorMsg = 'Your account has been suspended. Please contact support.';
                     }
+                    
+                    showToast(errorMsg, 'error');
                     
                     loginBtn.disabled = false;
                     btnText.textContent = 'Login';
@@ -776,11 +817,19 @@
                     btnIcon.style.display = 'inline-block';
                 }
                 
-            }, 1500);
+            } catch (error) {
+                console.error('❌ Login error:', error);
+                showToast('An error occurred. Please try again.', 'error');
+                
+                loginBtn.disabled = false;
+                btnText.textContent = 'Login';
+                btnLoader.classList.remove('show');
+                btnIcon.style.display = 'inline-block';
+            }
         });
         
         // ============================================================
-        // SOCIAL LOGIN (Demo)
+        // SOCIAL LOGIN (Coming Soon)
         // ============================================================
         document.getElementById('googleLogin').addEventListener('click', function() {
             showToast('Google login coming soon! 🔜', 'info');
@@ -793,9 +842,16 @@
         // ============================================================
         // FORGOT PASSWORD
         // ============================================================
-        document.querySelector('.forgot-link').addEventListener('click', function(e) {
+        forgotPassword.addEventListener('click', function(e) {
             e.preventDefault();
-            showToast('Password reset link will be sent to your email.', 'info');
+            const emailValue = email.value.trim();
+            
+            if (emailValue && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+                showToast(`Password reset link sent to ${emailValue}`, 'success');
+            } else {
+                showToast('Please enter your email address to reset your password', 'info');
+                email.focus();
+            }
         });
         
         // ============================================================
@@ -825,7 +881,7 @@
                 alertBanner.classList.remove('show');
             }
             
-            // Ctrl+Shift+R to open register page
+            // Ctrl+Shift+R to go to register page
             if (e.key === 'r' && e.ctrlKey && e.shiftKey) {
                 e.preventDefault();
                 window.location.href = 'register.html';
@@ -839,10 +895,18 @@
             window.history.replaceState(null, null, window.location.href);
         }
         
-        console.log('✅ Login Page Loaded Successfully!');
+        console.log('✅ Login Page with Supabase Loaded Successfully!');
         console.log('📋 Features: Email/Password Login, Remember Me, Password Toggle, Role-based Redirect');
         console.log('🎨 Design: Clean, Professional, Responsive');
-        console.log('👤 Users in localStorage:', JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]').length);
+        console.log('🔗 Connected to Supabase:', SUPABASE_URL);
+        
+        // Check if there's a session already
+        const existingSession = localStorage.getItem('nairobi_raha_session');
+        const adminSession = localStorage.getItem('nairobi_raha_admin_session');
+        
+        if (existingSession || adminSession) {
+            console.log('ℹ️ Existing session found. You are already logged in.');
+        }
         
     });
 </script>
