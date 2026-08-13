@@ -11,6 +11,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Supabase Config -->
+    <script src="supabase-config.js"></script>
+    
     <style>
         /* ============================================================
                    REGISTER PAGE STYLES
@@ -739,7 +745,7 @@
                 Welcome to Nairobi Raha! Your account has been created and is pending admin approval.
                 You will receive a confirmation email once your account is verified.
             </p>
-            <a href="#" class="btn-dashboard">
+            <a href="login.html" class="btn-dashboard">
                 <i class="fas fa-sign-in-alt"></i> Go to Login
             </a>
         </div>
@@ -761,7 +767,7 @@
 </div>
 
 <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT - WITH SUPABASE INTEGRATION
      ============================================================ -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -789,6 +795,14 @@
         const passwordBar = document.getElementById('passwordBar');
         const passwordHint = document.getElementById('passwordHint');
         const bioGroup = document.getElementById('bioGroup');
+        
+        // ============================================================
+        // CHECK IF SUPABASE IS LOADED
+        // ============================================================
+        if (typeof window.supabaseFunctions === 'undefined') {
+            console.error('❌ Supabase functions not loaded! Make sure supabase-config.js is loaded first.');
+            showToast('System error. Please refresh the page.', 'error');
+        }
         
         // ============================================================
         // ROLE SELECTION - SHOW/HIDE BIO
@@ -905,9 +919,9 @@
         }
         
         // ============================================================
-        // FORM SUBMISSION
+        // FORM SUBMISSION - WITH SUPABASE
         // ============================================================
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Validate all fields
@@ -969,7 +983,7 @@
             }
             
             // ============================================================
-            // SIMULATE REGISTRATION
+            // REGISTER WITH SUPABASE
             // ============================================================
             registerBtn.disabled = true;
             btnText.textContent = 'Creating Account...';
@@ -980,46 +994,71 @@
             const selectedRole = document.querySelector('input[name="role"]:checked');
             const role = selectedRole ? selectedRole.value : 'client';
             
-            // Prepare data
+            // Prepare data for Supabase
             const userData = {
                 fullName: fullName.value.trim(),
                 email: email.value.trim(),
                 phone: phone.value.trim(),
-                password: password.value,
+                password: password.value, // Will be hashed on server
                 role: role,
                 location: document.getElementById('location').value,
                 bio: document.getElementById('bio').value || '',
                 status: 'pending' // Needs admin approval
             };
             
-            console.log('📝 Registration Data:', userData);
+            console.log('📝 Sending to Supabase:', userData);
             
-            // Simulate API call
-            setTimeout(function() {
-                // Show success
-                registerCard.querySelector('form').style.display = 'none';
-                registerCard.querySelector('.login-link').style.display = 'none';
-                successMessage.classList.add('show');
+            try {
+                // Call Supabase function
+                const result = await window.supabaseFunctions.createUser(userData);
                 
-                showToast('Registration successful! Welcome to Nairobi Raha 🎉', 'success');
+                if (result.success) {
+                    // Show success
+                    registerCard.querySelector('form').style.display = 'none';
+                    registerCard.querySelector('.login-link').style.display = 'none';
+                    successMessage.classList.add('show');
+                    
+                    showToast('Registration successful! Welcome to Nairobi Raha 🎉', 'success');
+                    
+                    // Reset button
+                    registerBtn.disabled = false;
+                    btnText.textContent = 'Create Account';
+                    btnLoader.classList.remove('show');
+                    btnIcon.style.display = 'inline-block';
+                    
+                    // Log activity
+                    await window.supabaseFunctions.logActivity(
+                        result.data.id,
+                        'register',
+                        `User ${userData.fullName} registered as ${role}`
+                    );
+                    
+                } else {
+                    // Handle error
+                    let errorMsg = result.error || 'Registration failed. Please try again.';
+                    
+                    // Check for duplicate email
+                    if (errorMsg.includes('duplicate') || errorMsg.includes('unique')) {
+                        errorMsg = 'This email is already registered. Please use a different email.';
+                    }
+                    
+                    showToast(errorMsg, 'error');
+                    
+                    registerBtn.disabled = false;
+                    btnText.textContent = 'Create Account';
+                    btnLoader.classList.remove('show');
+                    btnIcon.style.display = 'inline-block';
+                }
                 
-                // Reset button
+            } catch (error) {
+                console.error('❌ Registration error:', error);
+                showToast('An error occurred. Please try again.', 'error');
+                
                 registerBtn.disabled = false;
                 btnText.textContent = 'Create Account';
                 btnLoader.classList.remove('show');
                 btnIcon.style.display = 'inline-block';
-                
-                // Store in localStorage for demo
-                const users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
-                users.push({
-                    ...userData,
-                    createdAt: new Date().toISOString(),
-                    approved: false,
-                    id: 'user_' + Date.now()
-                });
-                localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
-                
-            }, 2000);
+            }
         });
         
         // ============================================================
@@ -1058,9 +1097,10 @@
             window.history.replaceState(null, null, window.location.href);
         }
         
-        console.log('✅ Registration Page Loaded Successfully!');
-        console.log('📋 Features: Role Selection, Password Strength, Real-time Validation');
+        console.log('✅ Registration Page with Supabase Loaded Successfully!');
+        console.log('📋 Features: Role Selection, Password Strength, Real-time Validation, Supabase Integration');
         console.log('🎨 Design: Clean, Professional, Responsive');
+        console.log('🔗 Connected to Supabase:', SUPABASE_URL);
         
     });
 </script>
