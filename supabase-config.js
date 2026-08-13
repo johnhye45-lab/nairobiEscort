@@ -1,5 +1,5 @@
 // ============================================================
-// supabase-config.js - WORKING VERSION
+// supabase-config.js - CORRECTED VERSION
 // ============================================================
 
 console.log('🚀 Loading supabase-config.js...');
@@ -11,22 +11,29 @@ const SUPABASE_URL = 'https://tikhrcjjaykmrykelnbi.supabase.co';
 
 // ⚠️ IMPORTANT: Replace this with your REAL anon public key from Supabase
 // Go to: Settings → API → Project API Keys → anon public
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRpa2hyY2pqYXlrbXJ5a2VsbmJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQwNDQ4MDAsImV4cCI6MjAxOTYyMDgwMH0.YOUR_REAL_KEY_HERE';
+const SUPABASE_KEY = 'YOUR_ACTUAL_ANON_KEY_HERE'; // <-- REPLACE THIS!
 
 // ============================================================
 // 2. CHECK IF SUPABASE CLIENT IS AVAILABLE
 // ============================================================
 if (typeof window.supabase === 'undefined') {
-    console.error('❌ Supabase client not loaded! Check the CDN script.');
-} else {
-    console.log('✅ Supabase client found');
+    console.error('❌ Supabase client not loaded!');
 }
 
 // ============================================================
-// 3. INITIALIZE SUPABASE
+// 3. INITIALIZE SUPABASE - ONLY ONCE!
 // ============================================================
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-console.log('✅ Supabase client initialized');
+// Check if already initialized to avoid duplicate declaration
+let supabaseClient;
+
+if (typeof window._supabaseClient === 'undefined') {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    window._supabaseClient = supabaseClient;
+    console.log('✅ Supabase client initialized');
+} else {
+    supabaseClient = window._supabaseClient;
+    console.log('✅ Using existing Supabase client');
+}
 
 // ============================================================
 // 4. CREATE USER FUNCTION
@@ -36,7 +43,7 @@ async function createUser(userData) {
     
     try {
         // Step 1: Register with Supabase Auth
-        const { data: authData, error: authError } = await supabase.auth.signUp({
+        const { data: authData, error: authError } = await supabaseClient.auth.signUp({
             email: userData.email,
             password: userData.password,
             options: {
@@ -60,7 +67,7 @@ async function createUser(userData) {
 
         // Step 2: Insert into users table (if it exists)
         try {
-            const { data: userResult, error: userError } = await supabase
+            const { data: userResult, error: userError } = await supabaseClient
                 .from('users')
                 .insert([{
                     id: authData.user.id,
@@ -77,7 +84,6 @@ async function createUser(userData) {
 
             if (userError) {
                 console.warn('⚠️ Could not save to users table:', userError.message);
-                // Return success anyway since auth user was created
                 return { 
                     success: true, 
                     data: authData.user,
@@ -90,7 +96,6 @@ async function createUser(userData) {
             
         } catch (dbError) {
             console.warn('⚠️ Database insert error:', dbError.message);
-            // Return success anyway since auth user was created
             return { 
                 success: true, 
                 data: authData.user,
@@ -111,8 +116,7 @@ async function logActivity(userId, action, description) {
     console.log('📝 Logging activity:', { userId, action, description });
     
     try {
-        // Try to save to activity_logs table if it exists
-        const { error } = await supabase
+        const { error } = await supabaseClient
             .from('activity_logs')
             .insert([{
                 user_id: userId,
@@ -139,10 +143,9 @@ async function logActivity(userId, action, description) {
 window.supabaseFunctions = {
     createUser: createUser,
     logActivity: logActivity,
-    supabase: supabase
+    supabase: supabaseClient
 };
 
 console.log('✅ Supabase Functions Loaded Successfully!');
 console.log('📊 Connected to:', SUPABASE_URL);
-console.log('🔑 Key starts with:', SUPABASE_KEY.substring(0, 20) + '...');
 console.log('📦 Available functions:', Object.keys(window.supabaseFunctions));
