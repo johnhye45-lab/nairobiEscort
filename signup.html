@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Nairobi Raha Escorts</title>
+    <title>Register - Nairobi Vibe Escorts</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
-    <!-- Supabase Config -->
+    <!-- Supabase Config - THIS MUST LOAD FIRST -->
     <script src="supabase-config.js"></script>
     
     <style>
@@ -40,14 +40,14 @@
         
         .register-wrapper {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
         }
         
         /* ---------- REGISTER CARD ---------- */
         .register-card {
             background: #fff;
             border-radius: 20px;
-            padding: 45px 40px 40px;
+            padding: 35px 30px 30px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: slideUp 0.6s ease;
         }
@@ -59,37 +59,37 @@
         
         .register-card .logo {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .register-card .logo img {
-            height: 60px;
+            height: 55px;
             border-radius: 12px;
         }
         
         .register-card .logo h1 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: #E0006C;
-            margin-top: 8px;
+            margin-top: 6px;
         }
         
         .register-card .logo p {
             color: #888;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         /* ---------- FORM ---------- */
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
         
         .form-group label {
             display: block;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         
         .form-group label .required {
@@ -103,11 +103,11 @@
         
         .form-group .input-wrapper i {
             position: absolute;
-            left: 15px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: #999;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s ease;
         }
         
@@ -115,10 +115,10 @@
         .form-group .input-wrapper select,
         .form-group .input-wrapper textarea {
             width: 100%;
-            padding: 12px 15px 12px 45px;
+            padding: 10px 14px 10px 42px;
             border: 2px solid #e8e8e8;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 14px;
             font-family: 'Open Sans', sans-serif;
             transition: all 0.3s ease;
             background: #fafafa;
@@ -140,8 +140,8 @@
         }
         
         .form-group .input-wrapper textarea {
-            padding: 12px 15px 12px 45px;
-            min-height: 80px;
+            padding: 10px 14px 10px 42px;
+            min-height: 70px;
             resize: vertical;
         }
         
@@ -153,7 +153,7 @@
         
         .form-group .input-wrapper .select-arrow {
             position: absolute;
-            right: 15px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: #999;
@@ -162,7 +162,7 @@
         
         .form-group .input-wrapper .password-toggle {
             position: absolute;
-            right: 15px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: #999;
@@ -170,80 +170,11 @@
             transition: all 0.3s ease;
             background: none;
             border: none;
-            font-size: 16px;
+            font-size: 15px;
         }
         
         .form-group .input-wrapper .password-toggle:hover {
             color: #E0006C;
-        }
-        
-        /* ---------- ROLE SELECTION ---------- */
-        .role-selection {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 5px;
-        }
-        
-        .role-option {
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .role-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .role-option .role-box {
-            padding: 15px;
-            border: 2px solid #e8e8e8;
-            border-radius: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            background: #fafafa;
-        }
-        
-        .role-option .role-box i {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 5px;
-            color: #999;
-            transition: all 0.3s ease;
-        }
-        
-        .role-option .role-box .role-name {
-            font-weight: 600;
-            font-size: 14px;
-            color: #333;
-            transition: all 0.3s ease;
-        }
-        
-        .role-option .role-box .role-desc {
-            font-size: 11px;
-            color: #999;
-            margin-top: 3px;
-        }
-        
-        .role-option input[type="radio"]:checked + .role-box {
-            border-color: #E0006C;
-            background: #fce4ec;
-            box-shadow: 0 0 0 4px rgba(224, 0, 108, 0.1);
-        }
-        
-        .role-option input[type="radio"]:checked + .role-box i {
-            color: #E0006C;
-        }
-        
-        .role-option input[type="radio"]:checked + .role-box .role-name {
-            color: #E0006C;
-        }
-        
-        .role-option:hover .role-box {
-            border-color: #E0006C;
-            transform: translateY(-2px);
         }
         
         /* ---------- TERMS ---------- */
@@ -251,7 +182,7 @@
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         
         .terms-group input[type="checkbox"] {
@@ -263,7 +194,7 @@
         }
         
         .terms-group label {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
             line-height: 1.5;
             cursor: pointer;
@@ -281,12 +212,12 @@
         /* ---------- SUBMIT BUTTON ---------- */
         .btn-register {
             width: 100%;
-            padding: 14px;
+            padding: 13px;
             background: linear-gradient(135deg, #E0006C, #b30057);
             color: #fff;
             border: none;
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -306,14 +237,14 @@
         }
         
         .btn-register i {
-            font-size: 18px;
+            font-size: 17px;
         }
         
         /* ---------- LOGIN LINK ---------- */
         .login-link {
             text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
+            margin-top: 18px;
+            font-size: 13px;
             color: #666;
         }
         
@@ -331,7 +262,7 @@
             color: #e74c3c;
             font-size: 12px;
             font-weight: 600;
-            margin-top: 5px;
+            margin-top: 4px;
             display: none;
         }
         
@@ -363,7 +294,7 @@
         .success-message {
             display: none;
             text-align: center;
-            padding: 30px 20px;
+            padding: 25px 20px;
         }
         
         .success-message.show {
@@ -371,27 +302,27 @@
         }
         
         .success-message .icon {
-            font-size: 60px;
+            font-size: 50px;
             color: #27ae60;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
         
         .success-message h2 {
             color: #27ae60;
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 22px;
+            margin-bottom: 8px;
         }
         
         .success-message p {
             color: #666;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.6;
         }
         
         .success-message .btn-dashboard {
             display: inline-block;
-            margin-top: 20px;
-            padding: 12px 30px;
+            margin-top: 18px;
+            padding: 10px 28px;
             background: linear-gradient(135deg, #27ae60, #1e8449);
             color: #fff;
             border-radius: 12px;
@@ -408,8 +339,8 @@
         /* ---------- LOADER ---------- */
         .loader {
             display: none;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border: 3px solid rgba(255,255,255,0.3);
             border-top: 3px solid #fff;
             border-radius: 50%;
@@ -427,7 +358,7 @@
         
         /* ---------- PASSWORD STRENGTH ---------- */
         .password-strength {
-            margin-top: 5px;
+            margin-top: 4px;
             height: 4px;
             border-radius: 4px;
             background: #e8e8e8;
@@ -453,83 +384,21 @@
             margin-top: 3px;
         }
         
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 600px) {
-            .register-card {
-                padding: 30px 20px 30px;
-            }
-            
-            .role-selection {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .role-option .role-box {
-                padding: 12px 8px;
-            }
-            
-            .role-option .role-box i {
-                font-size: 22px;
-            }
-            
-            .role-option .role-box .role-name {
-                font-size: 12px;
-            }
-            
-            .role-option .role-box .role-desc {
-                display: none;
-            }
-            
-            .register-card .logo h1 {
-                font-size: 20px;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            .role-selection {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-group .input-wrapper input,
-            .form-group .input-wrapper select {
-                padding: 10px 12px 10px 40px;
-                font-size: 14px;
-            }
-            
-            .btn-register {
-                font-size: 16px;
-                padding: 12px;
-            }
-        }
-        
-        /* ---------- SCROLLBAR ---------- */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #E0006C;
-            border-radius: 10px;
-        }
-        
-        /* ---------- TOAST NOTIFICATION ---------- */
+        /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-radius: 12px;
             color: #fff;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.2);
             transform: translateX(120%);
             transition: all 0.4s ease;
             z-index: 9999;
-            max-width: 400px;
+            max-width: 380px;
         }
         
         .toast.show {
@@ -550,7 +419,7 @@
         
         .toast .toast-close {
             float: right;
-            margin-left: 15px;
+            margin-left: 12px;
             cursor: pointer;
             opacity: 0.8;
             font-size: 18px;
@@ -558,6 +427,53 @@
         
         .toast .toast-close:hover {
             opacity: 1;
+        }
+        
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 500px) {
+            .register-card {
+                padding: 25px 18px 25px;
+            }
+            
+            .register-card .logo h1 {
+                font-size: 20px;
+            }
+            
+            .btn-register {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .form-group .input-wrapper input,
+            .form-group .input-wrapper select {
+                padding: 8px 12px 8px 38px;
+                font-size: 13px;
+            }
+            
+            .btn-register {
+                font-size: 15px;
+                padding: 10px;
+            }
+        }
+        
+        /* ---------- SCROLLBAR ---------- */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #E0006C;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b30057;
         }
     </style>
 </head>
@@ -570,9 +486,9 @@
              LOGO
              ============================================================ -->
         <div class="logo">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENR%3C/text%3E%3C/svg%3E" alt="Nairobi Raha">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENV%3C/text%3E%3C/svg%3E" alt="Nairobi Vibe">
             <h1>Create Account</h1>
-            <p>Join Nairobi Raha - Find the best escorts in Nairobi</p>
+            <p>Join Nairobi Vibe - Find the best escorts in Nairobi</p>
         </div>
         
         <!-- ============================================================
@@ -610,45 +526,6 @@
                 <div class="error-message" id="phoneError">Please enter a valid phone number</div>
             </div>
             
-            <!-- Role Selection -->
-            <div class="form-group">
-                <label>I want to register as <span class="required">*</span></label>
-                <div class="role-selection">
-                    <label class="role-option">
-                        <input type="radio" name="role" value="escort" checked>
-                        <div class="role-box">
-                            <i class="fas fa-female"></i>
-                            <div class="role-name">Escort</div>
-                            <div class="role-desc">List your services</div>
-                        </div>
-                    </label>
-                    <label class="role-option">
-                        <input type="radio" name="role" value="client">
-                        <div class="role-box">
-                            <i class="fas fa-user"></i>
-                            <div class="role-name">Client</div>
-                            <div class="role-desc">Find escorts</div>
-                        </div>
-                    </label>
-                    <label class="role-option">
-                        <input type="radio" name="role" value="agency">
-                        <div class="role-box">
-                            <i class="fas fa-building"></i>
-                            <div class="role-name">Agency</div>
-                            <div class="role-desc">Manage escorts</div>
-                        </div>
-                    </label>
-                    <label class="role-option">
-                        <input type="radio" name="role" value="admin">
-                        <div class="role-box">
-                            <i class="fas fa-shield-alt"></i>
-                            <div class="role-name">Admin</div>
-                            <div class="role-desc">Manage platform</div>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            
             <!-- Password -->
             <div class="form-group" id="passwordGroup">
                 <label>Password <span class="required">*</span></label>
@@ -683,32 +560,32 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <select id="location">
                         <option value="">Select your location</option>
-                        <option value="kilimani">Kilimani</option>
-                        <option value="nairobi-cbd">Nairobi CBD</option>
-                        <option value="westlands">Westlands</option>
-                        <option value="kasarani">Kasarani</option>
-                        <option value="south-b">South B</option>
-                        <option value="langata">Langata</option>
-                        <option value="mombasa">Mombasa</option>
-                        <option value="kisumu">Kisumu</option>
-                        <option value="nakuru">Nakuru</option>
-                        <option value="thindigua">Thindigua</option>
-                        <option value="hurlingham">Hurlingham</option>
-                        <option value="runda">Runda</option>
-                        <option value="nyali">Nyali</option>
-                        <option value="umoja">Umoja</option>
-                        <option value="ruaka">Ruaka</option>
+                        <option value="Kilimani">Kilimani</option>
+                        <option value="Nairobi CBD">Nairobi CBD</option>
+                        <option value="Westlands">Westlands</option>
+                        <option value="Kasarani">Kasarani</option>
+                        <option value="South B">South B</option>
+                        <option value="Langata">Langata</option>
+                        <option value="Mombasa">Mombasa</option>
+                        <option value="Kisumu">Kisumu</option>
+                        <option value="Nakuru">Nakuru</option>
+                        <option value="Thindigua">Thindigua</option>
+                        <option value="Hurlingham">Hurlingham</option>
+                        <option value="Runda">Runda</option>
+                        <option value="Nyali">Nyali</option>
+                        <option value="Umoja">Umoja</option>
+                        <option value="Ruaka">Ruaka</option>
                     </select>
                     <i class="fas fa-chevron-down select-arrow"></i>
                 </div>
             </div>
             
-            <!-- Bio (Optional for Escorts) -->
-            <div class="form-group" id="bioGroup" style="display:none;">
-                <label>About You / Bio <span style="color:#999; font-weight:400;">(optional)</span></label>
+            <!-- Bio (Optional) -->
+            <div class="form-group">
+                <label>About You <span style="color:#999; font-weight:400;">(optional)</span></label>
                 <div class="input-wrapper">
                     <i class="fas fa-pen"></i>
-                    <textarea id="bio" placeholder="Tell clients about yourself, your services, experience..."></textarea>
+                    <textarea id="bio" placeholder="Tell us a little about yourself..."></textarea>
                 </div>
             </div>
             
@@ -734,7 +611,7 @@
         </form>
         
         <!-- ============================================================
-             SUCCESS MESSAGE (Hidden initially)
+             SUCCESS MESSAGE
              ============================================================ -->
         <div class="success-message" id="successMessage">
             <div class="icon">
@@ -742,7 +619,7 @@
             </div>
             <h2>Account Created Successfully!</h2>
             <p>
-                Welcome to Nairobi Raha! Your account has been created and is pending admin approval.
+                Welcome to Nairobi Vibe! Your account has been created and is pending admin approval.
                 You will receive a confirmation email once your account is verified.
             </p>
             <a href="login.html" class="btn-dashboard">
@@ -794,7 +671,6 @@
         const togglePassword = document.getElementById('togglePassword');
         const passwordBar = document.getElementById('passwordBar');
         const passwordHint = document.getElementById('passwordHint');
-        const bioGroup = document.getElementById('bioGroup');
         
         // ============================================================
         // CHECK IF SUPABASE IS LOADED
@@ -802,20 +678,10 @@
         if (typeof window.supabaseFunctions === 'undefined') {
             console.error('❌ Supabase functions not loaded! Make sure supabase-config.js is loaded first.');
             showToast('System error. Please refresh the page.', 'error');
+            return;
         }
         
-        // ============================================================
-        // ROLE SELECTION - SHOW/HIDE BIO
-        // ============================================================
-        document.querySelectorAll('input[name="role"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                if (this.value === 'escort') {
-                    bioGroup.style.display = 'block';
-                } else {
-                    bioGroup.style.display = 'none';
-                }
-            });
-        });
+        console.log('✅ Supabase is loaded. SUPABASE_URL:', SUPABASE_URL);
         
         // ============================================================
         // PASSWORD TOGGLE
@@ -990,17 +856,13 @@
             btnLoader.classList.add('show');
             btnIcon.style.display = 'none';
             
-            // Get selected role
-            const selectedRole = document.querySelector('input[name="role"]:checked');
-            const role = selectedRole ? selectedRole.value : 'client';
-            
-            // Prepare data for Supabase
+            // Prepare data for Supabase - DEFAULT ROLE IS 'client'
             const userData = {
                 fullName: fullName.value.trim(),
                 email: email.value.trim(),
                 phone: phone.value.trim(),
-                password: password.value, // Will be hashed on server
-                role: role,
+                password: password.value,
+                role: 'client', // All users default to 'client'
                 location: document.getElementById('location').value,
                 bio: document.getElementById('bio').value || '',
                 status: 'pending' // Needs admin approval
@@ -1018,7 +880,7 @@
                     registerCard.querySelector('.login-link').style.display = 'none';
                     successMessage.classList.add('show');
                     
-                    showToast('Registration successful! Welcome to Nairobi Raha 🎉', 'success');
+                    showToast('Registration successful! Welcome to Nairobi Vibe 🎉', 'success');
                     
                     // Reset button
                     registerBtn.disabled = false;
@@ -1030,7 +892,7 @@
                     await window.supabaseFunctions.logActivity(
                         result.data.id,
                         'register',
-                        `User ${userData.fullName} registered as ${role}`
+                        `User ${userData.fullName} registered`
                     );
                     
                 } else {
@@ -1098,9 +960,10 @@
         }
         
         console.log('✅ Registration Page with Supabase Loaded Successfully!');
-        console.log('📋 Features: Role Selection, Password Strength, Real-time Validation, Supabase Integration');
+        console.log('📋 Features: Password Strength, Real-time Validation, Supabase Integration');
         console.log('🎨 Design: Clean, Professional, Responsive');
         console.log('🔗 Connected to Supabase:', SUPABASE_URL);
+        console.log('👤 Default role: client');
         
     });
 </script>
