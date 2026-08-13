@@ -2,19 +2,15 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find Nairobi Escorts and Escorts in Nairobi on Nairobi Raha">
-    <title>Nairobi Raha - Best Nairobi Escorts and Massage Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Find Nairobi Escorts and Escorts in Nairobi on Nairobi Vibe">
+    <title>Nairobi Vibe - Best Nairobi Escorts and Massage Services</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     
     <!-- Select2 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
@@ -27,10 +23,9 @@
 
     <style>
         /* ============================================================
-                   COMPLETE STYLES - POLISHED VERSION
+                   MOBILE-FIRST STYLES
                    ============================================================ */
         
-        /* ---------- RESET ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -42,6 +37,7 @@
             background: #f5f5f5;
             color: #333;
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         
         a {
@@ -50,86 +46,40 @@
             transition: all 0.3s ease;
         }
         
-        a:hover {
-            color: #b30057;
-            text-decoration: none;
-        }
-        
         .clear { clear: both; }
         .clear5 { clear: both; height: 5px; }
         .clear10 { clear: both; height: 10px; }
-        .clear20 { clear: both; height: 20px; }
         .hide { display: none !important; }
-        .l { float: left; }
-        .r { float: right; }
-        .center { text-align: center; }
         .text-center { text-align: center; }
-        .rad3 { border-radius: 3px; }
         .rad10 { border-radius: 10px; }
         .rad25 { border-radius: 25px; }
-        .col100 { width: 100% !important; }
         
         /* ---------- BUTTONS ---------- */
         .btn-primary {
             background: linear-gradient(135deg, #E0006C, #b30057);
             color: #fff;
-            padding: 10px 25px;
+            padding: 8px 18px;
             border: none;
             border-radius: 25px;
             font-weight: 600;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-block;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(224, 0, 108, 0.4);
-            color: #fff;
+        .btn-primary:active {
+            transform: scale(0.95);
         }
         
         .btn-secondary {
             background: #eff8ff;
             color: #E0006C;
-            padding: 10px 25px;
+            padding: 8px 18px;
             border: 2px solid #E0006C;
             border-radius: 25px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .btn-secondary:hover {
-            background: #E0006C;
-            color: #fff;
-        }
-        
-        .btn-success {
-            background: linear-gradient(135deg, #27ae60, #1e8449);
-            color: #fff;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.4);
-            color: #fff;
-        }
-        
-        .btn-danger {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: #fff;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-block;
@@ -137,9 +87,9 @@
         
         .badge {
             display: inline-block;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 9px;
             font-weight: 700;
             text-transform: uppercase;
             color: #fff;
@@ -149,27 +99,26 @@
         .badge-verified { background: #27ae60; }
         .badge-featured { background: #E0006C; }
         .badge-new { background: #3498db; }
-        .badge-video { background: #9b59b6; }
         
         /* ---------- TOP BANNER ---------- */
         .top-banner {
             background: #ffff00;
-            padding: 10px;
+            padding: 8px 10px;
             text-align: center;
             color: #ff0000;
             font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.5px;
+            font-size: 12px;
+            letter-spacing: 0.3px;
         }
         
         /* ---------- HEADER ---------- */
         .header {
             background: linear-gradient(135deg, #f7053e, #d60435);
-            padding: 12px 30px;
+            padding: 10px 15px;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
         }
         
         .header-inner {
@@ -181,54 +130,62 @@
             flex-wrap: wrap;
         }
         
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
         .logo img {
-            height: 50px;
-            border-radius: 10px;
+            height: 35px;
+            border-radius: 8px;
+        }
+        
+        .logo-text {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 800;
+        }
+        
+        .logo-text span {
+            color: #FE5ACB;
         }
         
         .nav-menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            padding: 12px 0;
+            gap: 2px;
+        }
+        
+        .nav-menu.show {
             display: flex;
-            align-items: center;
-            list-style: none;
-            gap: 5px;
         }
         
         .nav-menu > li {
-            position: relative;
+            list-style: none;
+            width: 100%;
         }
         
         .nav-menu > li > a {
             color: #fff;
             font-weight: 600;
-            padding: 10px 15px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 10px;
             font-size: 14px;
         }
         
-        .nav-menu > li > a:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        
-        .nav-menu > li > a i {
-            margin-right: 5px;
+        .nav-menu > li > a:active {
+            background: rgba(255,255,255,0.15);
         }
         
         .nav-menu .dropdown {
-            position: absolute;
-            top: 45px;
-            left: 0;
-            background: #fff;
-            min-width: 200px;
+            background: rgba(255,255,255,0.1);
             border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            padding: 10px 0;
-            display: none;
-            z-index: 100;
-        }
-        
-        .nav-menu > li:hover .dropdown {
-            display: block;
+            padding: 5px 0;
+            margin: 0 10px;
         }
         
         .nav-menu .dropdown li {
@@ -237,34 +194,27 @@
         
         .nav-menu .dropdown li a {
             display: block;
-            padding: 8px 20px;
-            color: #333;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            padding: 6px 15px;
+            color: #fff;
+            font-size: 13px;
         }
         
-        .nav-menu .dropdown li a:hover {
-            background: #fce4ec;
-            color: #E0006C;
-        }
-        
-        .nav-menu .dropdown li a i {
-            margin-right: 10px;
-            color: #E0006C;
+        .nav-menu .dropdown li a:active {
+            background: rgba(255,255,255,0.1);
         }
         
         .user-menu {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
         }
         
         .user-menu a {
             color: #fff;
-            padding: 8px 15px;
+            padding: 6px 12px;
             border-radius: 25px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             transition: all 0.3s ease;
         }
         
@@ -276,292 +226,136 @@
             background: rgba(255,255,255,0.2);
         }
         
-        .user-menu .btn-register:hover,
-        .user-menu .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
         .user-menu .icon-btn {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             background: rgba(255,255,255,0.15);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 0;
-            transition: all 0.3s ease;
+            font-size: 14px;
         }
         
-        .user-menu .icon-btn:hover {
+        .user-menu .icon-btn:active {
             background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
         }
         
         .hamburger {
-            display: none;
+            display: block;
             color: #fff;
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
-            padding: 8px 15px;
-            background: rgba(255,255,255,0.15);
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.12);
             border-radius: 10px;
             transition: all 0.3s ease;
         }
         
-        .hamburger:hover {
+        .hamburger:active {
             background: rgba(255,255,255,0.25);
         }
-        
-        /* ---------- SLIDER ---------- */
-        .slider-section {
-            background: linear-gradient(135deg, #2f074e, #6529c7);
-            padding: 20px 0;
-        }
-        
-        .slider-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .slider-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .slider-item img {
-            width: 100%;
-            height: 550px;
-            object-fit: cover;
-        }
-        
-        .slider-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: #fff;
-        }
-        
-        .slider-overlay h2 {
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-        
-        .slider-overlay p {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-        
-        .slider-overlay .location {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        
-        .slider-overlay .location i {
-            margin-right: 5px;
-        }
-        
-        .slider-badges {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .slider-badges .badge {
-            font-size: 12px;
-            padding: 5px 15px;
-        }
-        
-        .slider-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-        }
-        
-        .slider-video img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .slider-premium {
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            z-index: 2;
-        }
-        
-        .slider-premium span {
-            display: block;
-            background: linear-gradient(135deg, #f7c214, #fc5e1f);
-            color: #fff;
-            font-weight: 700;
-            font-size: 14px;
-            padding: 5px 40px;
-            transform: rotate(45deg);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.3);
-        }
-        
-        .owl-nav button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.3) !important;
-            width: 50px;
-            height: 50px;
-            border-radius: 50% !important;
-            color: #fff !important;
-            font-size: 24px !important;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .owl-nav button:hover {
-            background: rgba(255,255,255,0.5) !important;
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .owl-prev { left: 20px; }
-        .owl-next { right: 20px; }
         
         /* ---------- MAIN CONTENT ---------- */
         .main-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 10px 12px;
             display: flex;
-            gap: 30px;
-            margin-top: 20px;
-        }
-        
-        .content-area {
-            flex: 1;
+            flex-direction: column;
+            gap: 12px;
         }
         
         .section-title {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            margin-bottom: 12px;
         }
         
         .section-title h2 {
-            font-size: 24px;
+            font-size: 17px;
             font-weight: 800;
             color: #333;
         }
         
         .section-title h2 i {
             color: #E0006C;
-            margin-right: 10px;
+            margin-right: 6px;
         }
         
         .section-title a {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
+            padding: 4px 12px;
         }
         
         .section-box {
             background: #fff;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
         /* ---------- ESCORT GRID ---------- */
         .escort-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-            align-items: start;
-            width: 100%;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
         
         .escort-card {
             background: #fff;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
             position: relative;
         }
         
-        .escort-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        .escort-card:active {
+            transform: scale(0.97);
         }
         
         .escort-card .image-wrapper {
             position: relative;
             overflow: hidden;
             background: #f0f0f0;
+            height: 150px;
         }
         
-        .escort-card .image-wrapper img {
+        .escort-card .image-wrapper .placeholder-img {
             width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: all 0.3s ease;
-        }
-        
-        .escort-card:hover .image-wrapper img {
-            transform: scale(1.05);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fce4ec, #f8d7da);
+            color: #E0006C;
+            font-size: 40px;
         }
         
         .escort-card .card-badges {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 6px;
+            left: 6px;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
             z-index: 2;
         }
         
         .escort-card .card-badges .badge {
-            font-size: 10px;
-            padding: 2px 10px;
-        }
-        
-        .escort-card .video-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-        }
-        
-        .escort-card .video-icon img {
-            width: 50px;
-            height: 50px;
+            font-size: 8px;
+            padding: 2px 8px;
         }
         
         .escort-card .premium-badge {
             position: absolute;
-            top: 10px;
-            right: -25px;
+            top: 6px;
+            right: -20px;
             z-index: 2;
         }
         
@@ -570,67 +364,40 @@
             background: linear-gradient(135deg, #f7c214, #fc5e1f);
             color: #fff;
             font-weight: 700;
-            font-size: 11px;
-            padding: 3px 35px;
+            font-size: 9px;
+            padding: 2px 28px;
             transform: rotate(45deg);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
         
         .escort-card .card-info {
-            padding: 15px;
+            padding: 10px;
         }
         
         .escort-card .card-info .name {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 13px;
             color: #333;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .escort-card .card-info .location {
-            font-size: 13px;
+            font-size: 11px;
             color: #888;
         }
         
         .escort-card .card-info .location i {
             color: #E0006C;
-            margin-right: 3px;
-        }
-        
-        .escort-card .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 15px;
-            background: linear-gradient(transparent, rgba(224, 0, 108, 0.85));
-            color: #fff;
-            transform: translateY(100%);
-            transition: all 0.3s ease;
-        }
-        
-        .escort-card:hover .card-overlay {
-            transform: translateY(0);
-        }
-        
-        .escort-card .card-overlay .name {
-            font-weight: 700;
-            font-size: 16px;
-        }
-        
-        .escort-card .card-overlay .location {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-        
-        .escort-card .card-overlay .location i {
-            margin-right: 3px;
+            margin-right: 2px;
+            font-size: 10px;
         }
         
         /* ---------- REVIEWS ---------- */
         .review-item {
-            padding: 15px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #f0f0f0;
         }
         
@@ -642,11 +409,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
         
         .review-item .review-author {
             font-weight: 600;
+            font-size: 13px;
             color: #333;
         }
         
@@ -656,86 +424,77 @@
         
         .review-item .review-stars {
             color: #f39c12;
-            font-size: 14px;
+            font-size: 12px;
+            letter-spacing: 1px;
         }
         
         .review-item .review-text {
             color: #666;
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 13px;
+            line-height: 1.5;
         }
         
         .review-item .review-text a {
             font-weight: 600;
+            font-size: 12px;
         }
         
         /* ---------- SIDEBARS ---------- */
         .sidebar-left,
         .sidebar-right {
-            width: 280px;
-            flex-shrink: 0;
+            width: 100%;
         }
         
         .sidebar-box {
             background: #fff;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
         .sidebar-box h3 {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: #333;
         }
         
         .sidebar-box h3 i {
             color: #E0006C;
-            margin-right: 8px;
+            margin-right: 6px;
         }
         
         /* Countries List */
         .country-list {
             list-style: none;
-            max-height: 400px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 10px;
+            max-height: 200px;
             overflow-y: auto;
         }
         
         .country-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f5f5f5;
-        }
-        
-        .country-list li:last-child {
-            border-bottom: none;
+            padding: 4px 0;
         }
         
         .country-list li a {
             color: #555;
-            font-size: 14px;
+            font-size: 12px;
             display: flex;
             align-items: center;
         }
         
         .country-list li a i {
             color: #E0006C;
-            margin-right: 8px;
-            width: 16px;
+            margin-right: 4px;
+            font-size: 10px;
+            width: 14px;
         }
         
-        .country-list li a:hover {
+        .country-list li a:active {
             color: #E0006C;
-        }
-        
-        .country-list::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        .country-list::-webkit-scrollbar-thumb {
-            background: #E0006C;
-            border-radius: 10px;
         }
         
         /* Quick Search */
@@ -749,25 +508,28 @@
         }
         
         .quick-search .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         
         .quick-search .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             color: rgba(255,255,255,0.9);
         }
         
         .quick-search .form-group select,
         .quick-search .form-group input {
             width: 100%;
-            padding: 10px 12px;
+            padding: 8px 10px;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
+            font-family: 'Open Sans', sans-serif;
             background: rgba(255,255,255,0.95);
+            -webkit-appearance: none;
+            appearance: none;
         }
         
         .quick-search .form-group select:focus,
@@ -779,68 +541,56 @@
         .quick-search .checkbox-group {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 6px;
+            margin-bottom: 5px;
         }
         
         .quick-search .checkbox-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
+            accent-color: #fff;
         }
         
         .quick-search .checkbox-group label {
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             color: rgba(255,255,255,0.9);
         }
         
         .quick-search .btn-search {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: #fff;
             color: #E0006C;
             border: none;
             border-radius: 8px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 5px;
+            margin-top: 3px;
         }
         
-        .quick-search .btn-search:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        .quick-search .btn-search:active {
+            transform: scale(0.97);
         }
         
         .quick-search .adv-link {
             display: block;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 8px;
             color: rgba(255,255,255,0.8);
-            font-size: 13px;
-        }
-        
-        .quick-search .adv-link:hover {
-            color: #fff;
-        }
-        
-        /* Sidebar Ads */
-        .sidebar-ad {
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        
-        .sidebar-ad img {
-            width: 100%;
-            height: auto;
-            display: block;
+            font-size: 12px;
         }
         
         /* Recent Posts */
+        .recent-posts {
+            list-style: none;
+        }
+        
         .recent-posts li {
-            padding: 10px 0;
+            padding: 6px 0;
             border-bottom: 1px solid #f5f5f5;
         }
         
@@ -850,11 +600,11 @@
         
         .recent-posts li a {
             color: #555;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.4;
         }
         
-        .recent-posts li a:hover {
+        .recent-posts li a:active {
             color: #E0006C;
         }
         
@@ -862,90 +612,87 @@
         .footer {
             background: #1a0528;
             color: #ccc;
-            padding: 50px 20px 20px;
-            margin-top: 40px;
+            padding: 30px 15px 15px;
+            margin-top: 20px;
         }
         
         .footer-inner {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
         
         .footer-col h4 {
             color: #FE5ACB;
-            font-size: 18px;
-            margin-bottom: 15px;
+            font-size: 15px;
+            margin-bottom: 8px;
         }
         
         .footer-col p {
-            font-size: 14px;
-            line-height: 1.8;
+            font-size: 13px;
+            line-height: 1.6;
             color: #aaa;
         }
         
         .footer-col a {
             color: #FE5ACB;
-        }
-        
-        .footer-col a:hover {
-            text-decoration: underline;
+            font-size: 13px;
         }
         
         .footer-col .partner-links {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5px 20px;
+            gap: 3px 15px;
         }
         
         .footer-col .partner-links a {
-            font-size: 13px;
+            font-size: 12px;
             line-height: 1.8;
         }
         
         .footer-bottom {
             max-width: 1400px;
-            margin: 30px auto 0;
-            padding-top: 20px;
+            margin: 20px auto 0;
+            padding-top: 15px;
             border-top: 1px solid #2a1a3a;
             text-align: center;
-            font-size: 13px;
+            font-size: 11px;
             color: #666;
         }
         
         .footer-bottom .social-icons {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
         
         .footer-bottom .social-icons a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: #2a1a3a;
             color: #FE5ACB;
-            font-size: 20px;
+            font-size: 16px;
             transition: all 0.3s ease;
         }
         
-        .footer-bottom .social-icons a:hover {
+        .footer-bottom .social-icons a:active {
             background: #FE5ACB;
             color: #1a0528;
-            transform: translateY(-3px);
+            transform: scale(0.95);
         }
         
         /* ---------- WHATSAPP BUTTON ---------- */
         .whatsapp-float {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             z-index: 9999;
             animation: bounceIn 0.6s ease;
         }
@@ -954,172 +701,262 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 65px;
-            height: 65px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             background: #25d366;
             color: #fff;
-            font-size: 38px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
             transition: all 0.3s ease;
         }
         
-        .whatsapp-float a:hover {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
-            color: #fff;
+        .whatsapp-float a:active {
+            transform: scale(0.9);
         }
         
         @keyframes bounceIn {
             0% { opacity: 0; transform: scale(0); }
-            60% { transform: scale(1.1); }
+            60% { transform: scale(1.05); }
             100% { opacity: 1; transform: scale(1); }
         }
         
+        /* ---------- LOADING ---------- */
+        .loading-spinner {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .loading-spinner i {
+            font-size: 24px;
+            color: #E0006C;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loading-spinner p {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 20px 0;
+            color: #999;
+            grid-column: 1 / -1;
+        }
+        
+        .no-results i {
+            font-size: 32px;
+            color: #ddd;
+            margin-bottom: 8px;
+        }
+        
+        .no-results h4 {
+            font-size: 15px;
+            color: #666;
+        }
+        
+        .no-results p {
+            font-size: 12px;
+        }
+        
+        /* ---------- TOAST ---------- */
+        .toast {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 9999;
+            max-width: 90%;
+            text-align: center;
+            pointer-events: none;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
+        .toast.info { background: #3498db; }
+        
+        /* ---------- SELECT2 OVERRIDES ---------- */
+        .select2-container .select2-selection--single {
+            height: 38px !important;
+            border: none !important;
+            border-radius: 8px !important;
+        }
+        
+        .select2-container .select2-selection__rendered {
+            line-height: 38px !important;
+            padding-left: 10px !important;
+            font-size: 13px !important;
+        }
+        
+        .select2-container .select2-selection__arrow {
+            height: 38px !important;
+        }
+        
         /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 1200px) {
+        @media (min-width: 600px) {
             .escort-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .country-list {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
-        @media (max-width: 1024px) {
-            .main-content {
-                flex-direction: column;
+        @media (min-width: 768px) {
+            .escort-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
             
-            .sidebar-left,
-            .sidebar-right {
-                width: 100%;
+            .footer-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .main-content {
+                flex-direction: row;
+                flex-wrap: wrap;
             }
             
             .sidebar-left {
+                width: 30%;
+                order: 2;
+            }
+            
+            .content-area {
+                width: 70%;
+                order: 1;
+            }
+            
+            .sidebar-right {
+                width: 100%;
+                order: 3;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .escort-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            
+            .sidebar-left {
+                width: 22%;
+            }
+            
+            .content-area {
+                width: 78%;
+            }
+            
+            .sidebar-right {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            
+            .nav-menu {
+                display: flex !important;
+                flex-direction: row;
+                width: auto;
+                padding: 0;
+                gap: 2px;
+            }
+            
+            .nav-menu > li {
+                width: auto;
+            }
+            
+            .nav-menu > li > a {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            
+            .nav-menu .dropdown {
+                position: absolute;
+                top: 40px;
+                left: 0;
+                background: #fff;
+                min-width: 180px;
+                border-radius: 10px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+                padding: 8px 0;
+                display: none;
+                z-index: 100;
+                margin: 0;
+            }
+            
+            .nav-menu > li:hover .dropdown {
+                display: block;
+            }
+            
+            .nav-menu .dropdown li a {
+                color: #333;
+                padding: 6px 18px;
+                font-size: 13px;
+            }
+            
+            .nav-menu .dropdown li a:hover {
+                background: #fce4ec;
+                color: #E0006C;
+            }
+            
+            .hamburger {
+                display: none;
+            }
+            
+            .country-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .escort-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            
+            .main-content {
+                flex-wrap: nowrap;
+            }
+            
+            .sidebar-left {
+                width: 18%;
+                order: 1;
+            }
+            
+            .content-area {
+                width: 60%;
                 order: 2;
             }
             
             .sidebar-right {
-                order: 1;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .footer-inner {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header {
-                padding: 12px 15px;
-            }
-            
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                padding: 15px 0;
-            }
-            
-            .nav-menu.show {
-                display: flex;
-            }
-            
-            .nav-menu > li {
-                width: 100%;
-            }
-            
-            .nav-menu > li > a {
-                display: block;
-                padding: 10px 15px;
-                width: 100%;
-            }
-            
-            .nav-menu .dropdown {
-                position: static;
-                box-shadow: none;
-                background: rgba(255,255,255,0.1);
-                border-radius: 10px;
-                margin: 0 15px;
-            }
-            
-            .nav-menu .dropdown li a {
-                color: #fff;
-            }
-            
-            .hamburger {
+                width: 22%;
+                order: 3;
                 display: block;
             }
-            
-            .user-menu .btn-register,
-            .user-menu .btn-login {
-                display: none;
-            }
-            
-            .escort-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .slider-item img {
-                height: 300px;
-            }
-            
-            .slider-overlay h2 {
-                font-size: 20px;
-            }
-            
-            .section-title {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .footer-inner {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-col .partner-links {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .whatsapp-float {
-                bottom: 15px;
-                right: 15px;
-            }
-            
-            .whatsapp-float a {
-                width: 55px;
-                height: 55px;
-                font-size: 30px;
-            }
         }
         
-        @media (max-width: 480px) {
-            .escort-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .slider-item img {
-                height: 250px;
-            }
-            
-            .slider-badges {
-                top: 10px;
-                left: 10px;
-            }
-            
-            .slider-badges .badge {
-                font-size: 10px;
-                padding: 3px 10px;
-            }
-            
-            .section-box {
-                padding: 15px;
-            }
-        }
-        
-        /* ---------- SCROLLBAR STYLING ---------- */
+        /* ---------- SCROLLBAR ---------- */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 4px;
         }
         
         ::-webkit-scrollbar-track {
@@ -1130,50 +967,6 @@
             background: #E0006C;
             border-radius: 10px;
         }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b30057;
-        }
-        
-        /* ---------- LOADING SPINNER ---------- */
-        .loading-spinner {
-            display: none;
-            text-align: center;
-            padding: 40px 0;
-        }
-        
-        .loading-spinner.show {
-            display: block;
-        }
-        
-        .loading-spinner i {
-            font-size: 40px;
-            color: #E0006C;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 40px 0;
-            color: #999;
-        }
-        
-        .no-results i {
-            font-size: 48px;
-            color: #ddd;
-            margin-bottom: 15px;
-        }
-        
-        .no-results h4 {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 5px;
-        }
     </style>
 </head>
 <body>
@@ -1182,9 +975,9 @@
      TOP BANNER
      ============================================================ -->
 <div class="top-banner">
-    <i class="fas fa-star" style="margin-right: 8px;"></i>
-    Welcome to Nairobi Raha Escorts - The #1 Escort Directory in Kenya
-    <i class="fas fa-star" style="margin-left: 8px;"></i>
+    <i class="fas fa-star" style="margin-right: 6px;"></i>
+    Welcome to Nairobi Vibe - The #1 Escort Directory in Kenya
+    <i class="fas fa-star" style="margin-left: 6px;"></i>
 </div>
 
 <!-- ============================================================
@@ -1193,31 +986,31 @@
 <header class="header">
     <div class="header-inner">
         <!-- Logo -->
-        <a href="#" class="logo">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENR%3C/text%3E%3C/svg%3E" alt="Nairobi Raha">
-        </a>
+        <div class="logo">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23E0006C' rx='12'/%3E%3Ctext x='40' y='50' font-family='Arial' font-size='32' fill='white' text-anchor='middle' font-weight='bold'%3ENV%3C/text%3E%3C/svg%3E" alt="Nairobi Vibe">
+            <span class="logo-text">Nairobi <span>Vibe</span></span>
+        </div>
         
         <!-- Navigation -->
         <ul class="nav-menu" id="navMenu">
             <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
             <li>
-                <a href="#"><i class="fas fa-female"></i> Escorts <i class="fas fa-chevron-down" style="font-size:10px; margin-left:5px;"></i></a>
+                <a href="#"><i class="fas fa-female"></i> Escorts <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i></a>
                 <ul class="dropdown">
                     <li><a href="#"><i class="fas fa-female"></i> Female</a></li>
                     <li><a href="#"><i class="fas fa-male"></i> Male</a></li>
                     <li><a href="#"><i class="fas fa-people-arrows"></i> Couple</a></li>
                     <li><a href="#"><i class="fas fa-rainbow"></i> Gay</a></li>
                     <li><a href="#"><i class="fas fa-transgender"></i> Transsexual</a></li>
-                    <li><hr style="margin:5px 15px; border-color:#eee;"></li>
+                    <li><hr style="margin:4px 15px; border-color:#eee;"></li>
                     <li><a href="#"><i class="fas fa-user-check"></i> Independent</a></li>
                     <li><a href="#"><i class="fas fa-check-circle"></i> Verified</a></li>
                     <li><a href="#"><i class="fas fa-wifi"></i> Online</a></li>
                 </ul>
             </li>
             <li><a href="#"><i class="fas fa-building"></i> Agencies</a></li>
-            <li><a href="#"><i class="fas fa-plane"></i> Escorts on Tour</a></li>
+            <li><a href="#"><i class="fas fa-plane"></i> Tours</a></li>
             <li><a href="#"><i class="fas fa-star"></i> Reviews</a></li>
-            <li><a href="#"><i class="fas fa-ad"></i> Classified Ads</a></li>
             <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
             <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
@@ -1227,7 +1020,6 @@
             <a href="register.html" class="btn-register"><i class="fas fa-user-plus"></i> Register</a>
             <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
             <a href="#" class="icon-btn" title="Search"><i class="fas fa-search"></i></a>
-            <a href="#" class="icon-btn" title="Contact"><i class="fas fa-envelope"></i></a>
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </div>
@@ -1235,17 +1027,6 @@
     </div>
 </header>
 
-
-<!-- ============================================================
-     SLIDER SECTION - DYNAMIC FROM SUPABASE
-     ============================================================ -->
-<section class="slider-section">
-    <div class="slider-container">
-        <div class="slider owl-carousel owl-theme" id="sliderContainer">
-            <!-- Slides will be dynamically loaded from Supabase -->
-        </div>
-    </div>
-</section>
 
 <!-- ============================================================
      MAIN CONTENT
@@ -1261,7 +1042,16 @@
         <div class="sidebar-box">
             <h3><i class="fas fa-globe-africa"></i> Locations</h3>
             <ul class="country-list" id="countryList">
-                <!-- Locations will be loaded from Supabase -->
+                <li><a href="#"><i class="fas fa-map-pin"></i> All Locations</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> Kilimani</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> Nairobi CBD</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> Westlands</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> Kasarani</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> South B</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> Langata</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> Mombasa</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> Kisumu</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i> Nakuru</a></li>
             </ul>
         </div>
         
@@ -1270,8 +1060,8 @@
             <h3><i class="fas fa-search"></i> Search</h3>
             <form action="#" method="get" id="searchForm">
                 <div style="display:flex; gap:5px;">
-                    <input type="search" id="searchInput" placeholder="Search escorts..." style="flex:1; padding:10px 15px; border:2px solid #eee; border-radius:10px; font-size:14px; outline:none; transition:all 0.3s ease;">
-                    <button type="submit" style="padding:10px 20px; background:#E0006C; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:600;">
+                    <input type="search" id="searchInput" placeholder="Search escorts..." style="flex:1; padding:8px 12px; border:2px solid #eee; border-radius:10px; font-size:13px; font-family:'Open Sans',sans-serif; outline:none; transition:all 0.3s ease;">
+                    <button type="submit" style="padding:8px 16px; background:#E0006C; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:600; font-size:13px;">
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
@@ -1281,26 +1071,13 @@
         <!-- Recent Posts -->
         <div class="sidebar-box">
             <h3><i class="fas fa-newspaper"></i> Recent Posts</h3>
-            <ul class="recent-posts" style="list-style:none;">
+            <ul class="recent-posts">
                 <li><a href="#">Asian massage near me in Nairobi</a></li>
                 <li><a href="#">Full Body Massage at Home: A Safer Guide</a></li>
                 <li><a href="#">Nairobi Massage Reddit: Trusted Leads</a></li>
                 <li><a href="#">Nairobi Massage Spa Guide: Treatments</a></li>
                 <li><a href="#">20 types of massage and how to choose</a></li>
             </ul>
-        </div>
-        
-        <!-- Sidebar Ads -->
-        <div class="sidebar-ad">
-            <img src="https://picsum.photos/280/200?random=10" alt="Ad">
-        </div>
-        <div class="clear10"></div>
-        <div class="sidebar-ad">
-            <img src="https://picsum.photos/280/200?random=11" alt="Ad">
-        </div>
-        <div class="clear10"></div>
-        <div class="sidebar-ad">
-            <img src="https://picsum.photos/280/200?random=12" alt="Ad">
         </div>
         
     </aside>
@@ -1311,71 +1088,174 @@
     <main class="content-area">
         
         <!-- ============================================================
-             PREMIUM ESCORTS SECTION
+             VIP ESCORTS SECTION (formerly Premium)
              ============================================================ -->
         <section class="section-box">
             <div class="section-title">
-                <h2><i class="fas fa-crown"></i> Premium Escorts</h2>
-                <a href="#" class="btn-secondary" style="padding:6px 20px; font-size:13px;">View All <i class="fas fa-arrow-right"></i></a>
+                <h2><i class="fas fa-crown"></i> VIP Escorts</h2>
+                <a href="#" class="btn-secondary" style="padding:4px 14px; font-size:11px;">View All <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <div class="loading-spinner" id="premiumLoading">
-                <i class="fas fa-spinner"></i>
-                <p>Loading premium escorts...</p>
+            <div class="escort-grid" id="vipEscortsGrid">
+                <!-- VIP escorts will be dynamically loaded -->
+                <div class="escort-card">
+                    <div class="image-wrapper">
+                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
+                        <div class="card-badges">
+                            <span class="badge badge-premium">VIP</span>
+                        </div>
+                        <div class="premium-badge"><span>VIP</span></div>
+                    </div>
+                    <div class="card-info">
+                        <div class="name">Premium Escort</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</div>
+                    </div>
+                </div>
+                <div class="escort-card">
+                    <div class="image-wrapper">
+                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
+                        <div class="card-badges">
+                            <span class="badge badge-premium">VIP</span>
+                            <span class="badge badge-verified">VERIFIED</span>
+                        </div>
+                        <div class="premium-badge"><span>VIP</span></div>
+                    </div>
+                    <div class="card-info">
+                        <div class="name">Verified VIP Escort</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
+                    </div>
+                </div>
+                <div class="escort-card">
+                    <div class="image-wrapper">
+                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
+                        <div class="card-badges">
+                            <span class="badge badge-premium">VIP</span>
+                            <span class="badge badge-featured">FEATURED</span>
+                        </div>
+                        <div class="premium-badge"><span>VIP</span></div>
+                    </div>
+                    <div class="card-info">
+                        <div class="name">Featured VIP Escort</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Westlands, Kenya</div>
+                    </div>
+                </div>
+                <div class="escort-card">
+                    <div class="image-wrapper">
+                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
+                        <div class="card-badges">
+                            <span class="badge badge-premium">VIP</span>
+                        </div>
+                        <div class="premium-badge"><span>VIP</span></div>
+                    </div>
+                    <div class="card-info">
+                        <div class="name">Elite VIP Escort</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</div>
+                    </div>
+                </div>
             </div>
             
-            <div class="escort-grid" id="premiumEscortsGrid">
-                <!-- Premium escorts will be dynamically loaded from Supabase -->
-            </div>
-            
-            <div class="text-center" style="margin-top:20px;">
-                <a href="#" class="btn-primary">View All Premium Escorts <i class="fas fa-arrow-right"></i></a>
+            <div class="text-center" style="margin-top:12px;">
+                <a href="#" class="btn-primary" style="font-size:13px; padding:8px 20px;">View All VIP Escorts <i class="fas fa-arrow-right"></i></a>
             </div>
         </section>
         
         <!-- ============================================================
-             NEWLY ADDED ESCORTS SECTION
+             BASIC ESCORTS SECTION (formerly Newly Added)
              ============================================================ -->
         <section class="section-box">
             <div class="section-title">
-                <h2><i class="fas fa-star"></i> Newly Added Escorts</h2>
-                <a href="#" class="btn-secondary" style="padding:6px 20px; font-size:13px;">View All <i class="fas fa-arrow-right"></i></a>
+                <h2><i class="fas fa-star"></i> Basic Escorts</h2>
+                <a href="#" class="btn-secondary" style="padding:4px 14px; font-size:11px;">View All <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <div class="loading-spinner" id="newLoading">
-                <i class="fas fa-spinner"></i>
-                <p>Loading new escorts...</p>
+            <div class="escort-grid" id="basicEscortsGrid">
+                <div class="escort-card">
+                    <div class="image-wrapper">
+                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
+                        <div class="card-badges">
+                            <span class="badge badge-new">NEW</span>
+                        </div>
+                    </div>
+                    <div class="card-info">
+                        <div class="name">New Escort</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</div>
+                    </div>
+                </div>
+                <div class="escort-card">
+                    <div class="image-wrapper">
+                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <div class="name">Basic Escort</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
+                    </div>
+                </div>
+                <div class="escort-card">
+                    <div class="image-wrapper">
+                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <div class="name">Standard Escort</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> Westlands, Kenya</div>
+                    </div>
+                </div>
+                <div class="escort-card">
+                    <div class="image-wrapper">
+                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
+                    </div>
+                    <div class="card-info">
+                        <div class="name">Regular Escort</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> South B, Kenya</div>
+                    </div>
+                </div>
             </div>
             
-            <div class="escort-grid" id="newEscortsGrid">
-                <!-- New escorts will be dynamically loaded from Supabase -->
-            </div>
-            
-            <div class="text-center" style="margin-top:20px;">
-                <a href="#" class="btn-primary">View All New Escorts <i class="fas fa-arrow-right"></i></a>
+            <div class="text-center" style="margin-top:12px;">
+                <a href="#" class="btn-primary" style="font-size:13px; padding:8px 20px;">View All Basic Escorts <i class="fas fa-arrow-right"></i></a>
             </div>
         </section>
         
         <!-- ============================================================
-             REVIEWS SECTION
+             VIP ESCORTS SECTION (formerly Latest Escort Reviews)
              ============================================================ -->
         <section class="section-box">
             <div class="section-title">
-                <h2><i class="fas fa-comments"></i> Latest Escort Reviews</h2>
-                <a href="#" class="btn-secondary" style="padding:6px 20px; font-size:13px;">All Reviews <i class="fas fa-arrow-right"></i></a>
+                <h2><i class="fas fa-gem"></i> VIP Escorts</h2>
+                <a href="#" class="btn-secondary" style="padding:4px 14px; font-size:11px;">All VIP <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <div class="loading-spinner" id="reviewsLoading">
-                <i class="fas fa-spinner"></i>
-                <p>Loading reviews...</p>
+            <div id="vipReviewsContainer">
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-author"><span>VIP</span> Client wrote:</span>
+                        <span class="review-stars">★★★★★</span>
+                    </div>
+                    <div class="review-text">
+                        Excellent VIP service, highly recommended! <a href="#">see the review</a>
+                    </div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-author"><span>Elite</span> Client wrote:</span>
+                        <span class="review-stars">★★★★★</span>
+                    </div>
+                    <div class="review-text">
+                        Top class escorts, very professional. <a href="#">see the review</a>
+                    </div>
+                </div>
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-author"><span>Premium</span> Client wrote:</span>
+                        <span class="review-stars">★★★★★</span>
+                    </div>
+                    <div class="review-text">
+                        Best VIP experience in Nairobi! <a href="#">see the review</a>
+                    </div>
+                </div>
             </div>
             
-            <div id="reviewsContainer">
-                <!-- Reviews will be dynamically loaded from Supabase -->
-            </div>
-            
-            <div class="text-center" style="margin-top:15px;">
-                <a href="#" class="btn-primary">See All Reviews <i class="fas fa-arrow-right"></i></a>
+            <div class="text-center" style="margin-top:12px;">
+                <a href="#" class="btn-primary" style="font-size:13px; padding:8px 20px;">See All VIP Reviews <i class="fas fa-arrow-right"></i></a>
             </div>
         </section>
         
@@ -1406,12 +1286,6 @@
                         <option value="Mombasa">Mombasa</option>
                         <option value="Kisumu">Kisumu</option>
                         <option value="Nakuru">Nakuru</option>
-                        <option value="Thindigua">Thindigua</option>
-                        <option value="Hurlingham">Hurlingham</option>
-                        <option value="Runda">Runda</option>
-                        <option value="Nyali">Nyali</option>
-                        <option value="Umoja">Umoja</option>
-                        <option value="Ruaka">Ruaka</option>
                     </select>
                 </div>
                 
@@ -1429,29 +1303,20 @@
                 
                 <div class="checkbox-group">
                     <input type="checkbox" id="searchPremium">
-                    <label for="searchPremium"><i class="fas fa-crown" style="color:#f39c12;"></i> Only Premium</label>
+                    <label for="searchPremium"><i class="fas fa-crown" style="color:#f39c12;"></i> VIP Only</label>
                 </div>
                 
                 <div class="checkbox-group">
                     <input type="checkbox" id="searchVerified">
-                    <label for="searchVerified"><i class="fas fa-check-circle"></i> Only Verified</label>
+                    <label for="searchVerified"><i class="fas fa-check-circle"></i> Verified Only</label>
                 </div>
                 
                 <button type="submit" class="btn-search">
-                    <i class="fas fa-search"></i> Search Escorts
+                    <i class="fas fa-search"></i> Search
                 </button>
                 
-                <a href="#" class="adv-link"><i class="fas fa-sliders-h"></i> Advanced Search</a>
+                <a href="#" class="adv-link"><i class="fas fa-sliders-h"></i> Advanced</a>
             </form>
-        </div>
-        
-        <!-- Sidebar Ads -->
-        <div class="sidebar-ad">
-            <img src="https://picsum.photos/280/250?random=40" alt="Ad">
-        </div>
-        <div class="clear10"></div>
-        <div class="sidebar-ad">
-            <img src="https://picsum.photos/280/250?random=41" alt="Ad">
         </div>
         
     </aside>
@@ -1466,17 +1331,17 @@
         
         <!-- Column 1 -->
         <div class="footer-col">
-            <h4><i class="fas fa-crown" style="color:#f39c12;"></i> Nairobi Raha</h4>
+            <h4><i class="fas fa-crown" style="color:#f39c12;"></i> Nairobi Vibe</h4>
             <p>
-                Nairobi Raha offers an exciting way for both men and women to meet and interact freely. 
+                Nairobi Vibe offers an exciting way for both men and women to meet and interact freely. 
                 We provide a platform where escorts listed on this website are willing to offer services 
                 to those seeking the same.
             </p>
             <br>
             <p>
-                <i class="fas fa-phone" style="color:#FE5ACB;"></i> +254 726 893 039<br>
-                <i class="fas fa-envelope" style="color:#FE5ACB;"></i> info@nairobiraha.com<br>
-                <i class="fas fa-map-marker-alt" style="color:#FE5ACB;"></i> Koinange Street, Nairobi, Kenya
+                <i class="fas fa-phone" style="color:#FE5ACB;"></i> +254 712 831 606<br>
+                <i class="fas fa-envelope" style="color:#FE5ACB;"></i> info@nairobivibe.com<br>
+                <i class="fas fa-map-marker-alt" style="color:#FE5ACB;"></i> Nairobi, Kenya
             </p>
         </div>
         
@@ -1484,14 +1349,12 @@
         <div class="footer-col">
             <h4><i class="fas fa-link"></i> Quick Links</h4>
             <ul style="list-style:none;">
-                <li style="padding:5px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:10px;"></i> Home</a></li>
-                <li style="padding:5px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:10px;"></i> Escorts</a></li>
-                <li style="padding:5px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:10px;"></i> Agencies</a></li>
-                <li style="padding:5px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:10px;"></i> Escorts on Tour</a></li>
-                <li style="padding:5px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:10px;"></i> Reviews</a></li>
-                <li style="padding:5px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:10px;"></i> Classified Ads</a></li>
-                <li style="padding:5px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:10px;"></i> Blog</a></li>
-                <li style="padding:5px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:10px;"></i> Contact Us</a></li>
+                <li style="padding:4px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:9px;"></i> Home</a></li>
+                <li style="padding:4px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:9px;"></i> Escorts</a></li>
+                <li style="padding:4px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:9px;"></i> Agencies</a></li>
+                <li style="padding:4px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:9px;"></i> Reviews</a></li>
+                <li style="padding:4px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:9px;"></i> Blog</a></li>
+                <li style="padding:4px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:9px;"></i> Contact Us</a></li>
             </ul>
         </div>
         
@@ -1499,7 +1362,7 @@
         <div class="footer-col">
             <h4><i class="fas fa-handshake"></i> Partner Sites</h4>
             <div class="partner-links">
-                <a href="#">Nairobi Raha</a>
+                <a href="#">Nairobi Vibe</a>
                 <a href="#">Nairobi Massage</a>
                 <a href="#">Nairobi Escorts</a>
                 <a href="#">Elites Beauty</a>
@@ -1507,16 +1370,6 @@
                 <a href="#">Nuru VIP Massage</a>
                 <a href="#">Nairobi SPA</a>
                 <a href="#">Nairobi Call Girls</a>
-                <a href="#">Nairobi XX Escorts</a>
-                <a href="#">The Aroma SPA</a>
-                <a href="#">Maya Massage &amp; SPA</a>
-                <a href="#">Milly Massage &amp; SPA</a>
-                <a href="#">Pure Bliss SPA</a>
-                <a href="#">Classy Massage &amp; SPA</a>
-                <a href="#">Classic Comfort SPA</a>
-                <a href="#">Black Berry Massage</a>
-                <a href="#">Happiness Massage</a>
-                <a href="#">Sweet Massage &amp; SPA</a>
             </div>
         </div>
         
@@ -1524,14 +1377,13 @@
         <div class="footer-col">
             <h4><i class="fas fa-info-circle"></i> About</h4>
             <p>
-                NairobiRaha.com offers a comprehensive platform connecting clients with a diverse range 
-                of verified escorts across Nairobi and Kenya. Featuring female, male, couple, gay, and 
-                transsexual escort listings.
+                Nairobi Vibe connects clients with verified escorts across Nairobi and Kenya. 
+                Featuring female, male, couple, gay, and transsexual escort listings.
             </p>
             <br>
             <p>
                 <i class="fas fa-shield-alt" style="color:#FE5ACB;"></i> 
-                <strong>100% Verified Profiles</strong><br>
+                <strong>100% Verified</strong><br>
                 <i class="fas fa-lock" style="color:#FE5ACB;"></i> 
                 <strong>Secure &amp; Discreet</strong><br>
                 <i class="fas fa-clock" style="color:#FE5ACB;"></i> 
@@ -1548,9 +1400,8 @@
             <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
             <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
-        <p>&copy; 2026 Nairobi Raha - Find Nairobi Escorts and Massage on Nairobi Raha. All Rights Reserved.</p>
+        <p>&copy; 2026 Nairobi Vibe - Find Nairobi Escorts and Massage. All Rights Reserved.</p>
     </div>
 </footer>
 
@@ -1558,7 +1409,7 @@
      WHATSAPP FLOATING BUTTON
      ============================================================ -->
 <div class="whatsapp-float">
-    <a href="#" target="_blank" title="Chat on WhatsApp">
+    <a href="https://wa.me/254712831606" target="_blank" title="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 </div>
@@ -1566,531 +1417,18 @@
 <!-- ============================================================
      TOAST NOTIFICATION
      ============================================================ -->
-<div class="toast" id="toast" style="position:fixed; top:20px; right:20px; padding:14px 25px; border-radius:12px; color:#fff; font-weight:600; font-size:14px; box-shadow:0 8px 30px rgba(0,0,0,0.2); transform:translateX(120%); transition:all 0.4s ease; z-index:9999; max-width:400px;">
-    <span class="toast-close" id="toastClose" style="float:right; margin-left:15px; cursor:pointer; opacity:0.8; font-size:18px;">&times;</span>
+<div class="toast" id="toast">
     <span id="toastMessage">Notification</span>
 </div>
 
 <!-- ============================================================
-     JAVASCRIPT - WITH SUPABASE INTEGRATION
+     JAVASCRIPT
      ============================================================ -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <script>
     $(document).ready(function() {
-        
-        // ============================================================
-        // CHECK IF SUPABASE IS LOADED
-        // ============================================================
-        if (typeof window.supabaseFunctions === 'undefined') {
-            console.error('❌ Supabase functions not loaded! Make sure supabase-config.js is loaded first.');
-            showToast('System error. Please refresh the page.', 'error');
-            return;
-        }
-        
-        // ============================================================
-        // DOM ELEMENTS
-        // ============================================================
-        const premiumGrid = document.getElementById('premiumEscortsGrid');
-        const newGrid = document.getElementById('newEscortsGrid');
-        const reviewsContainer = document.getElementById('reviewsContainer');
-        const sliderContainer = document.getElementById('sliderContainer');
-        const countryList = document.getElementById('countryList');
-        
-        // ============================================================
-        // TOAST NOTIFICATION
-        // ============================================================
-        function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            const toastClose = document.getElementById('toastClose');
-            
-            toastMessage.textContent = message;
-            toast.className = 'toast ' + type;
-            toast.style.transform = 'translateX(0)';
-            
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(function() {
-                toast.style.transform = 'translateX(120%)';
-            }, 4000);
-            
-            toastClose.onclick = function() {
-                toast.style.transform = 'translateX(120%)';
-            };
-        }
-        
-        // ============================================================
-        // LOAD SLIDER FROM SUPABASE
-        // ============================================================
-        async function loadSlider() {
-            try {
-                const result = await window.supabaseFunctions.getEscorts();
-                
-                if (result.success && result.data.length > 0) {
-                    // Get featured escorts for slider (first 5)
-                    const sliderEscorts = result.data.slice(0, 5);
-                    
-                    let sliderHtml = '';
-                    sliderEscorts.forEach((escort, index) => {
-                        // Generate random images for demo (in production, use actual images from DB)
-                        const images = [
-                            'https://picsum.photos/1200/600?random=' + (index + 1),
-                            'https://picsum.photos/1200/600?random=' + (index + 10),
-                            'https://picsum.photos/1200/600?random=' + (index + 20)
-                        ];
-                        
-                        const isPremium = escort.is_premium || false;
-                        const isVerified = escort.is_verified || false;
-                        
-                        sliderHtml += `
-                            <div class="slider-item">
-                                <img src="${images[index % images.length]}" alt="${escort.full_name || 'Escort'}">
-                                <div class="slider-badges">
-                                    ${isPremium ? '<span class="badge badge-premium">PREMIUM</span>' : ''}
-                                    ${isVerified ? '<span class="badge badge-verified">VERIFIED</span>' : ''}
-                                </div>
-                                ${isPremium ? '<div class="slider-premium"><span>PREMIUM</span></div>' : ''}
-                                <div class="slider-overlay">
-                                    <h2>${escort.full_name || 'Escort'}</h2>
-                                    <p class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</p>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    sliderContainer.innerHTML = sliderHtml;
-                    
-                    // Re-initialize Owl Carousel
-                    $('.slider.owl-carousel').owlCarousel({
-                        items: 1,
-                        loop: true,
-                        autoplay: true,
-                        autoplayTimeout: 5000,
-                        autoplayHoverPause: true,
-                        nav: true,
-                        navText: [
-                            '<i class="fas fa-chevron-left"></i>',
-                            '<i class="fas fa-chevron-right"></i>'
-                        ],
-                        dots: true,
-                        responsive: {
-                            0: { items: 1 },
-                            600: { items: 1 },
-                            1000: { items: 1 }
-                        }
-                    });
-                } else {
-                    sliderContainer.innerHTML = `
-                        <div class="slider-item">
-                            <img src="https://picsum.photos/1200/600?random=1" alt="Welcome">
-                            <div class="slider-overlay">
-                                <h2>Welcome to Nairobi Raha</h2>
-                                <p>Find the best escorts in Nairobi</p>
-                            </div>
-                        </div>
-                    `;
-                }
-            } catch (error) {
-                console.error('Error loading slider:', error);
-            }
-        }
-        
-        // ============================================================
-        // LOAD PREMIUM ESCORTS FROM SUPABASE
-        // ============================================================
-        async function loadPremiumEscorts() {
-            const loading = document.getElementById('premiumLoading');
-            loading.classList.add('show');
-            
-            try {
-                const result = await window.supabaseFunctions.getPremiumEscorts();
-                loading.classList.remove('show');
-                
-                if (result.success && result.data.length > 0) {
-                    let html = '';
-                    const escorts = result.data.slice(0, 8);
-                    
-                    escorts.forEach((escort, index) => {
-                        const isVerified = escort.is_verified || false;
-                        const isFeatured = escort.is_featured || false;
-                        const phone = escort.phone || '07XXXXXXXX';
-                        
-                        html += `
-                            <div class="escort-card">
-                                <div class="image-wrapper">
-                                    <img src="https://picsum.photos/300/220?random=${index + 50}" alt="${escort.full_name || 'Escort'}">
-                                    <div class="card-badges">
-                                        ${isVerified ? '<span class="badge badge-verified">VERIFIED</span>' : ''}
-                                        ${isFeatured ? '<span class="badge badge-featured">FEATURED</span>' : ''}
-                                    </div>
-                                    <div class="premium-badge"><span>PREMIUM</span></div>
-                                </div>
-                                <div class="card-info">
-                                    <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
-                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
-                                </div>
-                                <div class="card-overlay">
-                                    <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
-                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    premiumGrid.innerHTML = html;
-                } else {
-                    premiumGrid.innerHTML = `
-                        <div class="no-results" style="grid-column:1/-1;">
-                            <i class="fas fa-search"></i>
-                            <h4>No premium escorts found</h4>
-                            <p>Check back later for premium listings</p>
-                        </div>
-                    `;
-                }
-            } catch (error) {
-                loading.classList.remove('show');
-                console.error('Error loading premium escorts:', error);
-                premiumGrid.innerHTML = `
-                    <div class="no-results" style="grid-column:1/-1;">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <h4>Error loading escorts</h4>
-                        <p>Please refresh the page</p>
-                    </div>
-                `;
-            }
-        }
-        
-        // ============================================================
-        // LOAD NEW ESCORTS FROM SUPABASE
-        // ============================================================
-        async function loadNewEscorts() {
-            const loading = document.getElementById('newLoading');
-            loading.classList.add('show');
-            
-            try {
-                const result = await window.supabaseFunctions.getEscorts();
-                loading.classList.remove('show');
-                
-                if (result.success && result.data.length > 0) {
-                    // Get newest escorts (last 5)
-                    const sorted = result.data.sort((a, b) => 
-                        new Date(b.created_at || b.createdAt) - new Date(a.created_at || a.createdAt)
-                    );
-                    const escorts = sorted.slice(0, 5);
-                    
-                    let html = '';
-                    escorts.forEach((escort, index) => {
-                        const isNew = index < 3;
-                        const phone = escort.phone || '07XXXXXXXX';
-                        
-                        html += `
-                            <div class="escort-card">
-                                <div class="image-wrapper">
-                                    <img src="https://picsum.photos/300/220?random=${index + 100}" alt="${escort.full_name || 'Escort'}">
-                                    ${isNew ? '<div class="card-badges"><span class="badge badge-new">NEW</span></div>' : ''}
-                                </div>
-                                <div class="card-info">
-                                    <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
-                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    newGrid.innerHTML = html;
-                } else {
-                    newGrid.innerHTML = `
-                        <div class="no-results" style="grid-column:1/-1;">
-                            <i class="fas fa-users"></i>
-                            <h4>No escorts found</h4>
-                            <p>Check back later for new listings</p>
-                        </div>
-                    `;
-                }
-            } catch (error) {
-                loading.classList.remove('show');
-                console.error('Error loading new escorts:', error);
-            }
-        }
-        
-        // ============================================================
-        // LOAD REVIEWS FROM SUPABASE
-        // ============================================================
-        async function loadReviews() {
-            const loading = document.getElementById('reviewsLoading');
-            loading.classList.add('show');
-            
-            try {
-                // Get all escorts first
-                const escortsResult = await window.supabaseFunctions.getEscorts();
-                
-                if (escortsResult.success && escortsResult.data.length > 0) {
-                    // Use first escort for demo reviews
-                    const firstEscort = escortsResult.data[0];
-                    const result = await window.supabaseFunctions.getEscortReviews(firstEscort.id);
-                    
-                    loading.classList.remove('show');
-                    
-                    if (result.success && result.data.length > 0) {
-                        let html = '';
-                        const reviews = result.data.slice(0, 3);
-                        
-                        reviews.forEach(review => {
-                            const stars = '★'.repeat(review.rating || 5) + '☆'.repeat(5 - (review.rating || 5));
-                            const author = review.users?.full_name || 'Anonymous';
-                            
-                            html += `
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <span class="review-author"><span>${author.substring(0, 2)}...</span> wrote:</span>
-                                        <span class="review-stars">${stars}</span>
-                                    </div>
-                                    <div class="review-text">
-                                        ${review.comment || 'Great service!'} <a href="#">see the review</a>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                        
-                        reviewsContainer.innerHTML = html;
-                    } else {
-                        reviewsContainer.innerHTML = `
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <span class="review-author"><span>Na...</span> wrote:</span>
-                                    <span class="review-stars">★★★★★</span>
-                                </div>
-                                <div class="review-text">
-                                    Lovely services with hot Ethiopians escorts. <a href="#">see the review</a>
-                                </div>
-                            </div>
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <span class="review-author"><span>Na...</span> wrote:</span>
-                                    <span class="review-stars">★★★★★</span>
-                                </div>
-                                <div class="review-text">
-                                    Good escorts. Clean and classy <a href="#">see the review</a>
-                                </div>
-                            </div>
-                        `;
-                    }
-                } else {
-                    loading.classList.remove('show');
-                    reviewsContainer.innerHTML = `
-                        <div class="review-item">
-                            <div class="review-header">
-                                <span class="review-author"><span>Na...</span> wrote:</span>
-                                <span class="review-stars">★★★★★</span>
-                            </div>
-                            <div class="review-text">
-                                Lovely services with hot Ethiopians escorts. <a href="#">see the review</a>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <div class="review-header">
-                                <span class="review-author"><span>Na...</span> wrote:</span>
-                                <span class="review-stars">★★★★★</span>
-                            </div>
-                            <div class="review-text">
-                                Good escorts. Clean and classy <a href="#">see the review</a>
-                            </div>
-                        </div>
-                    `;
-                }
-            } catch (error) {
-                loading.classList.remove('show');
-                console.error('Error loading reviews:', error);
-            }
-        }
-        
-        // ============================================================
-        // LOAD LOCATIONS FROM SUPABASE
-        // ============================================================
-        async function loadLocations() {
-            try {
-                const result = await window.supabaseFunctions.getEscorts();
-                
-                if (result.success && result.data.length > 0) {
-                    // Get unique locations
-                    const locations = [...new Set(result.data.map(e => e.location).filter(Boolean))];
-                    
-                    if (locations.length > 0) {
-                        let html = '';
-                        // Add "All" option
-                        html += `<li><a href="#" data-location="all"><i class="fas fa-map-pin"></i> All Locations</a></li>`;
-                        
-                        locations.forEach(location => {
-                            html += `<li><a href="#" data-location="${location}"><i class="fas fa-map-pin"></i> ${location}</a></li>`;
-                        });
-                        
-                        countryList.innerHTML = html;
-                        
-                        // Add click handlers for location filter
-                        countryList.querySelectorAll('a').forEach(link => {
-                            link.addEventListener('click', function(e) {
-                                e.preventDefault();
-                                const location = this.dataset.location;
-                                if (location === 'all') {
-                                    loadPremiumEscorts();
-                                } else {
-                                    filterByLocation(location);
-                                }
-                            });
-                        });
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading locations:', error);
-            }
-        }
-        
-        // ============================================================
-        // FILTER BY LOCATION
-        // ============================================================
-        async function filterByLocation(location) {
-            showToast(`Showing escorts in ${location}`, 'info');
-            
-            try {
-                const result = await window.supabaseFunctions.getEscorts();
-                
-                if (result.success) {
-                    const filtered = result.data.filter(e => e.location === location);
-                    
-                    if (filtered.length > 0) {
-                        let html = '';
-                        filtered.slice(0, 8).forEach((escort, index) => {
-                            const phone = escort.phone || '07XXXXXXXX';
-                            html += `
-                                <div class="escort-card">
-                                    <div class="image-wrapper">
-                                        <img src="https://picsum.photos/300/220?random=${index + 200}" alt="${escort.full_name || 'Escort'}">
-                                    </div>
-                                    <div class="card-info">
-                                        <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
-                                        <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                        premiumGrid.innerHTML = html;
-                    }
-                }
-            } catch (error) {
-                console.error('Error filtering by location:', error);
-            }
-        }
-        
-        // ============================================================
-        // SEARCH FUNCTION
-        // ============================================================
-        document.getElementById('searchForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const term = document.getElementById('searchInput').value.trim();
-            
-            if (!term) {
-                showToast('Please enter a search term', 'info');
-                return;
-            }
-            
-            showToast(`Searching for "${term}"...`, 'info');
-            
-            try {
-                const result = await window.supabaseFunctions.searchEscorts(term);
-                
-                if (result.success && result.data.length > 0) {
-                    let html = '';
-                    result.data.slice(0, 8).forEach((escort, index) => {
-                        const phone = escort.phone || '07XXXXXXXX';
-                        html += `
-                            <div class="escort-card">
-                                <div class="image-wrapper">
-                                    <img src="https://picsum.photos/300/220?random=${index + 300}" alt="${escort.full_name || 'Escort'}">
-                                </div>
-                                <div class="card-info">
-                                    <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
-                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    premiumGrid.innerHTML = html;
-                    showToast(`Found ${result.data.length} results`, 'success');
-                } else {
-                    premiumGrid.innerHTML = `
-                        <div class="no-results" style="grid-column:1/-1;">
-                            <i class="fas fa-search"></i>
-                            <h4>No results found</h4>
-                            <p>Try a different search term</p>
-                        </div>
-                    `;
-                    showToast('No results found', 'info');
-                }
-            } catch (error) {
-                console.error('Search error:', error);
-                showToast('Error searching. Please try again.', 'error');
-            }
-        });
-        
-        // ============================================================
-        // QUICK SEARCH
-        // ============================================================
-        document.getElementById('quickSearchForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const city = document.getElementById('searchCity').value;
-            const gender = document.getElementById('searchGender').value;
-            const premium = document.getElementById('searchPremium').checked;
-            const verified = document.getElementById('searchVerified').checked;
-            
-            try {
-                const result = await window.supabaseFunctions.getEscorts();
-                
-                if (result.success) {
-                    let filtered = result.data;
-                    
-                    if (city) filtered = filtered.filter(e => e.location === city);
-                    if (premium) filtered = filtered.filter(e => e.is_premium === true);
-                    if (verified) filtered = filtered.filter(e => e.is_verified === true);
-                    
-                    if (filtered.length > 0) {
-                        let html = '';
-                        filtered.slice(0, 8).forEach((escort, index) => {
-                            const phone = escort.phone || '07XXXXXXXX';
-                            html += `
-                                <div class="escort-card">
-                                    <div class="image-wrapper">
-                                        <img src="https://picsum.photos/300/220?random=${index + 400}" alt="${escort.full_name || 'Escort'}">
-                                        ${premium ? '<div class="premium-badge"><span>PREMIUM</span></div>' : ''}
-                                        ${verified ? '<div class="card-badges"><span class="badge badge-verified">VERIFIED</span></div>' : ''}
-                                    </div>
-                                    <div class="card-info">
-                                        <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
-                                        <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                        premiumGrid.innerHTML = html;
-                        showToast(`Found ${filtered.length} results`, 'success');
-                    } else {
-                        premiumGrid.innerHTML = `
-                            <div class="no-results" style="grid-column:1/-1;">
-                                <i class="fas fa-search"></i>
-                                <h4>No matches found</h4>
-                                <p>Try adjusting your filters</p>
-                            </div>
-                        `;
-                        showToast('No matches found', 'info');
-                    }
-                }
-            } catch (error) {
-                console.error('Quick search error:', error);
-                showToast('Error searching. Please try again.', 'error');
-            }
-        });
         
         // ============================================================
         // HAMBURGER MENU TOGGLE
@@ -2100,8 +1438,9 @@
             $(this).toggleClass('active');
         });
         
+        // Close menu on outside click
         $(document).on('click', function(e) {
-            if ($(window).width() <= 768) {
+            if ($(window).width() <= 992) {
                 if (!$(e.target).closest('.header').length) {
                     $('#navMenu').slideUp(300);
                 }
@@ -2112,27 +1451,61 @@
         // SELECT2 FOR DROPDOWNS
         // ============================================================
         $('.select2').select2({
-            minimumResultsForSearch: 10,
+            minimumResultsForSearch: 5,
             width: 'resolve',
             placeholder: 'Select an option'
         });
         
         // ============================================================
-        // INITIALIZE
+        // TOAST NOTIFICATION
         // ============================================================
-        console.log('🚀 Loading Nairobi Raha from Supabase...');
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type + ' show';
+            
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
         
-        loadSlider();
-        loadPremiumEscorts();
-        loadNewEscorts();
-        loadReviews();
-        loadLocations();
+        // ============================================================
+        // SEARCH FUNCTION
+        // ============================================================
+        $('#searchForm').on('submit', function(e) {
+            e.preventDefault();
+            const term = $('#searchInput').val().trim();
+            
+            if (!term) {
+                showToast('Please enter a search term', 'info');
+                return;
+            }
+            
+            showToast(`Searching for "${term}"...`, 'info');
+        });
         
-        console.log('✅ Nairobi Raha - Homepage with Supabase Loaded Successfully!');
-        console.log('📋 Features: Dynamic Slider, Premium Escorts, New Escorts, Reviews, Locations');
-        console.log('🎨 Design: Modern, Clean, Professional');
-        console.log('📱 Responsive: Fully Responsive');
-        console.log('🔗 Connected to Supabase:', SUPABASE_URL);
+        // ============================================================
+        // QUICK SEARCH
+        // ============================================================
+        $('#quickSearchForm').on('submit', function(e) {
+            e.preventDefault();
+            showToast('Searching...', 'info');
+        });
+        
+        // ============================================================
+        // COUNTRY LIST ITEMS - MOBILE FRIENDLY
+        // ============================================================
+        $('.country-list li a').on('click', function(e) {
+            e.preventDefault();
+            const location = $(this).text().trim();
+            showToast(`Showing escorts in ${location}`, 'info');
+        });
+        
+        console.log('✅ Nairobi Vibe - Mobile First Homepage Loaded!');
+        console.log('📱 Optimized for mobile devices');
+        console.log('📋 Sections: VIP Escorts, Basic Escorts, VIP Reviews');
+        console.log('📞 WhatsApp: +254712831606');
         
     });
 </script>
