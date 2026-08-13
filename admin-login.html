@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Nairobi Raha</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================================
+                   ADMIN LOGIN STYLES
+                   ============================================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0528, #2f074e, #4a0e6b);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-wrapper {
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        /* ---------- LOGIN CARD ---------- */
+        .login-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 45px 40px 35px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: slideUp 0.6s ease;
+        }
+        
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .login-card .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .login-card .logo img {
+            height: 60px;
+            border-radius: 12px;
+        }
+        
+        .login-card .logo h1 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #E0006C;
+            margin-top: 8px;
+        }
+        
+        .login-card .logo .subtitle {
+            color: #888;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .login-card .logo .subtitle .lock-icon {
+            color: #E0006C;
+        }
+        
+        /* ---------- ALERT BANNER ---------- */
+        .alert-banner {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .alert-banner.show {
+            display: flex;
+        }
+        
+        .alert-banner i {
+            color: #ffc107;
+            font-size: 18px;
+        }
+        
+        .alert-banner .alert-text {
+            font-size: 13px;
+            color: #856404;
+            flex: 1;
+        }
+        
+        .alert-banner .alert-close {
+            cursor: pointer;
+            color: #856404;
+            font-size: 18px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .alert-banner .alert-close:hover {
+            opacity: 1;
+        }
+        
+        /* ---------- FORM ---------- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 2px;
+        }
+        
+        .form-group .input-wrapper {
+            position: relative;
+        }
+        
+        .form-group .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group .input-wrapper input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            color: #333;
+        }
+        
+        .form-group .input-wrapper input:focus {
+            outline: none;
+            border-color: #E0006C;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(224, 0, 108, 0.1);
+        }
+        
+        .form-group .input-wrapper input:focus + i {
+            color: #E0006C;
+        }
+        
+        .form-group .input-wrapper .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: none;
+            border: none;
+            font-size: 16px;
+        }
+        
+        .form-group .input-wrapper .password-toggle:hover {
+            color: #E0006C;
+        }
+        
+        /* ---------- REMEMBER ME ---------- */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #E0006C;
+        }
+        
+        .remember-me label {
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        /* ---------- LOGIN BUTTON ---------- */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #E0006C, #b30057);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(224, 0, 108, 0.4);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        
+        .btn-login i {
+            font-size: 18px;
+        }
+        
+        /* ---------- LOADER ---------- */
+        .loader {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .loader.show {
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ---------- BACK LINK ---------- */
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #999;
+        }
+        
+        .back-link a {
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link a:hover {
+            color: #E0006C;
+        }
+        
+        /* ---------- ERROR MESSAGES ---------- */
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .form-group.error .input-wrapper input {
+            border-color: #e74c3c;
+            background: #fdf2f2;
+        }
+        
+        .form-group.error .input-wrapper i {
+            color: #e74c3c;
+        }
+        
+        .form-group.success .input-wrapper input {
+            border-color: #27ae60;
+            background: #f0faf4;
+        }
+        
+        .form-group.success .input-wrapper i {
+            color: #27ae60;
+        }
+        
+        /* ---------- TOAST ---------- */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            transform: translateX(120%);
+            transition: all 0.4s ease;
+            z-index: 9999;
+            max-width: 400px;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast.success {
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+        }
+        
+        .toast.error {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .toast.info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+        
+        .toast .toast-close {
+            float: right;
+            margin-left: 15px;
+            cursor: pointer;
+            opacity: 0.8;
+            font-size: 18px;
+        }
+        
+        .toast .toast-close:hover {
+            opacity: 1;
+        }
+        
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 500px) {
+            .login-card {
+                padding: 30px 20px 25px;
+            }
+            
+            .form-options {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .login-card .logo h1 {
+                font-size: 20px;
+            }
+            
+            .btn-login {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .form-group .input-wrapper input {
+                padding: 10px 12px 10px 40px;
+                font-size: 14px;
+            }
+        }
+        
+        /* ---------- SCROLLBAR ---------- */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #E0006C;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-wrapper">
+    <div class="login-card" id="loginCard">
+        
+        <!-- ============================================================
+             LOGO
+             ============================================================ -->
+        <div class="logo">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENR%3C/text%3E%3C/svg%3E" alt="Nairobi Raha">
+            <h1>Admin Login</h1>
+            <div class="subtitle">
+                <i class="fas fa-shield-alt lock-icon"></i>
+                Secure Admin Access Only
+            </div>
+        </div>
+        
+        <!-- ============================================================
+             ALERT BANNER
+             ============================================================ -->
+        <div class="alert-banner" id="alertBanner">
+            <i class="fas fa-info-circle"></i>
+            <span class="alert-text" id="alertText">Session expired. Please login again.</span>
+            <span class="alert-close" id="alertClose">&times;</span>
+        </div>
+        
+        <!-- ============================================================
+             LOGIN FORM
+             ============================================================ -->
+        <form id="adminLoginForm" novalidate>
+            
+            <!-- Email -->
+            <div class="form-group" id="emailGroup">
+                <label>Admin Email <span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Enter admin email" required autocomplete="email" value="admin@nairobiraha.com">
+                </div>
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+            
+            <!-- Password -->
+            <div class="form-group" id="passwordGroup">
+                <label>Password <span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Enter admin password" required autocomplete="current-password" value="Admin@123">
+                    <button type="button" class="password-toggle" id="togglePassword">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <div class="error-message" id="passwordError">Please enter your password</div>
+            </div>
+            
+            <!-- Remember Me -->
+            <div class="form-options">
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me</label>
+                </div>
+            </div>
+            
+            <!-- Login Button -->
+            <button type="submit" class="btn-login" id="loginBtn">
+                <span id="btnText"><i class="fas fa-shield-alt"></i> Admin Login</span>
+                <span class="loader" id="btnLoader"></span>
+            </button>
+            
+        </form>
+        
+        <!-- ============================================================
+             BACK TO SITE LINK
+             ============================================================ -->
+        <div class="back-link">
+            <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Website</a>
+        </div>
+        
+    </div>
+</div>
+
+<!-- ============================================================
+     TOAST NOTIFICATION
+     ============================================================ -->
+<div class="toast" id="toast">
+    <span class="toast-close" id="toastClose">&times;</span>
+    <span id="toastMessage">Notification</span>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // ============================================================
+        // ELEMENTS
+        // ============================================================
+        const form = document.getElementById('adminLoginForm');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const rememberMe = document.getElementById('rememberMe');
+        const loginBtn = document.getElementById('loginBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const toastClose = document.getElementById('toastClose');
+        const togglePassword = document.getElementById('togglePassword');
+        const alertBanner = document.getElementById('alertBanner');
+        const alertText = document.getElementById('alertText');
+        const alertClose = document.getElementById('alertClose');
+        
+        // ============================================================
+        // CHECK FOR SESSION EXPIRED MESSAGE
+        // ============================================================
+        const urlParams = new URLSearchParams(window.location.search);
+        const expired = urlParams.get('expired');
+        if (expired === 'true') {
+            alertBanner.classList.add('show');
+            alertText.textContent = 'Your admin session has expired. Please login again.';
+        }
+        
+        // Close alert banner
+        alertClose.addEventListener('click', function() {
+            alertBanner.classList.remove('show');
+        });
+        
+        // ============================================================
+        // PASSWORD TOGGLE
+        // ============================================================
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+        
+        // ============================================================
+        // REAL-TIME VALIDATION
+        // ============================================================
+        email.addEventListener('blur', function() {
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value);
+            validateField(this, 'emailGroup', 'emailError', isValid);
+        });
+        
+        password.addEventListener('blur', function() {
+            const isValid = this.value.length >= 1;
+            validateField(this, 'passwordGroup', 'passwordError', isValid);
+        });
+        
+        function validateField(input, groupId, errorId, isValid) {
+            const group = document.getElementById(groupId);
+            const error = document.getElementById(errorId);
+            
+            if (input.value.trim() === '') {
+                group.classList.remove('success', 'error');
+                error.classList.remove('show');
+                return;
+            }
+            
+            if (isValid) {
+                group.classList.remove('error');
+                group.classList.add('success');
+                error.classList.remove('show');
+            } else {
+                group.classList.remove('success');
+                group.classList.add('error');
+                error.classList.add('show');
+            }
+        }
+        
+        // ============================================================
+        // LOAD SAVED EMAIL
+        // ============================================================
+        const savedEmail = localStorage.getItem('admin_remember_email');
+        if (savedEmail) {
+            email.value = savedEmail;
+            rememberMe.checked = true;
+        }
+        
+        // ============================================================
+        // FORM SUBMISSION - ADMIN AUTHENTICATION
+        // ============================================================
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate fields
+            let isValid = true;
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                validateField(email, 'emailGroup', 'emailError', false);
+                isValid = false;
+            } else {
+                validateField(email, 'emailGroup', 'emailError', true);
+            }
+            
+            if (password.value.length < 1) {
+                validateField(password, 'passwordGroup', 'passwordError', false);
+                isValid = false;
+            } else {
+                validateField(password, 'passwordGroup', 'passwordError', true);
+            }
+            
+            if (!isValid) {
+                showToast('Please fill in all fields correctly', 'error');
+                return;
+            }
+            
+            // ============================================================
+            // ADMIN AUTHENTICATION
+            // ============================================================
+            loginBtn.disabled = true;
+            btnText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+            btnLoader.classList.add('show');
+            
+            // Save remember me
+            if (rememberMe.checked) {
+                localStorage.setItem('admin_remember_email', email.value);
+            } else {
+                localStorage.removeItem('admin_remember_email');
+            }
+            
+            // ============================================================
+            // CHECK ADMIN CREDENTIALS
+            // ============================================================
+            setTimeout(function() {
+                
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
+                
+                // Find admin user
+                const admin = users.find(u => 
+                    u.email === email.value && 
+                    u.password === password.value && 
+                    u.role === 'admin'
+                );
+                
+                if (admin) {
+                    // Check if admin is approved
+                    if (admin.status === 'pending') {
+                        showToast('Your admin account is pending approval.', 'error');
+                        resetButton();
+                        return;
+                    }
+                    
+                    // Admin login successful
+                    showToast('Welcome Admin! Redirecting to dashboard... 🎉', 'success');
+                    
+                    // Store admin session
+                    const sessionData = {
+                        email: admin.email,
+                        name: admin.fullName,
+                        role: 'admin',
+                        isAdmin: true,
+                        loggedIn: true,
+                        loginTime: new Date().toISOString()
+                    };
+                    localStorage.setItem('nairobi_raha_admin_session', JSON.stringify(sessionData));
+                    
+                    // Redirect to admin dashboard
+                    setTimeout(function() {
+                        window.location.href = 'admin-dashboard.html';
+                    }, 1000);
+                    
+                } else {
+                    // Check if email exists but not admin
+                    const userExists = users.some(u => u.email === email.value);
+                    if (userExists) {
+                        showToast('This account is not an admin account.', 'error');
+                    } else {
+                        showToast('Invalid admin credentials. Please try again.', 'error');
+                    }
+                    resetButton();
+                }
+                
+            }, 1500);
+        });
+        
+        // ============================================================
+        // RESET BUTTON STATE
+        // ============================================================
+        function resetButton() {
+            loginBtn.disabled = false;
+            btnText.innerHTML = '<i class="fas fa-shield-alt"></i> Admin Login';
+            btnLoader.classList.remove('show');
+        }
+        
+        // ============================================================
+        // TOAST NOTIFICATION
+        // ============================================================
+        function showToast(message, type = 'info') {
+            toastMessage.textContent = message;
+            toast.className = 'toast ' + type;
+            toast.classList.add('show');
+            
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 5000);
+        }
+        
+        toastClose.addEventListener('click', function() {
+            toast.classList.remove('show');
+        });
+        
+        // ============================================================
+        // KEYBOARD SHORTCUTS
+        // ============================================================
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                toast.classList.remove('show');
+                alertBanner.classList.remove('show');
+            }
+        });
+        
+        // ============================================================
+        // ENSURE ADMIN USER EXISTS
+        // ============================================================
+        function ensureAdminUser() {
+            let users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
+            const adminExists = users.some(u => u.role === 'admin' && u.status === 'approved');
+            
+            if (!adminExists) {
+                // Create default admin if none exists
+                users.push({
+                    id: 'admin_' + Date.now(),
+                    fullName: 'Admin User',
+                    email: 'admin@nairobiraha.com',
+                    phone: '0712345678',
+                    password: 'Admin@123',
+                    role: 'admin',
+                    location: 'Nairobi CBD',
+                    status: 'approved',
+                    createdAt: new Date().toISOString()
+                });
+                localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
+                console.log('✅ Default admin created: admin@nairobiraha.com / Admin@123');
+            }
+        }
+        
+        ensureAdminUser();
+        
+        console.log('✅ Admin Login Page Loaded');
+        console.log('📧 Default Admin: admin@nairobiraha.com');
+        console.log('🔑 Default Password: Admin@123');
+        
+    });
+</script>
+
+</body>
+</html>
