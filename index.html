@@ -17,7 +17,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     
     <!-- Select2 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Supabase Config -->
+    <script src="supabase-config.js"></script>
 
     <style>
         /* ============================================================
@@ -1128,10 +1134,58 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #b30057;
         }
+        
+        /* ---------- LOADING SPINNER ---------- */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .loading-spinner.show {
+            display: block;
+        }
+        
+        .loading-spinner i {
+            font-size: 40px;
+            color: #E0006C;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+        }
+        
+        .no-results i {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .no-results h4 {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
 
+<!-- ============================================================
+     TOP BANNER
+     ============================================================ -->
+<div class="top-banner">
+    <i class="fas fa-star" style="margin-right: 8px;"></i>
+    Welcome to Nairobi Raha Escorts - The #1 Escort Directory in Kenya
+    <i class="fas fa-star" style="margin-left: 8px;"></i>
+</div>
 
 <!-- ============================================================
      HEADER
@@ -1140,7 +1194,7 @@
     <div class="header-inner">
         <!-- Logo -->
         <a href="#" class="logo">
-            <img src="https://via.placeholder.com/112x112/E0006C/FFFFFF?text=NR" alt="Nairobi Raha">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENR%3C/text%3E%3C/svg%3E" alt="Nairobi Raha">
         </a>
         
         <!-- Navigation -->
@@ -1170,8 +1224,8 @@
         
         <!-- User Menu -->
         <div class="user-menu">
-            <a href="#" class="btn-register"><i class="fas fa-user-plus"></i> Register</a>
-            <a href="#" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="register.html" class="btn-register"><i class="fas fa-user-plus"></i> Register</a>
+            <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
             <a href="#" class="icon-btn" title="Search"><i class="fas fa-search"></i></a>
             <a href="#" class="icon-btn" title="Contact"><i class="fas fa-envelope"></i></a>
             <div class="hamburger" id="hamburger">
@@ -1181,6 +1235,17 @@
     </div>
 </header>
 
+
+<!-- ============================================================
+     SLIDER SECTION - DYNAMIC FROM SUPABASE
+     ============================================================ -->
+<section class="slider-section">
+    <div class="slider-container">
+        <div class="slider owl-carousel owl-theme" id="sliderContainer">
+            <!-- Slides will be dynamically loaded from Supabase -->
+        </div>
+    </div>
+</section>
 
 <!-- ============================================================
      MAIN CONTENT
@@ -1195,38 +1260,17 @@
         <!-- Countries/Locations -->
         <div class="sidebar-box">
             <h3><i class="fas fa-globe-africa"></i> Locations</h3>
-            <ul class="country-list">
-                <li><a href="#"><i class="fas fa-map-pin"></i> All Sops</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Bamburi Mtambo</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Embu</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Hurlingham</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Juja</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kahawa West</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kamulu</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kangemi</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kasarani</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kiambu</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kilimani</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kisumu</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Langata</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Mombasa</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Nairobi CBD</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Nairobi West</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Nakuru</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Nyali</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> South B</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Thindigua</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Umoja</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Westlands</a></li>
+            <ul class="country-list" id="countryList">
+                <!-- Locations will be loaded from Supabase -->
             </ul>
         </div>
         
         <!-- Search Widget -->
         <div class="sidebar-box">
             <h3><i class="fas fa-search"></i> Search</h3>
-            <form action="#" method="get">
+            <form action="#" method="get" id="searchForm">
                 <div style="display:flex; gap:5px;">
-                    <input type="search" placeholder="Search escorts..." style="flex:1; padding:10px 15px; border:2px solid #eee; border-radius:10px; font-size:14px; outline:none; transition:all 0.3s ease;">
+                    <input type="search" id="searchInput" placeholder="Search escorts..." style="flex:1; padding:10px 15px; border:2px solid #eee; border-radius:10px; font-size:14px; outline:none; transition:all 0.3s ease;">
                     <button type="submit" style="padding:10px 20px; background:#E0006C; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:600;">
                         <i class="fas fa-arrow-right"></i>
                     </button>
@@ -1275,203 +1319,13 @@
                 <a href="#" class="btn-secondary" style="padding:6px 20px; font-size:13px;">View All <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <div class="escort-grid">
-                
-                <!-- Escort 1 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=20" alt="Desire SPA">
-                        <div class="card-badges">
-                            <span class="badge badge-verified">VERIFIED</span>
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Desire SPA 0727902874</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Desire SPA 0727902874</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 2 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=21" alt="Ashleys">
-                        <div class="card-badges">
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Ashleys 0728608148</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Ashleys 0728608148</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 3 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=22" alt="Samba">
-                        <div class="card-badges">
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="video-icon">
-                            <img src="https://img.icons8.com/fluency/60/000000/play-button-circled.png" alt="Video">
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Samba 0740682128</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Samba 0740682128</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 4 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=23" alt="Ecstacy SPA">
-                        <div class="card-badges">
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Ecstacy SPA 0769682766</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Ecstacy SPA 0769682766</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 5 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=24" alt="Maria">
-                        <div class="card-badges">
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Maria 0722570077</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Maria 0722570077</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 6 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=25" alt="Nana">
-                        <div class="card-badges">
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Nana 0722570077</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Nana 0722570077</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 7 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=26" alt="Seshi">
-                        <div class="card-badges">
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Seshi 0722713235</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Seshi 0722713235</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 8 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=27" alt="Barbra">
-                        <div class="card-badges">
-                            <span class="badge badge-verified">VERIFIED</span>
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Barbra 0708141538</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Barbra 0708141538</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 9 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=28" alt="Hanna">
-                        <div class="card-badges">
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Hanna 0729701685</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Hanna 0729701685</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- Escort 10 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=29" alt="Charlene">
-                        <div class="card-badges">
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>PREMIUM</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Charlene 0729677559</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                    <div class="card-overlay">
-                        <div class="name">Charlene 0729677559</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi CBD, Kenya</div>
-                    </div>
-                </div>
-                
+            <div class="loading-spinner" id="premiumLoading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading premium escorts...</p>
+            </div>
+            
+            <div class="escort-grid" id="premiumEscortsGrid">
+                <!-- Premium escorts will be dynamically loaded from Supabase -->
             </div>
             
             <div class="text-center" style="margin-top:20px;">
@@ -1488,78 +1342,13 @@
                 <a href="#" class="btn-secondary" style="padding:6px 20px; font-size:13px;">View All <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <div class="escort-grid">
-                
-                <!-- New Escort 1 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=30" alt="SAMHA">
-                        <div class="card-badges">
-                            <span class="badge badge-new">NEW</span>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">SAMHA</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Westlands, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- New Escort 2 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=31" alt="CAMILLA">
-                        <div class="card-badges">
-                            <span class="badge badge-new">NEW</span>
-                        </div>
-                        <div class="video-icon">
-                            <img src="https://img.icons8.com/fluency/60/000000/play-button-circled.png" alt="Video">
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">CAMILLA (NURU ORGASM MASSAGE)</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Westlands, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- New Escort 3 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=32" alt="DIYA INDIAN">
-                        <div class="card-badges">
-                            <span class="badge badge-new">NEW</span>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">DIYA INDIAN</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Westlands, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- New Escort 4 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=33" alt="Darl">
-                        <div class="card-badges">
-                            <span class="badge badge-new">NEW</span>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Darl</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</div>
-                    </div>
-                </div>
-                
-                <!-- New Escort 5 -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <img src="https://picsum.photos/300/220?random=34" alt="Indian dude">
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Indian dude (watsapp) women only</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</div>
-                    </div>
-                </div>
-                
+            <div class="loading-spinner" id="newLoading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading new escorts...</p>
+            </div>
+            
+            <div class="escort-grid" id="newEscortsGrid">
+                <!-- New escorts will be dynamically loaded from Supabase -->
             </div>
             
             <div class="text-center" style="margin-top:20px;">
@@ -1576,38 +1365,13 @@
                 <a href="#" class="btn-secondary" style="padding:6px 20px; font-size:13px;">All Reviews <i class="fas fa-arrow-right"></i></a>
             </div>
             
-            <!-- Review 1 -->
-            <div class="review-item">
-                <div class="review-header">
-                    <span class="review-author"><span>Na...</span> wrote:</span>
-                    <span class="review-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </span>
-                </div>
-                <div class="review-text">
-                    Lovely services with hot Ethiopians escorts. <a href="#">see the review</a>
-                </div>
+            <div class="loading-spinner" id="reviewsLoading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading reviews...</p>
             </div>
             
-            <!-- Review 2 -->
-            <div class="review-item">
-                <div class="review-header">
-                    <span class="review-author"><span>Na...</span> wrote:</span>
-                    <span class="review-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </span>
-                </div>
-                <div class="review-text">
-                    Good escorts. Clean and classy <a href="#">see the review</a>
-                </div>
+            <div id="reviewsContainer">
+                <!-- Reviews will be dynamically loaded from Supabase -->
             </div>
             
             <div class="text-center" style="margin-top:15px;">
@@ -1626,55 +1390,51 @@
         <div class="sidebar-box quick-search">
             <h3><i class="fas fa-search"></i> Quick Search</h3>
             
-            <form action="#" method="post">
+            <form action="#" method="post" id="quickSearchForm">
                 <input type="hidden" name="action" value="search">
                 
                 <div class="form-group">
                     <label><i class="fas fa-city"></i> City</label>
-                    <select class="select2">
+                    <select class="select2" id="searchCity">
                         <option value="">All Cities</option>
-                        <option value="1">Kilimani</option>
-                        <option value="2">Nairobi CBD</option>
-                        <option value="3">Westlands</option>
-                        <option value="4">Kasarani</option>
-                        <option value="5">South B</option>
-                        <option value="6">Langata</option>
-                        <option value="7">Mombasa</option>
-                        <option value="8">Kisumu</option>
-                        <option value="9">Nakuru</option>
-                        <option value="10">Thindigua</option>
-                        <option value="11">Hurlingham</option>
-                        <option value="12">Nairobi West</option>
-                        <option value="13">Runda</option>
-                        <option value="14">Nyali</option>
-                        <option value="15">Umoja</option>
+                        <option value="Kilimani">Kilimani</option>
+                        <option value="Nairobi CBD">Nairobi CBD</option>
+                        <option value="Westlands">Westlands</option>
+                        <option value="Kasarani">Kasarani</option>
+                        <option value="South B">South B</option>
+                        <option value="Langata">Langata</option>
+                        <option value="Mombasa">Mombasa</option>
+                        <option value="Kisumu">Kisumu</option>
+                        <option value="Nakuru">Nakuru</option>
+                        <option value="Thindigua">Thindigua</option>
+                        <option value="Hurlingham">Hurlingham</option>
+                        <option value="Runda">Runda</option>
+                        <option value="Nyali">Nyali</option>
+                        <option value="Umoja">Umoja</option>
+                        <option value="Ruaka">Ruaka</option>
                     </select>
                 </div>
                 
                 <div class="form-group">
                     <label><i class="fas fa-venus-mars"></i> Gender</label>
-                    <select>
-                        <option value="1">Female</option>
-                        <option value="2">Male</option>
-                        <option value="3">Couple</option>
-                        <option value="4">Gay</option>
-                        <option value="5">Transsexual</option>
+                    <select id="searchGender">
+                        <option value="">All</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="couple">Couple</option>
+                        <option value="gay">Gay</option>
+                        <option value="transsexual">Transsexual</option>
                     </select>
                 </div>
                 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="premium">
-                    <label for="premium"><i class="fas fa-crown" style="color:#f39c12;"></i> Only Premium</label>
+                    <input type="checkbox" id="searchPremium">
+                    <label for="searchPremium"><i class="fas fa-crown" style="color:#f39c12;"></i> Only Premium</label>
                 </div>
                 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="independent">
-                    <label for="independent"><i class="fas fa-user-check"></i> Only Independent</label>
-                </div>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="verified">
-                    <label for="verified"><i class="fas fa-check-circle"></i> Only Verified</label>
+                    <input type="checkbox" id="searchVerified">
+                    <label for="searchVerified"><i class="fas fa-check-circle"></i> Only Verified</label>
                 </div>
                 
                 <button type="submit" class="btn-search">
@@ -1804,7 +1564,15 @@
 </div>
 
 <!-- ============================================================
-     JAVASCRIPT
+     TOAST NOTIFICATION
+     ============================================================ -->
+<div class="toast" id="toast" style="position:fixed; top:20px; right:20px; padding:14px 25px; border-radius:12px; color:#fff; font-weight:600; font-size:14px; box-shadow:0 8px 30px rgba(0,0,0,0.2); transform:translateX(120%); transition:all 0.4s ease; z-index:9999; max-width:400px;">
+    <span class="toast-close" id="toastClose" style="float:right; margin-left:15px; cursor:pointer; opacity:0.8; font-size:18px;">&times;</span>
+    <span id="toastMessage">Notification</span>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT - WITH SUPABASE INTEGRATION
      ============================================================ -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
@@ -1814,48 +1582,524 @@
     $(document).ready(function() {
         
         // ============================================================
-        // 1. OWL CAROUSEL SLIDER
+        // CHECK IF SUPABASE IS LOADED
         // ============================================================
-        $('.slider.owl-carousel').owlCarousel({
-            items: 1,
-            loop: true,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplayHoverPause: true,
-            nav: true,
-            navText: [
-                '<i class="fas fa-chevron-left"></i>',
-                '<i class="fas fa-chevron-right"></i>'
-            ],
-            dots: true,
-            dotsData: true,
-            responsive: {
-                0: { items: 1 },
-                600: { items: 1 },
-                1000: { items: 1 }
+        if (typeof window.supabaseFunctions === 'undefined') {
+            console.error('❌ Supabase functions not loaded! Make sure supabase-config.js is loaded first.');
+            showToast('System error. Please refresh the page.', 'error');
+            return;
+        }
+        
+        // ============================================================
+        // DOM ELEMENTS
+        // ============================================================
+        const premiumGrid = document.getElementById('premiumEscortsGrid');
+        const newGrid = document.getElementById('newEscortsGrid');
+        const reviewsContainer = document.getElementById('reviewsContainer');
+        const sliderContainer = document.getElementById('sliderContainer');
+        const countryList = document.getElementById('countryList');
+        
+        // ============================================================
+        // TOAST NOTIFICATION
+        // ============================================================
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastClose = document.getElementById('toastClose');
+            
+            toastMessage.textContent = message;
+            toast.className = 'toast ' + type;
+            toast.style.transform = 'translateX(0)';
+            
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(function() {
+                toast.style.transform = 'translateX(120%)';
+            }, 4000);
+            
+            toastClose.onclick = function() {
+                toast.style.transform = 'translateX(120%)';
+            };
+        }
+        
+        // ============================================================
+        // LOAD SLIDER FROM SUPABASE
+        // ============================================================
+        async function loadSlider() {
+            try {
+                const result = await window.supabaseFunctions.getEscorts();
+                
+                if (result.success && result.data.length > 0) {
+                    // Get featured escorts for slider (first 5)
+                    const sliderEscorts = result.data.slice(0, 5);
+                    
+                    let sliderHtml = '';
+                    sliderEscorts.forEach((escort, index) => {
+                        // Generate random images for demo (in production, use actual images from DB)
+                        const images = [
+                            'https://picsum.photos/1200/600?random=' + (index + 1),
+                            'https://picsum.photos/1200/600?random=' + (index + 10),
+                            'https://picsum.photos/1200/600?random=' + (index + 20)
+                        ];
+                        
+                        const isPremium = escort.is_premium || false;
+                        const isVerified = escort.is_verified || false;
+                        
+                        sliderHtml += `
+                            <div class="slider-item">
+                                <img src="${images[index % images.length]}" alt="${escort.full_name || 'Escort'}">
+                                <div class="slider-badges">
+                                    ${isPremium ? '<span class="badge badge-premium">PREMIUM</span>' : ''}
+                                    ${isVerified ? '<span class="badge badge-verified">VERIFIED</span>' : ''}
+                                </div>
+                                ${isPremium ? '<div class="slider-premium"><span>PREMIUM</span></div>' : ''}
+                                <div class="slider-overlay">
+                                    <h2>${escort.full_name || 'Escort'}</h2>
+                                    <p class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    sliderContainer.innerHTML = sliderHtml;
+                    
+                    // Re-initialize Owl Carousel
+                    $('.slider.owl-carousel').owlCarousel({
+                        items: 1,
+                        loop: true,
+                        autoplay: true,
+                        autoplayTimeout: 5000,
+                        autoplayHoverPause: true,
+                        nav: true,
+                        navText: [
+                            '<i class="fas fa-chevron-left"></i>',
+                            '<i class="fas fa-chevron-right"></i>'
+                        ],
+                        dots: true,
+                        responsive: {
+                            0: { items: 1 },
+                            600: { items: 1 },
+                            1000: { items: 1 }
+                        }
+                    });
+                } else {
+                    sliderContainer.innerHTML = `
+                        <div class="slider-item">
+                            <img src="https://picsum.photos/1200/600?random=1" alt="Welcome">
+                            <div class="slider-overlay">
+                                <h2>Welcome to Nairobi Raha</h2>
+                                <p>Find the best escorts in Nairobi</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading slider:', error);
+            }
+        }
+        
+        // ============================================================
+        // LOAD PREMIUM ESCORTS FROM SUPABASE
+        // ============================================================
+        async function loadPremiumEscorts() {
+            const loading = document.getElementById('premiumLoading');
+            loading.classList.add('show');
+            
+            try {
+                const result = await window.supabaseFunctions.getPremiumEscorts();
+                loading.classList.remove('show');
+                
+                if (result.success && result.data.length > 0) {
+                    let html = '';
+                    const escorts = result.data.slice(0, 8);
+                    
+                    escorts.forEach((escort, index) => {
+                        const isVerified = escort.is_verified || false;
+                        const isFeatured = escort.is_featured || false;
+                        const phone = escort.phone || '07XXXXXXXX';
+                        
+                        html += `
+                            <div class="escort-card">
+                                <div class="image-wrapper">
+                                    <img src="https://picsum.photos/300/220?random=${index + 50}" alt="${escort.full_name || 'Escort'}">
+                                    <div class="card-badges">
+                                        ${isVerified ? '<span class="badge badge-verified">VERIFIED</span>' : ''}
+                                        ${isFeatured ? '<span class="badge badge-featured">FEATURED</span>' : ''}
+                                    </div>
+                                    <div class="premium-badge"><span>PREMIUM</span></div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
+                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
+                                </div>
+                                <div class="card-overlay">
+                                    <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
+                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    premiumGrid.innerHTML = html;
+                } else {
+                    premiumGrid.innerHTML = `
+                        <div class="no-results" style="grid-column:1/-1;">
+                            <i class="fas fa-search"></i>
+                            <h4>No premium escorts found</h4>
+                            <p>Check back later for premium listings</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                loading.classList.remove('show');
+                console.error('Error loading premium escorts:', error);
+                premiumGrid.innerHTML = `
+                    <div class="no-results" style="grid-column:1/-1;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h4>Error loading escorts</h4>
+                        <p>Please refresh the page</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // ============================================================
+        // LOAD NEW ESCORTS FROM SUPABASE
+        // ============================================================
+        async function loadNewEscorts() {
+            const loading = document.getElementById('newLoading');
+            loading.classList.add('show');
+            
+            try {
+                const result = await window.supabaseFunctions.getEscorts();
+                loading.classList.remove('show');
+                
+                if (result.success && result.data.length > 0) {
+                    // Get newest escorts (last 5)
+                    const sorted = result.data.sort((a, b) => 
+                        new Date(b.created_at || b.createdAt) - new Date(a.created_at || a.createdAt)
+                    );
+                    const escorts = sorted.slice(0, 5);
+                    
+                    let html = '';
+                    escorts.forEach((escort, index) => {
+                        const isNew = index < 3;
+                        const phone = escort.phone || '07XXXXXXXX';
+                        
+                        html += `
+                            <div class="escort-card">
+                                <div class="image-wrapper">
+                                    <img src="https://picsum.photos/300/220?random=${index + 100}" alt="${escort.full_name || 'Escort'}">
+                                    ${isNew ? '<div class="card-badges"><span class="badge badge-new">NEW</span></div>' : ''}
+                                </div>
+                                <div class="card-info">
+                                    <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
+                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    newGrid.innerHTML = html;
+                } else {
+                    newGrid.innerHTML = `
+                        <div class="no-results" style="grid-column:1/-1;">
+                            <i class="fas fa-users"></i>
+                            <h4>No escorts found</h4>
+                            <p>Check back later for new listings</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                loading.classList.remove('show');
+                console.error('Error loading new escorts:', error);
+            }
+        }
+        
+        // ============================================================
+        // LOAD REVIEWS FROM SUPABASE
+        // ============================================================
+        async function loadReviews() {
+            const loading = document.getElementById('reviewsLoading');
+            loading.classList.add('show');
+            
+            try {
+                // Get all escorts first
+                const escortsResult = await window.supabaseFunctions.getEscorts();
+                
+                if (escortsResult.success && escortsResult.data.length > 0) {
+                    // Use first escort for demo reviews
+                    const firstEscort = escortsResult.data[0];
+                    const result = await window.supabaseFunctions.getEscortReviews(firstEscort.id);
+                    
+                    loading.classList.remove('show');
+                    
+                    if (result.success && result.data.length > 0) {
+                        let html = '';
+                        const reviews = result.data.slice(0, 3);
+                        
+                        reviews.forEach(review => {
+                            const stars = '★'.repeat(review.rating || 5) + '☆'.repeat(5 - (review.rating || 5));
+                            const author = review.users?.full_name || 'Anonymous';
+                            
+                            html += `
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <span class="review-author"><span>${author.substring(0, 2)}...</span> wrote:</span>
+                                        <span class="review-stars">${stars}</span>
+                                    </div>
+                                    <div class="review-text">
+                                        ${review.comment || 'Great service!'} <a href="#">see the review</a>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        reviewsContainer.innerHTML = html;
+                    } else {
+                        reviewsContainer.innerHTML = `
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <span class="review-author"><span>Na...</span> wrote:</span>
+                                    <span class="review-stars">★★★★★</span>
+                                </div>
+                                <div class="review-text">
+                                    Lovely services with hot Ethiopians escorts. <a href="#">see the review</a>
+                                </div>
+                            </div>
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <span class="review-author"><span>Na...</span> wrote:</span>
+                                    <span class="review-stars">★★★★★</span>
+                                </div>
+                                <div class="review-text">
+                                    Good escorts. Clean and classy <a href="#">see the review</a>
+                                </div>
+                            </div>
+                        `;
+                    }
+                } else {
+                    loading.classList.remove('show');
+                    reviewsContainer.innerHTML = `
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="review-author"><span>Na...</span> wrote:</span>
+                                <span class="review-stars">★★★★★</span>
+                            </div>
+                            <div class="review-text">
+                                Lovely services with hot Ethiopians escorts. <a href="#">see the review</a>
+                            </div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="review-author"><span>Na...</span> wrote:</span>
+                                <span class="review-stars">★★★★★</span>
+                            </div>
+                            <div class="review-text">
+                                Good escorts. Clean and classy <a href="#">see the review</a>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                loading.classList.remove('show');
+                console.error('Error loading reviews:', error);
+            }
+        }
+        
+        // ============================================================
+        // LOAD LOCATIONS FROM SUPABASE
+        // ============================================================
+        async function loadLocations() {
+            try {
+                const result = await window.supabaseFunctions.getEscorts();
+                
+                if (result.success && result.data.length > 0) {
+                    // Get unique locations
+                    const locations = [...new Set(result.data.map(e => e.location).filter(Boolean))];
+                    
+                    if (locations.length > 0) {
+                        let html = '';
+                        // Add "All" option
+                        html += `<li><a href="#" data-location="all"><i class="fas fa-map-pin"></i> All Locations</a></li>`;
+                        
+                        locations.forEach(location => {
+                            html += `<li><a href="#" data-location="${location}"><i class="fas fa-map-pin"></i> ${location}</a></li>`;
+                        });
+                        
+                        countryList.innerHTML = html;
+                        
+                        // Add click handlers for location filter
+                        countryList.querySelectorAll('a').forEach(link => {
+                            link.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                const location = this.dataset.location;
+                                if (location === 'all') {
+                                    loadPremiumEscorts();
+                                } else {
+                                    filterByLocation(location);
+                                }
+                            });
+                        });
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading locations:', error);
+            }
+        }
+        
+        // ============================================================
+        // FILTER BY LOCATION
+        // ============================================================
+        async function filterByLocation(location) {
+            showToast(`Showing escorts in ${location}`, 'info');
+            
+            try {
+                const result = await window.supabaseFunctions.getEscorts();
+                
+                if (result.success) {
+                    const filtered = result.data.filter(e => e.location === location);
+                    
+                    if (filtered.length > 0) {
+                        let html = '';
+                        filtered.slice(0, 8).forEach((escort, index) => {
+                            const phone = escort.phone || '07XXXXXXXX';
+                            html += `
+                                <div class="escort-card">
+                                    <div class="image-wrapper">
+                                        <img src="https://picsum.photos/300/220?random=${index + 200}" alt="${escort.full_name || 'Escort'}">
+                                    </div>
+                                    <div class="card-info">
+                                        <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
+                                        <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        premiumGrid.innerHTML = html;
+                    }
+                }
+            } catch (error) {
+                console.error('Error filtering by location:', error);
+            }
+        }
+        
+        // ============================================================
+        // SEARCH FUNCTION
+        // ============================================================
+        document.getElementById('searchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const term = document.getElementById('searchInput').value.trim();
+            
+            if (!term) {
+                showToast('Please enter a search term', 'info');
+                return;
+            }
+            
+            showToast(`Searching for "${term}"...`, 'info');
+            
+            try {
+                const result = await window.supabaseFunctions.searchEscorts(term);
+                
+                if (result.success && result.data.length > 0) {
+                    let html = '';
+                    result.data.slice(0, 8).forEach((escort, index) => {
+                        const phone = escort.phone || '07XXXXXXXX';
+                        html += `
+                            <div class="escort-card">
+                                <div class="image-wrapper">
+                                    <img src="https://picsum.photos/300/220?random=${index + 300}" alt="${escort.full_name || 'Escort'}">
+                                </div>
+                                <div class="card-info">
+                                    <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
+                                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    premiumGrid.innerHTML = html;
+                    showToast(`Found ${result.data.length} results`, 'success');
+                } else {
+                    premiumGrid.innerHTML = `
+                        <div class="no-results" style="grid-column:1/-1;">
+                            <i class="fas fa-search"></i>
+                            <h4>No results found</h4>
+                            <p>Try a different search term</p>
+                        </div>
+                    `;
+                    showToast('No results found', 'info');
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                showToast('Error searching. Please try again.', 'error');
             }
         });
         
         // ============================================================
-        // 2. SELECT2 FOR DROPDOWNS
+        // QUICK SEARCH
         // ============================================================
-        $('.select2').select2({
-            minimumResultsForSearch: 10,
-            width: 'resolve',
-            placeholder: 'Select an option'
+        document.getElementById('quickSearchForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const city = document.getElementById('searchCity').value;
+            const gender = document.getElementById('searchGender').value;
+            const premium = document.getElementById('searchPremium').checked;
+            const verified = document.getElementById('searchVerified').checked;
+            
+            try {
+                const result = await window.supabaseFunctions.getEscorts();
+                
+                if (result.success) {
+                    let filtered = result.data;
+                    
+                    if (city) filtered = filtered.filter(e => e.location === city);
+                    if (premium) filtered = filtered.filter(e => e.is_premium === true);
+                    if (verified) filtered = filtered.filter(e => e.is_verified === true);
+                    
+                    if (filtered.length > 0) {
+                        let html = '';
+                        filtered.slice(0, 8).forEach((escort, index) => {
+                            const phone = escort.phone || '07XXXXXXXX';
+                            html += `
+                                <div class="escort-card">
+                                    <div class="image-wrapper">
+                                        <img src="https://picsum.photos/300/220?random=${index + 400}" alt="${escort.full_name || 'Escort'}">
+                                        ${premium ? '<div class="premium-badge"><span>PREMIUM</span></div>' : ''}
+                                        ${verified ? '<div class="card-badges"><span class="badge badge-verified">VERIFIED</span></div>' : ''}
+                                    </div>
+                                    <div class="card-info">
+                                        <div class="name">${escort.full_name || 'Escort'} ${phone}</div>
+                                        <div class="location"><i class="fas fa-map-marker-alt"></i> ${escort.location || 'Nairobi, Kenya'}</div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        premiumGrid.innerHTML = html;
+                        showToast(`Found ${filtered.length} results`, 'success');
+                    } else {
+                        premiumGrid.innerHTML = `
+                            <div class="no-results" style="grid-column:1/-1;">
+                                <i class="fas fa-search"></i>
+                                <h4>No matches found</h4>
+                                <p>Try adjusting your filters</p>
+                            </div>
+                        `;
+                        showToast('No matches found', 'info');
+                    }
+                }
+            } catch (error) {
+                console.error('Quick search error:', error);
+                showToast('Error searching. Please try again.', 'error');
+            }
         });
         
         // ============================================================
-        // 3. HAMBURGER MENU TOGGLE
+        // HAMBURGER MENU TOGGLE
         // ============================================================
         $('#hamburger').on('click', function() {
             $('#navMenu').slideToggle(300);
             $(this).toggleClass('active');
         });
         
-        // ============================================================
-        // 4. CLOSE MOBILE MENU ON CLICK OUTSIDE
-        // ============================================================
         $(document).on('click', function(e) {
             if ($(window).width() <= 768) {
                 if (!$(e.target).closest('.header').length) {
@@ -1865,31 +2109,30 @@
         });
         
         // ============================================================
-        // 5. SMOOTH SCROLL FOR ANCHOR LINKS
+        // SELECT2 FOR DROPDOWNS
         // ============================================================
-        $('a[href^="#"]').on('click', function(e) {
-            var target = $(this.getAttribute('href'));
-            if (target.length) {
-                e.preventDefault();
-                $('html, body').animate({
-                    scrollTop: target.offset().top - 80
-                }, 800);
-            }
+        $('.select2').select2({
+            minimumResultsForSearch: 10,
+            width: 'resolve',
+            placeholder: 'Select an option'
         });
         
         // ============================================================
-        // 6. COUNTRY LIST TOGGLE ON MOBILE
+        // INITIALIZE
         // ============================================================
-        if ($(window).width() <= 768) {
-            $('.sidebar-box h3 i.fa-globe-africa').parent().on('click', function() {
-                $(this).siblings('.country-list').slideToggle(300);
-            });
-        }
+        console.log('🚀 Loading Nairobi Raha from Supabase...');
         
-        console.log('✅ Nairobi Raha - Polished Homepage Loaded Successfully!');
-        console.log('📋 Features: Slider, Premium Escorts, New Escorts, Reviews, Sidebars, Footer, WhatsApp');
+        loadSlider();
+        loadPremiumEscorts();
+        loadNewEscorts();
+        loadReviews();
+        loadLocations();
+        
+        console.log('✅ Nairobi Raha - Homepage with Supabase Loaded Successfully!');
+        console.log('📋 Features: Dynamic Slider, Premium Escorts, New Escorts, Reviews, Locations');
         console.log('🎨 Design: Modern, Clean, Professional');
         console.log('📱 Responsive: Fully Responsive');
+        console.log('🔗 Connected to Supabase:', SUPABASE_URL);
         
     });
 </script>
