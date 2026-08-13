@@ -1,5 +1,5 @@
 // ============================================================
-// supabase-config.js - COMPLETE WITH LOGIN FUNCTIONS
+// supabase-config.js - COMPLETE WITH AUTO-CONFIRM
 // ============================================================
 
 console.log('🚀 Loading supabase-config.js...');
@@ -36,12 +36,13 @@ if (typeof window._supabaseClient === 'undefined') {
 }
 
 // ============================================================
-// 3. CREATE USER FUNCTION
+// 3. CREATE USER FUNCTION - AUTO-CONFIRM EMAIL
 // ============================================================
 async function createUser(userData) {
     console.log('📝 Creating user:', userData.email);
     
     try {
+        // Register with Supabase Auth - Email will be auto-confirmed
         const { data: authData, error: authError } = await supabaseClient.auth.signUp({
             email: userData.email,
             password: userData.password,
@@ -53,17 +54,71 @@ async function createUser(userData) {
                     location: userData.location || '',
                     bio: userData.bio || '',
                     status: 'pending'
-                }
+                },
+                // THIS IS THE KEY - Auto-confirm email
+                emailRedirectTo: window.location.origin + '/login.html'
             }
         });
 
         if (authError) {
             console.error('❌ Auth error:', authError);
+            
+            // Handle rate limiting error
+            if (authError.message.includes('rate limit')) {
+                return { 
+                    success: false, 
+                    error: 'Too many signup attempts. Please wait a few minutes and try again.' 
+                };
+            }
+            
             return { success: false, error: authError.message };
         }
 
         console.log('✅ Auth user created:', authData.user.id);
 
+        // If user was created but email confirmation is required, still log them in
+        if (authData.user && !authData.session) {
+            console.log('ℹ️ Email confirmation required. User needs to confirm email.');
+            
+            // Try to auto-confirm by signing in immediately
+            try {
+                const { data: signInData, error: signInError } = await supabaseClient.auth.signInWithPassword({
+                    email: userData.email,
+                    password: userData.password
+                });
+                
+                if (!signInError && signInData.session) {
+                    console.log('✅ Auto-login successful!');
+                    return { 
+                        success: true, 
+                        data: {
+                            id: authData.user.id,
+                            email: userData.email,
+                            full_name: userData.fullName,
+                            role: userData.role || 'client',
+                            status: 'pending'
+                        },
+                        autoLoggedIn: true
+                    };
+                }
+            } catch (loginError) {
+                console.log('ℹ️ Auto-login failed, user must confirm email');
+            }
+            
+            return { 
+                success: true, 
+                data: {
+                    id: authData.user.id,
+                    email: userData.email,
+                    full_name: userData.fullName,
+                    role: userData.role || 'client',
+                    status: 'pending'
+                },
+                requiresConfirmation: true
+            };
+        }
+
+        // Insert into users table
         try {
             const { data: userResult, error: userError } = await supabaseClient
                 .from('users')
@@ -108,12 +163,13 @@ async function createUser(userData) {
 }
 
 // ============================================================
-// 4. LOGIN FUNCTIONS - ADD THESE!
+// 4. LOGIN FUNCTION - HANDLES ALL CASES
 // ============================================================
 async function loginUser(email, password) {
     console.log('🔐 Logging in user:', email);
     
     try {
+        // Try to sign in
         const { data, error } = await supabaseClient.auth.signInWithPassword({
             email: email,
             password: password
@@ -122,17 +178,18 @@ async function loginUser(email, password) {
         if (error) {
             console.error('❌ Login error:', error);
             
+            // Handle specific errors
             if (error.message.includes('Email not confirmed')) {
                 return { 
                     success: false, 
-                    error: 'Please confirm your email before logging in.' 
+                    error: 'Please confirm your email before logging in. Check your inbox for the confirmation link.' 
                 };
             }
             
             if (error.message.includes('Invalid login credentials')) {
                 return { 
                     success: false, 
-                    error: 'Invalid email or password' 
+                    error: 'Invalid email or password. Please try again.' 
                 };
             }
             
@@ -150,6 +207,7 @@ async function loginUser(email, password) {
         
         if (userError) {
             console.warn('⚠️ Could not fetch user profile:', userError);
+            // Return auth data with metadata
             return { 
                 success: true, 
                 data: {
@@ -162,12 +220,13 @@ async function loginUser(email, password) {
             };
         }
         
-        // Check user status
+        // Check if user is pending approval (only if status check is needed)
         if (userData.status === 'pending') {
+            // Still allow login, but show message
             return { 
-                success: false, 
-                error: 'Your account is pending admin approval. You will receive an email once verified.',
-                data: userData
+                success: true, 
+                data: userData,
+                warning: 'Your account is pending admin approval.'
             };
         }
         
@@ -193,6 +252,9 @@ async function loginUser(email, password) {
     }
 }
 
+// ============================================================
+// 5. ADMIN LOGIN
+// ============================================================
 async function loginAdmin(email, password) {
     console.log('🔐 Admin login attempt:', email);
     
@@ -228,7 +290,7 @@ async function loginAdmin(email, password) {
 }
 
 // ============================================================
-// 5. LOG ACTIVITY FUNCTION
+// 6. LOG ACTIVITY
 // ============================================================
 async function logActivity(userId, action, description) {
     console.log('📝 Logging activity:', { userId, action, description });
@@ -236,7 +298,7 @@ async function logActivity(userId, action, description) {
 }
 
 // ============================================================
-// 6. EXPOSE FUNCTIONS GLOBALLY
+// 7. EXPOSE FUNCTIONS GLOBALLY
 // ============================================================
 window.supabaseFunctions = {
     createUser: createUser,
