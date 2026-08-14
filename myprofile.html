@@ -91,6 +91,70 @@
             background: rgba(255,255,255,0.3);
         }
         
+        /* ---------- LOGIN PROMPT ---------- */
+        .login-prompt {
+            background: #fff;
+            border-radius: 16px;
+            padding: 50px 30px;
+            text-align: center;
+            margin: 30px auto;
+            max-width: 500px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            display: none;
+        }
+        
+        .login-prompt .lock-icon {
+            font-size: 64px;
+            color: #E0006C;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .login-prompt h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .login-prompt p {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .login-prompt .btn-login-prompt {
+            background: linear-gradient(135deg, #E0006C, #b30057);
+            color: #fff;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .login-prompt .btn-login-prompt:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(224, 0, 108, 0.3);
+        }
+        
+        .login-prompt .register-link-prompt {
+            display: block;
+            margin-top: 15px;
+            color: #E0006C;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .login-prompt .register-link-prompt:hover {
+            text-decoration: underline;
+        }
+        
         /* ---------- CONTAINER ---------- */
         .site-content {
             max-width: 1200px;
@@ -464,6 +528,7 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             border: 1px solid #dfdfdf;
+            display: block;
         }
         
         .profile-form .form-title {
@@ -806,318 +871,339 @@
          ============================================================ -->
     <div class="site-content">
 
-        <!-- Profile Header -->
-        <div class="profile-header">
-            <h2>My Profile</h2>
-            <div class="breadcrumb">
-                Nairobi Vibe Escorts » Hookup with <span id="profileNameDisplay">User</span>
-            </div>
+        <!-- ============================================================
+             LOGIN PROMPT (shown when not logged in)
+             ============================================================ -->
+        <div class="login-prompt" id="loginPrompt">
+            <i class="fas fa-lock lock-icon"></i>
+            <h3>Login Required</h3>
+            <p>Please login to create and manage your profile on Nairobi Vibe.</p>
+            <a href="login.html" class="btn-login-prompt">
+                <i class="fas fa-sign-in-alt"></i> Login Now
+            </a>
+            <a href="signup.html" class="register-link-prompt">
+                Don't have an account? <strong>Register here</strong>
+            </a>
         </div>
 
-        <!-- Status Banner -->
-        <div class="status-banner inactive" id="statusBanner">
-            <div class="status-text">
-                <i class="fas fa-circle"></i>
-                <span id="statusText">Your profile is not active and will not be visible online.</span>
-            </div>
-            <button class="btn-activate" id="activateBtn">Activate Now</button>
-        </div>
+        <!-- ============================================================
+             PROFILE CONTENT (hidden when not logged in)
+             ============================================================ -->
+        <div id="profileContent" style="display:none;">
 
-        <!-- Wallet Section -->
-        <div class="wallet-section">
-            <div class="wallet-header">
-                <div class="wallet-balance">
-                    Available Wallet Balance: <span id="walletBalance">KSh0</span>
-                </div>
-                <button class="btn-add-fund" id="addFundBtn"><i class="fas fa-plus"></i> Add Fund</button>
-            </div>
-
-            <div class="wallet-stats">
-                <div class="stat-item">
-                    <label>Total Wallet Balance</label>
-                    <span id="totalWalletBalance">KSh0</span>
-                </div>
-                <div class="stat-item">
-                    <label>Bid Wager</label>
-                    <span id="bidWager">KSh0</span>
-                </div>
-                <div class="stat-item">
-                    <label>Available Balance</label>
-                    <span id="availableBalance">KSh0</span>
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <h2>My Profile</h2>
+                <div class="breadcrumb">
+                    Nairobi Vibe Escorts » Hookup with <span id="profileNameDisplay">User</span>
                 </div>
             </div>
 
-            <div class="wallet-footer">
-                <div class="chat-status">
-                    <i class="fas fa-comment"></i>
-                    Chat Inactive
+            <!-- Status Banner -->
+            <div class="status-banner inactive" id="statusBanner">
+                <div class="status-text">
+                    <i class="fas fa-circle"></i>
+                    <span id="statusText">Your profile is not active and will not be visible online.</span>
                 </div>
-                <button class="btn-chat-activate" id="activateChatBtn">Activate Now</button>
-                <a href="#" class="inbox-link">Inbox: Chat: <span id="chatCount">0</span></a>
-                <a href="#" class="inbox-link">View Statistics <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
-
-        <!-- Photo Section -->
-        <div class="photo-section">
-            <div class="photo-upload">
-                <div class="file-input-wrapper">
-                    <button class="btn-upload"><i class="fas fa-camera"></i> Change Photo</button>
-                    <input type="file" id="profilePhotoInput" accept="image/*">
-                </div>
-                <span class="file-name" id="photoFileName">No file chosen</span>
-                <span style="font-size:13px; color:#999;">0</span>
-                <span style="font-size:13px; color:#999;">0</span>
-            </div>
-            <div class="photo-grid" id="photoGrid">
-                <!-- Photos will be displayed here -->
-                <div class="photo-item">
-                    <i class="fas fa-plus" style="font-size:24px;"></i>
-                    <span>Add Photos</span>
-                </div>
-            </div>
-            
-            <div class="video-section">
-                <div class="verify-notice">
-                    <span><i class="fas fa-video"></i> Only Verified Accounts can Upload Video. Kindly Verify Your Account.</span>
-                    <button class="btn-verify" id="verifyBtn">Verify Now</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation Tabs -->
-        <div class="nav-tabs">
-            <a href="#" class="tab-link active">My Profile</a>
-            <a href="#" class="tab-link">My Wallet</a>
-            <a href="#" class="tab-link">My Membership</a>
-            <a href="#" class="tab-link">My Classified</a>
-            <a href="#" class="tab-link">My Threads</a>
-            <a href="#" class="tab-link">My Settings</a>
-            <a href="#" class="tab-link">Photo Verification</a>
-        </div>
-
-        <!-- Profile Form -->
-        <form class="profile-form" id="profileForm">
-            <div class="form-title">My Profile</div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Name <span class="required">*</span></label>
-                    <input type="text" id="profileName" placeholder="Enter your full name">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number <span class="required">*</span></label>
-                    <input type="tel" id="profilePhone" placeholder="Enter phone number">
-                </div>
+                <button class="btn-activate" id="activateBtn">Activate Now</button>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Gender</label>
-                    <select id="profileGender">
-                        <option value="Female">Female</option>
-                        <option value="Male">Male</option>
-                        <option value="Transgender">Transgender</option>
-                        <option value="Non-binary">Non-binary</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Sexual Orientation</label>
-                    <select id="profileOrientation">
-                        <option value="Straight">Straight</option>
-                        <option value="Gay">Gay</option>
-                        <option value="Lesbian">Lesbian</option>
-                        <option value="Bisexual">Bisexual</option>
-                        <option value="Pansexual">Pansexual</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Age</label>
-                    <select id="profileAge">
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                        <option value="32">32</option>
-                        <option value="33">33</option>
-                        <option value="34">34</option>
-                        <option value="35">35</option>
-                        <option value="36+">36+</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Nationality</label>
-                    <select id="profileNationality">
-                        <option value="Kenyan">Kenyan</option>
-                        <option value="Tanzanian">Tanzanian</option>
-                        <option value="Ugandan">Ugandan</option>
-                        <option value="Rwandan">Rwandan</option>
-                        <option value="South African">South African</option>
-                        <option value="Nigerian">Nigerian</option>
-                        <option value="Ethiopian">Ethiopian</option>
-                        <option value="European">European</option>
-                        <option value="American">American</option>
-                        <option value="Asian">Asian</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>County</label>
-                    <select id="profileCounty">
-                        <option value="">-</option>
-                        <option value="Nairobi">Nairobi</option>
-                        <option value="Mombasa">Mombasa</option>
-                        <option value="Kisumu">Kisumu</option>
-                        <option value="Nakuru">Nakuru</option>
-                        <option value="Kiambu">Kiambu</option>
-                        <option value="Machakos">Machakos</option>
-                        <option value="Kajiado">Kajiado</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>City / Town</label>
-                    <select id="profileCity">
-                        <option value="">-</option>
-                        <option value="Nairobi CBD">Nairobi CBD</option>
-                        <option value="Mombasa CBD">Mombasa CBD</option>
-                        <option value="Kisumu CBD">Kisumu CBD</option>
-                        <option value="Nakuru CBD">Nakuru CBD</option>
-                        <option value="Westlands">Westlands</option>
-                        <option value="Kilimani">Kilimani</option>
-                        <option value="Kasarani">Kasarani</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" id="profileLocation" placeholder="Enter your location">
-                </div>
-                <div class="form-group">
-                    <label>Area</label>
-                    <input type="text" id="profileArea" placeholder="Enter your area">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Nearby Places</label>
-                    <input type="text" id="profileNearby" placeholder="Enter nearby landmarks">
-                </div>
-            </div>
-
-            <!-- Services -->
-            <div style="margin-top:20px;">
-                <label style="font-size:13px; font-weight:600; color:#555; display:block; margin-bottom:10px;">Services</label>
-                <div class="services-grid" id="servicesGrid">
-                    <div class="service-item">
-                        <input type="checkbox" value="Dinner Date">
-                        <label>Dinner Date</label>
+            <!-- Wallet Section -->
+            <div class="wallet-section">
+                <div class="wallet-header">
+                    <div class="wallet-balance">
+                        Available Wallet Balance: <span id="walletBalance">KSh0</span>
                     </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="Travel Companion">
-                        <label>Travel Companion</label>
+                    <button class="btn-add-fund" id="addFundBtn"><i class="fas fa-plus"></i> Add Fund</button>
+                </div>
+
+                <div class="wallet-stats">
+                    <div class="stat-item">
+                        <label>Total Wallet Balance</label>
+                        <span id="totalWalletBalance">KSh0</span>
                     </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="Lesbian Show">
-                        <label>Lesbian Show</label>
+                    <div class="stat-item">
+                        <label>Bid Wager</label>
+                        <span id="bidWager">KSh0</span>
                     </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="Rimming">
-                        <label>Rimming</label>
-                    </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="Raw BJ">
-                        <label>Raw BJ</label>
-                    </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="BJ">
-                        <label>BJ</label>
-                    </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="GFE">
-                        <label>GFE</label>
-                    </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="COB – Cum On Body">
-                        <label>COB – Cum On Body</label>
-                    </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="CIM – Cum In Mouth">
-                        <label>CIM – Cum In Mouth</label>
-                    </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="3 Some">
-                        <label>3 Some</label>
-                    </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="Anal">
-                        <label>Anal</label>
-                    </div>
-                    <div class="service-item">
-                        <input type="checkbox" value="Massage">
-                        <label>Massage</label>
+                    <div class="stat-item">
+                        <label>Available Balance</label>
+                        <span id="availableBalance">KSh0</span>
                     </div>
                 </div>
-                <div class="form-group" style="margin-top:10px;">
-                    <label>Other Services</label>
-                    <input type="text" id="profileOtherServices" placeholder="Add other services">
+
+                <div class="wallet-footer">
+                    <div class="chat-status">
+                        <i class="fas fa-comment"></i>
+                        Chat Inactive
+                    </div>
+                    <button class="btn-chat-activate" id="activateChatBtn">Activate Now</button>
+                    <a href="#" class="inbox-link">Inbox: Chat: <span id="chatCount">0</span></a>
+                    <a href="#" class="inbox-link">View Statistics <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
-            <!-- Rates -->
-            <div class="form-row" style="margin-top:20px;">
-                <div class="form-group">
-                    <label>Incalls Rate (KSh/hr)</label>
-                    <input type="number" id="profileIncallsRate" placeholder="Enter incalls rate">
+            <!-- Photo Section -->
+            <div class="photo-section">
+                <div class="photo-upload">
+                    <div class="file-input-wrapper">
+                        <button class="btn-upload"><i class="fas fa-camera"></i> Change Photo</button>
+                        <input type="file" id="profilePhotoInput" accept="image/*">
+                    </div>
+                    <span class="file-name" id="photoFileName">No file chosen</span>
+                    <span style="font-size:13px; color:#999;">0</span>
+                    <span style="font-size:13px; color:#999;">0</span>
                 </div>
-                <div class="form-group">
-                    <label>Outcalls Rate (KSh/hr)</label>
-                    <input type="number" id="profileOutcallsRate" placeholder="Enter outcalls rate">
+                <div class="photo-grid" id="photoGrid">
+                    <div class="photo-item">
+                        <i class="fas fa-plus" style="font-size:24px;"></i>
+                        <span>Add Photos</span>
+                    </div>
+                </div>
+                
+                <div class="video-section">
+                    <div class="verify-notice">
+                        <span><i class="fas fa-video"></i> Only Verified Accounts can Upload Video. Kindly Verify Your Account.</span>
+                        <button class="btn-verify" id="verifyBtn">Verify Now</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Listing Options -->
-            <div class="listing-options">
-                <input type="checkbox" id="listOtherCities">
-                <label for="listOtherCities">List me in other cities</label>
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <a href="#" class="tab-link active">My Profile</a>
+                <a href="#" class="tab-link">My Wallet</a>
+                <a href="#" class="tab-link">My Membership</a>
+                <a href="#" class="tab-link">My Classified</a>
+                <a href="#" class="tab-link">My Threads</a>
+                <a href="#" class="tab-link">My Settings</a>
+                <a href="#" class="tab-link">Photo Verification</a>
             </div>
 
-            <button type="submit" class="btn-save" id="saveProfileBtn">
-                <span id="saveBtnText">Save Changes</span>
-                <span class="loader" id="saveLoader"></span>
-                <i class="fas fa-save" id="saveIcon"></i>
-            </button>
-        </form>
+            <!-- Profile Form -->
+            <form class="profile-form" id="profileForm">
+                <div class="form-title">My Profile</div>
 
-        <!-- About Section -->
-        <div class="about-section">
-            <div class="about-title">More About</div>
-            <div class="about-content" id="aboutContent">
-                This is <strong id="aboutName">User</strong>, a <span id="aboutAge">18</span> years old <span id="aboutGender">Female</span> escort. 
-                <span id="aboutName2">User</span> offers the best Escort Services in <span id="aboutLocation">Nairobi</span>. 
-                To communicate with <span id="aboutName3">User</span> you can Contact through Number to arrange a meetup.
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Name <span class="required">*</span></label>
+                        <input type="text" id="profileName" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="profilePhone" placeholder="Enter phone number">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="profileGender">
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Transgender">Transgender</option>
+                            <option value="Non-binary">Non-binary</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sexual Orientation</label>
+                        <select id="profileOrientation">
+                            <option value="Straight">Straight</option>
+                            <option value="Gay">Gay</option>
+                            <option value="Lesbian">Lesbian</option>
+                            <option value="Bisexual">Bisexual</option>
+                            <option value="Pansexual">Pansexual</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Age</label>
+                        <select id="profileAge">
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36+">36+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nationality</label>
+                        <select id="profileNationality">
+                            <option value="Kenyan">Kenyan</option>
+                            <option value="Tanzanian">Tanzanian</option>
+                            <option value="Ugandan">Ugandan</option>
+                            <option value="Rwandan">Rwandan</option>
+                            <option value="South African">South African</option>
+                            <option value="Nigerian">Nigerian</option>
+                            <option value="Ethiopian">Ethiopian</option>
+                            <option value="European">European</option>
+                            <option value="American">American</option>
+                            <option value="Asian">Asian</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>County</label>
+                        <select id="profileCounty">
+                            <option value="">-</option>
+                            <option value="Nairobi">Nairobi</option>
+                            <option value="Mombasa">Mombasa</option>
+                            <option value="Kisumu">Kisumu</option>
+                            <option value="Nakuru">Nakuru</option>
+                            <option value="Kiambu">Kiambu</option>
+                            <option value="Machakos">Machakos</option>
+                            <option value="Kajiado">Kajiado</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>City / Town</label>
+                        <select id="profileCity">
+                            <option value="">-</option>
+                            <option value="Nairobi CBD">Nairobi CBD</option>
+                            <option value="Mombasa CBD">Mombasa CBD</option>
+                            <option value="Kisumu CBD">Kisumu CBD</option>
+                            <option value="Nakuru CBD">Nakuru CBD</option>
+                            <option value="Westlands">Westlands</option>
+                            <option value="Kilimani">Kilimani</option>
+                            <option value="Kasarani">Kasarani</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="profileLocation" placeholder="Enter your location">
+                    </div>
+                    <div class="form-group">
+                        <label>Area</label>
+                        <input type="text" id="profileArea" placeholder="Enter your area">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nearby Places</label>
+                        <input type="text" id="profileNearby" placeholder="Enter nearby landmarks">
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div style="margin-top:20px;">
+                    <label style="font-size:13px; font-weight:600; color:#555; display:block; margin-bottom:10px;">Services</label>
+                    <div class="services-grid" id="servicesGrid">
+                        <div class="service-item">
+                            <input type="checkbox" value="Dinner Date">
+                            <label>Dinner Date</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="Travel Companion">
+                            <label>Travel Companion</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="Lesbian Show">
+                            <label>Lesbian Show</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="Rimming">
+                            <label>Rimming</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="Raw BJ">
+                            <label>Raw BJ</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="BJ">
+                            <label>BJ</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="GFE">
+                            <label>GFE</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="COB – Cum On Body">
+                            <label>COB – Cum On Body</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="CIM – Cum In Mouth">
+                            <label>CIM – Cum In Mouth</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="3 Some">
+                            <label>3 Some</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="Anal">
+                            <label>Anal</label>
+                        </div>
+                        <div class="service-item">
+                            <input type="checkbox" value="Massage">
+                            <label>Massage</label>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top:10px;">
+                        <label>Other Services</label>
+                        <input type="text" id="profileOtherServices" placeholder="Add other services">
+                    </div>
+                </div>
+
+                <!-- Rates -->
+                <div class="form-row" style="margin-top:20px;">
+                    <div class="form-group">
+                        <label>Incalls Rate (KSh/hr)</label>
+                        <input type="number" id="profileIncallsRate" placeholder="Enter incalls rate">
+                    </div>
+                    <div class="form-group">
+                        <label>Outcalls Rate (KSh/hr)</label>
+                        <input type="number" id="profileOutcallsRate" placeholder="Enter outcalls rate">
+                    </div>
+                </div>
+
+                <!-- Listing Options -->
+                <div class="listing-options">
+                    <input type="checkbox" id="listOtherCities">
+                    <label for="listOtherCities">List me in other cities</label>
+                </div>
+
+                <button type="submit" class="btn-save" id="saveProfileBtn">
+                    <span id="saveBtnText">Save Changes</span>
+                    <span class="loader" id="saveLoader"></span>
+                    <i class="fas fa-save" id="saveIcon"></i>
+                </button>
+            </form>
+
+            <!-- About Section -->
+            <div class="about-section">
+                <div class="about-title">More About</div>
+                <div class="about-content" id="aboutContent">
+                    This is <strong id="aboutName">User</strong>, a <span id="aboutAge">18</span> years old <span id="aboutGender">Female</span> escort. 
+                    <span id="aboutName2">User</span> offers the best Escort Services in <span id="aboutLocation">Nairobi</span>. 
+                    To communicate with <span id="aboutName3">User</span> you can Contact through Number to arrange a meetup.
+                </div>
             </div>
-        </div>
+
+        </div><!-- end profileContent -->
 
     </div>
 
@@ -1176,6 +1262,8 @@
             const toastMessage = document.getElementById('toastMessage');
             const toastClose = document.getElementById('toastClose');
             const logoutBtn = document.getElementById('logoutBtn');
+            const loginPrompt = document.getElementById('loginPrompt');
+            const profileContent = document.getElementById('profileContent');
             
             // ============================================================
             // CHECK IF SUPABASE IS LOADED
@@ -1185,7 +1273,7 @@
             }
             
             // ============================================================
-            // CHECK SESSION
+            // CHECK SESSION - FIXED (shows login prompt instead of redirect)
             // ============================================================
             let currentUser = null;
             
@@ -1193,9 +1281,15 @@
                 const session = localStorage.getItem('nairobi_vibe_session');
                 if (session) {
                     currentUser = JSON.parse(session);
+                    // Show profile content, hide login prompt
+                    loginPrompt.style.display = 'none';
+                    profileContent.style.display = 'block';
                     loadUserProfile();
                 } else {
-                    window.location.href = 'login.html';
+                    // Show login prompt, hide profile content
+                    currentUser = null;
+                    loginPrompt.style.display = 'block';
+                    profileContent.style.display = 'none';
                 }
             }
             
@@ -1304,6 +1398,11 @@
             // ACTIVATE/DEACTIVATE PROFILE
             // ============================================================
             document.getElementById('activateBtn').addEventListener('click', async function() {
+                if (!currentUser) {
+                    showToast('Please login first', 'error');
+                    return;
+                }
+                
                 const isActive = this.textContent === 'Deactivate';
                 const newStatus = !isActive;
                 
@@ -1327,6 +1426,15 @@
             // ============================================================
             profileForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                
+                // Check if user is logged in
+                if (!currentUser) {
+                    showToast('Please login first to save your profile', 'error');
+                    setTimeout(function() {
+                        window.location.href = 'login.html';
+                    }, 1500);
+                    return;
+                }
                 
                 saveBtn.disabled = true;
                 saveBtnText.textContent = 'Saving...';
@@ -1407,7 +1515,6 @@
                 if (file) {
                     document.getElementById('photoFileName').textContent = file.name;
                     
-                    // Preview photo
                     const reader = new FileReader();
                     reader.onload = function(event) {
                         const photoGrid = document.getElementById('photoGrid');
@@ -1446,7 +1553,11 @@
             // ============================================================
             logoutBtn.addEventListener('click', function() {
                 localStorage.removeItem('nairobi_vibe_session');
-                window.location.href = 'login.html';
+                localStorage.removeItem('nairobi_vibe_admin_session');
+                showToast('Logged out successfully', 'success');
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
             });
             
             // ============================================================
@@ -1479,6 +1590,7 @@
             
             console.log('✅ My Profile Page Loaded Successfully!');
             console.log('🎨 Design: Complete Profile Page with all sections');
+            console.log('🔐 Shows login prompt if user is not logged in');
             
         });
     </script>
