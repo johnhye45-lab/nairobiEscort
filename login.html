@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Nairobi Raha Escorts</title>
+    <title>Login - Nairobi Vibe Escorts</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -491,12 +491,12 @@
     <div class="login-card" id="loginCard">
         
         <!-- ============================================================
-             LOGO
+             LOGO - FIXED to NV (Nairobi Vibe)
              ============================================================ -->
         <div class="logo">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENR%3C/text%3E%3C/svg%3E" alt="Nairobi Raha">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENV%3C/text%3E%3C/svg%3E" alt="Nairobi Vibe">
             <h1>Welcome Back</h1>
-            <p>Login to your Nairobi Raha account</p>
+            <p>Login to your Nairobi Vibe account</p>
         </div>
         
         <!-- ============================================================
@@ -683,13 +683,18 @@
         }
         
         // ============================================================
-        // LOAD SAVED EMAIL FROM LOCAL STORAGE
+        // LOAD SAVED EMAIL FROM LOCAL STORAGE - FIXED
         // ============================================================
-        const savedEmail = localStorage.getItem('nairobi_raha_email');
+        const savedEmail = localStorage.getItem('nairobi_vibe_email');
         if (savedEmail) {
             email.value = savedEmail;
             rememberMe.checked = true;
         }
+        
+        // ============================================================
+        // GET REDIRECT URL FROM QUERY PARAMETER
+        // ============================================================
+        const redirectUrl = urlParams.get('redirect') || 'index.html';
         
         // ============================================================
         // FORM SUBMISSION - WITH SUPABASE
@@ -729,11 +734,11 @@
             btnLoader.classList.add('show');
             btnIcon.style.display = 'none';
             
-            // Save remember me
+            // Save remember me - FIXED key
             if (rememberMe.checked) {
-                localStorage.setItem('nairobi_raha_email', email.value);
+                localStorage.setItem('nairobi_vibe_email', email.value);
             } else {
-                localStorage.removeItem('nairobi_raha_email');
+                localStorage.removeItem('nairobi_vibe_email');
             }
             
             try {
@@ -754,16 +759,16 @@
                     const sessionData = {
                         id: user.id,
                         email: user.email,
-                        name: user.full_name,
-                        role: user.role,
+                        name: user.full_name || user.email.split('@')[0],
+                        role: user.role || 'client',
                         isAdmin: user.role === 'admin',
                         loggedIn: true,
                         loginTime: new Date().toISOString()
                     };
                     
-                    // Store session based on role
+                    // Store session based on role - FIXED keys
                     if (user.role === 'admin') {
-                        localStorage.setItem('nairobi_raha_admin_session', JSON.stringify(sessionData));
+                        localStorage.setItem('nairobi_vibe_admin_session', JSON.stringify(sessionData));
                         showToast('Welcome Admin! 🎉', 'success');
                         
                         // Log admin login
@@ -777,8 +782,8 @@
                             window.location.href = 'admin-dashboard.html';
                         }, 1000);
                     } else {
-                        localStorage.setItem('nairobi_raha_session', JSON.stringify(sessionData));
-                        showToast('Welcome back, ' + user.full_name + '! 🎉', 'success');
+                        localStorage.setItem('nairobi_vibe_session', JSON.stringify(sessionData));
+                        showToast('Welcome back, ' + sessionData.name + '! 🎉', 'success');
                         
                         // Log user login
                         await window.supabaseFunctions.logActivity(
@@ -788,7 +793,7 @@
                         );
                         
                         setTimeout(() => {
-                            window.location.href = 'index.html';
+                            window.location.href = redirectUrl;
                         }, 1000);
                     }
                     
@@ -801,10 +806,8 @@
                         errorMsg = 'Your account is pending admin approval. You will receive an email once verified.';
                         alertBanner.classList.add('show');
                         alertText.textContent = errorMsg;
-                    } else if (errorMsg.includes('User not found')) {
-                        errorMsg = 'No account found with this email. Please register first.';
-                    } else if (errorMsg.includes('Invalid password')) {
-                        errorMsg = 'Incorrect password. Please try again.';
+                    } else if (errorMsg.includes('User not found') || errorMsg.includes('Invalid login credentials')) {
+                        errorMsg = 'Invalid email or password. Please try again.';
                     } else if (errorMsg.includes('suspended')) {
                         errorMsg = 'Your account has been suspended. Please contact support.';
                     }
@@ -899,10 +902,11 @@
         console.log('📋 Features: Email/Password Login, Remember Me, Password Toggle, Role-based Redirect');
         console.log('🎨 Design: Clean, Professional, Responsive');
         console.log('🔗 Connected to Supabase:', SUPABASE_URL);
+        console.log('🔄 Redirect URL:', redirectUrl);
         
-        // Check if there's a session already
-        const existingSession = localStorage.getItem('nairobi_raha_session');
-        const adminSession = localStorage.getItem('nairobi_raha_admin_session');
+        // Check if there's a session already - FIXED keys
+        const existingSession = localStorage.getItem('nairobi_vibe_session');
+        const adminSession = localStorage.getItem('nairobi_vibe_admin_session');
         
         if (existingSession || adminSession) {
             console.log('ℹ️ Existing session found. You are already logged in.');
