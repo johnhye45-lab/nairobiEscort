@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Find Nairobi Escorts and Escorts in Nairobi on Nairobi Vibe">
-    <title>Nairobi Vibe - Best Nairobi Escorts and Massage Services</title>
+    <meta name="description" content="Find Kenyan Escorts Near You | Escorts in Nairobi County on Nairobi Vibe">
+    <title>Nairobi Vibe - Find Kenyan Escorts Near You | Escorts in Nairobi County</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -12,9 +12,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Select2 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
-
     <!-- Supabase Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
@@ -47,12 +44,7 @@
         }
         
         .clear { clear: both; }
-        .clear5 { clear: both; height: 5px; }
-        .clear10 { clear: both; height: 10px; }
-        .hide { display: none !important; }
         .text-center { text-align: center; }
-        .rad10 { border-radius: 10px; }
-        .rad25 { border-radius: 25px; }
         
         /* ---------- BUTTONS ---------- */
         .btn-primary {
@@ -71,34 +63,6 @@
         .btn-primary:active {
             transform: scale(0.95);
         }
-        
-        .btn-secondary {
-            background: #eff8ff;
-            color: #E0006C;
-            padding: 8px 18px;
-            border: 2px solid #E0006C;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #fff;
-        }
-        
-        .badge-premium { background: linear-gradient(135deg, #f39c12, #e67e22); }
-        .badge-verified { background: #27ae60; }
-        .badge-featured { background: #E0006C; }
-        .badge-new { background: #3498db; }
         
         /* ---------- TOP BANNER ---------- */
         .top-banner {
@@ -181,28 +145,6 @@
             background: rgba(255,255,255,0.15);
         }
         
-        .nav-menu .dropdown {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 5px 0;
-            margin: 0 10px;
-        }
-        
-        .nav-menu .dropdown li {
-            list-style: none;
-        }
-        
-        .nav-menu .dropdown li a {
-            display: block;
-            padding: 6px 15px;
-            color: #fff;
-            font-size: 13px;
-        }
-        
-        .nav-menu .dropdown li a:active {
-            background: rgba(255,255,255,0.1);
-        }
-        
         .user-menu {
             display: flex;
             align-items: center;
@@ -226,6 +168,15 @@
             background: rgba(255,255,255,0.2);
         }
         
+        .user-menu .btn-profile {
+            background: #fff;
+            color: #E0006C;
+        }
+        
+        .user-menu .btn-profile i {
+            margin-right: 4px;
+        }
+        
         .user-menu .icon-btn {
             width: 35px;
             height: 35px;
@@ -236,10 +187,6 @@
             justify-content: center;
             padding: 0;
             font-size: 14px;
-        }
-        
-        .user-menu .icon-btn:active {
-            background: rgba(255,255,255,0.3);
         }
         
         .hamburger {
@@ -262,9 +209,14 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 10px 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        }
+        
+        .section-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
         .section-title {
@@ -285,327 +237,192 @@
             margin-right: 6px;
         }
         
-        .section-title a {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 12px;
-        }
-        
-        .section-box {
-            background: #fff;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        /* ---------- ESCORT GRID ---------- */
-        .escort-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        
-        .escort-card {
-            background: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .escort-card:active {
-            transform: scale(0.97);
-        }
-        
-        .escort-card .image-wrapper {
-            position: relative;
-            overflow: hidden;
-            background: #f0f0f0;
-            height: 150px;
-        }
-        
-        .escort-card .image-wrapper .placeholder-img {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #fce4ec, #f8d7da);
-            color: #E0006C;
-            font-size: 40px;
-        }
-        
-        .escort-card .card-badges {
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            z-index: 2;
-        }
-        
-        .escort-card .card-badges .badge {
-            font-size: 8px;
-            padding: 2px 8px;
-        }
-        
-        .escort-card .premium-badge {
-            position: absolute;
-            top: 6px;
-            right: -20px;
-            z-index: 2;
-        }
-        
-        .escort-card .premium-badge span {
-            display: block;
-            background: linear-gradient(135deg, #f7c214, #fc5e1f);
-            color: #fff;
-            font-weight: 700;
-            font-size: 9px;
-            padding: 2px 28px;
-            transform: rotate(45deg);
-            text-transform: uppercase;
-        }
-        
-        .escort-card .card-info {
-            padding: 10px;
-        }
-        
-        .escort-card .card-info .name {
-            font-weight: 700;
-            font-size: 13px;
-            color: #333;
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .escort-card .card-info .location {
-            font-size: 11px;
-            color: #888;
-        }
-        
-        .escort-card .card-info .location i {
-            color: #E0006C;
-            margin-right: 2px;
-            font-size: 10px;
-        }
-        
-        /* ---------- REVIEWS ---------- */
-        .review-item {
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .review-item:last-child {
-            border-bottom: none;
-        }
-        
-        .review-item .review-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3px;
-        }
-        
-        .review-item .review-author {
-            font-weight: 600;
-            font-size: 13px;
-            color: #333;
-        }
-        
-        .review-item .review-author span {
-            color: #E0006C;
-        }
-        
-        .review-item .review-stars {
-            color: #f39c12;
-            font-size: 12px;
-            letter-spacing: 1px;
-        }
-        
-        .review-item .review-text {
-            color: #666;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        
-        .review-item .review-text a {
-            font-weight: 600;
-            font-size: 12px;
-        }
-        
-        /* ---------- SIDEBARS ---------- */
-        .sidebar-left,
-        .sidebar-right {
-            width: 100%;
-        }
-        
-        .sidebar-box {
-            background: #fff;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .sidebar-box h3 {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .sidebar-box h3 i {
-            color: #E0006C;
-            margin-right: 6px;
-        }
-        
-        /* Countries List */
-        .country-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 10px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .country-list li {
-            padding: 4px 0;
-        }
-        
-        .country-list li a {
-            color: #555;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .country-list li a i {
-            color: #E0006C;
-            margin-right: 4px;
-            font-size: 10px;
-            width: 14px;
-        }
-        
-        .country-list li a:active {
-            color: #E0006C;
-        }
-        
-        /* Quick Search */
-        .quick-search {
+        /* ---------- HERO SECTION ---------- */
+        .hero-section {
             background: linear-gradient(135deg, #E0006C, #b30057);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 12px;
             color: #fff;
         }
         
-        .quick-search h3 {
-            color: #fff;
-        }
-        
-        .quick-search .form-group {
-            margin-bottom: 8px;
-        }
-        
-        .quick-search .form-group label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 3px;
-            color: rgba(255,255,255,0.9);
-        }
-        
-        .quick-search .form-group select,
-        .quick-search .form-group input {
-            width: 100%;
-            padding: 8px 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: 'Open Sans', sans-serif;
-            background: rgba(255,255,255,0.95);
-            -webkit-appearance: none;
-            appearance: none;
-        }
-        
-        .quick-search .form-group select:focus,
-        .quick-search .form-group input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
-        }
-        
-        .quick-search .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .hero-section h1 {
+            font-size: 24px;
+            font-weight: 800;
             margin-bottom: 5px;
         }
         
-        .quick-search .checkbox-group input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-            accent-color: #fff;
+        .hero-section p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 15px;
         }
         
-        .quick-search .checkbox-group label {
-            font-size: 13px;
-            cursor: pointer;
-            color: rgba(255,255,255,0.9);
+        .hero-section .search-box {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 8px;
         }
         
-        .quick-search .btn-search {
-            width: 100%;
-            padding: 10px;
+        .hero-section .search-box input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-family: 'Open Sans', sans-serif;
+            outline: none;
+        }
+        
+        .hero-section .search-box button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
             background: #fff;
             color: #E0006C;
-            border: none;
-            border-radius: 8px;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 3px;
         }
         
-        .quick-search .btn-search:active {
-            transform: scale(0.97);
+        .hero-section .search-box button:active {
+            transform: scale(0.95);
         }
         
-        .quick-search .adv-link {
-            display: block;
-            text-align: center;
+        /* ---------- LOCATION TAGS ---------- */
+        .location-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
             margin-top: 8px;
-            color: rgba(255,255,255,0.8);
-            font-size: 12px;
         }
         
-        /* Recent Posts */
-        .recent-posts {
-            list-style: none;
-        }
-        
-        .recent-posts li {
-            padding: 6px 0;
-            border-bottom: 1px solid #f5f5f5;
-        }
-        
-        .recent-posts li:last-child {
-            border-bottom: none;
-        }
-        
-        .recent-posts li a {
+        .location-tags .tag {
+            background: #f5f5f5;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
             color: #555;
-            font-size: 13px;
-            line-height: 1.4;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
         }
         
-        .recent-posts li a:active {
+        .location-tags .tag:active {
+            background: #E0006C;
+            color: #fff;
+            border-color: #E0006C;
+        }
+        
+        .location-tags .tag i {
+            margin-right: 3px;
+            font-size: 9px;
             color: #E0006C;
+        }
+        
+        .location-tags .tag:active i {
+            color: #fff;
+        }
+        
+        /* ---------- COUNTY & TOWN GRID ---------- */
+        .county-grid,
+        .town-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 6px;
+            margin-top: 8px;
+        }
+        
+        .county-grid .county-item,
+        .town-grid .town-item {
+            background: #f8f9fa;
+            padding: 8px 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #eee;
+        }
+        
+        .county-grid .county-item:active,
+        .town-grid .town-item:active {
+            background: #E0006C;
+            color: #fff;
+            border-color: #E0006C;
+        }
+        
+        .county-grid .county-item i,
+        .town-grid .town-item i {
+            color: #E0006C;
+            margin-right: 4px;
+            font-size: 11px;
+        }
+        
+        .county-grid .county-item:active i,
+        .town-grid .town-item:active i {
+            color: #fff;
+        }
+        
+        /* ---------- SECTION HEADER WITH ICON ---------- */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .section-header .icon-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fce4ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #E0006C;
+            font-size: 14px;
+        }
+        
+        .section-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .section-header .view-all {
+            margin-left: auto;
+            font-size: 12px;
+            font-weight: 600;
+            color: #E0006C;
+        }
+        
+        /* ---------- ESCORT GRID (Empty State) ---------- */
+        .escort-grid-empty {
+            text-align: center;
+            padding: 30px 20px;
+            color: #999;
+        }
+        
+        .escort-grid-empty i {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+        
+        .escort-grid-empty h4 {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        
+        .escort-grid-empty p {
+            font-size: 13px;
         }
         
         /* ---------- FOOTER ---------- */
@@ -639,17 +456,6 @@
         .footer-col a {
             color: #FE5ACB;
             font-size: 13px;
-        }
-        
-        .footer-col .partner-links {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3px 15px;
-        }
-        
-        .footer-col .partner-links a {
-            font-size: 12px;
-            line-height: 1.8;
         }
         
         .footer-bottom {
@@ -694,7 +500,6 @@
             bottom: 20px;
             right: 20px;
             z-index: 9999;
-            animation: bounceIn 0.6s ease;
         }
         
         .whatsapp-float a {
@@ -713,57 +518,6 @@
         
         .whatsapp-float a:active {
             transform: scale(0.9);
-        }
-        
-        @keyframes bounceIn {
-            0% { opacity: 0; transform: scale(0); }
-            60% { transform: scale(1.05); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        
-        /* ---------- LOADING ---------- */
-        .loading-spinner {
-            text-align: center;
-            padding: 20px 0;
-        }
-        
-        .loading-spinner i {
-            font-size: 24px;
-            color: #E0006C;
-            animation: spin 1s linear infinite;
-        }
-        
-        .loading-spinner p {
-            font-size: 12px;
-            color: #999;
-            margin-top: 4px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 20px 0;
-            color: #999;
-            grid-column: 1 / -1;
-        }
-        
-        .no-results i {
-            font-size: 32px;
-            color: #ddd;
-            margin-bottom: 8px;
-        }
-        
-        .no-results h4 {
-            font-size: 15px;
-            color: #666;
-        }
-        
-        .no-results p {
-            font-size: 12px;
         }
         
         /* ---------- TOAST ---------- */
@@ -795,84 +549,26 @@
         .toast.error { background: #e74c3c; }
         .toast.info { background: #3498db; }
         
-        /* ---------- SELECT2 OVERRIDES ---------- */
-        .select2-container .select2-selection--single {
-            height: 38px !important;
-            border: none !important;
-            border-radius: 8px !important;
-        }
-        
-        .select2-container .select2-selection__rendered {
-            line-height: 38px !important;
-            padding-left: 10px !important;
-            font-size: 13px !important;
-        }
-        
-        .select2-container .select2-selection__arrow {
-            height: 38px !important;
-        }
-        
         /* ---------- RESPONSIVE ---------- */
-        @media (min-width: 600px) {
-            .escort-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .country-list {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
         @media (min-width: 768px) {
-            .escort-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
             .footer-inner {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .main-content {
-                flex-direction: row;
-                flex-wrap: wrap;
+            .hero-section h1 {
+                font-size: 32px;
             }
             
-            .sidebar-left {
-                width: 30%;
-                order: 2;
+            .hero-section p {
+                font-size: 18px;
             }
             
-            .content-area {
-                width: 70%;
-                order: 1;
-            }
-            
-            .sidebar-right {
-                width: 100%;
-                order: 3;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
+            .county-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
         }
         
         @media (min-width: 992px) {
-            .escort-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-            
-            .sidebar-left {
-                width: 22%;
-            }
-            
-            .content-area {
-                width: 78%;
-            }
-            
-            .sidebar-right {
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-            
             .nav-menu {
                 display: flex !important;
                 flex-direction: row;
@@ -890,67 +586,30 @@
                 font-size: 13px;
             }
             
-            .nav-menu .dropdown {
-                position: absolute;
-                top: 40px;
-                left: 0;
-                background: #fff;
-                min-width: 180px;
-                border-radius: 10px;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-                padding: 8px 0;
-                display: none;
-                z-index: 100;
-                margin: 0;
-            }
-            
-            .nav-menu > li:hover .dropdown {
-                display: block;
-            }
-            
-            .nav-menu .dropdown li a {
-                color: #333;
-                padding: 6px 18px;
-                font-size: 13px;
-            }
-            
-            .nav-menu .dropdown li a:hover {
-                background: #fce4ec;
-                color: #E0006C;
-            }
-            
             .hamburger {
                 display: none;
             }
             
-            .country-list {
-                grid-template-columns: 1fr 1fr;
+            .hero-section {
+                padding: 50px 30px;
+            }
+            
+            .hero-section h1 {
+                font-size: 38px;
+            }
+            
+            .county-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+            
+            .town-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
         }
         
         @media (min-width: 1200px) {
-            .escort-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
-            
-            .main-content {
-                flex-wrap: nowrap;
-            }
-            
-            .sidebar-left {
-                width: 18%;
-                order: 1;
-            }
-            
-            .content-area {
-                width: 60%;
-                order: 2;
-            }
-            
-            .sidebar-right {
-                width: 22%;
-                order: 3;
-                display: block;
+            .footer-inner {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
         
@@ -994,22 +653,8 @@
         <!-- Navigation -->
         <ul class="nav-menu" id="navMenu">
             <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-            <li>
-                <a href="#"><i class="fas fa-female"></i> Escorts <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i></a>
-                <ul class="dropdown">
-                    <li><a href="#"><i class="fas fa-female"></i> Female</a></li>
-                    <li><a href="#"><i class="fas fa-male"></i> Male</a></li>
-                    <li><a href="#"><i class="fas fa-people-arrows"></i> Couple</a></li>
-                    <li><a href="#"><i class="fas fa-rainbow"></i> Gay</a></li>
-                    <li><a href="#"><i class="fas fa-transgender"></i> Transsexual</a></li>
-                    <li><hr style="margin:4px 15px; border-color:#eee;"></li>
-                    <li><a href="#"><i class="fas fa-user-check"></i> Independent</a></li>
-                    <li><a href="#"><i class="fas fa-check-circle"></i> Verified</a></li>
-                    <li><a href="#"><i class="fas fa-wifi"></i> Online</a></li>
-                </ul>
-            </li>
+            <li><a href="#"><i class="fas fa-female"></i> Escorts</a></li>
             <li><a href="#"><i class="fas fa-building"></i> Agencies</a></li>
-            <li><a href="#"><i class="fas fa-plane"></i> Tours</a></li>
             <li><a href="#"><i class="fas fa-star"></i> Reviews</a></li>
             <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
             <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
@@ -1017,8 +662,14 @@
         
         <!-- User Menu -->
         <div class="user-menu">
-            <a href="signup.html" class="btn-register"><i class="fas fa-user-plus"></i> Register</a>
-            <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <!-- Show these when NOT logged in -->
+            <a href="signup.html" class="btn-register" id="registerBtn"><i class="fas fa-user-plus"></i> Register</a>
+            <a href="login.html" class="btn-login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</a>
+            
+            <!-- Show these when logged in (hidden by default) -->
+            <a href="myprofile.html" class="btn-profile" id="profileBtn" style="display:none;"><i class="fas fa-user"></i> My Profile</a>
+            <a href="#" class="btn-login" id="logoutBtn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            
             <a href="#" class="icon-btn" title="Search"><i class="fas fa-search"></i></a>
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
@@ -1027,300 +678,214 @@
     </div>
 </header>
 
-
 <!-- ============================================================
      MAIN CONTENT
      ============================================================ -->
 <div class="main-content">
-    
+
     <!-- ============================================================
-         LEFT SIDEBAR
+         HERO SECTION - Find Kenyan Escorts Near You
          ============================================================ -->
-    <aside class="sidebar-left">
-        
-        <!-- Countries/Locations -->
-        <div class="sidebar-box">
-            <h3><i class="fas fa-globe-africa"></i> Locations</h3>
-            <ul class="country-list" id="countryList">
-                <li><a href="#"><i class="fas fa-map-pin"></i> All Locations</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kilimani</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Nairobi CBD</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Westlands</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kasarani</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> South B</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Langata</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Mombasa</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Kisumu</a></li>
-                <li><a href="#"><i class="fas fa-map-pin"></i> Nakuru</a></li>
-            </ul>
+    <section class="hero-section">
+        <h1>Find Kenyan Escorts Near You</h1>
+        <p>Escorts in Nairobi County</p>
+        <div class="search-box">
+            <input type="text" id="heroSearch" placeholder="Search by location, name, or service...">
+            <button id="heroSearchBtn"><i class="fas fa-search"></i> Search</button>
         </div>
-        
-        <!-- Search Widget -->
-        <div class="sidebar-box">
-            <h3><i class="fas fa-search"></i> Search</h3>
-            <form action="#" method="get" id="searchForm">
-                <div style="display:flex; gap:5px;">
-                    <input type="search" id="searchInput" placeholder="Search escorts..." style="flex:1; padding:8px 12px; border:2px solid #eee; border-radius:10px; font-size:13px; font-family:'Open Sans',sans-serif; outline:none; transition:all 0.3s ease;">
-                    <button type="submit" style="padding:8px 16px; background:#E0006C; color:#fff; border:none; border-radius:10px; cursor:pointer; font-weight:600; font-size:13px;">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-        
-        <!-- Recent Posts -->
-        <div class="sidebar-box">
-            <h3><i class="fas fa-newspaper"></i> Recent Posts</h3>
-            <ul class="recent-posts">
-                <li><a href="#">Asian massage near me in Nairobi</a></li>
-                <li><a href="#">Full Body Massage at Home: A Safer Guide</a></li>
-                <li><a href="#">Nairobi Massage Reddit: Trusted Leads</a></li>
-                <li><a href="#">Nairobi Massage Spa Guide: Treatments</a></li>
-                <li><a href="#">20 types of massage and how to choose</a></li>
-            </ul>
-        </div>
-        
-    </aside>
-    
+    </section>
+
     <!-- ============================================================
-         CONTENT AREA
+         LOCATION TAGS - All Nairobi Areas
          ============================================================ -->
-    <main class="content-area">
-        
-        <!-- ============================================================
-             VIP ESCORTS SECTION (formerly Premium)
-             ============================================================ -->
-        <section class="section-box">
-            <div class="section-title">
-                <h2><i class="fas fa-crown"></i> VIP Escorts</h2>
-                <a href="#" class="btn-secondary" style="padding:4px 14px; font-size:11px;">View All <i class="fas fa-arrow-right"></i></a>
-            </div>
-            
-            <div class="escort-grid" id="vipEscortsGrid">
-                <!-- VIP escorts will be dynamically loaded -->
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
-                        <div class="card-badges">
-                            <span class="badge badge-premium">VIP</span>
-                        </div>
-                        <div class="premium-badge"><span>VIP</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Premium Escort</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</div>
-                    </div>
-                </div>
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
-                        <div class="card-badges">
-                            <span class="badge badge-premium">VIP</span>
-                            <span class="badge badge-verified">VERIFIED</span>
-                        </div>
-                        <div class="premium-badge"><span>VIP</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Verified VIP Escort</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                </div>
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
-                        <div class="card-badges">
-                            <span class="badge badge-premium">VIP</span>
-                            <span class="badge badge-featured">FEATURED</span>
-                        </div>
-                        <div class="premium-badge"><span>VIP</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Featured VIP Escort</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Westlands, Kenya</div>
-                    </div>
-                </div>
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
-                        <div class="card-badges">
-                            <span class="badge badge-premium">VIP</span>
-                        </div>
-                        <div class="premium-badge"><span>VIP</span></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Elite VIP Escort</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Mombasa, Kenya</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center" style="margin-top:12px;">
-                <a href="#" class="btn-primary" style="font-size:13px; padding:8px 20px;">View All VIP Escorts <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </section>
-        
-        <!-- ============================================================
-             BASIC ESCORTS SECTION (formerly Newly Added)
-             ============================================================ -->
-        <section class="section-box">
-            <div class="section-title">
-                <h2><i class="fas fa-star"></i> Basic Escorts</h2>
-                <a href="#" class="btn-secondary" style="padding:4px 14px; font-size:11px;">View All <i class="fas fa-arrow-right"></i></a>
-            </div>
-            
-            <div class="escort-grid" id="basicEscortsGrid">
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
-                        <div class="card-badges">
-                            <span class="badge badge-new">NEW</span>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">New Escort</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</div>
-                    </div>
-                </div>
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Basic Escort</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Kilimani, Kenya</div>
-                    </div>
-                </div>
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Standard Escort</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> Westlands, Kenya</div>
-                    </div>
-                </div>
-                <div class="escort-card">
-                    <div class="image-wrapper">
-                        <div class="placeholder-img"><i class="fas fa-user"></i></div>
-                    </div>
-                    <div class="card-info">
-                        <div class="name">Regular Escort</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> South B, Kenya</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center" style="margin-top:12px;">
-                <a href="#" class="btn-primary" style="font-size:13px; padding:8px 20px;">View All Basic Escorts <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </section>
-        
-        <!-- ============================================================
-             VIP ESCORTS SECTION (formerly Latest Escort Reviews)
-             ============================================================ -->
-        <section class="section-box">
-            <div class="section-title">
-                <h2><i class="fas fa-gem"></i> VIP Escorts</h2>
-                <a href="#" class="btn-secondary" style="padding:4px 14px; font-size:11px;">All VIP <i class="fas fa-arrow-right"></i></a>
-            </div>
-            
-            <div id="vipReviewsContainer">
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="review-author"><span>VIP</span> Client wrote:</span>
-                        <span class="review-stars">★★★★★</span>
-                    </div>
-                    <div class="review-text">
-                        Excellent VIP service, highly recommended! <a href="#">see the review</a>
-                    </div>
-                </div>
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="review-author"><span>Elite</span> Client wrote:</span>
-                        <span class="review-stars">★★★★★</span>
-                    </div>
-                    <div class="review-text">
-                        Top class escorts, very professional. <a href="#">see the review</a>
-                    </div>
-                </div>
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="review-author"><span>Premium</span> Client wrote:</span>
-                        <span class="review-stars">★★★★★</span>
-                    </div>
-                    <div class="review-text">
-                        Best VIP experience in Nairobi! <a href="#">see the review</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center" style="margin-top:12px;">
-                <a href="#" class="btn-primary" style="font-size:13px; padding:8px 20px;">See All VIP Reviews <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </section>
-        
-    </main>
-    
-    <!-- ============================================================
-         RIGHT SIDEBAR
-         ============================================================ -->
-    <aside class="sidebar-right">
-        
-        <!-- Quick Search -->
-        <div class="sidebar-box quick-search">
-            <h3><i class="fas fa-search"></i> Quick Search</h3>
-            
-            <form action="#" method="post" id="quickSearchForm">
-                <input type="hidden" name="action" value="search">
-                
-                <div class="form-group">
-                    <label><i class="fas fa-city"></i> City</label>
-                    <select class="select2" id="searchCity">
-                        <option value="">All Cities</option>
-                        <option value="Kilimani">Kilimani</option>
-                        <option value="Nairobi CBD">Nairobi CBD</option>
-                        <option value="Westlands">Westlands</option>
-                        <option value="Kasarani">Kasarani</option>
-                        <option value="South B">South B</option>
-                        <option value="Langata">Langata</option>
-                        <option value="Mombasa">Mombasa</option>
-                        <option value="Kisumu">Kisumu</option>
-                        <option value="Nakuru">Nakuru</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label><i class="fas fa-venus-mars"></i> Gender</label>
-                    <select id="searchGender">
-                        <option value="">All</option>
-                        <option value="female">Female</option>
-                        <option value="male">Male</option>
-                        <option value="couple">Couple</option>
-                        <option value="gay">Gay</option>
-                        <option value="transsexual">Transsexual</option>
-                    </select>
-                </div>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="searchPremium">
-                    <label for="searchPremium"><i class="fas fa-crown" style="color:#f39c12;"></i> VIP Only</label>
-                </div>
-                
-                <div class="checkbox-group">
-                    <input type="checkbox" id="searchVerified">
-                    <label for="searchVerified"><i class="fas fa-check-circle"></i> Verified Only</label>
-                </div>
-                
-                <button type="submit" class="btn-search">
-                    <i class="fas fa-search"></i> Search
-                </button>
-                
-                <a href="#" class="adv-link"><i class="fas fa-sliders-h"></i> Advanced</a>
-            </form>
+    <section class="section-box">
+        <div class="section-header">
+            <div class="icon-circle"><i class="fas fa-map-marked-alt"></i></div>
+            <h3>Nairobi Areas</h3>
+            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
         </div>
-        
-    </aside>
-    
+        <div class="location-tags" id="locationTags">
+            <span class="tag"><i class="fas fa-map-pin"></i> Allsops</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Athi River</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Banana</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Buru Buru</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Chokaa</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Dagoretti</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Dandora</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Donholm</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Eastlands</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Eastleigh</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Embakasi</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Garden City</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Githurai 44</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Githurai 45</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Homeland</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Hurlingham</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Huruma</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Imara Daima</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Jamhuri</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Joska</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Juja</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kabete</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kahawa Sukari</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kahawa Wendani</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kahawa West</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kamulu</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kangemi</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Karen</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kariobangi</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kasarani</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kawangware</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kayole</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kenyatta Road</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kibera</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kikuyu</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kileleshwa</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kilimani</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kitengela</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Kitisuru</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Komarock</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Langata</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Lavington</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Loresho</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Madaraka</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Makadara</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Malaa</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Mathare</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Milimani</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Mlolongo</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Muthaiga</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Muthangari</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Muthurwa</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Mwiki</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Nairobi Town</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Nairobi West</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ndenderu</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ngara</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ngong</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ngumba</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Njiru</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ongata Rongai</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Pangani</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Parklands</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Riversside</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Roasters</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Roysambu</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ruai</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ruaka</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ruaraka</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Ruiru</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Runda</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Saika</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> South B</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> South C</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Syokimau</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Thika</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Thogoto</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Thome</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Umoja</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Upper Hill</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Utawala</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Uthiru</span>
+            <span class="tag"><i class="fas fa-map-pin"></i> Westlands</span>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         POPULAR COUNTIES
+         ============================================================ -->
+    <section class="section-box">
+        <div class="section-header">
+            <div class="icon-circle"><i class="fas fa-flag"></i></div>
+            <h3>Popular Counties</h3>
+            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="county-grid">
+            <div class="county-item"><i class="fas fa-map-marker-alt"></i> Kiambu</div>
+            <div class="county-item"><i class="fas fa-map-marker-alt"></i> Kisumu</div>
+            <div class="county-item"><i class="fas fa-map-marker-alt"></i> Machakos</div>
+            <div class="county-item"><i class="fas fa-map-marker-alt"></i> Mombasa</div>
+            <div class="county-item"><i class="fas fa-map-marker-alt"></i> Nairobi</div>
+            <div class="county-item"><i class="fas fa-map-marker-alt"></i> Nakuru</div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ESCORTS FROM OTHER TOWNS
+         ============================================================ -->
+    <section class="section-box">
+        <div class="section-header">
+            <div class="icon-circle"><i class="fas fa-city"></i></div>
+            <h3>Escorts from Other Towns</h3>
+            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="town-grid">
+            <div class="town-item">Eldoret</div>
+            <div class="town-item">Kiambu</div>
+            <div class="town-item">Mombasa</div>
+            <div class="town-item">Nanyuki</div>
+            <div class="town-item">Kisumu</div>
+            <div class="town-item">Naivasha</div>
+            <div class="town-item">Embu Town</div>
+            <div class="town-item">Kisii Town</div>
+            <div class="town-item">Narok Town</div>
+            <div class="town-item">Meru Town</div>
+            <div class="town-item">Nyeri Town</div>
+            <div class="town-item">Machakos Town</div>
+            <div class="town-item">Nakuru</div>
+            <div class="town-item">Kakamega Town</div>
+            <div class="town-item">Wangige</div>
+            <div class="town-item">Bungoma Town</div>
+            <div class="town-item">Nyahururu</div>
+            <div class="town-item">Murang'a Town</div>
+            <div class="town-item">Kericho Town</div>
+            <div class="town-item">Voi</div>
+            <div class="town-item">Isiolo Town</div>
+            <div class="town-item">Kilifi Town</div>
+            <div class="town-item">Kerugoya</div>
+            <div class="town-item">Kitui Town</div>
+            <div class="town-item">Mwea</div>
+            <div class="town-item">Kitale</div>
+            <div class="town-item">Limuru</div>
+            <div class="town-item">Bomet</div>
+            <div class="town-item">Kajiado Town</div>
+            <div class="town-item">Changamwe</div>
+            <div class="town-item">Chaka</div>
+            <div class="town-item">Likoni</div>
+            <div class="town-item">Kenol</div>
+            <div class="town-item">Luanda</div>
+            <div class="town-item">Karatina</div>
+            <div class="town-item">Migori Town</div>
+            <div class="town-item">Chuka</div>
+            <div class="town-item">Diani</div>
+            <div class="town-item">Homa Bay Town</div>
+            <div class="town-item">Nkubu Town</div>
+            <div class="town-item">Githunguri</div>
+            <div class="town-item">Sagana</div>
+            <div class="town-item">Bondo</div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         ESCORT PROFILES (Empty State - No Users Yet)
+         ============================================================ -->
+    <section class="section-box">
+        <div class="section-header">
+            <div class="icon-circle"><i class="fas fa-female"></i></div>
+            <h3>Available Escorts</h3>
+            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="escort-grid-empty">
+            <i class="fas fa-users"></i>
+            <h4>No Escorts Listed Yet</h4>
+            <p>Be the first to create a profile and get listed on Nairobi Vibe!</p>
+            <br>
+            <a href="myprofile.html" class="btn-primary" style="padding:10px 30px; font-size:14px;">
+                <i class="fas fa-user-plus"></i> Create Your Profile Now
+            </a>
+        </div>
+    </section>
+
 </div>
 
 <!-- ============================================================
@@ -1329,7 +894,6 @@
 <footer class="footer">
     <div class="footer-inner">
         
-        <!-- Column 1 -->
         <div class="footer-col">
             <h4><i class="fas fa-crown" style="color:#f39c12;"></i> Nairobi Vibe</h4>
             <p>
@@ -1345,7 +909,6 @@
             </p>
         </div>
         
-        <!-- Column 2 -->
         <div class="footer-col">
             <h4><i class="fas fa-link"></i> Quick Links</h4>
             <ul style="list-style:none;">
@@ -1358,10 +921,9 @@
             </ul>
         </div>
         
-        <!-- Column 3 -->
         <div class="footer-col">
             <h4><i class="fas fa-handshake"></i> Partner Sites</h4>
-            <div class="partner-links">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 15px;">
                 <a href="#">Nairobi Vibe</a>
                 <a href="#">Nairobi Massage</a>
                 <a href="#">Nairobi Escorts</a>
@@ -1373,7 +935,6 @@
             </div>
         </div>
         
-        <!-- Column 4 -->
         <div class="footer-col">
             <h4><i class="fas fa-info-circle"></i> About</h4>
             <p>
@@ -1393,7 +954,6 @@
         
     </div>
     
-    <!-- Footer Bottom -->
     <div class="footer-bottom">
         <div class="social-icons">
             <a href="#" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
@@ -1401,7 +961,7 @@
             <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
         </div>
-        <p>&copy; 2026 Nairobi Vibe - Find Nairobi Escorts and Massage. All Rights Reserved.</p>
+        <p>&copy; 2026 Nairobi Vibe - Find Kenyan Escorts Near You. All Rights Reserved.</p>
     </div>
 </footer>
 
@@ -1424,45 +984,159 @@
 <!-- ============================================================
      JAVASCRIPT
      ============================================================ -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
 <script>
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // ============================================================
+        // ELEMENTS
+        // ============================================================
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const heroSearch = document.getElementById('heroSearch');
+        const heroSearchBtn = document.getElementById('heroSearchBtn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const profileBtn = document.getElementById('profileBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        // ============================================================
+        // CHECK SUPABASE CONFIG
+        // ============================================================
+        if (typeof window.supabaseFunctions === 'undefined') {
+            console.warn('⚠️ Supabase functions not loaded');
+        } else {
+            console.log('✅ Supabase is loaded');
+        }
+        
+        // ============================================================
+        // CHECK SESSION & UPDATE MENU
+        // ============================================================
+        function checkSession() {
+            const session = localStorage.getItem('nairobi_vibe_session');
+            
+            if (session) {
+                // User is logged in - show profile and logout
+                if (registerBtn) registerBtn.style.display = 'none';
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (profileBtn) profileBtn.style.display = 'inline-block';
+                if (logoutBtn) logoutBtn.style.display = 'inline-block';
+                
+                try {
+                    const userData = JSON.parse(session);
+                    if (profileBtn) {
+                        profileBtn.innerHTML = '<i class="fas fa-user"></i> ' + (userData.name || 'My Profile');
+                    }
+                } catch (e) {
+                    console.log('Session parse error');
+                }
+            } else {
+                // User is not logged in - show register and login
+                if (registerBtn) registerBtn.style.display = 'inline-block';
+                if (loginBtn) loginBtn.style.display = 'inline-block';
+                if (profileBtn) profileBtn.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+            }
+        }
+        
+        // Run on load
+        checkSession();
         
         // ============================================================
         // HAMBURGER MENU TOGGLE
         // ============================================================
-        $('#hamburger').on('click', function() {
-            $('#navMenu').slideToggle(300);
-            $(this).toggleClass('active');
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
         });
         
         // Close menu on outside click
-        $(document).on('click', function(e) {
-            if ($(window).width() <= 992) {
-                if (!$(e.target).closest('.header').length) {
-                    $('#navMenu').slideUp(300);
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                if (!e.target.closest('.header')) {
+                    navMenu.classList.remove('show');
                 }
             }
         });
         
         // ============================================================
-        // SELECT2 FOR DROPDOWNS
+        // LOGOUT
         // ============================================================
-        $('.select2').select2({
-            minimumResultsForSearch: 5,
-            width: 'resolve',
-            placeholder: 'Select an option'
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('nairobi_vibe_session');
+                localStorage.removeItem('nairobi_vibe_admin_session');
+                showToast('Logged out successfully', 'success');
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            });
+        }
+        
+        // ============================================================
+        // HERO SEARCH
+        // ============================================================
+        function performSearch() {
+            const term = heroSearch.value.trim();
+            if (term) {
+                showToast('Searching for "' + term + '"...', 'info');
+            } else {
+                showToast('Please enter a search term', 'info');
+            }
+        }
+        
+        heroSearchBtn.addEventListener('click', performSearch);
+        heroSearch.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performSearch();
+            }
+        });
+        
+        // ============================================================
+        // LOCATION TAGS - CLICK HANDLER
+        // ============================================================
+        document.querySelectorAll('.location-tags .tag').forEach(function(tag) {
+            tag.addEventListener('click', function() {
+                const location = this.textContent.trim();
+                heroSearch.value = location;
+                showToast('Showing escorts in ' + location, 'info');
+            });
+        });
+        
+        // ============================================================
+        // COUNTY ITEMS - CLICK HANDLER
+        // ============================================================
+        document.querySelectorAll('.county-grid .county-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                const county = this.textContent.trim();
+                heroSearch.value = county;
+                showToast('Showing escorts in ' + county, 'info');
+            });
+        });
+        
+        // ============================================================
+        // TOWN ITEMS - CLICK HANDLER
+        // ============================================================
+        document.querySelectorAll('.town-grid .town-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                const town = this.textContent.trim();
+                heroSearch.value = town;
+                showToast('Showing escorts in ' + town, 'info');
+            });
         });
         
         // ============================================================
         // TOAST NOTIFICATION
         // ============================================================
         function showToast(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast ' + type + ' show';
+            toastMessage.textContent = message;
+            toast.className = 'toast ' + type;
+            
+            // Force reflow for animation
+            void toast.offsetWidth;
+            toast.classList.add('show');
             
             clearTimeout(toast._timeout);
             toast._timeout = setTimeout(function() {
@@ -1471,41 +1145,12 @@
         }
         
         // ============================================================
-        // SEARCH FUNCTION
+        // CONSOLE LOG
         // ============================================================
-        $('#searchForm').on('submit', function(e) {
-            e.preventDefault();
-            const term = $('#searchInput').val().trim();
-            
-            if (!term) {
-                showToast('Please enter a search term', 'info');
-                return;
-            }
-            
-            showToast(`Searching for "${term}"...`, 'info');
-        });
-        
-        // ============================================================
-        // QUICK SEARCH
-        // ============================================================
-        $('#quickSearchForm').on('submit', function(e) {
-            e.preventDefault();
-            showToast('Searching...', 'info');
-        });
-        
-        // ============================================================
-        // COUNTRY LIST ITEMS - MOBILE FRIENDLY
-        // ============================================================
-        $('.country-list li a').on('click', function(e) {
-            e.preventDefault();
-            const location = $(this).text().trim();
-            showToast(`Showing escorts in ${location}`, 'info');
-        });
-        
-        console.log('✅ Nairobi Vibe - Mobile First Homepage Loaded!');
-        console.log('📱 Optimized for mobile devices');
-        console.log('📋 Sections: VIP Escorts, Basic Escorts, VIP Reviews');
-        console.log('📞 WhatsApp: +254712831606');
+        console.log('✅ Nairobi Vibe - Homepage Loaded!');
+        console.log('📍 Locations: All Nairobi areas, counties, and towns');
+        console.log('👤 Profile link appears when logged in');
+        console.log('📱 Mobile-first design ready');
         
     });
 </script>
