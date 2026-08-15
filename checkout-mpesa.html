@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Checkout - MPESA - Nairobi Vibe Escorts</title>
+    <title>Complete Payment - Nairobi Vibe Escorts</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
 
     <style>
         /* ============================================================
-                   CHECKOUT MPESA PAGE STYLES
+                   PAYMENT PAGE STYLES
                    ============================================================ */
         
         * {
@@ -161,8 +161,8 @@
             font-weight: 700;
         }
         
-        /* ---------- CHECKOUT CARD ---------- */
-        .checkout-card {
+        /* ---------- PAYMENT CARD ---------- */
+        .payment-card {
             background: #fff;
             border-radius: 16px;
             padding: 30px;
@@ -170,7 +170,7 @@
             border: 1px solid #eee;
         }
         
-        .checkout-title {
+        .payment-title {
             font-size: 24px;
             font-weight: 800;
             color: #E0006C;
@@ -178,12 +178,12 @@
             text-align: center;
         }
         
-        .checkout-title i {
+        .payment-title i {
             color: #6fcf97;
             margin-right: 8px;
         }
         
-        .checkout-subtitle {
+        .payment-subtitle {
             font-size: 14px;
             color: #999;
             text-align: center;
@@ -216,6 +216,105 @@
         
         .plan-summary .plan-value .highlight {
             color: #E0006C;
+        }
+        
+        /* ---------- TILL DETAILS ---------- */
+        .till-details {
+            background: linear-gradient(135deg, #fce4ec, #f8d7da);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 2px dashed #E0006C;
+        }
+        
+        .till-details .till-icon {
+            font-size: 48px;
+            color: #E0006C;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .till-details .till-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #E0006C;
+            letter-spacing: 3px;
+            background: #fff;
+            padding: 8px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        
+        .till-details .till-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .till-details .till-label {
+            font-size: 13px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .till-details .till-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: #E0006C;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: #fff;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        /* ---------- INSTRUCTIONS ---------- */
+        .instructions {
+            background: #f0f7ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .instructions .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .instructions .step .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #3498db;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .instructions .step .step-text {
+            flex: 1;
+        }
+        
+        .instructions .step .step-text strong {
+            color: #333;
+        }
+        
+        .instructions .step .step-text .highlight-text {
+            color: #E0006C;
+            font-weight: 700;
         }
         
         /* ---------- PAYMENT FORM ---------- */
@@ -302,50 +401,8 @@
             padding-left: 75px;
         }
         
-        /* ---------- INSTRUCTIONS ---------- */
-        .instructions {
-            background: #f0f7ff;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .instructions .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 6px 0;
-            font-size: 14px;
-            color: #555;
-            line-height: 1.5;
-        }
-        
-        .instructions .step .step-num {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #3498db;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        
-        .instructions .step .step-text {
-            flex: 1;
-        }
-        
-        .instructions .step .step-text strong {
-            color: #333;
-        }
-        
-        /* ---------- PAY BUTTON ---------- */
-        .btn-pay {
+        /* ---------- CONFIRM BUTTON ---------- */
+        .btn-confirm {
             width: 100%;
             padding: 16px;
             background: linear-gradient(135deg, #6fcf97, #27ae60);
@@ -362,18 +419,18 @@
             gap: 12px;
         }
         
-        .btn-pay:hover {
+        .btn-confirm:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
         }
         
-        .btn-pay:disabled {
+        .btn-confirm:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
         
-        .btn-pay i {
+        .btn-confirm i {
             font-size: 20px;
         }
         
@@ -543,11 +600,11 @@
         
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 600px) {
-            .checkout-card {
+            .payment-card {
                 padding: 20px;
             }
             
-            .checkout-title {
+            .payment-title {
                 font-size: 20px;
             }
             
@@ -564,6 +621,14 @@
             .header-inner {
                 flex-direction: column;
                 text-align: center;
+            }
+            
+            .till-details .till-number {
+                font-size: 24px;
+            }
+            
+            .till-details .till-name {
+                font-size: 15px;
             }
         }
         
@@ -610,7 +675,7 @@
             <a href="myprofile.html">My Profile</a> &raquo;
             <a href="activate.html">Activate</a> &raquo;
             <a href="checkout.html">Checkout</a> &raquo;
-            <span>MPESA</span>
+            <span>Payment</span>
         </div>
 
         <!-- Contact Banner -->
@@ -622,11 +687,11 @@
             </div>
         </div>
 
-        <!-- Checkout Card -->
-        <div class="checkout-card" id="checkoutCard">
+        <!-- Payment Card -->
+        <div class="payment-card" id="paymentCard">
 
-            <h1 class="checkout-title"><i class="fas fa-mobile-alt"></i> PAY WITH M-PESA</h1>
-            <p class="checkout-subtitle">Enter Your M-Pesa Number Below</p>
+            <h1 class="payment-title"><i class="fas fa-money-bill-wave"></i> Complete Payment</h1>
+            <p class="payment-subtitle">Pay via M-Pesa Till Number to activate your profile</p>
 
             <!-- Plan Summary -->
             <div class="plan-summary" id="planSummary">
@@ -640,21 +705,14 @@
                 </div>
             </div>
 
-            <!-- Payment Form -->
-            <div class="payment-form" id="paymentForm">
-                <div class="form-title">
-                    <i class="fas fa-mobile-alt"></i> M-PESA Payment
-                </div>
-
-                <div class="form-group">
-                    <label>M-Pesa Phone Number <span class="required">*</span></label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-phone"></i>
-                        <span class="phone-prefix-text">+254</span>
-                        <input type="tel" id="phoneNumber" class="phone-input-with-prefix" 
-                               placeholder="722xxxxxx" maxlength="9" required>
-                    </div>
-                </div>
+            <!-- TILL DETAILS -->
+            <div class="till-details">
+                <i class="fas fa-mobile-alt till-icon"></i>
+                <div class="till-label">M-PESA TILL NUMBER</div>
+                <div class="till-number">4159500</div>
+                <div class="till-name">Mercy Chepkemoi</div>
+                <div class="till-label" style="margin-top:8px;">Amount to Pay</div>
+                <div class="till-amount" id="tillAmount">KSh1,300</div>
             </div>
 
             <!-- Instructions -->
@@ -662,42 +720,80 @@
                 <div class="step">
                     <span class="step-num">1</span>
                     <span class="step-text">
-                        Click on <strong>"SEND PAYMENT REQUEST TO PHONE"</strong>.
+                        Open <strong>M-PESA</strong> on your phone
                     </span>
                 </div>
                 <div class="step">
                     <span class="step-num">2</span>
                     <span class="step-text">
-                        Check your phone number for the <strong>M-PESA PIN prompt</strong>.
+                        Select <strong>"Lipa Na M-PESA"</strong> then <strong>"Pay Bill"</strong>
                     </span>
                 </div>
                 <div class="step">
                     <span class="step-num">3</span>
                     <span class="step-text">
-                        Key in your <strong>M-PESA PIN</strong> and submit.
+                        Enter <strong>Till Number</strong>: <span class="highlight-text">4159500</span>
                     </span>
                 </div>
                 <div class="step">
                     <span class="step-num">4</span>
                     <span class="step-text">
-                        Wait for this page to refresh to move you to the next page.
+                        Enter <strong>Account Name</strong>: <span class="highlight-text">Mercy Chepkemoi</span>
+                    </span>
+                </div>
+                <div class="step">
+                    <span class="step-num">5</span>
+                    <span class="step-text">
+                        Enter the <strong>Amount</strong> and your <strong>M-PESA PIN</strong>
+                    </span>
+                </div>
+                <div class="step">
+                    <span class="step-num">6</span>
+                    <span class="step-text">
+                        After payment, click <strong>"I HAVE PAID"</strong> below to submit for admin review
                     </span>
                 </div>
             </div>
 
-            <!-- Pay Button -->
-            <button class="btn-pay" id="payBtn">
-                <span id="payBtnText">SEND PAYMENT REQUEST TO PHONE</span>
-                <span class="loader" id="payLoader"></span>
-                <i class="fas fa-arrow-right" id="payIcon"></i>
+            <!-- Payment Form -->
+            <div class="payment-form" id="paymentForm">
+                <div class="form-title">
+                    <i class="fas fa-user"></i> Your Details
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-phone"></i>
+                        <span class="phone-prefix-text">+254</span>
+                        <input type="tel" id="phoneNumber" class="phone-input-with-prefix" 
+                               placeholder="722xxxxxx" maxlength="9" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>M-PESA Transaction Code <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-receipt"></i>
+                        <input type="text" id="transactionCode" 
+                               placeholder="e.g., QWERTY123" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confirm Button -->
+            <button class="btn-confirm" id="confirmBtn">
+                <span id="confirmBtnText">I HAVE PAID ✓</span>
+                <span class="loader" id="confirmLoader"></span>
+                <i class="fas fa-check-circle" id="confirmIcon"></i>
             </button>
 
             <!-- Success State -->
             <div class="success-state" id="successState">
                 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-                <h3>Payment Successful! 🎉</h3>
-                <p>Your payment has been received and your profile is now pending admin approval.</p>
-                <p style="font-size:13px; color:#999; margin-top:5px;">You will be notified once approved.</p>
+                <h3>Payment Confirmed! 🎉</h3>
+                <p>Your payment has been recorded. Your profile is now pending admin review.</p>
+                <p style="font-size:13px; color:#999; margin-top:5px;">You will be notified once approved by admin.</p>
                 <a href="myprofile.html" class="btn-dashboard">
                     <i class="fas fa-user"></i> Go to My Profile
                 </a>
@@ -750,7 +846,7 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT - MODIFIED TO SEND TO ADMIN
+     JAVASCRIPT - COMPLETE PAYMENT CONFIRMATION
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -760,13 +856,14 @@
             // ============================================================
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toastMessage');
-            const payBtn = document.getElementById('payBtn');
-            const payBtnText = document.getElementById('payBtnText');
-            const payLoader = document.getElementById('payLoader');
-            const payIcon = document.getElementById('payIcon');
+            const confirmBtn = document.getElementById('confirmBtn');
+            const confirmBtnText = document.getElementById('confirmBtnText');
+            const confirmLoader = document.getElementById('confirmLoader');
+            const confirmIcon = document.getElementById('confirmIcon');
             const phoneInput = document.getElementById('phoneNumber');
+            const transactionInput = document.getElementById('transactionCode');
             const successState = document.getElementById('successState');
-            const checkoutCard = document.getElementById('checkoutCard');
+            const paymentCard = document.getElementById('paymentCard');
             const paymentForm = document.getElementById('paymentForm');
             const instructions = document.getElementById('instructions');
 
@@ -797,6 +894,7 @@
             document.getElementById('planNameDisplay').textContent = 
                 (planNames[planData.plan] || planData.plan.toUpperCase()) + ' - ' + planData.days + ' Days';
             document.getElementById('totalAmountDisplay').textContent = 'KSh' + parseInt(planData.price).toLocaleString();
+            document.getElementById('tillAmount').textContent = 'KSh' + parseInt(planData.price).toLocaleString();
 
             console.log('📋 Plan Data:', planData);
 
@@ -819,7 +917,7 @@
             // ============================================================
             // UPDATE PROFILE STATUS IN SUPABASE
             // ============================================================
-            async function updateProfileStatus(userId, plan, days, price) {
+            async function updateProfileStatus(userId, plan, days, price, phone, transactionCode) {
                 try {
                     // Update profile with membership details
                     const { data, error } = await window.supabaseFunctions.supabase
@@ -831,6 +929,8 @@
                             membership_price: parseInt(price),
                             payment_status: 'paid',
                             payment_date: new Date().toISOString(),
+                            payment_phone: '+254' + phone,
+                            payment_transaction: transactionCode,
                             is_active: false,
                             updated_at: new Date().toISOString()
                         })
@@ -842,15 +942,17 @@
                     await window.supabaseFunctions.logActivity(
                         userId,
                         'payment_completed',
-                        `User paid KSh${price} for ${plan.toUpperCase()} plan (${days} days) - Pending admin review`
+                        `User paid KSh${price} for ${plan.toUpperCase()} plan (${days} days) - Transaction: ${transactionCode}`
                     );
 
-                    // Notify admin (this would ideally be a function call to send notification)
-                    console.log('📧 Admin notification: New profile pending review!');
+                    // Notify admin
+                    console.log('📧 Admin notification: New payment received!');
                     console.log('👤 User ID:', userId);
                     console.log('📋 Plan:', plan.toUpperCase());
                     console.log('💰 Amount: KSh' + price);
                     console.log('📅 Duration:', days + ' days');
+                    console.log('📱 Phone: +254' + phone);
+                    console.log('🔑 Transaction:', transactionCode);
 
                     return { success: true };
 
@@ -861,15 +963,23 @@
             }
 
             // ============================================================
-            // PAY NOW BUTTON - MODIFIED TO UPDATE DATABASE
+            // CONFIRM BUTTON - MARK AS PAID
             // ============================================================
-            payBtn.addEventListener('click', function() {
+            confirmBtn.addEventListener('click', function() {
                 const phone = phoneInput.value.trim();
+                const transactionCode = transactionInput.value.trim();
 
                 // Validate phone number
                 if (phone.length < 9) {
-                    showToast('Please enter a valid M-Pesa phone number (e.g., 722xxxxxx)', 'error');
+                    showToast('Please enter a valid phone number (e.g., 722xxxxxx)', 'error');
                     phoneInput.focus();
+                    return;
+                }
+
+                // Validate transaction code
+                if (transactionCode.length < 5) {
+                    showToast('Please enter your M-PESA transaction code', 'error');
+                    transactionInput.focus();
                     return;
                 }
 
@@ -878,18 +988,18 @@
                 if (!session) {
                     showToast('Please login to continue', 'error');
                     setTimeout(function() {
-                        window.location.href = 'login.html?redirect=checkout-mpesa.html';
+                        window.location.href = 'login.html?redirect=payment.html';
                     }, 1500);
                     return;
                 }
 
                 // Show loading
-                payBtn.disabled = true;
-                payBtnText.textContent = 'Processing Payment...';
-                payLoader.classList.add('show');
-                payIcon.style.display = 'none';
+                confirmBtn.disabled = true;
+                confirmBtnText.textContent = 'Processing...';
+                confirmLoader.classList.add('show');
+                confirmIcon.style.display = 'none';
 
-                // Simulate payment processing and update database
+                // Process payment confirmation
                 setTimeout(async function() {
                     try {
                         // Get user ID from URL or session
@@ -905,43 +1015,45 @@
                             userId,
                             planData.plan,
                             planData.days,
-                            planData.price
+                            planData.price,
+                            phone,
+                            transactionCode
                         );
 
                         if (result.success) {
-                            // Hide form, show success
+                            // Hide form and instructions, show success
                             paymentForm.style.display = 'none';
                             instructions.style.display = 'none';
                             successState.classList.add('show');
                             
-                            showToast('✅ Payment successful! Profile sent for admin review.', 'success');
+                            showToast('✅ Payment confirmed! Profile sent for admin review.', 'success');
 
                             // Reset button
-                            payBtn.disabled = false;
-                            payBtnText.textContent = 'SEND PAYMENT REQUEST TO PHONE';
-                            payLoader.classList.remove('show');
-                            payIcon.style.display = 'inline-block';
+                            confirmBtn.disabled = false;
+                            confirmBtnText.textContent = 'I HAVE PAID ✓';
+                            confirmLoader.classList.remove('show');
+                            confirmIcon.style.display = 'inline-block';
 
                         } else {
-                            showToast('❌ Payment failed: ' + result.error, 'error');
+                            showToast('❌ Payment confirmation failed: ' + result.error, 'error');
                             
-                            payBtn.disabled = false;
-                            payBtnText.textContent = 'SEND PAYMENT REQUEST TO PHONE';
-                            payLoader.classList.remove('show');
-                            payIcon.style.display = 'inline-block';
+                            confirmBtn.disabled = false;
+                            confirmBtnText.textContent = 'I HAVE PAID ✓';
+                            confirmLoader.classList.remove('show');
+                            confirmIcon.style.display = 'inline-block';
                         }
 
                     } catch (error) {
                         console.error('❌ Payment error:', error);
                         showToast('An error occurred. Please try again.', 'error');
                         
-                        payBtn.disabled = false;
-                        payBtnText.textContent = 'SEND PAYMENT REQUEST TO PHONE';
-                        payLoader.classList.remove('show');
-                        payIcon.style.display = 'inline-block';
+                        confirmBtn.disabled = false;
+                        confirmBtnText.textContent = 'I HAVE PAID ✓';
+                        confirmLoader.classList.remove('show');
+                        confirmIcon.style.display = 'inline-block';
                     }
 
-                }, 2000);
+                }, 1500);
             });
 
             // ============================================================
@@ -952,7 +1064,7 @@
                 if (!session) {
                     showToast('Please login to continue', 'error');
                     setTimeout(function() {
-                        window.location.href = 'login.html?redirect=checkout-mpesa.html';
+                        window.location.href = 'login.html?redirect=payment.html';
                     }, 1500);
                 }
             }
@@ -979,14 +1091,22 @@
             phoneInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
-                    payBtn.click();
+                    transactionInput.focus();
                 }
             });
 
-            console.log('✅ Checkout MPESA Page Loaded Successfully!');
-            console.log('📋 Plan:', planData.plan);
+            transactionInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    confirmBtn.click();
+                }
+            });
+
+            console.log('✅ Payment Page Loaded Successfully!');
+            console.log('📋 Till Number: 4159500');
+            console.log('👤 Account Name: Mercy Chepkemoi');
             console.log('💰 Amount: KSh' + planData.price);
-            console.log('🔄 After payment, profile sent to admin for review');
+            console.log('🔄 After confirmation, profile sent to admin for review');
 
         });
     </script>
