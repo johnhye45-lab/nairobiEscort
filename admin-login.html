@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Nairobi Raha</title>
+    <title>Admin Login - Nairobi Vibe</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -11,6 +11,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Supabase Config -->
+    <script src="supabase-config.js"></script>
+
     <style>
         /* ============================================================
                    ADMIN LOGIN STYLES
@@ -413,10 +419,10 @@
     <div class="login-card" id="loginCard">
         
         <!-- ============================================================
-             LOGO
+             LOGO - UPDATED TO NAIROBI VIBE
              ============================================================ -->
         <div class="logo">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENR%3C/text%3E%3C/svg%3E" alt="Nairobi Raha">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENV%3C/text%3E%3C/svg%3E" alt="Nairobi Vibe">
             <h1>Admin Login</h1>
             <div class="subtitle">
                 <i class="fas fa-shield-alt lock-icon"></i>
@@ -443,7 +449,7 @@
                 <label>Admin Email <span class="required">*</span></label>
                 <div class="input-wrapper">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" placeholder="Enter admin email" required autocomplete="email" value="admin@nairobiraha.com">
+                    <input type="email" id="email" placeholder="Enter admin email" required autocomplete="email" value="admin@nairobivibe.com">
                 </div>
                 <div class="error-message" id="emailError">Please enter a valid email address</div>
             </div>
@@ -496,7 +502,7 @@
 </div>
 
 <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT - WITH SUPABASE INTEGRATION
      ============================================================ -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -588,9 +594,80 @@
         }
         
         // ============================================================
+        // CHECK SUPABASE CONFIG
+        // ============================================================
+        if (typeof window.supabaseFunctions === 'undefined') {
+            console.warn('⚠️ Supabase functions not loaded. Using localStorage fallback.');
+        } else {
+            console.log('✅ Supabase is loaded');
+        }
+        
+        // ============================================================
+        // ADMIN LOGIN - WITH SUPABASE
+        // ============================================================
+        async function loginAdminWithSupabase(email, password) {
+            try {
+                // First try to login via Supabase Auth
+                const { data: authData, error: authError } = await window.supabaseFunctions.supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+                
+                if (authError) {
+                    // If auth fails, try checking profiles table
+                    console.log('Auth login failed, checking profiles table...');
+                    const { data: profileData, error: profileError } = await window.supabaseFunctions.supabase
+                        .from('profiles')
+                        .select('*')
+                        .eq('email', email)
+                        .eq('role', 'admin')
+                        .single();
+                    
+                    if (profileError || !profileData) {
+                        return { success: false, error: 'Invalid admin credentials' };
+                    }
+                    
+                    // Check if admin is approved
+                    if (profileData.status !== 'approved') {
+                        return { success: false, error: 'Admin account not approved' };
+                    }
+                    
+                    return { success: true, data: profileData };
+                }
+                
+                // Auth successful - get profile
+                const { data: profileData, error: profileError } = await window.supabaseFunctions.supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', authData.user.id)
+                    .single();
+                
+                if (profileError) {
+                    return { success: false, error: 'Admin profile not found' };
+                }
+                
+                // Check if admin
+                if (profileData.role !== 'admin') {
+                    return { success: false, error: 'Not an admin account' };
+                }
+                
+                // Check if approved
+                if (profileData.status !== 'approved') {
+                    return { success: false, error: 'Admin account not approved' };
+                }
+                
+                return { success: true, data: profileData };
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        // ============================================================
         // FORM SUBMISSION - ADMIN AUTHENTICATION
         // ============================================================
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Validate fields
@@ -629,60 +706,63 @@
                 localStorage.removeItem('admin_remember_email');
             }
             
-            // ============================================================
-            // CHECK ADMIN CREDENTIALS
-            // ============================================================
-            setTimeout(function() {
+            try {
+                let result;
                 
-                // Get users from localStorage
-                const users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
+                // Try Supabase first
+                if (typeof window.supabaseFunctions !== 'undefined') {
+                    result = await loginAdminWithSupabase(email.value, password.value);
+                }
                 
-                // Find admin user
-                const admin = users.find(u => 
-                    u.email === email.value && 
-                    u.password === password.value && 
-                    u.role === 'admin'
-                );
-                
-                if (admin) {
-                    // Check if admin is approved
-                    if (admin.status === 'pending') {
-                        showToast('Your admin account is pending approval.', 'error');
-                        resetButton();
-                        return;
+                // If Supabase fails, try localStorage fallback
+                if (!result || !result.success) {
+                    const users = JSON.parse(localStorage.getItem('nairobi_vibe_users') || '[]');
+                    const admin = users.find(u => 
+                        u.email === email.value && 
+                        u.password === password.value && 
+                        u.role === 'admin'
+                    );
+                    
+                    if (admin) {
+                        result = { success: true, data: admin };
+                    } else {
+                        result = { success: false, error: 'Invalid admin credentials' };
                     }
+                }
+                
+                if (result.success) {
+                    const admin = result.data;
                     
-                    // Admin login successful
-                    showToast('Welcome Admin! Redirecting to dashboard... 🎉', 'success');
-                    
-                    // Store admin session
+                    // Store admin session with correct key
                     const sessionData = {
+                        id: admin.id,
                         email: admin.email,
-                        name: admin.fullName,
+                        name: admin.full_name || admin.fullName || 'Admin',
                         role: 'admin',
                         isAdmin: true,
                         loggedIn: true,
                         loginTime: new Date().toISOString()
                     };
-                    localStorage.setItem('nairobi_raha_admin_session', JSON.stringify(sessionData));
                     
-                    // Redirect to admin dashboard
+                    // Use the correct session key
+                    localStorage.setItem('nairobi_vibe_admin_session', JSON.stringify(sessionData));
+                    
+                    showToast('Welcome Admin! Redirecting to dashboard... 🎉', 'success');
+                    
                     setTimeout(function() {
                         window.location.href = 'admin-dashboard.html';
                     }, 1000);
                     
                 } else {
-                    // Check if email exists but not admin
-                    const userExists = users.some(u => u.email === email.value);
-                    if (userExists) {
-                        showToast('This account is not an admin account.', 'error');
-                    } else {
-                        showToast('Invalid admin credentials. Please try again.', 'error');
-                    }
+                    showToast(result.error || 'Invalid admin credentials.', 'error');
                     resetButton();
                 }
                 
-            }, 1500);
+            } catch (error) {
+                console.error('Login error:', error);
+                showToast('An error occurred. Please try again.', 'error');
+                resetButton();
+            }
         });
         
         // ============================================================
@@ -723,35 +803,81 @@
         });
         
         // ============================================================
-        // ENSURE ADMIN USER EXISTS
+        // CREATE DEFAULT ADMIN IN SUPABASE
         // ============================================================
-        function ensureAdminUser() {
-            let users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
-            const adminExists = users.some(u => u.role === 'admin' && u.status === 'approved');
-            
-            if (!adminExists) {
-                // Create default admin if none exists
-                users.push({
-                    id: 'admin_' + Date.now(),
-                    fullName: 'Admin User',
-                    email: 'admin@nairobiraha.com',
-                    phone: '0712345678',
-                    password: 'Admin@123',
-                    role: 'admin',
-                    location: 'Nairobi CBD',
-                    status: 'approved',
-                    createdAt: new Date().toISOString()
-                });
-                localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
-                console.log('✅ Default admin created: admin@nairobiraha.com / Admin@123');
+        async function createDefaultAdmin() {
+            try {
+                if (typeof window.supabaseFunctions === 'undefined') return;
+                
+                // Check if admin exists
+                const { data, error } = await window.supabaseFunctions.supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('email', 'admin@nairobivibe.com')
+                    .single();
+                
+                if (!data) {
+                    console.log('Creating default admin in Supabase...');
+                    
+                    // Create admin user via Supabase Auth
+                    const { data: authData, error: authError } = await window.supabaseFunctions.supabase.auth.signUp({
+                        email: 'admin@nairobivibe.com',
+                        password: 'Admin@123',
+                        options: {
+                            data: {
+                                full_name: 'Admin User',
+                                role: 'admin',
+                                status: 'approved'
+                            }
+                        }
+                    });
+                    
+                    if (authError) {
+                        console.warn('Could not create admin auth user:', authError.message);
+                        return;
+                    }
+                    
+                    // Insert into profiles table
+                    const { error: profileError } = await window.supabaseFunctions.supabase
+                        .from('profiles')
+                        .insert([{
+                            id: authData.user.id,
+                            user_id: authData.user.id,
+                            full_name: 'Admin User',
+                            email: 'admin@nairobivibe.com',
+                            phone: '0712345678',
+                            role: 'admin',
+                            location: 'Nairobi CBD',
+                            status: 'approved',
+                            is_active: true,
+                            created_at: new Date().toISOString()
+                        }]);
+                    
+                    if (profileError) {
+                        console.warn('Could not create admin profile:', profileError.message);
+                    } else {
+                        console.log('✅ Default admin created in Supabase!');
+                        console.log('📧 Email: admin@nairobivibe.com');
+                        console.log('🔑 Password: Admin@123');
+                    }
+                } else {
+                    console.log('✅ Admin already exists in Supabase');
+                }
+            } catch (error) {
+                console.log('Admin creation skipped:', error.message);
             }
         }
         
-        ensureAdminUser();
+        // ============================================================
+        // INIT
+        // ============================================================
+        // Create default admin if needed
+        setTimeout(createDefaultAdmin, 500);
         
         console.log('✅ Admin Login Page Loaded');
-        console.log('📧 Default Admin: admin@nairobiraha.com');
+        console.log('📧 Default Admin: admin@nairobivibe.com');
         console.log('🔑 Default Password: Admin@123');
+        console.log('🔐 Using session key: nairobi_vibe_admin_session');
         
     });
 </script>
