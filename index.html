@@ -20,7 +20,7 @@
 
     <style>
         /* ============================================================
-                   MOBILE-FIRST STYLES
+                   HOMEPAGE STYLES - UPGRADED & HOT
                    ============================================================ */
         
         * {
@@ -37,81 +37,51 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        a {
-            color: #E0006C;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .clear { clear: both; }
+        a { color: #E0006C; text-decoration: none; transition: all 0.3s ease; }
         .text-center { text-align: center; }
         
         /* ---------- BUTTONS ---------- */
         .btn-primary {
             background: linear-gradient(135deg, #E0006C, #b30057);
             color: #fff;
-            padding: 8px 18px;
-            border: none;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .btn-primary:active {
-            transform: scale(0.95);
-        }
-        
-        .btn-pink {
-            background: #FE5ACB;
-            color: #fff;
-            padding: 8px 18px;
+            padding: 10px 22px;
             border: none;
             border-radius: 25px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-block;
         }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(224,0,108,0.3); }
         
-        .btn-pink:active {
-            transform: scale(0.95);
-        }
-        
-        .btn-outline-white {
-            background: transparent;
-            color: #fff;
-            padding: 8px 18px;
-            border: 2px solid #fff;
+        .btn-gold {
+            background: linear-gradient(135deg, #FFD700, #f39c12);
+            color: #333;
+            padding: 10px 22px;
+            border: none;
             border-radius: 25px;
-            font-weight: 600;
-            font-size: 13px;
+            font-weight: 700;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-block;
         }
-        
-        .btn-outline-white:active {
-            background: rgba(255,255,255,0.2);
-        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.4); }
         
         /* ---------- TOP BANNER ---------- */
         .top-banner {
-            background: #ffff00;
+            background: linear-gradient(90deg, #ffff00, #ffcc00);
             padding: 6px 10px;
             text-align: center;
-            color: #ff0000;
+            color: #d60435;
             font-weight: 700;
             font-size: 11px;
             letter-spacing: 0.3px;
+            animation: slideDown 0.5s ease;
         }
-        
-        .top-banner i {
-            margin: 0 4px;
-        }
+        @keyframes slideDown { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }
+        .top-banner i { margin: 0 4px; }
         
         /* ---------- HEADER ---------- */
         .header {
@@ -122,7 +92,6 @@
             z-index: 1000;
             box-shadow: 0 2px 15px rgba(0,0,0,0.15);
         }
-        
         .header-inner {
             max-width: 1400px;
             margin: 0 auto;
@@ -132,35 +101,14 @@
             flex-wrap: wrap;
             gap: 8px;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
+        .logo { display: flex; align-items: center; gap: 8px; }
         .logo-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: 800;
-            color: #E0006C;
+            width: 40px; height: 40px; border-radius: 10px; background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: 800; color: #E0006C;
         }
-        
-        .logo-text {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 800;
-        }
-        
-        .logo-text span {
-            color: #FE5ACB;
-        }
+        .logo-text { color: #fff; font-size: 18px; font-weight: 800; }
+        .logo-text span { color: #FE5ACB; }
         
         .nav-menu {
             display: none;
@@ -169,28 +117,13 @@
             padding: 12px 0;
             gap: 2px;
         }
-        
-        .nav-menu.show {
-            display: flex;
-        }
-        
-        .nav-menu > li {
-            list-style: none;
-            width: 100%;
-        }
-        
+        .nav-menu.show { display: flex; }
+        .nav-menu > li { list-style: none; width: 100%; }
         .nav-menu > li > a {
-            color: #fff;
-            font-weight: 600;
-            padding: 8px 12px;
-            display: block;
-            border-radius: 10px;
-            font-size: 14px;
+            color: #fff; font-weight: 600; padding: 8px 12px;
+            display: block; border-radius: 10px; font-size: 14px;
         }
-        
-        .nav-menu > li > a:active {
-            background: rgba(255,255,255,0.15);
-        }
+        .nav-menu > li > a:active { background: rgba(255,255,255,0.15); }
         
         .user-menu {
             display: flex;
@@ -198,159 +131,86 @@
             gap: 5px;
             flex-wrap: wrap;
         }
-        
         .user-menu a {
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 12px;
-            transition: all 0.3s ease;
+            color: #fff; padding: 6px 12px; border-radius: 25px;
+            font-weight: 600; font-size: 12px; transition: all 0.3s ease;
         }
-        
-        .user-menu .btn-register {
-            background: #fe5acb;
-        }
-        
-        .user-menu .btn-login {
-            background: rgba(255,255,255,0.2);
-        }
-        
-        .user-menu .btn-profile {
-            background: #fff;
-            color: #E0006C;
-        }
-        
-        .user-menu .btn-profile i {
-            margin-right: 4px;
-        }
-        
+        .user-menu .btn-register { background: #fe5acb; }
+        .user-menu .btn-login { background: rgba(255,255,255,0.2); }
+        .user-menu .btn-profile { background: #fff; color: #E0006C; }
+        .user-menu .btn-profile i { margin-right: 4px; }
         .user-menu .btn-create-profile {
-            background: #FFD700;
-            color: #E0006C;
-            font-weight: 700;
+            background: #FFD700; color: #E0006C; font-weight: 700;
             animation: pulse-gold 2s infinite;
         }
-        
-        .user-menu .btn-create-profile i {
-            margin-right: 4px;
-        }
-        
+        .user-menu .btn-create-profile i { margin-right: 4px; }
         @keyframes pulse-gold {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-        
-        .user-menu .btn-create-profile:active {
-            transform: scale(0.95);
-        }
-        
         .user-menu .icon-btn {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
+            width: 35px; height: 35px; border-radius: 50%;
             background: rgba(255,255,255,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            font-size: 14px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0; font-size: 14px;
         }
-        
-        .user-menu .icon-btn:active {
-            background: rgba(255,255,255,0.3);
-        }
-        
+        .user-menu .icon-btn:active { background: rgba(255,255,255,0.3); }
         .hamburger {
-            display: block;
-            color: #fff;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 6px 12px;
-            background: rgba(255,255,255,0.12);
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            display: block; color: #fff; font-size: 22px; cursor: pointer;
+            padding: 6px 12px; background: rgba(255,255,255,0.12); border-radius: 10px;
         }
+        .hamburger:active { background: rgba(255,255,255,0.25); }
         
-        .hamburger:active {
-            background: rgba(255,255,255,0.25);
-        }
-        
-        /* ---------- HERO SECTION WITH IMAGE ---------- */
+        /* ---------- HERO SECTION ---------- */
         .hero-section {
             background: linear-gradient(135deg, #E0006C, #8b0a2a);
             border-radius: 16px;
-            padding: 30px 20px;
-            margin-bottom: 12px;
+            padding: 35px 25px;
+            margin-bottom: 15px;
             color: #fff;
             position: relative;
             overflow: hidden;
-            min-height: 200px;
+            min-height: 220px;
             display: flex;
             align-items: center;
         }
-        
-        .hero-section .hero-content {
-            flex: 1;
-            z-index: 2;
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
         }
-        
+        .hero-section .hero-content { flex: 1; z-index: 2; position: relative; }
         .hero-section .hero-image {
             display: none;
             z-index: 1;
-            opacity: 0.15;
+            opacity: 0.1;
+            font-size: 100px;
         }
-        
-        .hero-section h1 {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 4px;
-            line-height: 1.2;
-        }
-        
-        .hero-section h1 .highlight {
-            color: #FFD700;
-        }
-        
-        .hero-section p {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 12px;
-        }
-        
+        .hero-section h1 { font-size: 24px; font-weight: 800; margin-bottom: 4px; line-height: 1.2; }
+        .hero-section h1 .highlight { color: #FFD700; }
+        .hero-section p { font-size: 14px; opacity: 0.9; margin-bottom: 14px; }
         .hero-section .search-box {
             display: flex;
             max-width: 500px;
             gap: 8px;
         }
-        
         .hero-section .search-box input {
-            flex: 1;
-            padding: 10px 16px;
-            border: none;
-            border-radius: 25px;
-            font-size: 14px;
-            font-family: 'Open Sans', sans-serif;
-            outline: none;
+            flex: 1; padding: 12px 18px; border: none; border-radius: 25px;
+            font-size: 14px; font-family: 'Open Sans', sans-serif; outline: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
         .hero-section .search-box button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            background: #FFD700;
-            color: #E0006C;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 12px 24px; border: none; border-radius: 25px;
+            background: #FFD700; color: #E0006C; font-weight: 700;
+            font-size: 14px; cursor: pointer; transition: all 0.3s ease;
         }
-        
-        .hero-section .search-box button:active {
-            transform: scale(0.95);
-        }
-        
+        .hero-section .search-box button:hover { transform: scale(1.05); }
         .hero-section .hero-badge {
             display: inline-block;
             background: rgba(255,255,255,0.2);
@@ -365,73 +225,45 @@
         /* ---------- STATS BAR ---------- */
         .stats-bar {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 12px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
         }
-        
         .stats-bar .stat-item {
             background: #fff;
             border-radius: 12px;
-            padding: 12px 8px;
+            padding: 14px 8px;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
-        
-        .stats-bar .stat-item .number {
-            font-size: 20px;
-            font-weight: 800;
-            color: #E0006C;
-        }
-        
-        .stats-bar .stat-item .label {
-            font-size: 10px;
-            color: #999;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        .stats-bar .stat-item:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .stats-bar .stat-item .number { font-size: 22px; font-weight: 800; color: #E0006C; }
+        .stats-bar .stat-item .label { font-size: 10px; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
         
         /* ---------- SECTION BOX ---------- */
         .section-box {
             background: #fff;
             border-radius: 12px;
-            padding: 16px;
+            padding: 18px;
             margin-bottom: 12px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        
         .section-header {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
-        
         .section-header .icon-circle {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
+            width: 34px; height: 34px; border-radius: 50%;
             background: #fce4ec;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #E0006C;
-            font-size: 14px;
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            color: #E0006C; font-size: 14px; flex-shrink: 0;
         }
-        
-        .section-header h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #333;
-        }
-        
+        .section-header h3 { font-size: 16px; font-weight: 700; color: #333; }
         .section-header .view-all {
-            margin-left: auto;
-            font-size: 12px;
-            font-weight: 600;
-            color: #E0006C;
+            margin-left: auto; font-size: 12px; font-weight: 600; color: #E0006C;
         }
         
         /* ---------- LOCATION TAGS ---------- */
@@ -440,44 +272,27 @@
             flex-wrap: wrap;
             gap: 6px;
         }
-        
         .location-tags .tag {
             background: #f5f5f5;
-            padding: 4px 12px;
-            border-radius: 15px;
+            padding: 5px 14px;
+            border-radius: 20px;
             font-size: 11px;
             color: #555;
             transition: all 0.3s ease;
             cursor: pointer;
             border: 1px solid #eee;
         }
-        
-        .location-tags .tag:active {
-            background: #E0006C;
-            color: #fff;
-            border-color: #E0006C;
-        }
-        
-        .location-tags .tag i {
-            margin-right: 3px;
-            font-size: 9px;
-            color: #E0006C;
-        }
-        
-        .location-tags .tag:active i {
-            color: #fff;
-        }
+        .location-tags .tag:hover { background: #E0006C; color: #fff; border-color: #E0006C; }
+        .location-tags .tag i { margin-right: 3px; font-size: 9px; color: #E0006C; }
+        .location-tags .tag:hover i { color: #fff; }
         
         /* ---------- COUNTY & TOWN GRID ---------- */
-        .county-grid,
-        .town-grid {
+        .county-grid, .town-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 6px;
         }
-        
-        .county-grid .county-item,
-        .town-grid .town-item {
+        .county-grid .county-item, .town-grid .town-item {
             background: #f8f9fa;
             padding: 8px 10px;
             border-radius: 8px;
@@ -489,50 +304,99 @@
             cursor: pointer;
             border: 1px solid #eee;
         }
-        
-        .county-grid .county-item:active,
-        .town-grid .town-item:active {
-            background: #E0006C;
-            color: #fff;
-            border-color: #E0006C;
+        .county-grid .county-item:hover, .town-grid .town-item:hover {
+            background: #E0006C; color: #fff; border-color: #E0006C;
         }
+        .county-grid .county-item i, .town-grid .town-item i {
+            color: #E0006C; margin-right: 4px; font-size: 11px;
+        }
+        .county-grid .county-item:hover i, .town-grid .town-item:hover i { color: #fff; }
         
-        .county-grid .county-item i,
-        .town-grid .town-item i {
+        /* ---------- ESCORT GRID ---------- */
+        .escort-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+        }
+        .escort-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .escort-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0,0,0,0.12); }
+        .escort-card .card-image {
+            height: 180px;
+            background: linear-gradient(135deg, #fce4ec, #f8d7da);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
             color: #E0006C;
-            margin-right: 4px;
-            font-size: 11px;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .county-grid .county-item:active i,
-        .town-grid .town-item:active i {
+        .escort-card .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .escort-card .card-badges {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .escort-card .card-badges .badge {
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
             color: #fff;
         }
+        .badge-vip { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .badge-prime { background: linear-gradient(135deg, #007bff, #0069d9); }
+        .badge-premium { background: linear-gradient(135deg, #E0006C, #b30057); }
+        .badge-verified { background: #27ae60; }
+        .badge-new { background: #3498db; }
+        
+        .escort-card .card-info { padding: 12px 14px; }
+        .escort-card .card-info .name { font-weight: 700; font-size: 14px; color: #333; }
+        .escort-card .card-info .location { font-size: 12px; color: #888; }
+        .escort-card .card-info .location i { color: #E0006C; margin-right: 2px; font-size: 10px; }
+        .escort-card .card-info .meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 11px;
+            color: #999;
+        }
+        .escort-card .card-info .meta .rate { color: #E0006C; font-weight: 700; }
+        
+        /* ---------- LOADING SPINNER ---------- */
+        .loading-spinner {
+            text-align: center;
+            padding: 30px 0;
+            grid-column: 1 / -1;
+        }
+        .loading-spinner i { font-size: 30px; color: #E0006C; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         /* ---------- EMPTY STATE ---------- */
         .escort-grid-empty {
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             color: #999;
+            grid-column: 1 / -1;
         }
-        
-        .escort-grid-empty .empty-icon {
-            font-size: 56px;
-            color: #f0f0f0;
-            margin-bottom: 10px;
-            display: block;
-        }
-        
-        .escort-grid-empty h4 {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 4px;
-        }
-        
-        .escort-grid-empty p {
-            font-size: 13px;
-            color: #999;
-        }
+        .escort-grid-empty .empty-icon { font-size: 56px; color: #f0f0f0; margin-bottom: 10px; display: block; }
+        .escort-grid-empty h4 { font-size: 16px; color: #666; margin-bottom: 4px; }
+        .escort-grid-empty p { font-size: 13px; color: #999; }
         
         /* ---------- FOOTER ---------- */
         .footer {
@@ -541,7 +405,6 @@
             padding: 30px 15px 15px;
             margin-top: 20px;
         }
-        
         .footer-inner {
             max-width: 1400px;
             margin: 0 auto;
@@ -549,24 +412,9 @@
             grid-template-columns: 1fr;
             gap: 20px;
         }
-        
-        .footer-col h4 {
-            color: #FE5ACB;
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
-        
-        .footer-col p {
-            font-size: 13px;
-            line-height: 1.6;
-            color: #aaa;
-        }
-        
-        .footer-col a {
-            color: #FE5ACB;
-            font-size: 13px;
-        }
-        
+        .footer-col h4 { color: #FE5ACB; font-size: 15px; margin-bottom: 8px; }
+        .footer-col p { font-size: 13px; line-height: 1.6; color: #aaa; }
+        .footer-col a { color: #FE5ACB; font-size: 13px; }
         .footer-bottom {
             max-width: 1400px;
             margin: 20px auto 0;
@@ -576,32 +424,16 @@
             font-size: 11px;
             color: #666;
         }
-        
         .footer-bottom .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 10px;
+            display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;
         }
-        
         .footer-bottom .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #2a1a3a;
-            color: #FE5ACB;
-            font-size: 16px;
+            display: flex; align-items: center; justify-content: center;
+            width: 38px; height: 38px; border-radius: 50%;
+            background: #2a1a3a; color: #FE5ACB; font-size: 16px;
             transition: all 0.3s ease;
         }
-        
-        .footer-bottom .social-icons a:active {
-            background: #FE5ACB;
-            color: #1a0528;
-            transform: scale(0.95);
-        }
+        .footer-bottom .social-icons a:hover { background: #FE5ACB; color: #1a0528; }
         
         /* ---------- WHATSAPP BUTTON ---------- */
         .whatsapp-float {
@@ -609,25 +441,21 @@
             bottom: 20px;
             right: 20px;
             z-index: 9999;
+            animation: bounceIn 0.6s ease;
         }
-        
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0); }
+            60% { transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
         .whatsapp-float a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: #25d366;
-            color: #fff;
-            font-size: 30px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            display: flex; align-items: center; justify-content: center;
+            width: 55px; height: 55px; border-radius: 50%;
+            background: #25d366; color: #fff; font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
             transition: all 0.3s ease;
         }
-        
-        .whatsapp-float a:active {
-            transform: scale(0.9);
-        }
+        .whatsapp-float a:hover { transform: scale(1.1); }
         
         /* ---------- TOAST ---------- */
         .toast {
@@ -635,140 +463,56 @@
             top: 70px;
             left: 50%;
             transform: translateX(-50%) translateY(-20px);
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 12px 24px;
+            border-radius: 12px;
             color: #fff;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             opacity: 0;
             transition: all 0.4s ease;
             z-index: 9999;
             max-width: 90%;
             text-align: center;
-            pointer-events: none;
         }
-        
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
         .toast.success { background: #27ae60; }
         .toast.error { background: #e74c3c; }
         .toast.info { background: #3498db; }
         
         /* ---------- RESPONSIVE ---------- */
         @media (min-width: 600px) {
-            .hero-section {
-                padding: 40px 30px;
-                min-height: 250px;
-            }
-            
-            .hero-section h1 {
-                font-size: 28px;
-            }
-            
-            .hero-section p {
-                font-size: 16px;
-            }
-            
-            .stats-bar .stat-item .number {
-                font-size: 24px;
-            }
+            .hero-section { padding: 40px 30px; min-height: 250px; }
+            .hero-section h1 { font-size: 28px; }
+            .hero-section p { font-size: 16px; }
+            .escort-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        
         @media (min-width: 768px) {
-            .footer-inner {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .hero-section h1 {
-                font-size: 32px;
-            }
-            
-            .hero-section .hero-image {
-                display: block;
-                position: absolute;
-                right: 20px;
-                top: 50%;
-                transform: translateY(-50%);
-                font-size: 120px;
-                opacity: 0.12;
-            }
-            
-            .county-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
+            .footer-inner { grid-template-columns: repeat(2, 1fr); }
+            .hero-section h1 { font-size: 32px; }
+            .hero-section .hero-image { display: block; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 120px; opacity: 0.1; }
+            .escort-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        
         @media (min-width: 992px) {
-            .nav-menu {
-                display: flex !important;
-                flex-direction: row;
-                width: auto;
-                padding: 0;
-                gap: 2px;
-            }
-            
-            .nav-menu > li {
-                width: auto;
-            }
-            
-            .nav-menu > li > a {
-                padding: 8px 12px;
-                font-size: 13px;
-            }
-            
-            .hamburger {
-                display: none;
-            }
-            
-            .hero-section {
-                padding: 50px 40px;
-                min-height: 280px;
-            }
-            
-            .hero-section h1 {
-                font-size: 38px;
-            }
-            
-            .hero-section .hero-image {
-                font-size: 160px;
-            }
-            
-            .county-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            }
-            
-            .town-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            }
-            
-            .stats-bar {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            .nav-menu { display: flex !important; flex-direction: row; width: auto; padding: 0; gap: 2px; }
+            .nav-menu > li { width: auto; }
+            .nav-menu > li > a { padding: 8px 12px; font-size: 13px; }
+            .hamburger { display: none; }
+            .hero-section { padding: 50px 40px; min-height: 280px; }
+            .hero-section h1 { font-size: 38px; }
+            .hero-section .hero-image { font-size: 160px; }
+            .stats-bar { grid-template-columns: repeat(4, 1fr); }
+            .escort-grid { grid-template-columns: repeat(4, 1fr); }
         }
-        
         @media (min-width: 1200px) {
-            .footer-inner {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            .footer-inner { grid-template-columns: repeat(4, 1fr); }
+            .escort-grid { grid-template-columns: repeat(5, 1fr); }
         }
         
         /* ---------- SCROLLBAR ---------- */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #E0006C;
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #E0006C; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -787,13 +531,11 @@
      ============================================================ -->
 <header class="header">
     <div class="header-inner">
-        <!-- Logo -->
         <div class="logo">
             <div class="logo-img">NV</div>
             <span class="logo-text">Nairobi <span>Vibe</span></span>
         </div>
         
-        <!-- Navigation -->
         <ul class="nav-menu" id="navMenu">
             <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="#"><i class="fas fa-female"></i> Escorts</a></li>
@@ -803,13 +545,10 @@
             <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
         
-        <!-- User Menu -->
         <div class="user-menu">
-            <!-- Show these when NOT logged in -->
             <a href="signup.html" class="btn-register" id="registerBtn"><i class="fas fa-user-plus"></i> Register</a>
             <a href="login.html" class="btn-login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</a>
             
-            <!-- Show these when logged in (hidden by default) -->
             <a href="myprofile.html" class="btn-create-profile" id="createProfileBtn" style="display:none;">
                 <i class="fas fa-pen-fancy"></i> Create Profile
             </a>
@@ -831,10 +570,10 @@
 <!-- ============================================================
      MAIN CONTENT
      ============================================================ -->
-<div class="main-content">
+<div class="main-content" style="max-width:1400px; margin:0 auto; padding:10px 12px;">
 
     <!-- ============================================================
-         HERO SECTION - Find Kenyan Escorts Near You
+         HERO SECTION
          ============================================================ -->
     <section class="hero-section">
         <div class="hero-content">
@@ -858,15 +597,15 @@
          ============================================================ -->
     <div class="stats-bar">
         <div class="stat-item">
-            <div class="number">500+</div>
+            <div class="number" id="statEscorts">0</div>
             <div class="label">Escorts</div>
         </div>
         <div class="stat-item">
-            <div class="number">50+</div>
+            <div class="number" id="statLocations">50+</div>
             <div class="label">Locations</div>
         </div>
         <div class="stat-item">
-            <div class="number">100%</div>
+            <div class="number" id="statVerified">100%</div>
             <div class="label">Verified</div>
         </div>
         <div class="stat-item">
@@ -876,7 +615,7 @@
     </div>
 
     <!-- ============================================================
-         LOCATION TAGS - All Nairobi Areas
+         LOCATION TAGS
          ============================================================ -->
     <section class="section-box">
         <div class="section-header">
@@ -1047,7 +786,7 @@
     </section>
 
     <!-- ============================================================
-         ESCORT PROFILES (Empty State - No Users Yet)
+         ESCORT PROFILES - DYNAMIC
          ============================================================ -->
     <section class="section-box">
         <div class="section-header">
@@ -1055,14 +794,12 @@
             <h3>Available Escorts</h3>
             <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="escort-grid-empty">
-            <i class="fas fa-users empty-icon"></i>
-            <h4>No Escorts Listed Yet</h4>
-            <p>Be the first to create a profile and get listed on Nairobi Vibe!</p>
-            <br>
-            <a href="myprofile.html" class="btn-primary" style="padding:10px 30px; font-size:14px;">
-                <i class="fas fa-pen-fancy"></i> Create Your Profile Now
-            </a>
+        <div class="escort-grid" id="escortGrid">
+            <!-- Escorts will be dynamically loaded here -->
+            <div class="loading-spinner" id="loadingSpinner">
+                <i class="fas fa-spinner"></i>
+                <p style="color:#999; font-size:13px; margin-top:8px;">Loading escorts...</p>
+            </div>
         </div>
     </section>
 
@@ -1073,14 +810,9 @@
      ============================================================ -->
 <footer class="footer">
     <div class="footer-inner">
-        
         <div class="footer-col">
             <h4><i class="fas fa-crown" style="color:#f39c12;"></i> Nairobi Vibe</h4>
-            <p>
-                Nairobi Vibe offers an exciting way for both men and women to meet and interact freely. 
-                We provide a platform where escorts listed on this website are willing to offer services 
-                to those seeking the same.
-            </p>
+            <p>Nairobi Vibe offers an exciting way for both men and women to meet and interact freely. We provide a platform where escorts listed on this website are willing to offer services to those seeking the same.</p>
             <br>
             <p>
                 <i class="fas fa-phone" style="color:#FE5ACB;"></i> +254 712 831 606<br>
@@ -1088,7 +820,6 @@
                 <i class="fas fa-map-marker-alt" style="color:#FE5ACB;"></i> Nairobi, Kenya
             </p>
         </div>
-        
         <div class="footer-col">
             <h4><i class="fas fa-link"></i> Quick Links</h4>
             <ul style="list-style:none;">
@@ -1100,7 +831,6 @@
                 <li style="padding:4px 0;"><a href="#"><i class="fas fa-chevron-right" style="font-size:9px;"></i> Contact Us</a></li>
             </ul>
         </div>
-        
         <div class="footer-col">
             <h4><i class="fas fa-handshake"></i> Partner Sites</h4>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:3px 15px;">
@@ -1114,26 +844,17 @@
                 <a href="#">Nairobi Call Girls</a>
             </div>
         </div>
-        
         <div class="footer-col">
             <h4><i class="fas fa-info-circle"></i> About</h4>
-            <p>
-                Nairobi Vibe connects clients with verified escorts across Nairobi and Kenya. 
-                Featuring female, male, couple, gay, and transsexual escort listings.
-            </p>
+            <p>Nairobi Vibe connects clients with verified escorts across Nairobi and Kenya. Featuring female, male, couple, gay, and transsexual escort listings.</p>
             <br>
             <p>
-                <i class="fas fa-shield-alt" style="color:#FE5ACB;"></i> 
-                <strong>100% Verified</strong><br>
-                <i class="fas fa-lock" style="color:#FE5ACB;"></i> 
-                <strong>Secure &amp; Discreet</strong><br>
-                <i class="fas fa-clock" style="color:#FE5ACB;"></i> 
-                <strong>Available 24/7</strong>
+                <i class="fas fa-shield-alt" style="color:#FE5ACB;"></i> <strong>100% Verified</strong><br>
+                <i class="fas fa-lock" style="color:#FE5ACB;"></i> <strong>Secure &amp; Discreet</strong><br>
+                <i class="fas fa-clock" style="color:#FE5ACB;"></i> <strong>Available 24/7</strong>
             </p>
         </div>
-        
     </div>
-    
     <div class="footer-bottom">
         <div class="social-icons">
             <a href="#" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
@@ -1181,12 +902,16 @@
         const createProfileBtn = document.getElementById('createProfileBtn');
         const profileBtn = document.getElementById('profileBtn');
         const logoutBtn = document.getElementById('logoutBtn');
+        const escortGrid = document.getElementById('escortGrid');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const statEscorts = document.getElementById('statEscorts');
         
         // ============================================================
         // CHECK SUPABASE CONFIG
         // ============================================================
         if (typeof window.supabaseFunctions === 'undefined') {
             console.warn('⚠️ Supabase functions not loaded');
+            showToast('System error. Please refresh the page.', 'error');
         } else {
             console.log('✅ Supabase is loaded');
         }
@@ -1198,7 +923,6 @@
             const session = localStorage.getItem('nairobi_vibe_session');
             
             if (session) {
-                // User is logged in - show profile and logout
                 if (registerBtn) registerBtn.style.display = 'none';
                 if (loginBtn) loginBtn.style.display = 'none';
                 if (createProfileBtn) createProfileBtn.style.display = 'inline-block';
@@ -1210,11 +934,12 @@
                     if (profileBtn) {
                         profileBtn.innerHTML = '<i class="fas fa-user"></i> ' + (userData.name || 'My Profile');
                     }
+                    // Check if user already has a profile
+                    checkUserProfile(userData.id);
                 } catch (e) {
                     console.log('Session parse error');
                 }
             } else {
-                // User is not logged in - show register and login
                 if (registerBtn) registerBtn.style.display = 'inline-block';
                 if (loginBtn) loginBtn.style.display = 'inline-block';
                 if (createProfileBtn) createProfileBtn.style.display = 'none';
@@ -1223,8 +948,142 @@
             }
         }
         
-        // Run on load
-        checkSession();
+        // ============================================================
+        // CHECK IF USER HAS A PROFILE
+        // ============================================================
+        async function checkUserProfile(userId) {
+            try {
+                const { data, error } = await window.supabaseFunctions.supabase
+                    .from('profiles')
+                    .select('id, status')
+                    .eq('user_id', userId)
+                    .single();
+                
+                if (data) {
+                    // User already has a profile - hide "Create Profile" button
+                    if (createProfileBtn) createProfileBtn.style.display = 'none';
+                }
+            } catch (error) {
+                // No profile found - keep "Create Profile" button visible
+                console.log('No profile found for user');
+            }
+        }
+        
+        // ============================================================
+        // LOAD ESCORTS FROM SUPABASE (ONLY APPROVED)
+        // ============================================================
+        async function loadEscorts(searchTerm = '') {
+            try {
+                let query = window.supabaseFunctions.supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('status', 'approved')
+                    .eq('is_active', true)
+                    .order('created_at', { ascending: false });
+                
+                if (searchTerm) {
+                    query = query.or(`full_name.ilike.%${searchTerm}%,location.ilike.%${searchTerm}%,area.ilike.%${searchTerm}%`);
+                }
+                
+                const { data, error } = await query;
+                
+                if (error) throw error;
+                
+                const escorts = data || [];
+                renderEscorts(escorts);
+                
+                // Update stats
+                if (statEscorts) statEscorts.textContent = escorts.length + '+';
+                
+                console.log(`✅ Loaded ${escorts.length} approved escorts`);
+                return escorts;
+                
+            } catch (error) {
+                console.error('❌ Error loading escorts:', error);
+                showToast('Error loading escorts. Please refresh.', 'error');
+                renderEscorts([]);
+            }
+        }
+        
+        // ============================================================
+        // RENDER ESCORT CARDS
+        // ============================================================
+        function renderEscorts(escorts) {
+            // Remove loading spinner
+            if (loadingSpinner) loadingSpinner.style.display = 'none';
+            
+            if (!escorts || escorts.length === 0) {
+                escortGrid.innerHTML = `
+                    <div class="escort-grid-empty">
+                        <i class="fas fa-users empty-icon"></i>
+                        <h4>No Escorts Available</h4>
+                        <p>Check back soon for new listings!</p>
+                        <br>
+                        <a href="myprofile.html" class="btn-primary" style="padding:10px 30px; font-size:14px;">
+                            <i class="fas fa-pen-fancy"></i> Create Your Profile Now
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+            
+            escortGrid.innerHTML = escorts.map(escort => {
+                // Determine badge based on membership plan
+                let badgeHtml = '';
+                if (escort.membership_plan === 'vip') {
+                    badgeHtml = '<span class="badge badge-vip"><i class="fas fa-crown"></i> VIP</span>';
+                } else if (escort.membership_plan === 'prime-vip') {
+                    badgeHtml = '<span class="badge badge-premium"><i class="fas fa-gem"></i> PRIME VIP</span>';
+                } else if (escort.membership_plan === 'prime') {
+                    badgeHtml = '<span class="badge badge-prime"><i class="fas fa-star"></i> PRIME</span>';
+                }
+                
+                const name = escort.full_name || 'Anonymous';
+                const location = escort.location || 'Nairobi';
+                const age = escort.age || '?';
+                const gender = escort.gender || 'Female';
+                
+                return `
+                    <div class="escort-card" onclick="viewEscort('${escort.id}')">
+                        <div class="card-image">
+                            <i class="fas fa-user"></i>
+                            <div class="card-badges">
+                                ${badgeHtml}
+                                <span class="badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <div class="name">${name}</div>
+                            <div class="location"><i class="fas fa-map-marker-alt"></i> ${location}</div>
+                            <div class="meta">
+                                <span><i class="fas fa-venus-mars"></i> ${gender}</span>
+                                <span><i class="fas fa-calendar-alt"></i> ${age} yrs</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // ============================================================
+        // VIEW ESCORT DETAILS (placeholder)
+        // ============================================================
+        window.viewEscort = function(escortId) {
+            showToast('Viewing escort profile - Coming soon! 🔜', 'info');
+        };
+        
+        // ============================================================
+        // SEARCH FUNCTION
+        // ============================================================
+        function performSearch() {
+            const term = heroSearch.value.trim();
+            if (term) {
+                showToast('Searching for "' + term + '"...', 'info');
+                loadEscorts(term);
+            } else {
+                loadEscorts('');
+            }
+        }
         
         // ============================================================
         // HAMBURGER MENU TOGGLE
@@ -1233,7 +1092,6 @@
             navMenu.classList.toggle('show');
         });
         
-        // Close menu on outside click
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 992) {
                 if (!e.target.closest('.header')) {
@@ -1251,24 +1109,13 @@
                 localStorage.removeItem('nairobi_vibe_session');
                 localStorage.removeItem('nairobi_vibe_admin_session');
                 showToast('Logged out successfully', 'success');
-                setTimeout(function() {
-                    location.reload();
-                }, 1000);
+                setTimeout(function() { location.reload(); }, 1000);
             });
         }
         
         // ============================================================
-        // HERO SEARCH
+        // SEARCH EVENTS
         // ============================================================
-        function performSearch() {
-            const term = heroSearch.value.trim();
-            if (term) {
-                showToast('Searching for "' + term + '"...', 'info');
-            } else {
-                showToast('Please enter a search term', 'info');
-            }
-        }
-        
         heroSearchBtn.addEventListener('click', performSearch);
         heroSearch.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -1284,7 +1131,7 @@
             tag.addEventListener('click', function() {
                 const location = this.textContent.trim();
                 heroSearch.value = location;
-                showToast('Showing escorts in ' + location, 'info');
+                performSearch();
             });
         });
         
@@ -1295,7 +1142,7 @@
             item.addEventListener('click', function() {
                 const county = this.textContent.trim();
                 heroSearch.value = county;
-                showToast('Showing escorts in ' + county, 'info');
+                performSearch();
             });
         });
         
@@ -1306,7 +1153,7 @@
             item.addEventListener('click', function() {
                 const town = this.textContent.trim();
                 heroSearch.value = town;
-                showToast('Showing escorts in ' + town, 'info');
+                performSearch();
             });
         });
         
@@ -1326,13 +1173,45 @@
         }
         
         // ============================================================
-        // CONSOLE LOG
+        // ANIMATE STATS COUNT
         // ============================================================
-        console.log('✅ Nairobi Vibe - Polished Homepage Loaded!');
+        function animateStats() {
+            const stats = document.querySelectorAll('.stats-bar .stat-item .number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.textContent.replace(/[^0-9]/g, '')) || 0;
+                if (target > 0) {
+                    let current = 0;
+                    const increment = Math.ceil(target / 30);
+                    const interval = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(interval);
+                        }
+                        if (stat.id === 'statEscorts') {
+                            stat.textContent = current + '+';
+                        } else {
+                            stat.textContent = current;
+                        }
+                    }, 40);
+                }
+            });
+        }
+        
+        // ============================================================
+        // INITIALIZE
+        // ============================================================
+        checkSession();
+        loadEscorts();
+        
+        // Animate stats after loading
+        setTimeout(animateStats, 500);
+        
+        console.log('🔥 Nairobi Vibe - HOT Homepage Loaded!');
         console.log('📍 Locations: All Nairobi areas, counties, and towns');
-        console.log('👤 "Create Profile" button in header (shown when logged in)');
-        console.log('📱 Mobile-first design with images');
-        console.log('✨ Polished with hero section and stats');
+        console.log('👤 Dynamic "Create Profile" button');
+        console.log('📱 Fully responsive and mobile-first');
+        console.log('✨ Only showing APPROVED profiles from Supabase');
         
     });
 </script>
