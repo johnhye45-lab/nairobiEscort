@@ -285,20 +285,6 @@
             box-shadow: 0 0 0 4px rgba(224, 0, 108, 0.1);
         }
         
-        .payment-form .form-group .input-wrapper .phone-prefix {
-            position: absolute;
-            left: 44px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        
-        .payment-form .form-group .input-wrapper input.phone-input {
-            padding-left: 70px;
-        }
-        
         .payment-form .form-group .input-wrapper .phone-prefix-text {
             position: absolute;
             left: 14px;
@@ -655,7 +641,7 @@
             </div>
 
             <!-- Payment Form -->
-            <div class="payment-form">
+            <div class="payment-form" id="paymentForm">
                 <div class="form-title">
                     <i class="fas fa-mobile-alt"></i> M-PESA Payment
                 </div>
@@ -672,7 +658,7 @@
             </div>
 
             <!-- Instructions -->
-            <div class="instructions">
+            <div class="instructions" id="instructions">
                 <div class="step">
                     <span class="step-num">1</span>
                     <span class="step-text">
@@ -710,7 +696,8 @@
             <div class="success-state" id="successState">
                 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
                 <h3>Payment Successful! 🎉</h3>
-                <p>Your payment has been received. Your profile will be activated within 24 hours.</p>
+                <p>Your payment has been received and your profile is now pending admin approval.</p>
+                <p style="font-size:13px; color:#999; margin-top:5px;">You will be notified once approved.</p>
                 <a href="myprofile.html" class="btn-dashboard">
                     <i class="fas fa-user"></i> Go to My Profile
                 </a>
@@ -763,7 +750,7 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT - MODIFIED TO SEND TO ADMIN
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -780,6 +767,8 @@
             const phoneInput = document.getElementById('phoneNumber');
             const successState = document.getElementById('successState');
             const checkoutCard = document.getElementById('checkoutCard');
+            const paymentForm = document.getElementById('paymentForm');
+            const instructions = document.getElementById('instructions');
 
             // ============================================================
             // GET PLAN DATA FROM URL
@@ -789,8 +778,9 @@
                 const plan = urlParams.get('plan') || 'regular';
                 const days = urlParams.get('days') || '15';
                 const price = urlParams.get('price') || '1300';
+                const userId = urlParams.get('user_id') || '';
 
-                return { plan, days, price };
+                return { plan, days, price, userId };
             }
 
             const planData = getPlanFromURL();
@@ -808,28 +798,70 @@
                 (planNames[planData.plan] || planData.plan.toUpperCase()) + ' - ' + planData.days + ' Days';
             document.getElementById('totalAmountDisplay').textContent = 'KSh' + parseInt(planData.price).toLocaleString();
 
+            console.log('📋 Plan Data:', planData);
+
             // ============================================================
             // PHONE INPUT FORMATTING
             // ============================================================
             phoneInput.addEventListener('input', function() {
-                // Remove non-numeric characters
                 this.value = this.value.replace(/\D/g, '');
-                
-                // Limit to 9 digits (after 254)
                 if (this.value.length > 9) {
                     this.value = this.value.slice(0, 9);
                 }
             });
 
             phoneInput.addEventListener('keypress', function(e) {
-                // Only allow numbers
                 if (e.key < '0' || e.key > '9') {
                     e.preventDefault();
                 }
             });
 
             // ============================================================
-            // PAY NOW BUTTON
+            // UPDATE PROFILE STATUS IN SUPABASE
+            // ============================================================
+            async function updateProfileStatus(userId, plan, days, price) {
+                try {
+                    // Update profile with membership details
+                    const { data, error } = await window.supabaseFunctions.supabase
+                        .from('profiles')
+                        .update({
+                            status: 'pending_review',
+                            membership_plan: plan,
+                            membership_days: parseInt(days),
+                            membership_price: parseInt(price),
+                            payment_status: 'paid',
+                            payment_date: new Date().toISOString(),
+                            is_active: false,
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('user_id', userId);
+
+                    if (error) throw error;
+
+                    // Log activity for admin
+                    await window.supabaseFunctions.logActivity(
+                        userId,
+                        'payment_completed',
+                        `User paid KSh${price} for ${plan.toUpperCase()} plan (${days} days) - Pending admin review`
+                    );
+
+                    // Notify admin (this would ideally be a function call to send notification)
+                    console.log('📧 Admin notification: New profile pending review!');
+                    console.log('👤 User ID:', userId);
+                    console.log('📋 Plan:', plan.toUpperCase());
+                    console.log('💰 Amount: KSh' + price);
+                    console.log('📅 Duration:', days + ' days');
+
+                    return { success: true };
+
+                } catch (error) {
+                    console.error('❌ Error updating profile:', error);
+                    return { success: false, error: error.message };
+                }
+            }
+
+            // ============================================================
+            // PAY NOW BUTTON - MODIFIED TO UPDATE DATABASE
             // ============================================================
             payBtn.addEventListener('click', function() {
                 const phone = phoneInput.value.trim();
@@ -841,31 +873,73 @@
                     return;
                 }
 
+                // Check if user is logged in
+                const session = localStorage.getItem('nairobi_vibe_session');
+                if (!session) {
+                    showToast('Please login to continue', 'error');
+                    setTimeout(function() {
+                        window.location.href = 'login.html?redirect=checkout-mpesa.html';
+                    }, 1500);
+                    return;
+                }
+
                 // Show loading
                 payBtn.disabled = true;
-                payBtnText.textContent = 'Sending Request...';
+                payBtnText.textContent = 'Processing Payment...';
                 payLoader.classList.add('show');
                 payIcon.style.display = 'none';
 
-                // Simulate sending payment request
-                setTimeout(function() {
-                    // Hide form, show success
-                    const paymentForm = document.querySelector('.payment-form');
-                    const instructions = document.querySelector('.instructions');
-                    
-                    paymentForm.style.display = 'none';
-                    instructions.style.display = 'none';
-                    
-                    successState.classList.add('show');
-                    
-                    // Show success toast
-                    showToast('✅ Payment request sent to ' + phone + '!', 'success');
+                // Simulate payment processing and update database
+                setTimeout(async function() {
+                    try {
+                        // Get user ID from URL or session
+                        let userId = planData.userId;
+                        
+                        if (!userId) {
+                            const sessionData = JSON.parse(session);
+                            userId = sessionData.id;
+                        }
 
-                    // Reset button (hidden anyway)
-                    payBtn.disabled = false;
-                    payBtnText.textContent = 'SEND PAYMENT REQUEST TO PHONE';
-                    payLoader.classList.remove('show');
-                    payIcon.style.display = 'inline-block';
+                        // Update profile status in Supabase
+                        const result = await updateProfileStatus(
+                            userId,
+                            planData.plan,
+                            planData.days,
+                            planData.price
+                        );
+
+                        if (result.success) {
+                            // Hide form, show success
+                            paymentForm.style.display = 'none';
+                            instructions.style.display = 'none';
+                            successState.classList.add('show');
+                            
+                            showToast('✅ Payment successful! Profile sent for admin review.', 'success');
+
+                            // Reset button
+                            payBtn.disabled = false;
+                            payBtnText.textContent = 'SEND PAYMENT REQUEST TO PHONE';
+                            payLoader.classList.remove('show');
+                            payIcon.style.display = 'inline-block';
+
+                        } else {
+                            showToast('❌ Payment failed: ' + result.error, 'error');
+                            
+                            payBtn.disabled = false;
+                            payBtnText.textContent = 'SEND PAYMENT REQUEST TO PHONE';
+                            payLoader.classList.remove('show');
+                            payIcon.style.display = 'inline-block';
+                        }
+
+                    } catch (error) {
+                        console.error('❌ Payment error:', error);
+                        showToast('An error occurred. Please try again.', 'error');
+                        
+                        payBtn.disabled = false;
+                        payBtnText.textContent = 'SEND PAYMENT REQUEST TO PHONE';
+                        payLoader.classList.remove('show');
+                        payIcon.style.display = 'inline-block';
+                    }
 
                 }, 2000);
             });
@@ -912,7 +986,7 @@
             console.log('✅ Checkout MPESA Page Loaded Successfully!');
             console.log('📋 Plan:', planData.plan);
             console.log('💰 Amount: KSh' + planData.price);
-            console.log('📱 Phone: +254' + phoneInput.value);
+            console.log('🔄 After payment, profile sent to admin for review');
 
         });
     </script>
