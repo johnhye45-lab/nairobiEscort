@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>My Profile - Nairobi Vibe Escorts</title>
     
     <!-- Google Fonts -->
@@ -19,7 +19,7 @@
     
     <style>
         /* ============================================================
-                   MY PROFILE PAGE STYLES
+                   MY PROFILE PAGE - MOBILE OPTIMIZED
                    ============================================================ */
         
         * {
@@ -33,289 +33,204 @@
             background: #f5f5f5;
             min-height: 100vh;
             color: #333;
+            padding-bottom: 70px;
         }
         
         /* ---------- HEADER ---------- */
         .site-header {
             background: linear-gradient(135deg, #E0006C, #b30057);
-            padding: 15px 20px;
+            padding: 10px 15px;
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .site-header .logo h1 {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 800;
         }
-        
-        .site-header .logo span {
-            font-size: 12px;
-            opacity: 0.8;
-        }
+        .site-header .logo span { font-size: 10px; opacity: 0.8; }
         
         .site-header .user-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
-        
         .site-header .user-info img {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             border: 2px solid #fff;
             object-fit: cover;
         }
-        
         .site-header .user-info .username {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
         }
-        
         .site-header .user-info .logout-btn {
             background: rgba(255,255,255,0.2);
             border: none;
             color: #fff;
-            padding: 6px 15px;
+            padding: 5px 12px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s ease;
-        }
-        
-        .site-header .user-info .logout-btn:hover {
-            background: rgba(255,255,255,0.3);
+            font-size: 11px;
+            min-height: 34px;
         }
         
         /* ---------- LOGIN PROMPT ---------- */
         .login-prompt {
             background: #fff;
-            border-radius: 16px;
-            padding: 50px 30px;
+            border-radius: 14px;
+            padding: 30px 20px;
             text-align: center;
-            margin: 30px auto;
-            max-width: 500px;
+            margin: 20px auto;
+            max-width: 400px;
             box-shadow: 0 2px 20px rgba(0,0,0,0.08);
             display: none;
         }
-        
-        .login-prompt .lock-icon {
-            font-size: 64px;
-            color: #E0006C;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .login-prompt h3 {
-            font-size: 24px;
-            font-weight: 800;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        
-        .login-prompt p {
-            color: #666;
-            font-size: 15px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        
+        .login-prompt .lock-icon { font-size: 48px; color: #E0006C; margin-bottom: 10px; display: block; }
+        .login-prompt h3 { font-size: 20px; font-weight: 800; color: #333; margin-bottom: 6px; }
+        .login-prompt p { color: #666; font-size: 13px; margin-bottom: 15px; line-height: 1.5; }
         .login-prompt .btn-login-prompt {
             background: linear-gradient(135deg, #E0006C, #b30057);
             color: #fff;
             border: none;
-            padding: 12px 40px;
+            padding: 10px 30px;
             border-radius: 25px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: inline-block;
             text-decoration: none;
+            min-height: 44px;
+            line-height: 24px;
         }
-        
-        .login-prompt .btn-login-prompt:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(224, 0, 108, 0.3);
-        }
-        
         .login-prompt .register-link-prompt {
             display: block;
-            margin-top: 15px;
+            margin-top: 12px;
             color: #E0006C;
             font-weight: 600;
-            font-size: 14px;
-        }
-        
-        .login-prompt .register-link-prompt:hover {
-            text-decoration: underline;
+            font-size: 13px;
         }
         
         /* ---------- CONTAINER ---------- */
         .site-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
         }
         
         /* ---------- PROFILE HEADER ---------- */
         .profile-header {
             background: #fff;
             border-radius: 10px;
-            padding: 25px 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
-        
-        .profile-header h2 {
-            font-size: 22px;
-            font-weight: 800;
-            color: #E0006C;
-        }
-        
-        .profile-header .breadcrumb {
-            font-size: 13px;
-            color: #999;
-            margin-top: 5px;
-        }
-        
-        .profile-header .breadcrumb span {
-            color: #E0006C;
-        }
+        .profile-header h2 { font-size: 18px; font-weight: 800; color: #E0006C; }
+        .profile-header .breadcrumb { font-size: 11px; color: #999; margin-top: 3px; }
+        .profile-header .breadcrumb span { color: #E0006C; }
         
         /* ---------- STATUS BANNER ---------- */
         .status-banner {
             border-left: 4px solid #ffc107;
-            padding: 15px 20px;
+            padding: 10px 14px;
             border-radius: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
-        
-        .status-banner.inactive {
-            background: #f8d7da;
-            border-left-color: #dc3545;
-        }
-        
-        .status-banner.active {
-            background: #d4edda;
-            border-left-color: #28a745;
-        }
-        
-        .status-banner.pending {
-            background: #fff3cd;
-            border-left-color: #ffc107;
-        }
-        
-        .status-banner .status-text {
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .status-banner .status-text i {
-            margin-right: 8px;
-        }
-        
+        .status-banner.inactive { background: #f8d7da; border-left-color: #dc3545; }
+        .status-banner.active { background: #d4edda; border-left-color: #28a745; }
+        .status-banner.pending { background: #fff3cd; border-left-color: #ffc107; }
+        .status-banner .status-text { font-size: 12px; font-weight: 600; }
+        .status-banner .status-text i { margin-right: 6px; }
         .status-banner .btn-activate {
             background: #E0006C;
             color: #fff;
             border: none;
-            padding: 8px 25px;
+            padding: 6px 18px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            min-height: 36px;
         }
+        .status-banner .btn-activate:disabled { opacity: 0.5; cursor: not-allowed; }
         
-        .status-banner .btn-activate:hover {
-            background: #b30057;
-            transform: translateY(-1px);
-        }
-        
-        .status-banner .btn-activate:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        
-        /* ---------- WALLET SECTION ---------- */
+        /* ---------- WALLET SECTION - HORIZONTAL ---------- */
         .wallet-section {
             background: #fff;
             border-radius: 10px;
-            padding: 20px 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border: 1px solid #dfdfdf;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
         }
-        
         .wallet-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 10px;
         }
-        
         .wallet-header .wallet-balance {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 700;
             color: #E0006C;
         }
-        
-        .wallet-header .wallet-balance span {
-            font-size: 24px;
-        }
-        
+        .wallet-header .wallet-balance span { font-size: 20px; }
         .wallet-header .btn-add-fund {
             background: #28a745;
             color: #fff;
             border: none;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            min-height: 36px;
         }
         
-        .wallet-header .btn-add-fund:hover {
-            background: #1e7e34;
-        }
-        
+        /* WALLET STATS - HORIZONTAL ROW */
         .wallet-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 6px;
+            margin-top: 10px;
+            flex-wrap: wrap;
         }
-        
         .wallet-stats .stat-item {
+            flex: 1;
             text-align: center;
-            padding: 10px;
+            padding: 6px 4px;
             background: #f8f9fa;
             border-radius: 8px;
+            min-width: 70px;
         }
-        
         .wallet-stats .stat-item label {
             display: block;
-            font-size: 12px;
+            font-size: 9px;
             color: #999;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
-        
         .wallet-stats .stat-item span {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
             color: #333;
         }
@@ -325,71 +240,51 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-            padding-top: 15px;
+            gap: 6px;
+            margin-top: 10px;
+            padding-top: 10px;
             border-top: 1px solid #eee;
         }
-        
-        .wallet-footer .chat-status {
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .wallet-footer .chat-status i {
-            margin-right: 5px;
-        }
-        
+        .wallet-footer .chat-status { font-size: 12px; color: #666; }
+        .wallet-footer .chat-status i { margin-right: 4px; }
         .wallet-footer .btn-chat-activate {
             background: #17a2b8;
             color: #fff;
             border: none;
-            padding: 6px 18px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 11px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            min-height: 32px;
         }
-        
-        .wallet-footer .btn-chat-activate:hover {
-            background: #117a8b;
-        }
-        
         .wallet-footer .inbox-link {
             color: #E0006C;
             font-weight: 600;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 12px;
         }
         
-        .wallet-footer .inbox-link:hover {
-            text-decoration: underline;
-        }
-        
-        /* ---------- PHOTO SECTION ---------- */
+        /* ---------- PHOTO SECTION - MULTIPLE UPLOAD ---------- */
         .photo-section {
             background: #fff;
             border-radius: 10px;
-            padding: 20px 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border: 1px solid #dfdfdf;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
         }
-        
         .photo-section .photo-upload {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
         }
-        
         .photo-section .photo-upload .file-input-wrapper {
             position: relative;
             overflow: hidden;
             display: inline-block;
         }
-        
         .photo-section .photo-upload .file-input-wrapper input[type="file"] {
             position: absolute;
             left: 0;
@@ -399,35 +294,25 @@
             height: 100%;
             cursor: pointer;
         }
-        
         .photo-section .photo-upload .btn-upload {
             background: #E0006C;
             color: #fff;
             border: none;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            min-height: 36px;
         }
-        
-        .photo-section .photo-upload .btn-upload:hover {
-            background: #b30057;
-        }
-        
-        .photo-section .photo-upload .file-name {
-            font-size: 13px;
-            color: #999;
-        }
+        .photo-section .photo-upload .file-name { font-size: 11px; color: #999; display: none; }
         
         .photo-section .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
         }
-        
         .photo-section .photo-grid .photo-item {
             aspect-ratio: 1;
             background: #f0f0f0;
@@ -436,427 +321,344 @@
             align-items: center;
             justify-content: center;
             color: #ccc;
-            font-size: 12px;
+            font-size: 10px;
             border: 2px dashed #ddd;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            min-height: 80px;
         }
-        
         .photo-section .photo-grid .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
         .photo-section .photo-grid .photo-item .delete-photo {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: 4px;
+            right: 4px;
             background: rgba(0,0,0,0.6);
             color: #fff;
             border: none;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 10px;
             display: none;
+            align-items: center;
+            justify-content: center;
         }
-        
-        .photo-section .photo-grid .photo-item:hover .delete-photo {
-            display: block;
+        .photo-section .photo-grid .photo-item:hover .delete-photo { display: flex; }
+        .photo-section .photo-grid .photo-item .add-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #ccc;
         }
+        .photo-section .photo-grid .photo-item .add-icon i { font-size: 24px; }
+        .photo-section .photo-grid .photo-item .add-icon span { font-size: 9px; margin-top: 4px; }
         
-        .photo-section .video-section {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        
+        .photo-section .video-section { margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee; }
         .photo-section .video-section .verify-notice {
             background: #fff3cd;
-            padding: 12px 18px;
+            padding: 10px 14px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
-        
+        .photo-section .video-section .verify-notice span { font-size: 11px; color: #856404; }
         .photo-section .video-section .verify-notice .btn-verify {
             background: #007bff;
             color: #fff;
             border: none;
-            padding: 6px 20px;
+            padding: 5px 16px;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 11px;
             cursor: pointer;
+            min-height: 32px;
         }
         
         /* ---------- NAV TABS ---------- */
         .nav-tabs {
             background: #fff;
             border-radius: 10px;
-            padding: 10px 15px;
-            margin-bottom: 20px;
+            padding: 8px 10px;
+            margin-bottom: 10px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border: 1px solid #dfdfdf;
+            flex-wrap: nowrap;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
-        
+        .nav-tabs::-webkit-scrollbar { display: none; }
         .nav-tabs .tab-link {
-            padding: 8px 18px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 600;
             color: #666;
             text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            white-space: nowrap;
+            min-height: 34px;
+            display: flex;
+            align-items: center;
         }
-        
-        .nav-tabs .tab-link:hover {
-            background: #f5f5f5;
-            color: #E0006C;
-        }
-        
-        .nav-tabs .tab-link.active {
-            background: #E0006C;
-            color: #fff;
-        }
+        .nav-tabs .tab-link:hover { background: #f5f5f5; color: #E0006C; }
+        .nav-tabs .tab-link.active { background: #E0006C; color: #fff; }
         
         /* ---------- PROFILE FORM ---------- */
         .profile-form {
             background: #fff;
             border-radius: 10px;
-            padding: 25px 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border: 1px solid #dfdfdf;
-            display: block;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
         }
-        
         .profile-form .form-title {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 800;
             color: #E0006C;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
         }
-        
         .profile-form .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
         }
-        
         .profile-form .form-group {
             display: flex;
             flex-direction: column;
         }
-        
         .profile-form .form-group label {
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 600;
             color: #555;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
-        
-        .profile-form .form-group label .required {
-            color: #dc3545;
-        }
-        
+        .profile-form .form-group label .required { color: #dc3545; }
         .profile-form .form-group input,
         .profile-form .form-group select,
         .profile-form .form-group textarea {
-            padding: 10px 14px;
+            padding: 8px 12px;
             border: 2px solid #e8e8e8;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Open Sans', sans-serif;
-            transition: all 0.3s ease;
             background: #fafafa;
+            min-height: 40px;
         }
-        
         .profile-form .form-group input:focus,
         .profile-form .form-group select:focus,
         .profile-form .form-group textarea:focus {
             outline: none;
             border-color: #E0006C;
             background: #fff;
-            box-shadow: 0 0 0 4px rgba(224, 0, 108, 0.1);
+            box-shadow: 0 0 0 3px rgba(224,0,108,0.1);
         }
-        
-        .profile-form .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
+        .profile-form .form-group textarea { resize: vertical; min-height: 60px; }
         
         /* ---------- SERVICES CHECKBOXES ---------- */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 10px;
-            margin: 10px 0 20px 0;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 6px;
+            margin: 8px 0 12px 0;
         }
-        
         .services-grid .service-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
-        
         .services-grid .service-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             accent-color: #E0006C;
             cursor: pointer;
         }
-        
-        .services-grid .service-item label {
-            font-size: 13px;
-            color: #555;
-            cursor: pointer;
-        }
+        .services-grid .service-item label { font-size: 12px; color: #555; cursor: pointer; }
         
         /* ---------- LISTING OPTIONS ---------- */
         .listing-options {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin: 15px 0 20px 0;
-            padding: 15px;
+            gap: 10px;
+            margin: 10px 0 14px 0;
+            padding: 10px 14px;
             background: #f8f9fa;
             border-radius: 8px;
         }
-        
         .listing-options input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             accent-color: #E0006C;
             cursor: pointer;
         }
-        
-        .listing-options label {
-            font-size: 14px;
-            color: #555;
-            cursor: pointer;
-        }
+        .listing-options label { font-size: 12px; color: #555; cursor: pointer; }
         
         /* ---------- SAVE BUTTON ---------- */
         .btn-save {
             background: linear-gradient(135deg, #E0006C, #b30057);
             color: #fff;
             border: none;
-            padding: 12px 40px;
+            padding: 10px 30px;
             border-radius: 25px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            min-height: 44px;
+            width: 100%;
+            justify-content: center;
         }
-        
-        .btn-save:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(224, 0, 108, 0.3);
-        }
-        
-        .btn-save:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
         
         /* ---------- ABOUT SECTION ---------- */
         .about-section {
             background: #fff;
             border-radius: 10px;
-            padding: 25px 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border: 1px solid #dfdfdf;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
         }
-        
         .about-section .about-title {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 800;
             color: #E0006C;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
-        
-        .about-section .about-content {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #666;
-        }
+        .about-section .about-content { font-size: 12px; line-height: 1.6; color: #666; }
         
         /* ---------- FOOTER ---------- */
         .site-footer {
             background: #1a1a2e;
             color: #ccc;
-            padding: 40px 20px 20px;
-            margin-top: 40px;
+            padding: 20px 15px 10px;
+            margin-top: 20px;
         }
-        
         .site-footer .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
-        
-        .site-footer .footer-content h4 {
-            color: #fff;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        
-        .site-footer .footer-content p {
-            font-size: 13px;
-            line-height: 1.6;
-            color: #aaa;
-        }
-        
-        .site-footer .footer-content a {
-            color: #E0006C;
-            text-decoration: none;
-            font-size: 13px;
-        }
-        
-        .site-footer .footer-content a:hover {
-            text-decoration: underline;
-        }
-        
+        .site-footer .footer-content h4 { color: #fff; font-size: 13px; margin-bottom: 6px; }
+        .site-footer .footer-content p { font-size: 11px; line-height: 1.5; color: #aaa; }
+        .site-footer .footer-content a { color: #E0006C; font-size: 11px; }
         .site-footer .footer-bottom {
             text-align: center;
-            padding-top: 20px;
-            margin-top: 20px;
+            padding-top: 12px;
+            margin-top: 12px;
             border-top: 1px solid #333;
-            font-size: 13px;
+            font-size: 11px;
             color: #888;
         }
-        
-        .site-footer .footer-bottom span {
-            color: #E0006C;
-        }
+        .site-footer .footer-bottom span { color: #E0006C; }
         
         /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 12px;
+            top: 60px;
+            right: 10px;
+            padding: 10px 18px;
+            border-radius: 10px;
             color: #fff;
             font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            font-size: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             transform: translateX(120%);
             transition: all 0.4s ease;
             z-index: 9999;
-            max-width: 400px;
+            max-width: 350px;
         }
+        .toast.show { transform: translateX(0); }
+        .toast.success { background: linear-gradient(135deg, #28a745, #1e7e34); }
+        .toast.error { background: linear-gradient(135deg, #dc3545, #c82333); }
+        .toast.info { background: linear-gradient(135deg, #17a2b8, #117a8b); }
+        .toast .toast-close { float: right; margin-left: 10px; cursor: pointer; opacity: 0.8; font-size: 16px; }
         
-        .toast.show {
-            transform: translateX(0);
+        /* ---------- BOTTOM NAV ---------- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 4px 0 8px 0;
+            z-index: 999;
+            box-shadow: 0 -2px 15px rgba(0,0,0,0.08);
         }
-        
-        .toast.success {
-            background: linear-gradient(135deg, #28a745, #1e7e34);
-        }
-        
-        .toast.error {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-        }
-        
-        .toast.info {
-            background: linear-gradient(135deg, #17a2b8, #117a8b);
-        }
-        
-        .toast .toast-close {
-            float: right;
-            margin-left: 15px;
+        .bottom-nav .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+            color: #999;
+            font-size: 9px;
+            font-weight: 600;
             cursor: pointer;
-            opacity: 0.8;
-            font-size: 18px;
+            padding: 4px 10px;
+            min-height: 40px;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
-        
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 768px) {
-            .profile-form .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .site-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .wallet-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-tabs {
-                overflow-x: auto;
-                flex-wrap: nowrap;
-            }
-            
-            .profile-header h2 {
-                font-size: 18px;
-            }
-            
-            .services-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .profile-form {
-                padding: 15px;
-            }
-            
-            .profile-header {
-                padding: 15px;
-            }
-            
-            .wallet-section {
-                padding: 15px;
-            }
-            
-            .photo-section {
-                padding: 15px;
-            }
-        }
+        .bottom-nav .nav-item.active { color: #E0006C; }
+        .bottom-nav .nav-item i { font-size: 16px; }
+        .bottom-nav .nav-item:active { transform: scale(0.9); }
         
         /* ---------- LOADER ---------- */
         .loader {
             display: none;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 3px solid rgba(255,255,255,0.3);
             border-top: 3px solid #fff;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
+        .loader.show { display: inline-block; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .loader.show {
-            display: inline-block;
+        /* ---------- RESPONSIVE ---------- */
+        @media (min-width: 600px) {
+            .profile-form .form-row { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+            .site-content { padding: 15px; }
+            .photo-section .photo-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+        }
+        @media (min-width: 768px) {
+            .bottom-nav { display: none; }
+            body { padding-bottom: 0; }
+            .wallet-stats .stat-item { min-width: 100px; }
+        }
+        @media (min-width: 992px) {
+            .site-content { padding: 20px; }
+            .profile-form { padding: 20px 25px; }
+            .photo-section .photo-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        /* ---------- SCROLLBAR ---------- */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #E0006C; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -881,13 +683,13 @@
     <div class="site-content">
 
         <!-- ============================================================
-             LOGIN PROMPT (shown when not logged in)
+             LOGIN PROMPT
              ============================================================ -->
         <div class="login-prompt" id="loginPrompt">
             <i class="fas fa-lock lock-icon"></i>
             <h3>Login Required</h3>
             <p>Please login to create and manage your profile on Nairobi Vibe.</p>
-            <a href="login.html" class="btn-login-prompt">
+            <a href="login.html?redirect=myprofile.html" class="btn-login-prompt">
                 <i class="fas fa-sign-in-alt"></i> Login Now
             </a>
             <a href="signup.html" class="register-link-prompt">
@@ -896,7 +698,7 @@
         </div>
 
         <!-- ============================================================
-             PROFILE CONTENT (hidden when not logged in)
+             PROFILE CONTENT
              ============================================================ -->
         <div id="profileContent" style="display:none;">
 
@@ -912,23 +714,23 @@
             <div class="status-banner inactive" id="statusBanner">
                 <div class="status-text">
                     <i class="fas fa-circle"></i>
-                    <span id="statusText">Your profile is not active and will not be visible online.</span>
+                    <span id="statusText">Your profile is not active</span>
                 </div>
                 <button class="btn-activate" id="activateBtn">Activate Now</button>
             </div>
 
-            <!-- Wallet Section -->
+            <!-- Wallet Section - HORIZONTAL -->
             <div class="wallet-section">
                 <div class="wallet-header">
                     <div class="wallet-balance">
-                        Available Wallet Balance: <span id="walletBalance">KSh0</span>
+                        Available: <span id="walletBalance">KSh0</span>
                     </div>
                     <button class="btn-add-fund" id="addFundBtn"><i class="fas fa-plus"></i> Add Fund</button>
                 </div>
 
                 <div class="wallet-stats">
                     <div class="stat-item">
-                        <label>Total Wallet Balance</label>
+                        <label>Total Wallet</label>
                         <span id="totalWalletBalance">KSh0</span>
                     </div>
                     <div class="stat-item">
@@ -936,43 +738,41 @@
                         <span id="bidWager">KSh0</span>
                     </div>
                     <div class="stat-item">
-                        <label>Available Balance</label>
+                        <label>Available</label>
                         <span id="availableBalance">KSh0</span>
                     </div>
                 </div>
 
                 <div class="wallet-footer">
                     <div class="chat-status">
-                        <i class="fas fa-comment"></i>
-                        Chat Inactive
+                        <i class="fas fa-comment"></i> Chat Inactive
                     </div>
-                    <button class="btn-chat-activate" id="activateChatBtn">Activate Now</button>
-                    <a href="#" class="inbox-link">Inbox: Chat: <span id="chatCount">0</span></a>
-                    <a href="#" class="inbox-link">View Statistics <i class="fas fa-arrow-right"></i></a>
+                    <button class="btn-chat-activate" id="activateChatBtn">Activate Chat</button>
+                    <a href="#" class="inbox-link">Inbox: <span id="chatCount">0</span></a>
                 </div>
             </div>
 
-            <!-- Photo Section -->
+            <!-- Photo Section - MULTIPLE UPLOAD -->
             <div class="photo-section">
                 <div class="photo-upload">
                     <div class="file-input-wrapper">
-                        <button class="btn-upload"><i class="fas fa-camera"></i> Change Photo</button>
-                        <input type="file" id="profilePhotoInput" accept="image/*">
+                        <button class="btn-upload"><i class="fas fa-camera"></i> Add Photos</button>
+                        <input type="file" id="profilePhotoInput" accept="image/*" multiple>
                     </div>
-                    <span class="file-name" id="photoFileName">No file chosen</span>
-                    <span style="font-size:13px; color:#999;">0</span>
-                    <span style="font-size:13px; color:#999;">0</span>
+                    <span style="font-size:11px; color:#999;" id="photoCount">0 photos</span>
                 </div>
                 <div class="photo-grid" id="photoGrid">
-                    <div class="photo-item">
-                        <i class="fas fa-plus" style="font-size:24px;"></i>
-                        <span>Add Photos</span>
+                    <div class="photo-item" id="addPhotoPlaceholder">
+                        <div class="add-icon">
+                            <i class="fas fa-plus"></i>
+                            <span>Add Photos</span>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="video-section">
                     <div class="verify-notice">
-                        <span><i class="fas fa-video"></i> Only Verified Accounts can Upload Video. Kindly Verify Your Account.</span>
+                        <span><i class="fas fa-video"></i> Only Verified Accounts can Upload Video</span>
                         <button class="btn-verify" id="verifyBtn">Verify Now</button>
                     </div>
                 </div>
@@ -1119,8 +919,8 @@
                 </div>
 
                 <!-- Services -->
-                <div style="margin-top:20px;">
-                    <label style="font-size:13px; font-weight:600; color:#555; display:block; margin-bottom:10px;">Services</label>
+                <div style="margin-top:12px;">
+                    <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:6px;">Services</label>
                     <div class="services-grid" id="servicesGrid">
                         <div class="service-item">
                             <input type="checkbox" value="Dinner Date">
@@ -1171,14 +971,14 @@
                             <label>Massage</label>
                         </div>
                     </div>
-                    <div class="form-group" style="margin-top:10px;">
+                    <div class="form-group" style="margin-top:6px;">
                         <label>Other Services</label>
                         <input type="text" id="profileOtherServices" placeholder="Add other services">
                     </div>
                 </div>
 
                 <!-- Rates -->
-                <div class="form-row" style="margin-top:20px;">
+                <div class="form-row" style="margin-top:12px;">
                     <div class="form-group">
                         <label>Incalls Rate (KSh/hr)</label>
                         <input type="number" id="profileIncallsRate" placeholder="Enter incalls rate">
@@ -1217,13 +1017,35 @@
     </div>
 
     <!-- ============================================================
+         BOTTOM NAVIGATION
+         ============================================================ -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="window.location.href='index.html'">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item active" onclick="window.location.href='myprofile.html'">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </div>
+        <div class="nav-item" onclick="window.location.href='#'">
+            <i class="fas fa-heart"></i>
+            <span>Favorites</span>
+        </div>
+        <div class="nav-item" onclick="window.location.href='login.html'">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>Login</span>
+        </div>
+    </div>
+
+    <!-- ============================================================
          FOOTER
          ============================================================ -->
     <footer class="site-footer">
         <div class="footer-content">
             <div>
                 <h4>Nairobi Vibe Escorts</h4>
-                <p>Mombasa escorts and call girls from Mombasa Kenya offering hot massage and escorts services at very affordable rates. Tomba malaya wa mombasa leo.</p>
+                <p>Mombasa escorts and call girls from Mombasa Kenya offering hot massage and escorts services at very affordable rates.</p>
             </div>
             <div>
                 <h4>Quick Links</h4>
@@ -1254,7 +1076,7 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT - MODIFIED FOR ADMIN APPROVAL FLOW
+     JAVASCRIPT
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1276,9 +1098,13 @@
             const activateBtn = document.getElementById('activateBtn');
             const statusBanner = document.getElementById('statusBanner');
             const statusText = document.getElementById('statusText');
+            const photoGrid = document.getElementById('photoGrid');
+            const photoInput = document.getElementById('profilePhotoInput');
+            const photoCount = document.getElementById('photoCount');
+            let uploadedPhotos = [];
             
             // ============================================================
-            // CHECK IF SUPABASE IS LOADED
+            // CHECK SUPABASE
             // ============================================================
             if (typeof window.supabaseFunctions === 'undefined') {
                 showToast('System error. Please refresh the page.', 'error');
@@ -1288,7 +1114,7 @@
             // CHECK SESSION
             // ============================================================
             let currentUser = null;
-            let profileStatus = 'inactive'; // inactive, pending, active
+            let profileStatus = 'inactive';
             
             function checkSession() {
                 const session = localStorage.getItem('nairobi_vibe_session');
@@ -1324,16 +1150,21 @@
                     
                     if (data) {
                         fillProfileForm(data);
-                        // Check profile status
                         if (data.status === 'approved') {
                             profileStatus = 'active';
                             updateStatusBanner('active');
-                        } else if (data.status === 'pending') {
+                        } else if (data.status === 'pending' || data.status === 'pending_review') {
                             profileStatus = 'pending';
                             updateStatusBanner('pending');
                         } else {
                             profileStatus = 'inactive';
                             updateStatusBanner('inactive');
+                        }
+                        
+                        // Load photos
+                        if (data.photos && Array.isArray(data.photos)) {
+                            uploadedPhotos = data.photos;
+                            renderPhotos();
                         }
                     } else {
                         profileStatus = 'inactive';
@@ -1380,6 +1211,84 @@
             }
             
             // ============================================================
+            // PHOTO FUNCTIONS - MULTIPLE UPLOAD
+            // ============================================================
+            function renderPhotos() {
+                const placeholder = document.getElementById('addPhotoPlaceholder');
+                photoGrid.innerHTML = '';
+                
+                uploadedPhotos.forEach((photo, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'photo-item';
+                    div.innerHTML = `
+                        <img src="${photo}" alt="Photo ${index + 1}">
+                        <button class="delete-photo" onclick="removePhoto(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    photoGrid.appendChild(div);
+                });
+                
+                // Add placeholder if less than 10 photos
+                if (uploadedPhotos.length < 10) {
+                    const addDiv = document.createElement('div');
+                    addDiv.className = 'photo-item';
+                    addDiv.id = 'addPhotoPlaceholder';
+                    addDiv.innerHTML = `
+                        <div class="add-icon">
+                            <i class="fas fa-plus"></i>
+                            <span>Add Photos</span>
+                        </div>
+                    `;
+                    addDiv.onclick = function() { photoInput.click(); };
+                    photoGrid.appendChild(addDiv);
+                }
+                
+                photoCount.textContent = uploadedPhotos.length + ' photos';
+            }
+            
+            window.removePhoto = function(index) {
+                uploadedPhotos.splice(index, 1);
+                renderPhotos();
+                showToast('Photo removed', 'info');
+            };
+            
+            photoInput.addEventListener('change', function(e) {
+                const files = this.files;
+                if (files.length === 0) return;
+                
+                // Limit to 10 photos total
+                const remainingSlots = 10 - uploadedPhotos.length;
+                if (remainingSlots <= 0) {
+                    showToast('Maximum 10 photos allowed', 'error');
+                    this.value = '';
+                    return;
+                }
+                
+                const filesToUpload = Math.min(files.length, remainingSlots);
+                
+                for (let i = 0; i < filesToUpload; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        uploadedPhotos.push(event.target.result);
+                        if (uploadedPhotos.length >= 10 || i === filesToUpload - 1) {
+                            renderPhotos();
+                            showToast(`${uploadedPhotos.length} photos uploaded`, 'success');
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+                
+                this.value = '';
+            });
+            
+            // Click placeholder to upload
+            document.getElementById('addPhotoPlaceholder')?.addEventListener('click', function() {
+                photoInput.click();
+            });
+            
+            // ============================================================
             // UPDATE STATUS BANNER
             // ============================================================
             function updateStatusBanner(status) {
@@ -1390,12 +1299,12 @@
                     activateBtn.disabled = false;
                 } else if (status === 'pending') {
                     statusBanner.className = 'status-banner pending';
-                    statusText.innerHTML = '<i class="fas fa-clock"></i> Your profile is pending admin approval. You will be notified once approved.';
+                    statusText.innerHTML = '<i class="fas fa-clock"></i> Profile pending admin approval.';
                     activateBtn.textContent = 'Pending Approval';
                     activateBtn.disabled = true;
                 } else {
                     statusBanner.className = 'status-banner inactive';
-                    statusText.innerHTML = '<i class="fas fa-circle"></i> Your profile is not active and will not be visible online.';
+                    statusText.innerHTML = '<i class="fas fa-circle"></i> Your profile is not active.';
                     activateBtn.textContent = 'Activate Now';
                     activateBtn.disabled = false;
                 }
@@ -1419,57 +1328,41 @@
             }
             
             // ============================================================
-            // ACTIVATE BUTTON - Redirect to activate.html
+            // ACTIVATE BUTTON
             // ============================================================
             activateBtn.addEventListener('click', function() {
                 if (this.disabled) return;
-                
                 if (profileStatus === 'active') {
-                    // Deactivate - set status to inactive
                     deactivateProfile();
                 } else {
-                    // Go to activate page
                     window.location.href = 'activate.html';
                 }
             });
             
             async function deactivateProfile() {
-                if (!currentUser) {
-                    showToast('Please login first', 'error');
-                    return;
-                }
-                
+                if (!currentUser) return;
                 try {
                     const { error } = await window.supabaseFunctions.supabase
                         .from('profiles')
-                        .update({ 
-                            status: 'inactive',
-                            is_active: false,
-                            updated_at: new Date().toISOString()
-                        })
+                        .update({ status: 'inactive', is_active: false, updated_at: new Date().toISOString() })
                         .eq('user_id', currentUser.id);
-                    
                     if (error) throw error;
-                    
                     profileStatus = 'inactive';
                     updateStatusBanner('inactive');
-                    showToast('Profile deactivated successfully', 'success');
+                    showToast('Profile deactivated', 'success');
                 } catch (error) {
-                    showToast('Error deactivating profile: ' + error.message, 'error');
+                    showToast('Error: ' + error.message, 'error');
                 }
             }
             
             // ============================================================
-            // SAVE PROFILE - Set status to 'pending' for admin approval
+            // SAVE PROFILE
             // ============================================================
             profileForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 if (!currentUser) {
-                    showToast('Please login first to save your profile', 'error');
-                    setTimeout(function() {
-                        window.location.href = 'login.html?redirect=myprofile.html';
-                    }, 1500);
+                    showToast('Please login first', 'error');
                     return;
                 }
                 
@@ -1501,20 +1394,20 @@
                     incalls_rate: parseInt(document.getElementById('profileIncallsRate').value) || 0,
                     outcalls_rate: parseInt(document.getElementById('profileOutcallsRate').value) || 0,
                     list_in_other_cities: document.getElementById('listOtherCities').checked,
-                    status: 'pending', // <-- Set status to pending for admin approval
+                    photos: uploadedPhotos,
+                    status: 'pending',
                     is_active: false,
                     updated_at: new Date().toISOString()
                 };
                 
                 try {
-                    const { data: existing, error: checkError } = await window.supabaseFunctions.supabase
+                    const { data: existing } = await window.supabaseFunctions.supabase
                         .from('profiles')
                         .select('id')
                         .eq('user_id', currentUser.id)
                         .single();
                     
                     let result;
-                    
                     if (existing) {
                         result = await window.supabaseFunctions.supabase
                             .from('profiles')
@@ -1531,19 +1424,11 @@
                     
                     profileStatus = 'pending';
                     updateStatusBanner('pending');
-                    
-                    showToast('✅ Profile saved! Waiting for admin approval.', 'success');
+                    showToast('✅ Profile saved! Pending admin approval.', 'success');
                     updateAboutSection(profileData);
                     
-                    // Log activity for admin
-                    await window.supabaseFunctions.logActivity(
-                        currentUser.id,
-                        'profile_submitted',
-                        `User ${profileData.full_name} submitted profile for approval`
-                    );
-                    
                 } catch (error) {
-                    showToast('Error saving profile: ' + error.message, 'error');
+                    showToast('Error: ' + error.message, 'error');
                 }
                 
                 saveBtn.disabled = false;
@@ -1553,44 +1438,24 @@
             });
             
             // ============================================================
-            // PHOTO UPLOAD
-            // ============================================================
-            document.getElementById('profilePhotoInput').addEventListener('change', function(e) {
-                const file = this.files[0];
-                if (file) {
-                    document.getElementById('photoFileName').textContent = file.name;
-                    
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        const photoGrid = document.getElementById('photoGrid');
-                        const photoItem = document.createElement('div');
-                        photoItem.className = 'photo-item';
-                        photoItem.innerHTML = `<img src="${event.target.result}" alt="Profile photo">`;
-                        photoGrid.prepend(photoItem);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // ============================================================
             // ADD FUND
             // ============================================================
             document.getElementById('addFundBtn').addEventListener('click', function() {
-                showToast('Fund feature coming soon! 🔜', 'info');
+                showToast('💳 Fund feature coming soon!', 'info');
             });
             
             // ============================================================
             // ACTIVATE CHAT
             // ============================================================
             document.getElementById('activateChatBtn').addEventListener('click', function() {
-                showToast('Chat feature coming soon! 🔜', 'info');
+                showToast('💬 Chat feature coming soon!', 'info');
             });
             
             // ============================================================
             // VERIFY ACCOUNT
             // ============================================================
             document.getElementById('verifyBtn').addEventListener('click', function() {
-                showToast('Verification feature coming soon! 🔜', 'info');
+                showToast('✅ Verification feature coming soon!', 'info');
             });
             
             // ============================================================
@@ -1599,32 +1464,24 @@
             logoutBtn.addEventListener('click', function() {
                 localStorage.removeItem('nairobi_vibe_session');
                 localStorage.removeItem('nairobi_vibe_admin_session');
-                showToast('Logged out successfully', 'success');
-                setTimeout(function() {
-                    location.reload();
-                }, 1000);
+                showToast('Logged out', 'success');
+                setTimeout(function() { location.reload(); }, 800);
             });
             
             // ============================================================
-            // TOAST NOTIFICATION
+            // TOAST
             // ============================================================
             function showToast(message, type = 'info') {
                 toastMessage.textContent = message;
                 toast.className = 'toast ' + type;
                 toast.classList.add('show');
-                
                 clearTimeout(toast._timeout);
-                toast._timeout = setTimeout(function() {
-                    toast.classList.remove('show');
-                }, 5000);
+                toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
             }
-            
-            toastClose.addEventListener('click', function() {
-                toast.classList.remove('show');
-            });
+            toastClose.addEventListener('click', () => toast.classList.remove('show'));
             
             // ============================================================
-            // SET CURRENT YEAR IN FOOTER
+            // SET CURRENT YEAR
             // ============================================================
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
@@ -1633,10 +1490,10 @@
             // ============================================================
             checkSession();
             
-            console.log('✅ My Profile Page Loaded Successfully!');
-            console.log('📋 Profile Status: Pending admin approval flow enabled');
-            console.log('🔐 Shows login prompt if user is not logged in');
-            console.log('👤 After saving, profile goes to admin for approval');
+            console.log('✅ My Profile - Mobile Optimized Loaded!');
+            console.log('📸 Multiple photo upload (10 max)');
+            console.log('💰 Horizontal wallet stats');
+            console.log('📱 Mobile-first design');
             
         });
     </script>
