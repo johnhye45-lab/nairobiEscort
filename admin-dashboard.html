@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Nairobi Raha</title>
+    <title>Admin Dashboard - Nairobi Vibe</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -558,6 +558,11 @@
             color: #856404;
         }
         
+        .status-badge.pending_review {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
         .status-badge.approved {
             background: #d4edda;
             color: #155724;
@@ -569,8 +574,8 @@
         }
         
         .status-badge.active {
-            background: #cce5ff;
-            color: #004085;
+            background: #d4edda;
+            color: #155724;
         }
         
         .status-badge.inactive {
@@ -588,6 +593,20 @@
             background: #fce4ec;
             color: #E0006C;
         }
+        
+        .membership-badge {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        
+        .membership-badge.regular { background: #6c757d; color: #fff; }
+        .membership-badge.prime { background: #007bff; color: #fff; }
+        .membership-badge.prime-vip { background: #8b5cf6; color: #fff; }
+        .membership-badge.vip { background: linear-gradient(135deg, #f7053e, #d60435); color: #fff; }
         
         .action-buttons {
             display: flex;
@@ -1041,8 +1060,8 @@
      ============================================================ -->
 <script>
     (function() {
-        // Check if admin is logged in
-        const adminSession = JSON.parse(localStorage.getItem('nairobi_raha_admin_session') || 'null');
+        // Check if admin is logged in - Updated to use nairobi_vibe_admin_session
+        const adminSession = JSON.parse(localStorage.getItem('nairobi_vibe_admin_session') || 'null');
         
         if (!adminSession || !adminSession.isAdmin) {
             window.location.href = 'admin-login.html?expired=true';
@@ -1055,7 +1074,7 @@
         const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
         
         if (hoursDiff > 24) {
-            localStorage.removeItem('nairobi_raha_admin_session');
+            localStorage.removeItem('nairobi_vibe_admin_session');
             window.location.href = 'admin-login.html?expired=true';
             return;
         }
@@ -1070,7 +1089,7 @@
         <div class="sidebar-toggle" id="sidebarToggle">
             <i class="fas fa-bars"></i>
         </div>
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENR%3C/text%3E%3C/svg%3E" alt="Nairobi Raha">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='112' height='112' viewBox='0 0 112 112'%3E%3Crect width='112' height='112' fill='%23E0006C' rx='15'/%3E%3Ctext x='56' y='68' font-family='Arial' font-size='48' fill='white' text-anchor='middle' font-weight='bold'%3ENV%3C/text%3E%3C/svg%3E" alt="Nairobi Vibe">
         <h1>Admin <span>Panel</span></h1>
     </div>
     
@@ -1104,8 +1123,8 @@
         <ul class="sidebar-menu">
             <li><a href="#" class="active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
             <li><a href="#" data-page="users"><i class="fas fa-users"></i> Users <span class="badge" id="pendingBadge">0</span></a></li>
+            <li><a href="#" data-page="profiles"><i class="fas fa-id-card"></i> Profiles <span class="badge" id="profileBadge">0</span></a></li>
             <li><a href="#" data-page="escorts"><i class="fas fa-female"></i> Escorts</a></li>
-            <li><a href="#" data-page="agencies"><i class="fas fa-building"></i> Agencies</a></li>
             <li><a href="#" data-page="reviews"><i class="fas fa-star"></i> Reviews</a></li>
             
             <li class="menu-divider"></li>
@@ -1142,7 +1161,7 @@
                 <div class="icon orange"><i class="fas fa-clock"></i></div>
                 <div class="info">
                     <h3 id="pendingUsers">0</h3>
-                    <p>Pending Approval</p>
+                    <p>Pending Review</p>
                 </div>
             </div>
             <div class="stat-card">
@@ -1189,7 +1208,7 @@
         </div>
         
         <!-- ============================================================
-             USER TABLE
+             USER TABLE - WITH PENDING REVIEW FILTER
              ============================================================ -->
         <div class="table-container">
             <div class="table-header">
@@ -1206,6 +1225,7 @@
                     <select id="filterStatus">
                         <option value="all">All Status</option>
                         <option value="pending">Pending</option>
+                        <option value="pending_review">Pending Review</option>
                         <option value="approved">Approved</option>
                         <option value="rejected">Rejected</option>
                     </select>
@@ -1218,6 +1238,7 @@
                         <tr>
                             <th>User</th>
                             <th>Role</th>
+                            <th>Membership</th>
                             <th>Location</th>
                             <th>Status</th>
                             <th>Joined</th>
@@ -1256,10 +1277,10 @@
         <div class="modal-footer">
             <button class="btn-secondary" id="modalCloseBtn">Close</button>
             <button class="btn-primary" id="modalApproveBtn" style="display:none;">
-                <i class="fas fa-check"></i> Approve User
+                <i class="fas fa-check"></i> Approve Profile
             </button>
             <button class="btn-danger" id="modalRejectBtn" style="display:none;">
-                <i class="fas fa-times"></i> Reject User
+                <i class="fas fa-times"></i> Reject Profile
             </button>
         </div>
     </div>
@@ -1291,7 +1312,7 @@
         // ============================================================
         // LOAD ADMIN SESSION
         // ============================================================
-        const adminSession = JSON.parse(localStorage.getItem('nairobi_raha_admin_session') || 'null');
+        const adminSession = JSON.parse(localStorage.getItem('nairobi_vibe_admin_session') || 'null');
         if (adminSession) {
             document.getElementById('adminName').textContent = adminSession.name || 'Admin';
             document.getElementById('adminAvatar').textContent = (adminSession.name || 'Admin').charAt(0);
@@ -1311,6 +1332,7 @@
         const approvedUsers = document.getElementById('approvedUsers');
         const newToday = document.getElementById('newToday');
         const pendingBadge = document.getElementById('pendingBadge');
+        const profileBadge = document.getElementById('profileBadge');
         const notificationCount = document.getElementById('notificationCount');
         const currentDate = document.getElementById('currentDate');
         const toast = document.getElementById('toast');
@@ -1334,6 +1356,7 @@
         let currentPage = 1;
         const itemsPerPage = 5;
         let currentModalUserId = null;
+        let currentModalUserStatus = null;
         let chart1 = null;
         let chart2 = null;
         
@@ -1349,34 +1372,32 @@
         });
         
         // ============================================================
-        // LOAD USERS FROM SUPABASE
+        // LOAD USERS FROM SUPABASE (profiles table)
         // ============================================================
         async function loadUsers() {
             try {
                 showToast('Loading users...', 'info');
                 
-                const result = await window.supabaseFunctions.getUsers();
+                // Get users from profiles table
+                const { data, error } = await window.supabaseFunctions.supabase
+                    .from('profiles')
+                    .select('*')
+                    .order('created_at', { ascending: false });
                 
-                if (result.success) {
-                    users = result.data || [];
-                    console.log(`✅ Loaded ${users.length} users from Supabase`);
-                    updateStats();
-                    renderUsers();
-                    initCharts();
-                    showToast(`Loaded ${users.length} users`, 'success');
-                } else {
-                    console.error('❌ Failed to load users:', result.error);
-                    showToast('Failed to load users: ' + result.error, 'error');
-                    // Fallback to localStorage if Supabase fails
-                    users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
-                    updateStats();
-                    renderUsers();
-                }
+                if (error) throw error;
+                
+                users = data || [];
+                console.log(`✅ Loaded ${users.length} users from Supabase`);
+                console.log(`⏳ Pending review: ${users.filter(u => u.status === 'pending_review').length}`);
+                updateStats();
+                renderUsers();
+                initCharts();
+                showToast(`Loaded ${users.length} users`, 'success');
+                
             } catch (error) {
                 console.error('❌ Error loading users:', error);
                 showToast('Error loading users. Please refresh.', 'error');
-                // Fallback to localStorage
-                users = JSON.parse(localStorage.getItem('nairobi_raha_users') || '[]');
+                users = [];
                 updateStats();
                 renderUsers();
             }
@@ -1387,22 +1408,45 @@
         // ============================================================
         function updateStats() {
             const total = users.length;
-            const pending = users.filter(u => u.status === 'pending').length;
+            const pendingReview = users.filter(u => u.status === 'pending_review').length;
             const approved = users.filter(u => u.status === 'approved').length;
-            const rejected = users.filter(u => u.status === 'rejected').length;
+            const pending = users.filter(u => u.status === 'pending').length;
             
             const today = new Date();
             const newTodayCount = users.filter(u => {
-                const created = new Date(u.created_at || u.createdAt);
+                const created = new Date(u.created_at);
                 return created.toDateString() === today.toDateString();
             }).length;
             
             totalUsers.textContent = total;
-            pendingUsers.textContent = pending;
-            approvedUsers.textContent = approved;
+            pendingUsers.textContent = pendingReview;
+            approvedUsers.textContent = approved + pending;
             newToday.textContent = newTodayCount;
-            pendingBadge.textContent = pending;
-            notificationCount.textContent = pending;
+            pendingBadge.textContent = pendingReview;
+            profileBadge.textContent = pendingReview;
+            notificationCount.textContent = pendingReview;
+        }
+        
+        // ============================================================
+        // GET MEMBERSHIP BADGE
+        // ============================================================
+        function getMembershipBadge(plan) {
+            if (!plan) return '<span class="membership-badge regular">None</span>';
+            const classes = {
+                'regular': 'regular',
+                'prime': 'prime',
+                'prime-vip': 'prime-vip',
+                'vip': 'vip'
+            };
+            const labels = {
+                'regular': 'Regular',
+                'prime': 'Prime',
+                'prime-vip': 'Prime VIP',
+                'vip': 'VIP'
+            };
+            const cls = classes[plan] || 'regular';
+            const label = labels[plan] || plan.toUpperCase();
+            return `<span class="membership-badge ${cls}">${label}</span>`;
         }
         
         // ============================================================
@@ -1424,7 +1468,7 @@
             });
             
             // Sort by newest first
-            filtered.sort((a, b) => new Date(b.created_at || b.createdAt) - new Date(a.created_at || a.createdAt));
+            filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             
             const totalItems = filtered.length;
             const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -1440,7 +1484,7 @@
             if (pageItems.length === 0) {
                 userTableBody.innerHTML = `
                     <tr>
-                        <td colspan="6">
+                        <td colspan="7">
                             <div class="empty-state">
                                 <i class="fas fa-users"></i>
                                 <h4>No users found</h4>
@@ -1462,15 +1506,16 @@
                             </div>
                         </td>
                         <td><span class="role-badge">${user.role || 'client'}</span></td>
+                        <td>${getMembershipBadge(user.membership_plan)}</td>
                         <td>${user.location || 'N/A'}</td>
                         <td><span class="status-badge ${user.status || 'pending'}">${user.status || 'pending'}</span></td>
-                        <td>${new Date(user.created_at || user.createdAt).toLocaleDateString()}</td>
+                        <td>${new Date(user.created_at).toLocaleDateString()}</td>
                         <td>
                             <div class="action-buttons">
                                 <button class="btn-view" onclick="viewUser('${user.id}')"><i class="fas fa-eye"></i></button>
-                                ${(user.status === 'pending') ? `
-                                    <button class="btn-approve" onclick="approveUser('${user.id}')"><i class="fas fa-check"></i></button>
-                                    <button class="btn-reject" onclick="rejectUser('${user.id}')"><i class="fas fa-times"></i></button>
+                                ${(user.status === 'pending_review' || user.status === 'pending') ? `
+                                    <button class="btn-approve" onclick="approveUser('${user.id}')"><i class="fas fa-check"></i> Approve</button>
+                                    <button class="btn-reject" onclick="rejectUser('${user.id}')"><i class="fas fa-times"></i> Reject</button>
                                 ` : ''}
                                 ${user.role !== 'admin' ? `
                                     <button class="btn-delete" onclick="deleteUser('${user.id}')"><i class="fas fa-trash"></i></button>
@@ -1509,6 +1554,12 @@
             if (!user) return;
             
             currentModalUserId = userId;
+            currentModalUserStatus = user.status;
+            
+            const membershipInfo = user.membership_plan ? 
+                `${user.membership_plan.toUpperCase()} - ${user.membership_days} days (KSh${user.membership_price})` : 
+                'No membership';
+            
             modalBody.innerHTML = `
                 <div class="user-detail">
                     <span class="label">Full Name</span>
@@ -1523,31 +1574,49 @@
                     <span class="value">${user.phone || 'N/A'}</span>
                 </div>
                 <div class="user-detail">
-                    <span class="label">Role</span>
-                    <span class="value"><span class="role-badge">${user.role || 'client'}</span></span>
+                    <span class="label">Gender</span>
+                    <span class="value">${user.gender || 'N/A'}</span>
+                </div>
+                <div class="user-detail">
+                    <span class="label">Age</span>
+                    <span class="value">${user.age || 'N/A'}</span>
                 </div>
                 <div class="user-detail">
                     <span class="label">Location</span>
                     <span class="value">${user.location || 'N/A'}</span>
                 </div>
                 <div class="user-detail">
-                    <span class="label">Status</span>
-                    <span class="value"><span class="status-badge ${user.status || 'pending'}">${user.status || 'pending'}</span></span>
+                    <span class="label">Membership</span>
+                    <span class="value">${getMembershipBadge(user.membership_plan)} ${user.membership_plan ? `- ${user.membership_days} days (KSh${user.membership_price})` : ''}</span>
                 </div>
                 <div class="user-detail">
-                    <span class="label">Joined</span>
-                    <span class="value">${new Date(user.created_at || user.createdAt).toLocaleString()}</span>
+                    <span class="label">Payment Status</span>
+                    <span class="value"><span class="status-badge ${user.payment_status || 'pending'}">${user.payment_status || 'pending'}</span></span>
                 </div>
+                <div class="user-detail">
+                    <span class="label">Profile Status</span>
+                    <span class="value"><span class="status-badge ${user.status || 'pending'}">${user.status || 'pending'}</span></span>
+                </div>
+                ${user.services ? `
+                <div class="user-detail">
+                    <span class="label">Services</span>
+                    <span class="value">${Array.isArray(user.services) ? user.services.join(', ') : user.services}</span>
+                </div>
+                ` : ''}
                 ${user.bio ? `
                 <div class="user-detail">
                     <span class="label">Bio</span>
                     <span class="value">${user.bio}</span>
                 </div>
                 ` : ''}
+                <div class="user-detail">
+                    <span class="label">Joined</span>
+                    <span class="value">${new Date(user.created_at).toLocaleString()}</span>
+                </div>
             `;
             
-            modalApproveBtn.style.display = user.status === 'pending' ? 'inline-block' : 'none';
-            modalRejectBtn.style.display = user.status === 'pending' ? 'inline-block' : 'none';
+            modalApproveBtn.style.display = (user.status === 'pending_review' || user.status === 'pending') ? 'inline-block' : 'none';
+            modalRejectBtn.style.display = (user.status === 'pending_review' || user.status === 'pending') ? 'inline-block' : 'none';
             userModal.classList.add('show');
         };
         
@@ -1555,31 +1624,37 @@
             const user = users.find(u => u.id === userId);
             if (!user) return;
             
-            if (confirm(`Approve ${user.full_name || user.fullName}?`)) {
+            if (confirm(`Approve ${user.full_name || user.fullName || 'User'}'s profile? This will make them visible on the homepage.`)) {
                 try {
-                    const result = await window.supabaseFunctions.updateUserStatus(userId, 'approved');
+                    const { error } = await window.supabaseFunctions.supabase
+                        .from('profiles')
+                        .update({ 
+                            status: 'approved',
+                            is_active: true,
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('id', userId);
                     
-                    if (result.success) {
-                        // Update local data
-                        user.status = 'approved';
-                        localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
-                        updateStats();
-                        renderUsers();
-                        showToast(`${user.full_name || user.fullName} has been approved! ✅`, 'success');
-                        userModal.classList.remove('show');
-                        
-                        // Log activity
-                        await window.supabaseFunctions.logActivity(
-                            userId,
-                            'admin_approve',
-                            `User ${user.full_name || user.fullName} approved by admin`
-                        );
-                    } else {
-                        showToast('Failed to approve user: ' + result.error, 'error');
-                    }
+                    if (error) throw error;
+                    
+                    // Update local data
+                    user.status = 'approved';
+                    user.is_active = true;
+                    updateStats();
+                    renderUsers();
+                    showToast(`✅ ${user.full_name || user.fullName || 'User'} has been approved and is now visible on the homepage!`, 'success');
+                    userModal.classList.remove('show');
+                    
+                    // Log activity
+                    await window.supabaseFunctions.logActivity(
+                        userId,
+                        'admin_approve_profile',
+                        `Profile of ${user.full_name || user.fullName} approved by admin`
+                    );
+                    
                 } catch (error) {
                     console.error('Approve error:', error);
-                    showToast('Error approving user', 'error');
+                    showToast('Failed to approve user: ' + error.message, 'error');
                 }
             }
         };
@@ -1588,29 +1663,35 @@
             const user = users.find(u => u.id === userId);
             if (!user) return;
             
-            if (confirm(`Reject ${user.full_name || user.fullName}?`)) {
+            if (confirm(`Reject ${user.full_name || user.fullName || 'User'}'s profile? They will need to re-submit.`)) {
                 try {
-                    const result = await window.supabaseFunctions.updateUserStatus(userId, 'rejected');
+                    const { error } = await window.supabaseFunctions.supabase
+                        .from('profiles')
+                        .update({ 
+                            status: 'rejected',
+                            is_active: false,
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('id', userId);
                     
-                    if (result.success) {
-                        user.status = 'rejected';
-                        localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
-                        updateStats();
-                        renderUsers();
-                        showToast(`${user.full_name || user.fullName} has been rejected.`, 'info');
-                        userModal.classList.remove('show');
-                        
-                        await window.supabaseFunctions.logActivity(
-                            userId,
-                            'admin_reject',
-                            `User ${user.full_name || user.fullName} rejected by admin`
-                        );
-                    } else {
-                        showToast('Failed to reject user: ' + result.error, 'error');
-                    }
+                    if (error) throw error;
+                    
+                    user.status = 'rejected';
+                    user.is_active = false;
+                    updateStats();
+                    renderUsers();
+                    showToast(`❌ ${user.full_name || user.fullName || 'User'}'s profile has been rejected.`, 'info');
+                    userModal.classList.remove('show');
+                    
+                    await window.supabaseFunctions.logActivity(
+                        userId,
+                        'admin_reject_profile',
+                        `Profile of ${user.full_name || user.fullName} rejected by admin`
+                    );
+                    
                 } catch (error) {
                     console.error('Reject error:', error);
-                    showToast('Error rejecting user', 'error');
+                    showToast('Failed to reject user: ' + error.message, 'error');
                 }
             }
         };
@@ -1624,29 +1705,30 @@
                 return;
             }
             
-            if (confirm(`Delete ${user.full_name || user.fullName} permanently? This cannot be undone.`)) {
+            if (confirm(`Delete ${user.full_name || user.fullName || 'User'} permanently? This cannot be undone.`)) {
                 try {
-                    const result = await window.supabaseFunctions.deleteUser(userId);
+                    const { error } = await window.supabaseFunctions.supabase
+                        .from('profiles')
+                        .delete()
+                        .eq('id', userId);
                     
-                    if (result.success) {
-                        users = users.filter(u => u.id !== userId);
-                        localStorage.setItem('nairobi_raha_users', JSON.stringify(users));
-                        updateStats();
-                        renderUsers();
-                        showToast(`User deleted successfully.`, 'info');
-                        userModal.classList.remove('show');
-                        
-                        await window.supabaseFunctions.logActivity(
-                            userId,
-                            'admin_delete',
-                            `User ${user.full_name || user.fullName} deleted by admin`
-                        );
-                    } else {
-                        showToast('Failed to delete user: ' + result.error, 'error');
-                    }
+                    if (error) throw error;
+                    
+                    users = users.filter(u => u.id !== userId);
+                    updateStats();
+                    renderUsers();
+                    showToast(`User deleted successfully.`, 'info');
+                    userModal.classList.remove('show');
+                    
+                    await window.supabaseFunctions.logActivity(
+                        userId,
+                        'admin_delete_user',
+                        `User ${user.full_name || user.fullName} deleted by admin`
+                    );
+                    
                 } catch (error) {
                     console.error('Delete error:', error);
-                    showToast('Error deleting user', 'error');
+                    showToast('Failed to delete user: ' + error.message, 'error');
                 }
             }
         };
@@ -1704,7 +1786,7 @@
         // ============================================================
         logoutBtn.addEventListener('click', () => {
             if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('nairobi_raha_admin_session');
+                localStorage.removeItem('nairobi_vibe_admin_session');
                 window.location.href = 'admin-login.html';
             }
         });
@@ -1713,14 +1795,14 @@
         // NOTIFICATION BUTTON
         // ============================================================
         notificationBtn.addEventListener('click', () => {
-            const pending = users.filter(u => u.status === 'pending').length;
+            const pending = users.filter(u => u.status === 'pending_review').length;
             if (pending > 0) {
-                filterStatus.value = 'pending';
+                filterStatus.value = 'pending_review';
                 currentPage = 1;
                 renderUsers();
-                showToast(`Showing ${pending} pending users`, 'info');
+                showToast(`Showing ${pending} profiles pending review`, 'info');
             } else {
-                showToast('No pending approvals! 🎉', 'success');
+                showToast('No pending reviews! 🎉', 'success');
             }
         });
         
@@ -1728,11 +1810,9 @@
         // CHARTS
         // ============================================================
         function initCharts() {
-            // Destroy existing charts
             if (chart1) { chart1.destroy(); chart1 = null; }
             if (chart2) { chart2.destroy(); chart2 = null; }
             
-            // Registrations Chart
             const ctx1 = document.getElementById('registrationsChart').getContext('2d');
             const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
             const registrations = generateRegistrationData();
@@ -1758,9 +1838,7 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
                         x: { grid: { display: false } }
@@ -1768,7 +1846,6 @@
                 }
             });
             
-            // Roles Chart
             const ctx2 = document.getElementById('rolesChart').getContext('2d');
             const roleCounts = {
                 admin: users.filter(u => u.role === 'admin').length,
@@ -1809,7 +1886,7 @@
                 const date = new Date(now);
                 date.setDate(date.getDate() - i);
                 const count = users.filter(u => {
-                    const created = new Date(u.created_at || u.createdAt);
+                    const created = new Date(u.created_at);
                     return created.toDateString() === date.toDateString();
                 }).length;
                 data.push(count || 0);
@@ -1865,50 +1942,14 @@
         });
         
         // ============================================================
-        // CREATE DEFAULT ADMIN IN SUPABASE IF NEEDED
-        // ============================================================
-        async function ensureAdminExists() {
-            try {
-                const result = await window.supabaseFunctions.getUserByEmail('admin@nairobiraha.com');
-                
-                if (!result.success || !result.data) {
-                    // Create default admin
-                    const adminData = {
-                        fullName: 'Admin User',
-                        email: 'admin@nairobiraha.com',
-                        phone: '0712345678',
-                        password: 'Admin@123',
-                        role: 'admin',
-                        location: 'Nairobi CBD',
-                        bio: 'System Administrator',
-                        status: 'approved'
-                    };
-                    
-                    const createResult = await window.supabaseFunctions.createUser(adminData);
-                    if (createResult.success) {
-                        console.log('✅ Default admin created in Supabase!');
-                        console.log('📧 Email: admin@nairobiraha.com');
-                        console.log('🔑 Password: Admin@123');
-                    }
-                } else {
-                    console.log('✅ Admin account exists in Supabase');
-                }
-            } catch (error) {
-                console.log('ℹ️ Admin check: Could not verify admin account', error);
-            }
-        }
-        
-        // ============================================================
         // INITIALIZE
         // ============================================================
-        await ensureAdminExists();
         await loadUsers();
         
         console.log('✅ Admin Dashboard with Supabase Loaded Successfully!');
         console.log(`👥 Total Users: ${users.length}`);
-        console.log(`⏳ Pending Approvals: ${users.filter(u => u.status === 'pending').length}`);
-        console.log('📧 Admin: admin@nairobiraha.com');
-        console.log('🔑 Password: Admin@123');
+        console.log(`⏳ Pending Review: ${users.filter(u => u.status === 'pending_review').length}`);
+        console.log('📧 Admin Email: admin@nairobivibe.com');
         
     });
 </script>
