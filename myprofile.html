@@ -189,7 +189,6 @@
         
         /* ---------- STATUS BANNER ---------- */
         .status-banner {
-            background: #fff3cd;
             border-left: 4px solid #ffc107;
             padding: 15px 20px;
             border-radius: 8px;
@@ -209,6 +208,11 @@
         .status-banner.active {
             background: #d4edda;
             border-left-color: #28a745;
+        }
+        
+        .status-banner.pending {
+            background: #fff3cd;
+            border-left-color: #ffc107;
         }
         
         .status-banner .status-text {
@@ -235,6 +239,11 @@
         .status-banner .btn-activate:hover {
             background: #b30057;
             transform: translateY(-1px);
+        }
+        
+        .status-banner .btn-activate:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         
         /* ---------- WALLET SECTION ---------- */
@@ -1245,7 +1254,7 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT - MODIFIED FOR ADMIN APPROVAL FLOW
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1264,6 +1273,9 @@
             const logoutBtn = document.getElementById('logoutBtn');
             const loginPrompt = document.getElementById('loginPrompt');
             const profileContent = document.getElementById('profileContent');
+            const activateBtn = document.getElementById('activateBtn');
+            const statusBanner = document.getElementById('statusBanner');
+            const statusText = document.getElementById('statusText');
             
             // ============================================================
             // CHECK IF SUPABASE IS LOADED
@@ -1273,20 +1285,19 @@
             }
             
             // ============================================================
-            // CHECK SESSION - FIXED (shows login prompt instead of redirect)
+            // CHECK SESSION
             // ============================================================
             let currentUser = null;
+            let profileStatus = 'inactive'; // inactive, pending, active
             
             function checkSession() {
                 const session = localStorage.getItem('nairobi_vibe_session');
                 if (session) {
                     currentUser = JSON.parse(session);
-                    // Show profile content, hide login prompt
                     loginPrompt.style.display = 'none';
                     profileContent.style.display = 'block';
                     loadUserProfile();
                 } else {
-                    // Show login prompt, hide profile content
                     currentUser = null;
                     loginPrompt.style.display = 'block';
                     profileContent.style.display = 'none';
@@ -1304,7 +1315,6 @@
                 document.getElementById('profileName').value = currentUser.name || '';
                 document.getElementById('profilePhone').value = currentUser.phone || '';
                 
-                // Load profile data from Supabase
                 try {
                     const { data, error } = await window.supabaseFunctions.supabase
                         .from('profiles')
@@ -1314,9 +1324,25 @@
                     
                     if (data) {
                         fillProfileForm(data);
+                        // Check profile status
+                        if (data.status === 'approved') {
+                            profileStatus = 'active';
+                            updateStatusBanner('active');
+                        } else if (data.status === 'pending') {
+                            profileStatus = 'pending';
+                            updateStatusBanner('pending');
+                        } else {
+                            profileStatus = 'inactive';
+                            updateStatusBanner('inactive');
+                        }
+                    } else {
+                        profileStatus = 'inactive';
+                        updateStatusBanner('inactive');
                     }
                 } catch (error) {
                     console.log('No existing profile found');
+                    profileStatus = 'inactive';
+                    updateStatusBanner('inactive');
                 }
             }
             
@@ -1337,7 +1363,6 @@
                 document.getElementById('profileOtherServices').value = data.other_services || '';
                 document.getElementById('listOtherCities').checked = data.list_in_other_cities || false;
                 
-                // Services
                 if (data.services) {
                     const services = Array.isArray(data.services) ? data.services : JSON.parse(data.services || '[]');
                     document.querySelectorAll('#servicesGrid input[type="checkbox"]').forEach(cb => {
@@ -1345,35 +1370,34 @@
                     });
                 }
                 
-                // Wallet
                 document.getElementById('walletBalance').textContent = 'KSh' + (data.wallet_balance || 0);
                 document.getElementById('totalWalletBalance').textContent = 'KSh' + (data.wallet_balance || 0);
                 document.getElementById('bidWager').textContent = 'KSh' + (data.bid_wager || 0);
                 document.getElementById('availableBalance').textContent = 'KSh' + (data.available_balance || 0);
                 document.getElementById('chatCount').textContent = data.chat_count || 0;
                 
-                // Status
-                updateStatusBanner(data.is_active || false);
-                
-                // About
                 updateAboutSection(data);
             }
             
             // ============================================================
             // UPDATE STATUS BANNER
             // ============================================================
-            function updateStatusBanner(isActive) {
-                const banner = document.getElementById('statusBanner');
-                const statusText = document.getElementById('statusText');
-                
-                if (isActive) {
-                    banner.className = 'status-banner active';
+            function updateStatusBanner(status) {
+                if (status === 'active') {
+                    statusBanner.className = 'status-banner active';
                     statusText.innerHTML = '<i class="fas fa-check-circle"></i> Your profile is active and visible online.';
-                    document.getElementById('activateBtn').textContent = 'Deactivate';
+                    activateBtn.textContent = 'Deactivate';
+                    activateBtn.disabled = false;
+                } else if (status === 'pending') {
+                    statusBanner.className = 'status-banner pending';
+                    statusText.innerHTML = '<i class="fas fa-clock"></i> Your profile is pending admin approval. You will be notified once approved.';
+                    activateBtn.textContent = 'Pending Approval';
+                    activateBtn.disabled = true;
                 } else {
-                    banner.className = 'status-banner inactive';
+                    statusBanner.className = 'status-banner inactive';
                     statusText.innerHTML = '<i class="fas fa-circle"></i> Your profile is not active and will not be visible online.';
-                    document.getElementById('activateBtn').textContent = 'Activate Now';
+                    activateBtn.textContent = 'Activate Now';
+                    activateBtn.disabled = false;
                 }
             }
             
@@ -1395,43 +1419,56 @@
             }
             
             // ============================================================
-            // ACTIVATE/DEACTIVATE PROFILE
+            // ACTIVATE BUTTON - Redirect to activate.html
             // ============================================================
-            document.getElementById('activateBtn').addEventListener('click', async function() {
+            activateBtn.addEventListener('click', function() {
+                if (this.disabled) return;
+                
+                if (profileStatus === 'active') {
+                    // Deactivate - set status to inactive
+                    deactivateProfile();
+                } else {
+                    // Go to activate page
+                    window.location.href = 'activate.html';
+                }
+            });
+            
+            async function deactivateProfile() {
                 if (!currentUser) {
                     showToast('Please login first', 'error');
                     return;
                 }
                 
-                const isActive = this.textContent === 'Deactivate';
-                const newStatus = !isActive;
-                
                 try {
                     const { error } = await window.supabaseFunctions.supabase
                         .from('profiles')
-                        .update({ is_active: newStatus })
+                        .update({ 
+                            status: 'inactive',
+                            is_active: false,
+                            updated_at: new Date().toISOString()
+                        })
                         .eq('user_id', currentUser.id);
                     
                     if (error) throw error;
                     
-                    updateStatusBanner(newStatus);
-                    showToast(newStatus ? 'Profile activated successfully!' : 'Profile deactivated.', 'success');
+                    profileStatus = 'inactive';
+                    updateStatusBanner('inactive');
+                    showToast('Profile deactivated successfully', 'success');
                 } catch (error) {
-                    showToast('Error updating status: ' + error.message, 'error');
+                    showToast('Error deactivating profile: ' + error.message, 'error');
                 }
-            });
+            }
             
             // ============================================================
-            // SAVE PROFILE
+            // SAVE PROFILE - Set status to 'pending' for admin approval
             // ============================================================
             profileForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                // Check if user is logged in
                 if (!currentUser) {
                     showToast('Please login first to save your profile', 'error');
                     setTimeout(function() {
-                        window.location.href = 'login.html';
+                        window.location.href = 'login.html?redirect=myprofile.html';
                     }, 1500);
                     return;
                 }
@@ -1441,7 +1478,6 @@
                 saveLoader.classList.add('show');
                 saveIcon.style.display = 'none';
                 
-                // Collect services
                 const services = [];
                 document.querySelectorAll('#servicesGrid input[type="checkbox"]:checked').forEach(cb => {
                     services.push(cb.value);
@@ -1465,11 +1501,12 @@
                     incalls_rate: parseInt(document.getElementById('profileIncallsRate').value) || 0,
                     outcalls_rate: parseInt(document.getElementById('profileOutcallsRate').value) || 0,
                     list_in_other_cities: document.getElementById('listOtherCities').checked,
+                    status: 'pending', // <-- Set status to pending for admin approval
+                    is_active: false,
                     updated_at: new Date().toISOString()
                 };
                 
                 try {
-                    // Check if profile exists
                     const { data: existing, error: checkError } = await window.supabaseFunctions.supabase
                         .from('profiles')
                         .select('id')
@@ -1479,13 +1516,11 @@
                     let result;
                     
                     if (existing) {
-                        // Update
                         result = await window.supabaseFunctions.supabase
                             .from('profiles')
                             .update(profileData)
                             .eq('user_id', currentUser.id);
                     } else {
-                        // Insert
                         profileData.created_at = new Date().toISOString();
                         result = await window.supabaseFunctions.supabase
                             .from('profiles')
@@ -1494,8 +1529,18 @@
                     
                     if (result.error) throw result.error;
                     
-                    showToast('Profile saved successfully! 🎉', 'success');
+                    profileStatus = 'pending';
+                    updateStatusBanner('pending');
+                    
+                    showToast('✅ Profile saved! Waiting for admin approval.', 'success');
                     updateAboutSection(profileData);
+                    
+                    // Log activity for admin
+                    await window.supabaseFunctions.logActivity(
+                        currentUser.id,
+                        'profile_submitted',
+                        `User ${profileData.full_name} submitted profile for approval`
+                    );
                     
                 } catch (error) {
                     showToast('Error saving profile: ' + error.message, 'error');
@@ -1589,8 +1634,9 @@
             checkSession();
             
             console.log('✅ My Profile Page Loaded Successfully!');
-            console.log('🎨 Design: Complete Profile Page with all sections');
+            console.log('📋 Profile Status: Pending admin approval flow enabled');
             console.log('🔐 Shows login prompt if user is not logged in');
+            console.log('👤 After saving, profile goes to admin for approval');
             
         });
     </script>
