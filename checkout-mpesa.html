@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Checkout - MPESA - Nairobi Vibe Escorts</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Supabase Config -->
+    <script src="supabase-config.js"></script>
+
+    <style>
+        /* ============================================================
+                   CHECKOUT MPESA PAGE STYLES
+                   ============================================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', "Helvetica Neue", Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* ---------- HEADER ---------- */
+        .header {
+            background: linear-gradient(135deg, #f7053e, #d60435);
+            padding: 10px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+        }
+        
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #E0006C;
+        }
+        
+        .logo-text {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 800;
+        }
+        
+        .logo-text span {
+            color: #FE5ACB;
+        }
+        
+        .back-link {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 6px 15px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        
+        .back-link i {
+            margin-right: 6px;
+        }
+        
+        /* ---------- MAIN CONTENT ---------- */
+        .main-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+        
+        /* ---------- BREADCRUMB ---------- */
+        .breadcrumb {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: #E0006C;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .breadcrumb span {
+            color: #666;
+        }
+        
+        /* ---------- CONTACT BANNER ---------- */
+        .contact-banner {
+            background: #fff3cd;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .contact-banner i {
+            color: #ffc107;
+            font-size: 20px;
+        }
+        
+        .contact-banner .contact-text {
+            font-size: 14px;
+            color: #856404;
+        }
+        
+        .contact-banner .contact-text strong {
+            color: #E0006C;
+        }
+        
+        .contact-banner .contact-text a {
+            color: #E0006C;
+            font-weight: 700;
+        }
+        
+        /* ---------- CHECKOUT CARD ---------- */
+        .checkout-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+        }
+        
+        .checkout-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #E0006C;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        
+        .checkout-title i {
+            color: #6fcf97;
+            margin-right: 8px;
+        }
+        
+        .checkout-subtitle {
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        /* ---------- PLAN SUMMARY ---------- */
+        .plan-summary {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .plan-summary .plan-label {
+            font-size: 13px;
+            color: #999;
+        }
+        
+        .plan-summary .plan-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .plan-summary .plan-value .highlight {
+            color: #E0006C;
+        }
+        
+        /* ---------- PAYMENT FORM ---------- */
+        .payment-form {
+            margin-bottom: 25px;
+        }
+        
+        .payment-form .form-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .payment-form .form-title i {
+            color: #6fcf97;
+        }
+        
+        .payment-form .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .payment-form .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 6px;
+        }
+        
+        .payment-form .form-group label .required {
+            color: #e74c3c;
+        }
+        
+        .payment-form .form-group .input-wrapper {
+            position: relative;
+        }
+        
+        .payment-form .form-group .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6fcf97;
+            font-size: 18px;
+        }
+        
+        .payment-form .form-group .input-wrapper input {
+            width: 100%;
+            padding: 14px 14px 14px 48px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            color: #333;
+        }
+        
+        .payment-form .form-group .input-wrapper input:focus {
+            outline: none;
+            border-color: #E0006C;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(224, 0, 108, 0.1);
+        }
+        
+        .payment-form .form-group .input-wrapper .phone-prefix {
+            position: absolute;
+            left: 44px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .payment-form .form-group .input-wrapper input.phone-input {
+            padding-left: 70px;
+        }
+        
+        .payment-form .form-group .input-wrapper .phone-prefix-text {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-weight: 600;
+            font-size: 14px;
+            background: #f0f0f0;
+            padding: 6px 10px 6px 14px;
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .payment-form .form-group .input-wrapper input.phone-input-with-prefix {
+            padding-left: 75px;
+        }
+        
+        /* ---------- INSTRUCTIONS ---------- */
+        .instructions {
+            background: #f0f7ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .instructions .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .instructions .step .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #3498db;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .instructions .step .step-text {
+            flex: 1;
+        }
+        
+        .instructions .step .step-text strong {
+            color: #333;
+        }
+        
+        /* ---------- PAY BUTTON ---------- */
+        .btn-pay {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #6fcf97, #27ae60);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+        }
+        
+        .btn-pay:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-pay i {
+            font-size: 20px;
+        }
+        
+        /* ---------- LOADER ---------- */
+        .loader {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .loader.show {
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ---------- SUCCESS STATE ---------- */
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .success-state.show {
+            display: block;
+        }
+        
+        .success-state .success-icon {
+            font-size: 72px;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        
+        .success-state h3 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #27ae60;
+            margin-bottom: 8px;
+        }
+        
+        .success-state p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .success-state .btn-dashboard {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 12px 35px;
+            background: linear-gradient(135deg, #E0006C, #b30057);
+            color: #fff;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .success-state .btn-dashboard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(224, 0, 108, 0.3);
+        }
+        
+        /* ---------- FOOTER ---------- */
+        .footer {
+            background: #1a0528;
+            color: #ccc;
+            padding: 30px 15px 15px;
+            margin-top: 30px;
+        }
+        
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .footer-col h4 {
+            color: #FE5ACB;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        
+        .footer-col p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #aaa;
+        }
+        
+        .footer-col a {
+            color: #FE5ACB;
+            font-size: 13px;
+            text-decoration: none;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            padding-top: 15px;
+            border-top: 1px solid #2a1a3a;
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .footer-bottom .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #2a1a3a;
+            color: #FE5ACB;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-bottom .social-icons a:hover {
+            background: #FE5ACB;
+            color: #1a0528;
+        }
+        
+        /* ---------- TOAST ---------- */
+        .toast {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 12px 24px;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 9999;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
+        .toast.info { background: #3498db; }
+        
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 600px) {
+            .checkout-card {
+                padding: 20px;
+            }
+            
+            .checkout-title {
+                font-size: 20px;
+            }
+            
+            .plan-summary {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        /* ---------- SCROLLBAR ---------- */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #E0006C;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         HEADER
+         ============================================================ -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-img">NV</div>
+                <span class="logo-text">Nairobi <span>Vibe</span></span>
+            </div>
+            <a href="checkout.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Checkout
+            </a>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         MAIN CONTENT
+         ============================================================ -->
+    <div class="main-content">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> &raquo;
+            <a href="myprofile.html">My Profile</a> &raquo;
+            <a href="activate.html">Activate</a> &raquo;
+            <a href="checkout.html">Checkout</a> &raquo;
+            <span>MPESA</span>
+        </div>
+
+        <!-- Contact Banner -->
+        <div class="contact-banner">
+            <i class="fas fa-phone-alt"></i>
+            <div class="contact-text">
+                If you have a problem with payment kindly contact admin via Call or WhatsApp on this number. 
+                <strong><a href="tel:0703206765"><i class="fas fa-phone"></i> 0703 206 765</a></strong>
+            </div>
+        </div>
+
+        <!-- Checkout Card -->
+        <div class="checkout-card" id="checkoutCard">
+
+            <h1 class="checkout-title"><i class="fas fa-mobile-alt"></i> PAY WITH M-PESA</h1>
+            <p class="checkout-subtitle">Enter Your M-Pesa Number Below</p>
+
+            <!-- Plan Summary -->
+            <div class="plan-summary" id="planSummary">
+                <div>
+                    <div class="plan-label">Selected Plan</div>
+                    <div class="plan-value" id="planNameDisplay">REGULAR - 15 Days</div>
+                </div>
+                <div>
+                    <div class="plan-label">Total Amount</div>
+                    <div class="plan-value"><span class="highlight" id="totalAmountDisplay">KSh1,300</span></div>
+                </div>
+            </div>
+
+            <!-- Payment Form -->
+            <div class="payment-form">
+                <div class="form-title">
+                    <i class="fas fa-mobile-alt"></i> M-PESA Payment
+                </div>
+
+                <div class="form-group">
+                    <label>M-Pesa Phone Number <span class="required">*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-phone"></i>
+                        <span class="phone-prefix-text">+254</span>
+                        <input type="tel" id="phoneNumber" class="phone-input-with-prefix" 
+                               placeholder="722xxxxxx" maxlength="9" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <div class="step">
+                    <span class="step-num">1</span>
+                    <span class="step-text">
+                        Click on <strong>"SEND PAYMENT REQUEST TO PHONE"</strong>.
+                    </span>
+                </div>
+                <div class="step">
+                    <span class="step-num">2</span>
+                    <span class="step-text">
+                        Check your phone number for the <strong>M-PESA PIN prompt</strong>.
+                    </span>
+                </div>
+                <div class="step">
+                    <span class="step-num">3</span>
+                    <span class="step-text">
+                        Key in your <strong>M-PESA PIN</strong> and submit.
+                    </span>
+                </div>
+                <div class="step">
+                    <span class="step-num">4</span>
+                    <span class="step-text">
+                        Wait for this page to refresh to move you to the next page.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Pay Button -->
+            <button class="btn-pay" id="payBtn">
+                <span id="payBtnText">SEND PAYMENT REQUEST TO PHONE</span>
+                <span class="loader" id="payLoader"></span>
+                <i class="fas fa-arrow-right" id="payIcon"></i>
+            </button>
+
+            <!-- Success State -->
+            <div class="success-state" id="successState">
+                <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                <h3>Payment Successful! 🎉</h3>
+                <p>Your payment has been received. Your profile will be activated within 24 hours.</p>
+                <a href="myprofile.html" class="btn-dashboard">
+                    <i class="fas fa-user"></i> Go to My Profile
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>Nairobi Vibe Escorts</h4>
+                <p>Mombasa escorts and call girls from Mombasa Kenya offering hot massage and escorts services at very affordable rates. Tomba malaya wa mombasa leo.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#">About Us</a><br>
+                <a href="#">Escort Agencies</a><br>
+                <a href="#">Escorts Blog</a><br>
+                <a href="#">Hookup</a>
+            </div>
+            <div class="footer-col">
+                <h4>More</h4>
+                <a href="#">Kenyan Escorts</a><br>
+                <a href="#">Nairobi Tamu</a><br>
+                <a href="#">Nairobi Raha Videos</a><br>
+                <a href="#">Sexy Nairobi Escorts</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2026 Nairobi Vibe Massage and Escort services. Powered by <span style="color:#FE5ACB;">Nairobi Vibe</span></p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         TOAST
+         ============================================================ -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Notification</span>
+    </div>
+
+    <!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ============================================================
+            // ELEMENTS
+            // ============================================================
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const payBtn = document.getElementById('payBtn');
+            const payBtnText = document.getElementById('payBtnText');
+            const payLoader = document.getElementById('payLoader');
+            const payIcon = document.getElementById('payIcon');
+            const phoneInput = document.getElementById('phoneNumber');
+            const successState = document.getElementById('successState');
+            const checkoutCard = document.getElementById('checkoutCard');
+
+            // ============================================================
+            // GET PLAN DATA FROM URL
+            // ============================================================
+            function getPlanFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const plan = urlParams.get('plan') || 'regular';
+                const days = urlParams.get('days') || '15';
+                const price = urlParams.get('price') || '1300';
+
+                return { plan, days, price };
+            }
+
+            const planData = getPlanFromURL();
+
+            // Plan names mapping
+            const planNames = {
+                'regular': 'REGULAR',
+                'prime': 'PRIME',
+                'prime-vip': 'PRIME VIP',
+                'vip': 'VIP'
+            };
+
+            // Update plan summary
+            document.getElementById('planNameDisplay').textContent = 
+                (planNames[planData.plan] || planData.plan.toUpperCase()) + ' - ' + planData.days + ' Days';
+            document.getElementById('totalAmountDisplay').textContent = 'KSh' + parseInt(planData.price).toLocaleString();
+
+            // ============================================================
+            // PHONE INPUT FORMATTING
+            // ============================================================
+            phoneInput.addEventListener('input', function() {
+                // Remove non-numeric characters
+                this.value = this.value.replace(/\D/g, '');
+                
+                // Limit to 9 digits (after 254)
+                if (this.value.length > 9) {
+                    this.value = this.value.slice(0, 9);
+                }
+            });
+
+            phoneInput.addEventListener('keypress', function(e) {
+                // Only allow numbers
+                if (e.key < '0' || e.key > '9') {
+                    e.preventDefault();
+                }
+            });
+
+            // ============================================================
+            // PAY NOW BUTTON
+            // ============================================================
+            payBtn.addEventListener('click', function() {
+                const phone = phoneInput.value.trim();
+
+                // Validate phone number
+                if (phone.length < 9) {
+                    showToast('Please enter a valid M-Pesa phone number (e.g., 722xxxxxx)', 'error');
+                    phoneInput.focus();
+                    return;
+                }
+
+                // Show loading
+                payBtn.disabled = true;
+                payBtnText.textContent = 'Sending Request...';
+                payLoader.classList.add('show');
+                payIcon.style.display = 'none';
+
+                // Simulate sending payment request
+                setTimeout(function() {
+                    // Hide form, show success
+                    const paymentForm = document.querySelector('.payment-form');
+                    const instructions = document.querySelector('.instructions');
+                    
+                    paymentForm.style.display = 'none';
+                    instructions.style.display = 'none';
+                    
+                    successState.classList.add('show');
+                    
+                    // Show success toast
+                    showToast('✅ Payment request sent to ' + phone + '!', 'success');
+
+                    // Reset button (hidden anyway)
+                    payBtn.disabled = false;
+                    payBtnText.textContent = 'SEND PAYMENT REQUEST TO PHONE';
+                    payLoader.classList.remove('show');
+                    payIcon.style.display = 'inline-block';
+
+                }, 2000);
+            });
+
+            // ============================================================
+            // CHECK SESSION
+            // ============================================================
+            function checkSession() {
+                const session = localStorage.getItem('nairobi_vibe_session');
+                if (!session) {
+                    showToast('Please login to continue', 'error');
+                    setTimeout(function() {
+                        window.location.href = 'login.html?redirect=checkout-mpesa.html';
+                    }, 1500);
+                }
+            }
+            checkSession();
+
+            // ============================================================
+            // TOAST
+            // ============================================================
+            function showToast(message, type = 'info') {
+                toastMessage.textContent = message;
+                toast.className = 'toast ' + type;
+                void toast.offsetWidth;
+                toast.classList.add('show');
+
+                clearTimeout(toast._timeout);
+                toast._timeout = setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+
+            // ============================================================
+            // ENTER KEY SUPPORT
+            // ============================================================
+            phoneInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    payBtn.click();
+                }
+            });
+
+            console.log('✅ Checkout MPESA Page Loaded Successfully!');
+            console.log('📋 Plan:', planData.plan);
+            console.log('💰 Amount: KSh' + planData.price);
+            console.log('📱 Phone: +254' + phoneInput.value);
+
+        });
+    </script>
+
+</body>
+</html>
