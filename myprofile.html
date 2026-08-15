@@ -19,7 +19,7 @@
     
     <style>
         /* ============================================================
-                   MY PROFILE PAGE - MOBILE OPTIMIZED WITH PROFILE TYPE
+                   MY PROFILE PAGE - WITH MEMBERSHIP PLANS
                    ============================================================ */
         
         * {
@@ -496,17 +496,9 @@
             border-color: #E0006C;
             background: #fce4ec;
         }
-        .profile-type-selector .type-option .type-icon {
-            font-size: 14px;
-        }
-        .profile-type-selector .type-option .type-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #333;
-        }
-        .profile-type-selector .type-option.active .type-label {
-            color: #E0006C;
-        }
+        .profile-type-selector .type-option .type-icon { font-size: 14px; }
+        .profile-type-selector .type-option .type-label { font-size: 12px; font-weight: 600; color: #333; }
+        .profile-type-selector .type-option.active .type-label { color: #E0006C; }
         .profile-type-selector .type-option .type-badge {
             font-size: 8px;
             padding: 1px 8px;
@@ -516,6 +508,106 @@
         }
         .type-badge.regular { background: #6c757d; color: #fff; }
         .type-badge.vip { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
+        
+        /* ---------- MEMBERSHIP PLANS ---------- */
+        .membership-section {
+            margin: 12px 0;
+        }
+        .membership-section .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .membership-section .section-label i {
+            color: #E0006C;
+            margin-right: 4px;
+        }
+        
+        .membership-plans {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .membership-plans .plan-option {
+            padding: 10px 8px;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            min-height: 44px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .membership-plans .plan-option:hover {
+            border-color: #E0006C;
+        }
+        .membership-plans .plan-option.active {
+            border-color: #E0006C;
+            background: #fce4ec;
+        }
+        .membership-plans .plan-option .plan-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+        }
+        .membership-plans .plan-option .plan-price {
+            font-size: 11px;
+            color: #E0006C;
+            font-weight: 600;
+        }
+        .membership-plans .plan-option .plan-badge {
+            font-size: 7px;
+            padding: 1px 6px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .plan-badge.regular-badge { background: #6c757d; color: #fff; }
+        .plan-badge.prime-badge { background: #007bff; color: #fff; }
+        .plan-badge.prime-vip-badge { background: #8b5cf6; color: #fff; }
+        .plan-badge.vip-badge { background: linear-gradient(135deg, #f7053e, #d60435); color: #fff; }
+        
+        /* ---------- DURATION OPTIONS ---------- */
+        .duration-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .duration-options .duration-btn {
+            padding: 8px 6px;
+            border: 2px solid #e8e8e8;
+            border-radius: 8px;
+            background: #fafafa;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .duration-options .duration-btn:hover {
+            border-color: #E0006C;
+        }
+        .duration-options .duration-btn.active {
+            border-color: #E0006C;
+            background: #fce4ec;
+        }
+        .duration-options .duration-btn .days {
+            font-size: 11px;
+            font-weight: 700;
+            color: #333;
+        }
+        .duration-options .duration-btn .price {
+            font-size: 10px;
+            font-weight: 600;
+            color: #E0006C;
+        }
         
         /* ---------- SERVICES CHECKBOXES ---------- */
         .services-grid {
@@ -692,6 +784,7 @@
             .services-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
             .site-content { padding: 15px; }
             .photo-section .photo-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+            .membership-plans { grid-template-columns: repeat(4, 1fr); }
         }
         @media (min-width: 768px) {
             .bottom-nav { display: none; }
@@ -702,6 +795,10 @@
             .site-content { padding: 20px; }
             .profile-form { padding: 20px 25px; }
             .photo-section .photo-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+        }
+        @media (max-width: 480px) {
+            .duration-options { grid-template-columns: repeat(2, 1fr); }
+            .membership-plans { grid-template-columns: 1fr 1fr; }
         }
         
         /* ---------- SCROLLBAR ---------- */
@@ -968,7 +1065,7 @@
                 </div>
 
                 <!-- ============================================================
-                     PROFILE TYPE SELECTOR - NEW
+                     PROFILE TYPE SELECTOR
                      ============================================================ -->
                 <div style="margin-top:8px;">
                     <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:6px;">Profile Type <span class="required">*</span></label>
@@ -985,6 +1082,43 @@
                         </div>
                     </div>
                     <input type="hidden" id="profileType" value="regular">
+                </div>
+
+                <!-- ============================================================
+                     MEMBERSHIP PLANS - NEW
+                     ============================================================ -->
+                <div class="membership-section">
+                    <label class="section-label"><i class="fas fa-crown"></i> Select Membership Plan</label>
+                    <div class="membership-plans" id="membershipPlans">
+                        <div class="plan-option active" data-plan="regular" onclick="selectPlan('regular')">
+                            <span class="plan-name">Regular</span>
+                            <span class="plan-price">KSh400 <small>from</small></span>
+                            <span class="plan-badge regular-badge">Basic</span>
+                        </div>
+                        <div class="plan-option" data-plan="prime" onclick="selectPlan('prime')">
+                            <span class="plan-name">Prime</span>
+                            <span class="plan-price">KSh500 <small>from</small></span>
+                            <span class="plan-badge prime-badge">Popular</span>
+                        </div>
+                        <div class="plan-option" data-plan="prime-vip" onclick="selectPlan('prime-vip')">
+                            <span class="plan-name">Prime VIP</span>
+                            <span class="plan-price">KSh600 <small>from</small></span>
+                            <span class="plan-badge prime-vip-badge">Best Value</span>
+                        </div>
+                        <div class="plan-option" data-plan="vip" onclick="selectPlan('vip')">
+                            <span class="plan-name">VIP</span>
+                            <span class="plan-price">KSh900 <small>from</small></span>
+                            <span class="plan-badge vip-badge">Premium</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selectedPlan" value="regular">
+
+                    <!-- Duration Options -->
+                    <div class="duration-options" id="durationOptions">
+                        <!-- Dynamically generated by JavaScript -->
+                    </div>
+                    <input type="hidden" id="selectedDuration" value="3">
+                    <input type="hidden" id="selectedPrice" value="400">
                 </div>
 
                 <!-- Services -->
@@ -1145,11 +1279,147 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT - WITH PROFILE TYPE
+     JAVASCRIPT - WITH MEMBERSHIP PLANS
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
+            // ============================================================
+            // MEMBERSHIP PLAN DATA
+            // ============================================================
+            const membershipData = {
+                regular: {
+                    name: 'Regular',
+                    badge: 'Basic',
+                    badgeClass: 'regular-badge',
+                    durations: [
+                        { days: 3, price: 400 },
+                        { days: 7, price: 700 },
+                        { days: 15, price: 1300 },
+                        { days: 30, price: 2000 }
+                    ]
+                },
+                prime: {
+                    name: 'Prime',
+                    badge: 'Popular',
+                    badgeClass: 'prime-badge',
+                    durations: [
+                        { days: 3, price: 500 },
+                        { days: 7, price: 950 },
+                        { days: 15, price: 1800 },
+                        { days: 30, price: 3000 }
+                    ]
+                },
+                'prime-vip': {
+                    name: 'Prime VIP',
+                    badge: 'Best Value',
+                    badgeClass: 'prime-vip-badge',
+                    durations: [
+                        { days: 3, price: 600 },
+                        { days: 7, price: 1250 },
+                        { days: 15, price: 2400 },
+                        { days: 30, price: 4000 }
+                    ]
+                },
+                vip: {
+                    name: 'VIP',
+                    badge: 'Premium',
+                    badgeClass: 'vip-badge',
+                    durations: [
+                        { days: 3, price: 900 },
+                        { days: 7, price: 1450 },
+                        { days: 15, price: 2800 },
+                        { days: 30, price: 5000 }
+                    ]
+                }
+            };
+
+            let currentPlan = 'regular';
+            let currentDuration = 3;
+            let currentPrice = 400;
+
+            // ============================================================
+            // SELECT PLAN
+            // ============================================================
+            window.selectPlan = function(plan) {
+                currentPlan = plan;
+                document.getElementById('selectedPlan').value = plan;
+                
+                // Update UI
+                document.querySelectorAll('.plan-option').forEach(opt => {
+                    opt.classList.remove('active');
+                    if (opt.dataset.plan === plan) {
+                        opt.classList.add('active');
+                    }
+                });
+                
+                // Update durations
+                updateDurations(plan);
+            };
+
+            // ============================================================
+            // UPDATE DURATIONS
+            // ============================================================
+            function updateDurations(plan) {
+                const data = membershipData[plan];
+                if (!data) return;
+                
+                const container = document.getElementById('durationOptions');
+                container.innerHTML = '';
+                
+                data.durations.forEach((d, index) => {
+                    const btn = document.createElement('div');
+                    btn.className = 'duration-btn' + (index === 0 ? ' active' : '');
+                    btn.dataset.days = d.days;
+                    btn.dataset.price = d.price;
+                    btn.innerHTML = `
+                        <div class="days">${d.days} Days</div>
+                        <div class="price">KSh${d.price.toLocaleString()}</div>
+                    `;
+                    btn.onclick = function() {
+                        selectDuration(d.days, d.price);
+                    };
+                    container.appendChild(btn);
+                });
+                
+                // Set default duration
+                const firstDuration = data.durations[0];
+                currentDuration = firstDuration.days;
+                currentPrice = firstDuration.price;
+                document.getElementById('selectedDuration').value = firstDuration.days;
+                document.getElementById('selectedPrice').value = firstDuration.price;
+            }
+
+            // ============================================================
+            // SELECT DURATION
+            // ============================================================
+            function selectDuration(days, price) {
+                currentDuration = days;
+                currentPrice = price;
+                document.getElementById('selectedDuration').value = days;
+                document.getElementById('selectedPrice').value = price;
+                
+                document.querySelectorAll('.duration-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (parseInt(btn.dataset.days) === days) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+
+            // ============================================================
+            // PROFILE TYPE SELECTOR
+            // ============================================================
+            window.selectProfileType = function(type) {
+                document.getElementById('profileType').value = type;
+                document.querySelectorAll('.type-option').forEach(opt => {
+                    opt.classList.remove('active');
+                    if (opt.dataset.type === type) {
+                        opt.classList.add('active');
+                    }
+                });
+            };
+
             // ============================================================
             // ELEMENTS
             // ============================================================
@@ -1170,24 +1440,7 @@
             const photoGrid = document.getElementById('photoGrid');
             const photoInput = document.getElementById('profilePhotoInput');
             const photoCount = document.getElementById('photoCount');
-            const profileTypeInput = document.getElementById('profileType');
             let uploadedPhotos = [];
-            let selectedProfileType = 'regular';
-            
-            // ============================================================
-            // PROFILE TYPE SELECTOR
-            // ============================================================
-            window.selectProfileType = function(type) {
-                selectedProfileType = type;
-                profileTypeInput.value = type;
-                
-                document.querySelectorAll('.type-option').forEach(opt => {
-                    opt.classList.remove('active');
-                    if (opt.dataset.type === type) {
-                        opt.classList.add('active');
-                    }
-                });
-            };
             
             // ============================================================
             // CHECK SUPABASE
@@ -1252,6 +1505,14 @@
                             selectProfileType(data.profile_type);
                         }
                         
+                        // Load membership plan
+                        if (data.membership_plan) {
+                            selectPlan(data.membership_plan);
+                            if (data.membership_days) {
+                                selectDuration(data.membership_days, data.membership_price || 0);
+                            }
+                        }
+                        
                         // Load photos
                         if (data.photos && Array.isArray(data.photos)) {
                             uploadedPhotos = data.photos;
@@ -1287,6 +1548,13 @@
                 
                 if (data.profile_type) {
                     selectProfileType(data.profile_type);
+                }
+                
+                if (data.membership_plan) {
+                    selectPlan(data.membership_plan);
+                    if (data.membership_days) {
+                        selectDuration(data.membership_days, data.membership_price || 0);
+                    }
                 }
                 
                 if (data.services) {
@@ -1447,7 +1715,7 @@
             }
             
             // ============================================================
-            // SAVE PROFILE - WITH PROFILE TYPE
+            // SAVE PROFILE - WITH MEMBERSHIP PLAN
             // ============================================================
             profileForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -1485,7 +1753,10 @@
                     incalls_rate: parseInt(document.getElementById('profileIncallsRate').value) || 0,
                     outcalls_rate: parseInt(document.getElementById('profileOutcallsRate').value) || 0,
                     list_in_other_cities: document.getElementById('listOtherCities').checked,
-                    profile_type: selectedProfileType, // <-- NEW: Profile Type
+                    profile_type: document.getElementById('profileType').value,
+                    membership_plan: document.getElementById('selectedPlan').value,
+                    membership_days: parseInt(document.getElementById('selectedDuration').value),
+                    membership_price: parseInt(document.getElementById('selectedPrice').value),
                     photos: uploadedPhotos,
                     status: 'pending',
                     is_active: false,
@@ -1523,7 +1794,7 @@
                     await window.supabaseFunctions.logActivity(
                         currentUser.id,
                         'profile_submitted',
-                        `User ${profileData.full_name} submitted ${selectedProfileType.toUpperCase()} profile for approval`
+                        `User ${profileData.full_name} submitted ${profileData.profile_type.toUpperCase()} profile with ${profileData.membership_plan.toUpperCase()} plan (${profileData.membership_days} days - KSh${profileData.membership_price})`
                     );
                     
                 } catch (error) {
@@ -1585,14 +1856,16 @@
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
             // ============================================================
-            // INIT
+            // INIT - Load default durations
             // ============================================================
             checkSession();
+            updateDurations('regular');
             
-            console.log('✅ My Profile - With Profile Type Loaded!');
+            console.log('✅ My Profile - With Membership Plans Loaded!');
             console.log('📸 Multiple photo upload (10 max)');
             console.log('👤 Profile Type: Regular or VIP');
-            console.log('💰 Horizontal wallet stats');
+            console.log('📋 Membership Plans: Regular, Prime, Prime VIP, VIP');
+            console.log('💰 Duration options: 3, 7, 15, 30 days');
             console.log('📱 Mobile-first design');
             
         });
