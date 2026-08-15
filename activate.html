@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Activate Profile - Nairobi Vibe Escorts</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Supabase Config -->
+    <script src="supabase-config.js"></script>
+
+    <style>
+        /* ============================================================
+                   ACTIVATE PAGE STYLES
+                   ============================================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', "Helvetica Neue", Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* ---------- HEADER ---------- */
+        .header {
+            background: linear-gradient(135deg, #f7053e, #d60435);
+            padding: 10px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+        }
+        
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #E0006C;
+        }
+        
+        .logo-text {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 800;
+        }
+        
+        .logo-text span {
+            color: #FE5ACB;
+        }
+        
+        .back-link {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 6px 15px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        
+        .back-link i {
+            margin-right: 6px;
+        }
+        
+        /* ---------- MAIN CONTENT ---------- */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+        
+        /* ---------- PAGE HEADER ---------- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #E0006C;
+        }
+        
+        .page-header h1 i {
+            color: #FFD700;
+            margin-right: 8px;
+        }
+        
+        .page-header p {
+            color: #666;
+            font-size: 15px;
+            margin-top: 5px;
+        }
+        
+        /* ---------- WALLET SECTION ---------- */
+        .wallet-section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            border: 1px solid #eee;
+        }
+        
+        .wallet-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .wallet-header .wallet-balance {
+            font-size: 18px;
+            font-weight: 700;
+            color: #E0006C;
+        }
+        
+        .wallet-header .wallet-balance span {
+            font-size: 26px;
+        }
+        
+        .wallet-header .btn-add-fund {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: #fff;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .wallet-header .btn-add-fund:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .wallet-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        
+        .wallet-stats .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .wallet-stats .stat-item label {
+            display: block;
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .wallet-stats .stat-item span {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        /* ---------- MEMBERSHIP PLANS ---------- */
+        .membership-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .membership-title i {
+            color: #E0006C;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .plan-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .plan-card.selected {
+            border-color: #E0006C;
+            box-shadow: 0 0 0 4px rgba(224, 0, 108, 0.1), 0 10px 40px rgba(0,0,0,0.08);
+        }
+        
+        .plan-card .plan-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fff;
+        }
+        
+        .plan-card .plan-badge.best-value {
+            background: linear-gradient(135deg, #FFD700, #f39c12);
+            color: #333;
+        }
+        
+        .plan-card .plan-badge.popular {
+            background: linear-gradient(135deg, #E0006C, #b30057);
+        }
+        
+        .plan-card .plan-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .plan-card .plan-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: #333;
+        }
+        
+        .plan-card .plan-name .plan-icon {
+            margin-right: 8px;
+        }
+        
+        .plan-card .plan-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #E0006C;
+        }
+        
+        .plan-card .plan-price small {
+            font-size: 13px;
+            font-weight: 400;
+            color: #999;
+        }
+        
+        .plan-card .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        
+        .plan-card .plan-features li {
+            padding: 6px 0;
+            font-size: 14px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .plan-card .plan-features li i {
+            color: #27ae60;
+            font-size: 14px;
+            width: 20px;
+        }
+        
+        .plan-card .plan-features li .fa-times {
+            color: #e74c3c;
+        }
+        
+        /* ---------- DURATION SELECTOR ---------- */
+        .duration-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .duration-selector .duration-btn {
+            padding: 10px 8px;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            background: #fafafa;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .duration-selector .duration-btn:hover {
+            border-color: #E0006C;
+        }
+        
+        .duration-selector .duration-btn.active {
+            border-color: #E0006C;
+            background: #fce4ec;
+        }
+        
+        .duration-selector .duration-btn .days {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .duration-selector .duration-btn .price {
+            font-size: 13px;
+            font-weight: 600;
+            color: #E0006C;
+        }
+        
+        .plan-card .btn-signup {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .plan-card .btn-signup:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-signup.regular {
+            background: #6c757d;
+            color: #fff;
+        }
+        
+        .btn-signup.regular:hover {
+            background: #5a6268;
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        }
+        
+        .btn-signup.prime {
+            background: #007bff;
+            color: #fff;
+        }
+        
+        .btn-signup.prime:hover {
+            background: #0069d9;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        .btn-signup.prime-vip {
+            background: #8b5cf6;
+            color: #fff;
+        }
+        
+        .btn-signup.prime-vip:hover {
+            background: #7c3aed;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .btn-signup.vip {
+            background: linear-gradient(135deg, #f7053e, #d60435);
+            color: #fff;
+        }
+        
+        .btn-signup.vip:hover {
+            box-shadow: 0 4px 15px rgba(247, 5, 62, 0.3);
+        }
+        
+        /* ---------- FOOTER ---------- */
+        .footer {
+            background: #1a0528;
+            color: #ccc;
+            padding: 30px 15px 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .footer-col h4 {
+            color: #FE5ACB;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        
+        .footer-col p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #aaa;
+        }
+        
+        .footer-col a {
+            color: #FE5ACB;
+            font-size: 13px;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 20px auto 0;
+            padding-top: 15px;
+            border-top: 1px solid #2a1a3a;
+            text-align: center;
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .footer-bottom .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .footer-bottom .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #2a1a3a;
+            color: #FE5ACB;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-bottom .social-icons a:hover {
+            background: #FE5ACB;
+            color: #1a0528;
+        }
+        
+        /* ---------- TOAST ---------- */
+        .toast {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 12px 24px;
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 9999;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
+        .toast.info { background: #3498db; }
+        
+        /* ---------- LOADER ---------- */
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .loader.show {
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ---------- RESPONSIVE ---------- */
+        @media (min-width: 600px) {
+            .plans-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .wallet-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .plans-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .footer-inner {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .duration-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .wallet-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-card .plan-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+        
+        /* ---------- SCROLLBAR ---------- */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #E0006C;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+         HEADER
+         ============================================================ -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-img">NV</div>
+                <span class="logo-text">Nairobi <span>Vibe</span></span>
+            </div>
+            <a href="myprofile.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Profile
+            </a>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         MAIN CONTENT
+         ============================================================ -->
+    <div class="main-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="fas fa-crown"></i> Activate Your Profile</h1>
+            <p>Choose a membership plan to get listed and start receiving bookings</p>
+        </div>
+
+        <!-- Wallet Section -->
+        <div class="wallet-section">
+            <div class="wallet-header">
+                <div class="wallet-balance">
+                    Available Wallet Balance: <span id="walletBalance">KSh0</span>
+                </div>
+                <button class="btn-add-fund" id="addFundBtn"><i class="fas fa-plus-circle"></i> Add Fund</button>
+            </div>
+            <div class="wallet-stats">
+                <div class="stat-item">
+                    <label>Total Wallet Balance</label>
+                    <span id="totalWalletBalance">KSh0</span>
+                </div>
+                <div class="stat-item">
+                    <label>Bid Wager</label>
+                    <span id="bidWager">KSh0</span>
+                </div>
+                <div class="stat-item">
+                    <label>Available Balance</label>
+                    <span id="availableBalance">KSh0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Membership Plans -->
+        <div class="membership-title">
+            <i class="fas fa-tags"></i> Choose Your Membership Plan
+        </div>
+
+        <div class="plans-grid">
+
+            <!-- ============================================================
+                 REGULAR PLAN
+                 ============================================================ -->
+            <div class="plan-card" data-plan="regular">
+                <div class="plan-badge">BASIC</div>
+                <div class="plan-header">
+                    <div class="plan-name">
+                        <i class="fas fa-circle plan-icon" style="color:#6c757d;"></i>
+                        REGULAR
+                    </div>
+                    <div class="plan-price">KSh400 <small>from</small></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check-circle"></i> Bottom section listing</li>
+                    <li><i class="fas fa-check-circle"></i> Geo-location targeted</li>
+                    <li><i class="fas fa-check-circle"></i> Up to 4 photos</li>
+                    <li><i class="fas fa-times-circle" style="color:#e74c3c;"></i> No VIP placement</li>
+                    <li><i class="fas fa-times-circle" style="color:#e74c3c;"></i> No Prime section</li>
+                </ul>
+                <div class="duration-selector" data-plan="regular">
+                    <div class="duration-btn active" data-days="3" data-price="400">
+                        <div class="days">3 Days</div>
+                        <div class="price">KSh400</div>
+                    </div>
+                    <div class="duration-btn" data-days="7" data-price="700">
+                        <div class="days">7 Days</div>
+                        <div class="price">KSh700</div>
+                    </div>
+                    <div class="duration-btn" data-days="15" data-price="1300">
+                        <div class="days">15 Days</div>
+                        <div class="price">KSh1,300</div>
+                    </div>
+                    <div class="duration-btn" data-days="30" data-price="2000">
+                        <div class="days">30 Days</div>
+                        <div class="price">KSh2,000</div>
+                    </div>
+                </div>
+                <button class="btn-signup regular" data-plan="regular">
+                    <span>Sign Up Now</span>
+                    <span class="loader"></span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- ============================================================
+                 PRIME PLAN
+                 ============================================================ -->
+            <div class="plan-card" data-plan="prime">
+                <div class="plan-badge popular">POPULAR</div>
+                <div class="plan-header">
+                    <div class="plan-name">
+                        <i class="fas fa-star plan-icon" style="color:#007bff;"></i>
+                        PRIME
+                    </div>
+                    <div class="plan-price">KSh500 <small>from</small></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check-circle"></i> Prime section listing</li>
+                    <li><i class="fas fa-check-circle"></i> Geo-location targeted</li>
+                    <li><i class="fas fa-check-circle"></i> Up to 5 photos</li>
+                    <li><i class="fas fa-check-circle"></i> Higher visibility</li>
+                    <li><i class="fas fa-times-circle" style="color:#e74c3c;"></i> No VIP placement</li>
+                </ul>
+                <div class="duration-selector" data-plan="prime">
+                    <div class="duration-btn active" data-days="3" data-price="500">
+                        <div class="days">3 Days</div>
+                        <div class="price">KSh500</div>
+                    </div>
+                    <div class="duration-btn" data-days="7" data-price="950">
+                        <div class="days">7 Days</div>
+                        <div class="price">KSh950</div>
+                    </div>
+                    <div class="duration-btn" data-days="15" data-price="1800">
+                        <div class="days">15 Days</div>
+                        <div class="price">KSh1,800</div>
+                    </div>
+                    <div class="duration-btn" data-days="30" data-price="3000">
+                        <div class="days">30 Days</div>
+                        <div class="price">KSh3,000</div>
+                    </div>
+                </div>
+                <button class="btn-signup prime" data-plan="prime">
+                    <span>Sign Up Now</span>
+                    <span class="loader"></span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- ============================================================
+                 PRIME VIP PLAN
+                 ============================================================ -->
+            <div class="plan-card" data-plan="prime-vip">
+                <div class="plan-badge best-value">BEST VALUE</div>
+                <div class="plan-header">
+                    <div class="plan-name">
+                        <i class="fas fa-gem plan-icon" style="color:#8b5cf6;"></i>
+                        PRIME VIP
+                    </div>
+                    <div class="plan-price">KSh600 <small>from</small></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check-circle"></i> Prime + VIP sections</li>
+                    <li><i class="fas fa-check-circle"></i> Geo-location targeted</li>
+                    <li><i class="fas fa-check-circle"></i> Up to 10 photos</li>
+                    <li><i class="fas fa-check-circle"></i> Maximum visibility</li>
+                    <li><i class="fas fa-check-circle"></i> Featured placement</li>
+                </ul>
+                <div class="duration-selector" data-plan="prime-vip">
+                    <div class="duration-btn active" data-days="3" data-price="600">
+                        <div class="days">3 Days</div>
+                        <div class="price">KSh600</div>
+                    </div>
+                    <div class="duration-btn" data-days="7" data-price="1250">
+                        <div class="days">7 Days</div>
+                        <div class="price">KSh1,250</div>
+                    </div>
+                    <div class="duration-btn" data-days="15" data-price="2400">
+                        <div class="days">15 Days</div>
+                        <div class="price">KSh2,400</div>
+                    </div>
+                    <div class="duration-btn" data-days="30" data-price="4000">
+                        <div class="days">30 Days</div>
+                        <div class="price">KSh4,000</div>
+                    </div>
+                </div>
+                <button class="btn-signup prime-vip" data-plan="prime-vip">
+                    <span>Sign Up Now</span>
+                    <span class="loader"></span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- ============================================================
+                 VIP PLAN
+                 ============================================================ -->
+            <div class="plan-card" data-plan="vip">
+                <div class="plan-badge" style="background:linear-gradient(135deg, #f7053e, #d60435);">PREMIUM</div>
+                <div class="plan-header">
+                    <div class="plan-name">
+                        <i class="fas fa-crown plan-icon" style="color:#f7053e;"></i>
+                        VIP
+                    </div>
+                    <div class="plan-price">KSh900 <small>from</small></div>
+                </div>
+                <ul class="plan-features">
+                    <li><i class="fas fa-check-circle"></i> VIP section listing</li>
+                    <li><i class="fas fa-check-circle"></i> Geo-location targeted</li>
+                    <li><i class="fas fa-check-circle"></i> Up to 10 photos</li>
+                    <li><i class="fas fa-check-circle"></i> Premium visibility</li>
+                    <li><i class="fas fa-check-circle"></i> Top of the page</li>
+                </ul>
+                <div class="duration-selector" data-plan="vip">
+                    <div class="duration-btn active" data-days="3" data-price="900">
+                        <div class="days">3 Days</div>
+                        <div class="price">KSh900</div>
+                    </div>
+                    <div class="duration-btn" data-days="7" data-price="1450">
+                        <div class="days">7 Days</div>
+                        <div class="price">KSh1,450</div>
+                    </div>
+                    <div class="duration-btn" data-days="15" data-price="2800">
+                        <div class="days">15 Days</div>
+                        <div class="price">KSh2,800</div>
+                    </div>
+                    <div class="duration-btn" data-days="30" data-price="5000">
+                        <div class="days">30 Days</div>
+                        <div class="price">KSh5,000</div>
+                    </div>
+                </div>
+                <button class="btn-signup vip" data-plan="vip">
+                    <span>Sign Up Now</span>
+                    <span class="loader"></span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>Nairobi Vibe Escorts</h4>
+                <p>Mombasa escorts and call girls from Mombasa Kenya offering hot massage and escorts services at very affordable rates. Tomba malaya wa mombasa leo.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#">About Us</a><br>
+                <a href="#">Escort Agencies</a><br>
+                <a href="#">Escorts Blog</a><br>
+                <a href="#">Hookup</a>
+            </div>
+            <div class="footer-col">
+                <h4>More</h4>
+                <a href="#">Kenyan Escorts</a><br>
+                <a href="#">Nairobi Tamu</a><br>
+                <a href="#">Nairobi Raha Videos</a><br>
+                <a href="#">Sexy Nairobi Escorts</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2026 Nairobi Vibe Massage and Escort services. Powered by <span style="color:#FE5ACB;">Nairobi Vibe</span></p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         TOAST
+         ============================================================ -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Notification</span>
+    </div>
+
+    <!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ============================================================
+            // ELEMENTS
+            // ============================================================
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const addFundBtn = document.getElementById('addFundBtn');
+            const planCards = document.querySelectorAll('.plan-card');
+            const signupBtns = document.querySelectorAll('.btn-signup');
+
+            // ============================================================
+            // CHECK SUPABASE
+            // ============================================================
+            if (typeof window.supabaseFunctions === 'undefined') {
+                console.warn('⚠️ Supabase functions not loaded');
+            } else {
+                console.log('✅ Supabase is loaded');
+            }
+
+            // ============================================================
+            // CHECK SESSION
+            // ============================================================
+            let currentUser = null;
+
+            function checkSession() {
+                const session = localStorage.getItem('nairobi_vibe_session');
+                if (session) {
+                    currentUser = JSON.parse(session);
+                    loadWalletData();
+                } else {
+                    showToast('Please login to activate your profile', 'error');
+                    setTimeout(function() {
+                        window.location.href = 'login.html?redirect=activate.html';
+                    }, 1500);
+                }
+            }
+
+            // ============================================================
+            // LOAD WALLET DATA
+            // ============================================================
+            async function loadWalletData() {
+                if (!currentUser) return;
+
+                try {
+                    const { data, error } = await window.supabaseFunctions.supabase
+                        .from('profiles')
+                        .select('wallet_balance, bid_wager, available_balance')
+                        .eq('user_id', currentUser.id)
+                        .single();
+
+                    if (data) {
+                        document.getElementById('walletBalance').textContent = 'KSh' + (data.wallet_balance || 0);
+                        document.getElementById('totalWalletBalance').textContent = 'KSh' + (data.wallet_balance || 0);
+                        document.getElementById('bidWager').textContent = 'KSh' + (data.bid_wager || 0);
+                        document.getElementById('availableBalance').textContent = 'KSh' + (data.available_balance || 0);
+                    }
+                } catch (error) {
+                    console.log('No wallet data found');
+                }
+            }
+
+            // ============================================================
+            // DURATION SELECTOR
+            // ============================================================
+            document.querySelectorAll('.duration-selector').forEach(function(selector) {
+                const btns = selector.querySelectorAll('.duration-btn');
+
+                btns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        // Remove active from all in this selector
+                        btns.forEach(function(b) { b.classList.remove('active'); });
+                        // Add active to clicked
+                        this.classList.add('active');
+
+                        // Update the plan price display
+                        const planCard = this.closest('.plan-card');
+                        const price = this.dataset.price;
+                        const planName = planCard.dataset.plan;
+
+                        // Update the price display
+                        const priceDisplay = planCard.querySelector('.plan-price');
+                        if (priceDisplay) {
+                            priceDisplay.innerHTML = 'KSh' + parseInt(price).toLocaleString() + ' <small>for ' + this
+                                .dataset.days + ' days</small>';
+                        }
+                    });
+                });
+            });
+
+            // ============================================================
+            // PLAN SELECTION (click on card)
+            // ============================================================
+            planCards.forEach(function(card) {
+                card.addEventListener('click', function(e) {
+                    // Don't trigger if clicking on button or duration
+                    if (e.target.closest('.btn-signup') || e.target.closest('.duration-btn')) return;
+
+                    planCards.forEach(function(c) { c.classList.remove('selected'); });
+                    this.classList.add('selected');
+                });
+            });
+
+            // ============================================================
+            // SIGN UP BUTTON
+            // ============================================================
+            signupBtns.forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+
+                    const planCard = this.closest('.plan-card');
+                    const plan = planCard.dataset.plan;
+                    const durationBtn = planCard.querySelector('.duration-btn.active');
+                    const days = durationBtn ? durationBtn.dataset.days : '3';
+                    const price = durationBtn ? durationBtn.dataset.price : '0';
+
+                    // Get the plan name for display
+                    const planNames = {
+                        'regular': 'REGULAR',
+                        'prime': 'PRIME',
+                        'prime-vip': 'PRIME VIP',
+                        'vip': 'VIP'
+                    };
+
+                    const planName = planNames[plan] || plan.toUpperCase();
+
+                    // Show loading state
+                    const originalText = this.querySelector('span');
+                    const loader = this.querySelector('.loader');
+                    const icon = this.querySelector('i');
+
+                    if (originalText) originalText.textContent = 'Processing...';
+                    if (loader) loader.classList.add('show');
+                    if (icon) icon.style.display = 'none';
+
+                    // Simulate processing
+                    setTimeout(function() {
+                        // Show success
+                        showToast('🎉 ' + planName + ' plan activated for ' + days + ' days! KSh' + parseInt(
+                            price).toLocaleString() + ' deducted.', 'success');
+
+                        // Reset button
+                        if (originalText) originalText.textContent = 'Sign Up Now';
+                        if (loader) loader.classList.remove('show');
+                        if (icon) icon.style.display = 'inline-block';
+
+                        // Redirect to profile after 2 seconds
+                        setTimeout(function() {
+                            window.location.href = 'myprofile.html';
+                        }, 2000);
+
+                    }, 1500);
+                });
+            });
+
+            // ============================================================
+            // ADD FUND
+            // ============================================================
+            addFundBtn.addEventListener('click', function() {
+                showToast('💳 Fund feature coming soon!', 'info');
+            });
+
+            // ============================================================
+            // TOAST
+            // ============================================================
+            function showToast(message, type = 'info') {
+                toastMessage.textContent = message;
+                toast.className = 'toast ' + type;
+                void toast.offsetWidth;
+                toast.classList.add('show');
+
+                clearTimeout(toast._timeout);
+                toast._timeout = setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+
+            // ============================================================
+            // INIT
+            // ============================================================
+            checkSession();
+
+            console.log('✅ Activate Page Loaded Successfully!');
+            console.log('📋 Membership Plans: Regular, Prime, Prime VIP, VIP');
+            console.log('💰 Duration options: 3, 7, 15, 30 days');
+
+        });
+    </script>
+
+</body>
+</html>
