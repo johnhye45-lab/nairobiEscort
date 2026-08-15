@@ -876,7 +876,7 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT - MODIFIED TO PASS DATA TO CHECKOUT
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -949,17 +949,11 @@
 
                 btns.forEach(function(btn) {
                     btn.addEventListener('click', function() {
-                        // Remove active from all in this selector
                         btns.forEach(function(b) { b.classList.remove('active'); });
-                        // Add active to clicked
                         this.classList.add('active');
 
-                        // Update the plan price display
                         const planCard = this.closest('.plan-card');
                         const price = this.dataset.price;
-                        const planName = planCard.dataset.plan;
-
-                        // Update the price display
                         const priceDisplay = planCard.querySelector('.plan-price');
                         if (priceDisplay) {
                             priceDisplay.innerHTML = 'KSh' + parseInt(price).toLocaleString() + ' <small>for ' + this
@@ -974,16 +968,14 @@
             // ============================================================
             planCards.forEach(function(card) {
                 card.addEventListener('click', function(e) {
-                    // Don't trigger if clicking on button or duration
                     if (e.target.closest('.btn-signup') || e.target.closest('.duration-btn')) return;
-
                     planCards.forEach(function(c) { c.classList.remove('selected'); });
                     this.classList.add('selected');
                 });
             });
 
             // ============================================================
-            // SIGN UP BUTTON
+            // SIGN UP BUTTON - MODIFIED TO PASS DATA TO CHECKOUT
             // ============================================================
             signupBtns.forEach(function(btn) {
                 btn.addEventListener('click', function(e) {
@@ -995,15 +987,11 @@
                     const days = durationBtn ? durationBtn.dataset.days : '3';
                     const price = durationBtn ? durationBtn.dataset.price : '0';
 
-                    // Get the plan name for display
-                    const planNames = {
-                        'regular': 'REGULAR',
-                        'prime': 'PRIME',
-                        'prime-vip': 'PRIME VIP',
-                        'vip': 'VIP'
-                    };
-
-                    const planName = planNames[plan] || plan.toUpperCase();
+                    // Get user ID
+                    if (!currentUser) {
+                        showToast('Please login first', 'error');
+                        return;
+                    }
 
                     // Show loading state
                     const originalText = this.querySelector('span');
@@ -1014,23 +1002,23 @@
                     if (loader) loader.classList.add('show');
                     if (icon) icon.style.display = 'none';
 
-                    // Simulate processing
+                    // Redirect to checkout with plan data
                     setTimeout(function() {
-                        // Show success
-                        showToast('🎉 ' + planName + ' plan activated for ' + days + ' days! KSh' + parseInt(
-                            price).toLocaleString() + ' deducted.', 'success');
+                        // Build URL with parameters
+                        const checkoutUrl = 'checkout.html?plan=' + plan + 
+                                           '&days=' + days + 
+                                           '&price=' + price + 
+                                           '&user_id=' + currentUser.id;
 
                         // Reset button
                         if (originalText) originalText.textContent = 'Sign Up Now';
                         if (loader) loader.classList.remove('show');
                         if (icon) icon.style.display = 'inline-block';
 
-                        // Redirect to profile after 2 seconds
-                        setTimeout(function() {
-                            window.location.href = 'myprofile.html';
-                        }, 2000);
+                        // Redirect to checkout
+                        window.location.href = checkoutUrl;
 
-                    }, 1500);
+                    }, 800);
                 });
             });
 
@@ -1064,6 +1052,7 @@
             console.log('✅ Activate Page Loaded Successfully!');
             console.log('📋 Membership Plans: Regular, Prime, Prime VIP, VIP');
             console.log('💰 Duration options: 3, 7, 15, 30 days');
+            console.log('🔗 Redirects to checkout.html with plan data');
 
         });
     </script>
