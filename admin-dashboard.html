@@ -37,9 +37,7 @@
             min-height: 100vh;
         }
         
-        /* ============================================================
-                   ADMIN HEADER
-                   ============================================================ */
+        /* ---------- ADMIN HEADER ---------- */
         .admin-header {
             background: linear-gradient(135deg, #1a0528, #2f074e);
             padding: 12px 30px;
@@ -176,17 +174,13 @@
             background: rgba(255,255,255,0.2);
         }
         
-        /* ============================================================
-                   ADMIN CONTAINER
-                   ============================================================ */
+        /* ---------- ADMIN CONTAINER ---------- */
         .admin-container {
             display: flex;
             min-height: calc(100vh - 64px);
         }
         
-        /* ============================================================
-                   ADMIN SIDEBAR
-                   ============================================================ */
+        /* ---------- ADMIN SIDEBAR ---------- */
         .admin-sidebar {
             width: 250px;
             background: #fff;
@@ -259,9 +253,7 @@
             letter-spacing: 1px;
         }
         
-        /* ============================================================
-                   ADMIN CONTENT
-                   ============================================================ */
+        /* ---------- ADMIN CONTENT ---------- */
         .admin-content {
             flex: 1;
             padding: 25px 30px;
@@ -292,9 +284,7 @@
             font-size: 14px;
         }
         
-        /* ============================================================
-                   STATS CARDS
-                   ============================================================ */
+        /* ---------- STATS CARDS ---------- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -346,9 +336,7 @@
             font-weight: 600;
         }
         
-        /* ============================================================
-                   CHARTS
-                   ============================================================ */
+        /* ---------- CHARTS ---------- */
         .charts-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -410,9 +398,7 @@
             height: 230px;
         }
         
-        /* ============================================================
-                   USER TABLE
-                   ============================================================ */
+        /* ---------- USER TABLE ---------- */
         .table-container {
             background: #fff;
             border-radius: 15px;
@@ -514,18 +500,26 @@
             background: #fafafa;
         }
         
+        /* ---------- TABLE USER AVATAR WITH IMAGE ---------- */
         table tbody .user-avatar {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: #fce4ec;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 16px;
             color: #E0006C;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+        
+        table tbody .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         table tbody .user-info {
@@ -544,6 +538,7 @@
             color: #888;
         }
         
+        /* ---------- STATUS BADGES ---------- */
         .status-badge {
             padding: 3px 12px;
             border-radius: 15px;
@@ -553,35 +548,12 @@
             text-transform: capitalize;
         }
         
-        .status-badge.pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .status-badge.pending_review {
-            background: #cce5ff;
-            color: #004085;
-        }
-        
-        .status-badge.approved {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .status-badge.rejected {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        .status-badge.active {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .status-badge.inactive {
-            background: #e2e3e5;
-            color: #383d41;
-        }
+        .status-badge.pending { background: #fff3cd; color: #856404; }
+        .status-badge.pending_review { background: #cce5ff; color: #004085; }
+        .status-badge.approved { background: #d4edda; color: #155724; }
+        .status-badge.rejected { background: #f8d7da; color: #721c24; }
+        .status-badge.active { background: #d4edda; color: #155724; }
+        .status-badge.inactive { background: #e2e3e5; color: #383d41; }
         
         .role-badge {
             padding: 3px 12px;
@@ -627,45 +599,16 @@
             gap: 4px;
         }
         
-        .action-buttons .btn-approve {
-            background: #27ae60;
-            color: #fff;
-        }
+        .action-buttons .btn-approve { background: #27ae60; color: #fff; }
+        .action-buttons .btn-approve:hover { background: #1e8449; }
+        .action-buttons .btn-reject { background: #e74c3c; color: #fff; }
+        .action-buttons .btn-reject:hover { background: #c0392b; }
+        .action-buttons .btn-view { background: #3498db; color: #fff; }
+        .action-buttons .btn-view:hover { background: #2980b9; }
+        .action-buttons .btn-delete { background: #e74c3c; color: #fff; }
+        .action-buttons .btn-delete:hover { background: #c0392b; }
         
-        .action-buttons .btn-approve:hover {
-            background: #1e8449;
-        }
-        
-        .action-buttons .btn-reject {
-            background: #e74c3c;
-            color: #fff;
-        }
-        
-        .action-buttons .btn-reject:hover {
-            background: #c0392b;
-        }
-        
-        .action-buttons .btn-view {
-            background: #3498db;
-            color: #fff;
-        }
-        
-        .action-buttons .btn-view:hover {
-            background: #2980b9;
-        }
-        
-        .action-buttons .btn-delete {
-            background: #e74c3c;
-            color: #fff;
-        }
-        
-        .action-buttons .btn-delete:hover {
-            background: #c0392b;
-        }
-        
-        /* ============================================================
-                   PAGINATION
-                   ============================================================ */
+        /* ---------- PAGINATION ---------- */
         .pagination {
             display: flex;
             justify-content: space-between;
@@ -707,9 +650,7 @@
             border-color: #E0006C;
         }
         
-        /* ============================================================
-                   MODAL
-                   ============================================================ */
+        /* ---------- MODAL - UPGRADED ---------- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -717,7 +658,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -732,7 +673,7 @@
         .modal {
             background: #fff;
             border-radius: 20px;
-            max-width: 520px;
+            max-width: 600px;
             width: 100%;
             padding: 30px;
             animation: modalSlide 0.3s ease;
@@ -755,9 +696,13 @@
         }
         
         .modal .modal-header h3 {
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 20px;
+            font-weight: 800;
             color: #333;
+        }
+        
+        .modal .modal-header h3 i {
+            color: #E0006C;
         }
         
         .modal .modal-header .close {
@@ -778,7 +723,7 @@
         
         .modal .modal-body .user-detail {
             display: flex;
-            padding: 8px 0;
+            padding: 6px 0;
             border-bottom: 1px solid #f5f5f5;
             gap: 15px;
         }
@@ -790,7 +735,7 @@
         .modal .modal-body .user-detail .label {
             font-weight: 600;
             color: #666;
-            min-width: 100px;
+            min-width: 120px;
             font-size: 13px;
         }
         
@@ -800,6 +745,71 @@
             word-break: break-word;
         }
         
+        /* ---------- PHOTO GALLERY IN MODAL ---------- */
+        .modal .photo-gallery {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        
+        .modal .photo-gallery .gallery-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .modal .photo-gallery .gallery-title i {
+            color: #E0006C;
+        }
+        
+        .modal .photo-gallery .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
+        }
+        
+        .modal .photo-gallery .gallery-grid .gallery-img {
+            aspect-ratio: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e8e8e8;
+            background: #f0f0f0;
+        }
+        
+        .modal .photo-gallery .gallery-grid .gallery-img:hover {
+            transform: scale(1.05);
+            border-color: #E0006C;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .modal .photo-gallery .gallery-grid .gallery-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .modal .photo-gallery .no-photos {
+            text-align: center;
+            color: #999;
+            font-size: 13px;
+            padding: 15px 0;
+        }
+        
+        .modal .photo-gallery .no-photos i {
+            font-size: 30px;
+            display: block;
+            margin-bottom: 5px;
+            color: #ddd;
+        }
+        
+        /* ---------- MODAL FOOTER ---------- */
         .modal .modal-footer {
             display: flex;
             gap: 10px;
@@ -828,12 +838,12 @@
         }
         
         .modal .modal-footer .btn-primary {
-            background: #E0006C;
+            background: #27ae60;
             color: #fff;
         }
         
         .modal .modal-footer .btn-primary:hover {
-            background: #b30057;
+            background: #1e8449;
         }
         
         .modal .modal-footer .btn-danger {
@@ -845,9 +855,48 @@
             background: #c0392b;
         }
         
-        /* ============================================================
-                   TOAST
-                   ============================================================ */
+        /* ---------- FULL SCREEN IMAGE VIEW ---------- */
+        .image-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: pointer;
+        }
+        
+        .image-viewer.show {
+            display: flex;
+        }
+        
+        .image-viewer img {
+            max-width: 95%;
+            max-height: 90vh;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+        
+        .image-viewer .close-viewer {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .image-viewer .close-viewer:hover {
+            color: #E0006C;
+        }
+        
+        /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
             top: 20px;
@@ -868,17 +917,9 @@
             transform: translateX(0);
         }
         
-        .toast.success {
-            background: linear-gradient(135deg, #27ae60, #1e8449);
-        }
-        
-        .toast.error {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-        }
-        
-        .toast.info {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-        }
+        .toast.success { background: linear-gradient(135deg, #27ae60, #1e8449); }
+        .toast.error { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .toast.info { background: linear-gradient(135deg, #3498db, #2980b9); }
         
         .toast .toast-close {
             float: right;
@@ -892,9 +933,7 @@
             opacity: 1;
         }
         
-        /* ============================================================
-                   EMPTY STATE
-                   ============================================================ */
+        /* ---------- EMPTY STATE ---------- */
         .empty-state {
             text-align: center;
             padding: 40px 20px;
@@ -917,17 +956,10 @@
             font-size: 14px;
         }
         
-        /* ============================================================
-                   RESPONSIVE
-                   ============================================================ */
+        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 1200px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .charts-grid { grid-template-columns: 1fr; }
         }
         
         @media (max-width: 992px) {
@@ -942,115 +974,41 @@
                 box-shadow: 2px 0 20px rgba(0,0,0,0.1);
                 height: calc(100vh - 64px);
             }
-            
-            .admin-sidebar.show {
-                display: block;
-            }
-            
-            .admin-content {
-                padding: 20px 15px;
-            }
-            
-            .sidebar-toggle {
-                display: block;
-            }
+            .admin-sidebar.show { display: block; }
+            .admin-content { padding: 20px 15px; }
+            .sidebar-toggle { display: block; }
+            .modal { max-width: 500px; }
         }
         
         @media (max-width: 768px) {
-            .admin-header {
-                padding: 10px 15px;
-            }
-            
-            .admin-header .logo h1 {
-                font-size: 15px;
-            }
-            
-            .admin-content .page-title h2 {
-                font-size: 18px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .stat-card {
-                padding: 15px;
-            }
-            
-            .stat-card .icon {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
-            }
-            
-            .stat-card .info h3 {
-                font-size: 18px;
-            }
-            
-            .table-container .table-header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .table-container .table-header .table-controls {
-                flex-direction: column;
-            }
-            
-            .table-container .table-header .table-controls input {
-                width: 100%;
-            }
-            
-            .table-container .table-header .table-controls select {
-                width: 100%;
-            }
-            
-            .admin-header .header-right .admin-info .details {
-                display: none;
-            }
+            .admin-header { padding: 10px 15px; }
+            .admin-header .logo h1 { font-size: 15px; }
+            .admin-content .page-title h2 { font-size: 18px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .stat-card { padding: 15px; }
+            .stat-card .icon { width: 40px; height: 40px; font-size: 18px; }
+            .stat-card .info h3 { font-size: 18px; }
+            .table-container .table-header { flex-direction: column; align-items: stretch; }
+            .table-container .table-header .table-controls { flex-direction: column; }
+            .table-container .table-header .table-controls input { width: 100%; }
+            .table-container .table-header .table-controls select { width: 100%; }
+            .admin-header .header-right .admin-info .details { display: none; }
+            .modal .modal-body .user-detail { flex-direction: column; gap: 3px; }
+            .modal .modal-body .user-detail .label { min-width: auto; }
+            .modal { padding: 20px; max-width: 100%; margin: 10px; }
+            .modal .photo-gallery .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
         }
         
         @media (max-width: 500px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .admin-header .header-right .admin-info .name {
-                display: none;
-            }
-            
-            .modal {
-                padding: 20px;
-            }
-            
-            .modal .modal-body .user-detail {
-                flex-direction: column;
-                gap: 3px;
-            }
-            
-            .modal .modal-body .user-detail .label {
-                min-width: auto;
-            }
+            .stats-grid { grid-template-columns: 1fr; }
+            .admin-header .header-right .admin-info .name { display: none; }
         }
         
-        /* ============================================================
-                   SCROLLBAR
-                   ============================================================ */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #E0006C;
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b30057;
-        }
+        /* ---------- SCROLLBAR ---------- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #E0006C; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #b30057; }
     </style>
 </head>
 <body>
@@ -1060,19 +1018,14 @@
      ============================================================ -->
 <script>
     (function() {
-        // Check if admin is logged in - Updated to use nairobi_vibe_admin_session
         const adminSession = JSON.parse(localStorage.getItem('nairobi_vibe_admin_session') || 'null');
-        
         if (!adminSession || !adminSession.isAdmin) {
             window.location.href = 'admin-login.html?expired=true';
             return;
         }
-        
-        // Check session expiry (24 hours)
         const loginTime = new Date(adminSession.loginTime);
         const now = new Date();
         const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
-        
         if (hoursDiff > 24) {
             localStorage.removeItem('nairobi_vibe_admin_session');
             window.location.href = 'admin-login.html?expired=true';
@@ -1116,9 +1069,6 @@
      ============================================================ -->
 <div class="admin-container">
     
-    <!-- ============================================================
-         SIDEBAR
-         ============================================================ -->
     <aside class="admin-sidebar" id="adminSidebar">
         <ul class="sidebar-menu">
             <li><a href="#" class="active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
@@ -1126,7 +1076,6 @@
             <li><a href="#" data-page="profiles"><i class="fas fa-id-card"></i> Profiles <span class="badge" id="profileBadge">0</span></a></li>
             <li><a href="#" data-page="escorts"><i class="fas fa-female"></i> Escorts</a></li>
             <li><a href="#" data-page="reviews"><i class="fas fa-star"></i> Reviews</a></li>
-            
             <li class="menu-divider"></li>
             <li class="menu-label">Settings</li>
             <li><a href="#" data-page="settings"><i class="fas fa-cog"></i> General Settings</a></li>
@@ -1135,20 +1084,14 @@
         </ul>
     </aside>
     
-    <!-- ============================================================
-         MAIN CONTENT
-         ============================================================ -->
     <main class="admin-content" id="adminContent">
         
-        <!-- Page Title -->
         <div class="page-title">
             <h2>Dashboard <span>Overview</span></h2>
             <span class="date" id="currentDate"></span>
         </div>
         
-        <!-- ============================================================
-             STATS CARDS
-             ============================================================ -->
+        <!-- Stats Cards -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="icon pink"><i class="fas fa-users"></i></div>
@@ -1180,9 +1123,7 @@
             </div>
         </div>
         
-        <!-- ============================================================
-             CHARTS
-             ============================================================ -->
+        <!-- Charts -->
         <div class="charts-grid">
             <div class="chart-box">
                 <div class="chart-header">
@@ -1207,9 +1148,7 @@
             </div>
         </div>
         
-        <!-- ============================================================
-             USER TABLE - WITH PENDING REVIEW FILTER
-             ============================================================ -->
+        <!-- User Table -->
         <div class="table-container">
             <div class="table-header">
                 <h3><i class="fas fa-users"></i> User Management</h3>
@@ -1263,7 +1202,7 @@
 </div>
 
 <!-- ============================================================
-     USER DETAIL MODAL
+     USER DETAIL MODAL - UPGRADED WITH PHOTOS
      ============================================================ -->
 <div class="modal-overlay" id="userModal">
     <div class="modal">
@@ -1287,6 +1226,14 @@
 </div>
 
 <!-- ============================================================
+     FULL SCREEN IMAGE VIEWER
+     ============================================================ -->
+<div class="image-viewer" id="imageViewer" onclick="closeImageViewer()">
+    <span class="close-viewer" onclick="closeImageViewer()">&times;</span>
+    <img id="fullImage" src="" alt="Full view">
+</div>
+
+<!-- ============================================================
      TOAST NOTIFICATION
      ============================================================ -->
 <div class="toast" id="toast">
@@ -1295,16 +1242,16 @@
 </div>
 
 <!-- ============================================================
-     JAVASCRIPT - COMPLETE ADMIN WITH SUPABASE
+     JAVASCRIPT - UPGRADED WITH PHOTO GALLERY
      ============================================================ -->
 <script>
     document.addEventListener('DOMContentLoaded', async function() {
         
         // ============================================================
-        // CHECK IF SUPABASE IS LOADED
+        // CHECK SUPABASE
         // ============================================================
         if (typeof window.supabaseFunctions === 'undefined') {
-            console.error('❌ Supabase functions not loaded! Make sure supabase-config.js is loaded first.');
+            console.error('❌ Supabase functions not loaded!');
             showToast('System error. Please refresh the page.', 'error');
             return;
         }
@@ -1356,7 +1303,6 @@
         let currentPage = 1;
         const itemsPerPage = 5;
         let currentModalUserId = null;
-        let currentModalUserStatus = null;
         let chart1 = null;
         let chart2 = null;
         
@@ -1365,20 +1311,16 @@
         // ============================================================
         const now = new Date();
         currentDate.textContent = now.toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
         });
         
         // ============================================================
-        // LOAD USERS FROM SUPABASE (profiles table)
+        // LOAD USERS FROM SUPABASE
         // ============================================================
         async function loadUsers() {
             try {
                 showToast('Loading users...', 'info');
                 
-                // Get users from profiles table
                 const { data, error } = await window.supabaseFunctions.supabase
                     .from('profiles')
                     .select('*')
@@ -1389,6 +1331,7 @@
                 users = data || [];
                 console.log(`✅ Loaded ${users.length} users from Supabase`);
                 console.log(`⏳ Pending review: ${users.filter(u => u.status === 'pending_review').length}`);
+                console.log(`📸 Users with photos: ${users.filter(u => u.photos && u.photos.length > 0).length}`);
                 updateStats();
                 renderUsers();
                 initCharts();
@@ -1432,21 +1375,25 @@
         // ============================================================
         function getMembershipBadge(plan) {
             if (!plan) return '<span class="membership-badge regular">None</span>';
-            const classes = {
-                'regular': 'regular',
-                'prime': 'prime',
-                'prime-vip': 'prime-vip',
-                'vip': 'vip'
-            };
-            const labels = {
-                'regular': 'Regular',
-                'prime': 'Prime',
-                'prime-vip': 'Prime VIP',
-                'vip': 'VIP'
-            };
+            const classes = { 'regular': 'regular', 'prime': 'prime', 'prime-vip': 'prime-vip', 'vip': 'vip' };
+            const labels = { 'regular': 'Regular', 'prime': 'Prime', 'prime-vip': 'Prime VIP', 'vip': 'VIP' };
             const cls = classes[plan] || 'regular';
             const label = labels[plan] || plan.toUpperCase();
             return `<span class="membership-badge ${cls}">${label}</span>`;
+        }
+        
+        // ============================================================
+        // GET USER AVATAR WITH PHOTO
+        // ============================================================
+        function getUserAvatar(user) {
+            const name = user.full_name || 'U';
+            const initial = name.charAt(0).toUpperCase();
+            
+            // Check if user has photos
+            if (user.photos && user.photos.length > 0) {
+                return `<img src="${user.photos[0]}" alt="${name}" onerror="this.style.display='none'">`;
+            }
+            return initial;
         }
         
         // ============================================================
@@ -1461,13 +1408,13 @@
                 const matchesSearch = 
                     (user.full_name || '').toLowerCase().includes(searchTerm) ||
                     (user.email || '').toLowerCase().includes(searchTerm) ||
-                    (user.phone || '').includes(searchTerm);
+                    (user.phone || '').includes(searchTerm) ||
+                    (user.location || '').toLowerCase().includes(searchTerm);
                 const matchesRole = roleFilter === 'all' || user.role === roleFilter;
                 const matchesStatus = statusFilter === 'all' || user.status === statusFilter;
                 return matchesSearch && matchesRole && matchesStatus;
             });
             
-            // Sort by newest first
             filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             
             const totalItems = filtered.length;
@@ -1480,7 +1427,6 @@
             const end = Math.min(start + itemsPerPage, totalItems);
             const pageItems = filtered.slice(start, end);
             
-            // Render table rows
             if (pageItems.length === 0) {
                 userTableBody.innerHTML = `
                     <tr>
@@ -1498,7 +1444,7 @@
                     <tr>
                         <td>
                             <div class="user-info">
-                                <div class="user-avatar">${(user.full_name || 'U').charAt(0)}</div>
+                                <div class="user-avatar">${getUserAvatar(user)}</div>
                                 <div class="user-details">
                                     <div class="name">${user.full_name || 'Unknown'}</div>
                                     <div class="email">${user.email || 'No email'}</div>
@@ -1526,7 +1472,6 @@
                 `).join('');
             }
             
-            // Pagination
             tableInfo.textContent = `Showing ${start + 1} - ${end} of ${totalItems} users`;
             
             let paginationHtml = '';
@@ -1539,7 +1484,7 @@
         }
         
         // ============================================================
-        // PAGINATION FUNCTIONS
+        // PAGINATION
         // ============================================================
         window.goToPage = function(page) {
             currentPage = page;
@@ -1547,18 +1492,54 @@
         };
         
         // ============================================================
-        // USER ACTIONS - WITH SUPABASE
+        // VIEW USER - WITH PHOTO GALLERY
         // ============================================================
         window.viewUser = function(userId) {
             const user = users.find(u => u.id === userId);
             if (!user) return;
             
             currentModalUserId = userId;
-            currentModalUserStatus = user.status;
             
-            const membershipInfo = user.membership_plan ? 
-                `${user.membership_plan.toUpperCase()} - ${user.membership_days} days (KSh${user.membership_price})` : 
-                'No membership';
+            // Build photo gallery HTML
+            let photoHtml = '';
+            if (user.photos && user.photos.length > 0) {
+                photoHtml = `
+                    <div class="photo-gallery">
+                        <div class="gallery-title">
+                            <i class="fas fa-images"></i> Profile Photos (${user.photos.length})
+                        </div>
+                        <div class="gallery-grid">
+                            ${user.photos.map(photo => `
+                                <div class="gallery-img" onclick="viewFullImage('${photo}')">
+                                    <img src="${photo}" alt="Profile photo" loading="lazy">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else {
+                photoHtml = `
+                    <div class="photo-gallery">
+                        <div class="gallery-title">
+                            <i class="fas fa-images"></i> Profile Photos
+                        </div>
+                        <div class="no-photos">
+                            <i class="fas fa-camera"></i>
+                            No photos uploaded
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Services display
+            let servicesHtml = '';
+            if (user.services && user.services.length > 0) {
+                const serviceList = Array.isArray(user.services) ? user.services : JSON.parse(user.services || '[]');
+                servicesHtml = `<div class="user-detail">
+                    <span class="label">Services</span>
+                    <span class="value">${serviceList.join(', ')}</span>
+                </div>`;
+            }
             
             modalBody.innerHTML = `
                 <div class="user-detail">
@@ -1586,8 +1567,19 @@
                     <span class="value">${user.location || 'N/A'}</span>
                 </div>
                 <div class="user-detail">
+                    <span class="label">Area</span>
+                    <span class="value">${user.area || 'N/A'}</span>
+                </div>
+                ${servicesHtml}
+                ${user.bio ? `
+                <div class="user-detail">
+                    <span class="label">Bio</span>
+                    <span class="value">${user.bio}</span>
+                </div>
+                ` : ''}
+                <div class="user-detail">
                     <span class="label">Membership</span>
-                    <span class="value">${getMembershipBadge(user.membership_plan)} ${user.membership_plan ? `- ${user.membership_days} days (KSh${user.membership_price})` : ''}</span>
+                    <span class="value">${getMembershipBadge(user.membership_plan)} ${user.membership_plan ? `- ${user.membership_days} days (KSh${user.membership_price})` : 'No membership'}</span>
                 </div>
                 <div class="user-detail">
                     <span class="label">Payment Status</span>
@@ -1597,22 +1589,11 @@
                     <span class="label">Profile Status</span>
                     <span class="value"><span class="status-badge ${user.status || 'pending'}">${user.status || 'pending'}</span></span>
                 </div>
-                ${user.services ? `
-                <div class="user-detail">
-                    <span class="label">Services</span>
-                    <span class="value">${Array.isArray(user.services) ? user.services.join(', ') : user.services}</span>
-                </div>
-                ` : ''}
-                ${user.bio ? `
-                <div class="user-detail">
-                    <span class="label">Bio</span>
-                    <span class="value">${user.bio}</span>
-                </div>
-                ` : ''}
                 <div class="user-detail">
                     <span class="label">Joined</span>
                     <span class="value">${new Date(user.created_at).toLocaleString()}</span>
                 </div>
+                ${photoHtml}
             `;
             
             modalApproveBtn.style.display = (user.status === 'pending_review' || user.status === 'pending') ? 'inline-block' : 'none';
@@ -1620,11 +1601,26 @@
             userModal.classList.add('show');
         };
         
+        // ============================================================
+        // FULL SCREEN IMAGE VIEWER
+        // ============================================================
+        window.viewFullImage = function(src) {
+            document.getElementById('fullImage').src = src;
+            document.getElementById('imageViewer').classList.add('show');
+        };
+        
+        window.closeImageViewer = function() {
+            document.getElementById('imageViewer').classList.remove('show');
+        };
+        
+        // ============================================================
+        // APPROVE USER
+        // ============================================================
         window.approveUser = async function(userId) {
             const user = users.find(u => u.id === userId);
             if (!user) return;
             
-            if (confirm(`Approve ${user.full_name || user.fullName || 'User'}'s profile? This will make them visible on the homepage.`)) {
+            if (confirm(`Approve ${user.full_name || 'User'}'s profile? This will make them visible on the homepage.`)) {
                 try {
                     const { error } = await window.supabaseFunctions.supabase
                         .from('profiles')
@@ -1637,15 +1633,13 @@
                     
                     if (error) throw error;
                     
-                    // Update local data
                     user.status = 'approved';
                     user.is_active = true;
                     updateStats();
                     renderUsers();
-                    showToast(`✅ ${user.full_name || user.fullName || 'User'} has been approved and is now visible on the homepage!`, 'success');
+                    showToast(`✅ ${user.full_name || 'User'} has been approved!`, 'success');
                     userModal.classList.remove('show');
                     
-                    // Log activity
                     await window.supabaseFunctions.logActivity(
                         userId,
                         'admin_approve_profile',
@@ -1659,11 +1653,14 @@
             }
         };
         
+        // ============================================================
+        // REJECT USER
+        // ============================================================
         window.rejectUser = async function(userId) {
             const user = users.find(u => u.id === userId);
             if (!user) return;
             
-            if (confirm(`Reject ${user.full_name || user.fullName || 'User'}'s profile? They will need to re-submit.`)) {
+            if (confirm(`Reject ${user.full_name || 'User'}'s profile? They will need to re-submit.`)) {
                 try {
                     const { error } = await window.supabaseFunctions.supabase
                         .from('profiles')
@@ -1680,7 +1677,7 @@
                     user.is_active = false;
                     updateStats();
                     renderUsers();
-                    showToast(`❌ ${user.full_name || user.fullName || 'User'}'s profile has been rejected.`, 'info');
+                    showToast(`❌ ${user.full_name || 'User'}'s profile has been rejected.`, 'info');
                     userModal.classList.remove('show');
                     
                     await window.supabaseFunctions.logActivity(
@@ -1696,6 +1693,9 @@
             }
         };
         
+        // ============================================================
+        // DELETE USER
+        // ============================================================
         window.deleteUser = async function(userId) {
             const user = users.find(u => u.id === userId);
             if (!user) return;
@@ -1705,7 +1705,7 @@
                 return;
             }
             
-            if (confirm(`Delete ${user.full_name || user.fullName || 'User'} permanently? This cannot be undone.`)) {
+            if (confirm(`Delete ${user.full_name || 'User'} permanently? This cannot be undone.`)) {
                 try {
                     const { error } = await window.supabaseFunctions.supabase
                         .from('profiles')
@@ -1755,12 +1755,10 @@
             currentPage = 1;
             renderUsers();
         });
-        
         filterRole.addEventListener('change', () => {
             currentPage = 1;
             renderUsers();
         });
-        
         filterStatus.addEventListener('change', () => {
             currentPage = 1;
             renderUsers();
@@ -1772,7 +1770,6 @@
         sidebarToggle.addEventListener('click', () => {
             adminSidebar.classList.toggle('show');
         });
-        
         document.addEventListener('click', (e) => {
             if (window.innerWidth <= 992) {
                 if (!e.target.closest('.admin-sidebar') && !e.target.closest('.sidebar-toggle')) {
@@ -1916,13 +1913,9 @@
             toastMessage.textContent = message;
             toast.className = 'toast ' + type;
             toast.classList.add('show');
-            
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 4000);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 4000);
         }
-        
         toastClose.addEventListener('click', () => toast.classList.remove('show'));
         
         // ============================================================
@@ -1933,6 +1926,7 @@
                 userModal.classList.remove('show');
                 toast.classList.remove('show');
                 adminSidebar.classList.remove('show');
+                closeImageViewer();
             }
             if (e.key === 'r' && e.ctrlKey) {
                 e.preventDefault();
@@ -1946,9 +1940,10 @@
         // ============================================================
         await loadUsers();
         
-        console.log('✅ Admin Dashboard with Supabase Loaded Successfully!');
+        console.log('✅ Admin Dashboard - Upgraded with Photo Gallery!');
         console.log(`👥 Total Users: ${users.length}`);
         console.log(`⏳ Pending Review: ${users.filter(u => u.status === 'pending_review').length}`);
+        console.log(`📸 Users with photos: ${users.filter(u => u.photos && u.photos.length > 0).length}`);
         console.log('📧 Admin Email: admin@nairobivibe.com');
         
     });
