@@ -341,10 +341,6 @@
             color: #ff0000;
         }
         
-        .payment-methods .payment-option .payment-icon.bank {
-            color: #2d9cdb;
-        }
-        
         .payment-methods .payment-option .payment-name {
             font-size: 14px;
             font-weight: 600;
@@ -617,8 +613,8 @@
                     <span class="plan-badge regular" id="planBadge">BASIC</span>
                 </div>
                 <div class="plan-details">
-                    <div class="detail-item"><i class="fas fa-calendar-alt"></i> Duration: <strong id="durationDisplay">30 Days</strong></div>
-                    <div class="detail-item"><i class="fas fa-tag"></i> Plan Price: <strong id="priceDisplay">KSh2,000</strong></div>
+                    <div class="detail-item"><i class="fas fa-calendar-alt"></i> Duration: <strong id="durationDisplay">15 Days</strong></div>
+                    <div class="detail-item"><i class="fas fa-tag"></i> Plan Price: <strong id="priceDisplay">KSh1,300</strong></div>
                     <div class="detail-item"><i class="fas fa-map-marker-alt"></i> <span id="locationDisplay">Bottom Section</span></div>
                     <div class="detail-item"><i class="fas fa-camera"></i> <span id="photosDisplay">Up to 4 Photos</span></div>
                 </div>
@@ -633,22 +629,7 @@
             <div class="duration-section">
                 <label class="duration-label"><i class="fas fa-clock"></i> Select Duration</label>
                 <div class="duration-options" id="durationOptions">
-                    <div class="duration-option" data-days="3" data-price="400">
-                        <div class="days">3 Days</div>
-                        <div class="price">KSh400</div>
-                    </div>
-                    <div class="duration-option" data-days="7" data-price="700">
-                        <div class="days">7 Days</div>
-                        <div class="price">KSh700</div>
-                    </div>
-                    <div class="duration-option active" data-days="15" data-price="1300">
-                        <div class="days">15 Days</div>
-                        <div class="price">KSh1,300</div>
-                    </div>
-                    <div class="duration-option" data-days="30" data-price="2000">
-                        <div class="days">30 Days</div>
-                        <div class="price">KSh2,000</div>
-                    </div>
+                    <!-- Dynamically generated -->
                 </div>
             </div>
 
@@ -753,7 +734,7 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT - MODIFIED TO PASS DATA TO MPESA PAGE
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -778,8 +759,9 @@
                 const plan = urlParams.get('plan') || 'regular';
                 const days = urlParams.get('days') || '15';
                 const price = urlParams.get('price') || '1300';
+                const userId = urlParams.get('user_id') || '';
 
-                return { plan, days, price };
+                return { plan, days, price, userId };
             }
 
             // ============================================================
@@ -849,6 +831,10 @@
             // ============================================================
             const urlParams = new URLSearchParams(window.location.search);
             const planKey = urlParams.get('plan') || 'regular';
+            const initialDays = parseInt(urlParams.get('days')) || 15;
+            const initialPrice = parseInt(urlParams.get('price')) || 1300;
+            const userId = urlParams.get('user_id') || '';
+
             const plan = planData[planKey];
 
             if (!plan) {
@@ -856,6 +842,17 @@
                 setTimeout(() => { window.location.href = 'activate.html'; }, 1500);
                 return;
             }
+
+            // Store the plan data globally
+            window.checkoutData = {
+                plan: planKey,
+                days: initialDays,
+                price: initialPrice,
+                userId: userId,
+                planName: plan.name
+            };
+
+            console.log('📋 Checkout Data:', window.checkoutData);
 
             // Update plan summary
             document.getElementById('planNameDisplay').textContent = plan.name;
@@ -869,9 +866,9 @@
             // Generate duration options
             const durationContainer = document.getElementById('durationOptions');
             durationContainer.innerHTML = '';
-            plan.durations.forEach((d, index) => {
+            plan.durations.forEach((d) => {
                 const div = document.createElement('div');
-                div.className = 'duration-option' + (index === 2 ? ' active' : '');
+                div.className = 'duration-option' + (d.days === initialDays ? ' active' : '');
                 div.dataset.days = d.days;
                 div.dataset.price = d.price;
                 div.innerHTML = `
@@ -881,8 +878,8 @@
                 durationContainer.appendChild(div);
             });
 
-            // Update price display with default (15 days)
-            updatePriceDisplay(15, 1300);
+            // Update price display
+            updatePriceDisplay(initialDays, initialPrice);
 
             // ============================================================
             // DURATION SELECTOR
@@ -897,6 +894,10 @@
                     const days = parseInt(this.dataset.days);
                     const price = parseInt(this.dataset.price);
                     updatePriceDisplay(days, price);
+                    
+                    // Update checkout data
+                    window.checkoutData.days = days;
+                    window.checkoutData.price = price;
                 });
             });
 
@@ -909,12 +910,6 @@
                 document.getElementById('planPriceDisplay').textContent = 'KSh' + price.toLocaleString();
                 document.getElementById('durationTextDisplay').textContent = days + ' Days';
                 document.getElementById('totalAmount').textContent = 'KSh' + price.toLocaleString();
-
-                // Update URL with selected duration
-                const url = new URL(window.location);
-                url.searchParams.set('days', days);
-                url.searchParams.set('price', price);
-                window.history.replaceState({}, '', url);
             }
 
             // ============================================================
@@ -928,10 +923,9 @@
             });
 
             // ============================================================
-            // PAY NOW BUTTON
+            // PAY NOW BUTTON - MODIFIED TO REDIRECT TO MPESA PAGE
             // ============================================================
             payBtn.addEventListener('click', function() {
-                // Get selected details
                 const selectedDuration = document.querySelector('.duration-option.active');
                 const selectedPayment = document.querySelector('.payment-option.active');
 
@@ -955,23 +949,16 @@
                 payLoader.classList.add('show');
                 payIcon.style.display = 'none';
 
-                // Simulate payment processing
+                // Build redirect URL to M-PESA page
+                const mpesaUrl = 'checkout-mpesa.html?plan=' + planKey + 
+                                 '&days=' + days + 
+                                 '&price=' + price + 
+                                 '&user_id=' + userId;
+
+                // Redirect after short delay
                 setTimeout(function() {
-                    // Success
-                    showToast('✅ Payment successful! Your profile will be activated within 24 hours.', 'success');
-
-                    // Reset button
-                    payBtn.disabled = false;
-                    payBtnText.textContent = 'Pay Now';
-                    payLoader.classList.remove('show');
-                    payIcon.style.display = 'inline-block';
-
-                    // Redirect to profile after 3 seconds
-                    setTimeout(function() {
-                        window.location.href = 'myprofile.html?activated=true';
-                    }, 3000);
-
-                }, 2000);
+                    window.location.href = mpesaUrl;
+                }, 800);
             });
 
             // ============================================================
@@ -1005,8 +992,8 @@
 
             console.log('✅ Checkout Page Loaded Successfully!');
             console.log('📋 Plan:', plan.name);
-            console.log('💰 Price: KSh' + plan.durations[2].price);
-            console.log('💳 Payment: M-Pesa');
+            console.log('💰 Price: KSh' + initialPrice);
+            console.log('🔄 Will redirect to checkout-mpesa.html');
 
         });
     </script>
