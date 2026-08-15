@@ -19,7 +19,7 @@
     
     <style>
         /* ============================================================
-                   MY PROFILE PAGE - MOBILE OPTIMIZED
+                   MY PROFILE PAGE - MOBILE OPTIMIZED WITH PROFILE TYPE
                    ============================================================ */
         
         * {
@@ -467,6 +467,55 @@
             box-shadow: 0 0 0 3px rgba(224,0,108,0.1);
         }
         .profile-form .form-group textarea { resize: vertical; min-height: 60px; }
+        
+        /* ---------- PROFILE TYPE SELECTOR ---------- */
+        .profile-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 6px 0 12px 0;
+        }
+        .profile-type-selector .type-option {
+            padding: 10px 8px;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .profile-type-selector .type-option:hover {
+            border-color: #E0006C;
+        }
+        .profile-type-selector .type-option.active {
+            border-color: #E0006C;
+            background: #fce4ec;
+        }
+        .profile-type-selector .type-option .type-icon {
+            font-size: 14px;
+        }
+        .profile-type-selector .type-option .type-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+        .profile-type-selector .type-option.active .type-label {
+            color: #E0006C;
+        }
+        .profile-type-selector .type-option .type-badge {
+            font-size: 8px;
+            padding: 1px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .type-badge.regular { background: #6c757d; color: #fff; }
+        .type-badge.vip { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
         
         /* ---------- SERVICES CHECKBOXES ---------- */
         .services-grid {
@@ -918,6 +967,26 @@
                     </div>
                 </div>
 
+                <!-- ============================================================
+                     PROFILE TYPE SELECTOR - NEW
+                     ============================================================ -->
+                <div style="margin-top:8px;">
+                    <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:6px;">Profile Type <span class="required">*</span></label>
+                    <div class="profile-type-selector" id="profileTypeSelector">
+                        <div class="type-option active" data-type="regular" onclick="selectProfileType('regular')">
+                            <i class="fas fa-user type-icon" style="color:#6c757d;"></i>
+                            <span class="type-label">Regular</span>
+                            <span class="type-badge regular">Standard</span>
+                        </div>
+                        <div class="type-option" data-type="vip" onclick="selectProfileType('vip')">
+                            <i class="fas fa-crown type-icon" style="color:#f39c12;"></i>
+                            <span class="type-label">VIP</span>
+                            <span class="type-badge vip">Premium</span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="profileType" value="regular">
+                </div>
+
                 <!-- Services -->
                 <div style="margin-top:12px;">
                     <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:6px;">Services</label>
@@ -1076,7 +1145,7 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT
+     JAVASCRIPT - WITH PROFILE TYPE
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1101,7 +1170,24 @@
             const photoGrid = document.getElementById('photoGrid');
             const photoInput = document.getElementById('profilePhotoInput');
             const photoCount = document.getElementById('photoCount');
+            const profileTypeInput = document.getElementById('profileType');
             let uploadedPhotos = [];
+            let selectedProfileType = 'regular';
+            
+            // ============================================================
+            // PROFILE TYPE SELECTOR
+            // ============================================================
+            window.selectProfileType = function(type) {
+                selectedProfileType = type;
+                profileTypeInput.value = type;
+                
+                document.querySelectorAll('.type-option').forEach(opt => {
+                    opt.classList.remove('active');
+                    if (opt.dataset.type === type) {
+                        opt.classList.add('active');
+                    }
+                });
+            };
             
             // ============================================================
             // CHECK SUPABASE
@@ -1161,6 +1247,11 @@
                             updateStatusBanner('inactive');
                         }
                         
+                        // Load profile type
+                        if (data.profile_type) {
+                            selectProfileType(data.profile_type);
+                        }
+                        
                         // Load photos
                         if (data.photos && Array.isArray(data.photos)) {
                             uploadedPhotos = data.photos;
@@ -1194,6 +1285,10 @@
                 document.getElementById('profileOtherServices').value = data.other_services || '';
                 document.getElementById('listOtherCities').checked = data.list_in_other_cities || false;
                 
+                if (data.profile_type) {
+                    selectProfileType(data.profile_type);
+                }
+                
                 if (data.services) {
                     const services = Array.isArray(data.services) ? data.services : JSON.parse(data.services || '[]');
                     document.querySelectorAll('#servicesGrid input[type="checkbox"]').forEach(cb => {
@@ -1211,10 +1306,9 @@
             }
             
             // ============================================================
-            // PHOTO FUNCTIONS - MULTIPLE UPLOAD
+            // PHOTO FUNCTIONS
             // ============================================================
             function renderPhotos() {
-                const placeholder = document.getElementById('addPhotoPlaceholder');
                 photoGrid.innerHTML = '';
                 
                 uploadedPhotos.forEach((photo, index) => {
@@ -1229,7 +1323,6 @@
                     photoGrid.appendChild(div);
                 });
                 
-                // Add placeholder if less than 10 photos
                 if (uploadedPhotos.length < 10) {
                     const addDiv = document.createElement('div');
                     addDiv.className = 'photo-item';
@@ -1257,7 +1350,6 @@
                 const files = this.files;
                 if (files.length === 0) return;
                 
-                // Limit to 10 photos total
                 const remainingSlots = 10 - uploadedPhotos.length;
                 if (remainingSlots <= 0) {
                     showToast('Maximum 10 photos allowed', 'error');
@@ -1283,7 +1375,6 @@
                 this.value = '';
             });
             
-            // Click placeholder to upload
             document.getElementById('addPhotoPlaceholder')?.addEventListener('click', function() {
                 photoInput.click();
             });
@@ -1356,7 +1447,7 @@
             }
             
             // ============================================================
-            // SAVE PROFILE
+            // SAVE PROFILE - WITH PROFILE TYPE
             // ============================================================
             profileForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -1394,6 +1485,7 @@
                     incalls_rate: parseInt(document.getElementById('profileIncallsRate').value) || 0,
                     outcalls_rate: parseInt(document.getElementById('profileOutcallsRate').value) || 0,
                     list_in_other_cities: document.getElementById('listOtherCities').checked,
+                    profile_type: selectedProfileType, // <-- NEW: Profile Type
                     photos: uploadedPhotos,
                     status: 'pending',
                     is_active: false,
@@ -1426,6 +1518,13 @@
                     updateStatusBanner('pending');
                     showToast('✅ Profile saved! Pending admin approval.', 'success');
                     updateAboutSection(profileData);
+                    
+                    // Log activity for admin
+                    await window.supabaseFunctions.logActivity(
+                        currentUser.id,
+                        'profile_submitted',
+                        `User ${profileData.full_name} submitted ${selectedProfileType.toUpperCase()} profile for approval`
+                    );
                     
                 } catch (error) {
                     showToast('Error: ' + error.message, 'error');
@@ -1490,8 +1589,9 @@
             // ============================================================
             checkSession();
             
-            console.log('✅ My Profile - Mobile Optimized Loaded!');
+            console.log('✅ My Profile - With Profile Type Loaded!');
             console.log('📸 Multiple photo upload (10 max)');
+            console.log('👤 Profile Type: Regular or VIP');
             console.log('💰 Horizontal wallet stats');
             console.log('📱 Mobile-first design');
             
