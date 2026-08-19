@@ -19,75 +19,58 @@
     
     <style>
         /* ============================================================
-                   MY PROFILE PAGE - WITH MEMBERSHIP PLANS
+                   MY PROFILE - COMPLETE FIXED VERSION
                    ============================================================ */
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Open Sans', "Helvetica Neue", Arial, sans-serif;
-            background: #f5f5f5;
-            min-height: 100vh;
+            font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+            background: #f3f3f3;
+            font-size: 13px;
+            line-height: 1.5em;
             color: #333;
+            overflow-x: hidden;
             padding-bottom: 70px;
         }
         
         /* ---------- HEADER ---------- */
         .site-header {
             background: linear-gradient(135deg, #E0006C, #b30057);
-            padding: 10px 15px;
+            padding: 10px 18px;
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
-        
-        .site-header .logo h1 {
-            font-size: 16px;
-            font-weight: 800;
-        }
+        .site-header .logo h1 { font-size: 17px; font-weight: 800; }
         .site-header .logo span { font-size: 10px; opacity: 0.8; }
-        
-        .site-header .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .site-header .user-info img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            object-fit: cover;
-        }
-        .site-header .user-info .username {
-            font-weight: 600;
-            font-size: 12px;
-        }
+        .site-header .user-info { display: flex; align-items: center; gap: 10px; }
+        .site-header .user-info img { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #fff; object-fit: cover; }
+        .site-header .user-info .username { font-weight: 600; font-size: 12px; }
         .site-header .user-info .logout-btn {
             background: rgba(255,255,255,0.2);
             border: none;
             color: #fff;
-            padding: 5px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 11px;
             min-height: 34px;
+            transition: all 0.3s ease;
         }
+        .site-header .user-info .logout-btn:hover { background: rgba(255,255,255,0.3); }
         
         /* ---------- LOGIN PROMPT ---------- */
         .login-prompt {
             background: #fff;
-            border-radius: 14px;
+            border-radius: 12px;
             padding: 30px 20px;
             text-align: center;
             margin: 20px auto;
@@ -121,30 +104,27 @@
         }
         
         /* ---------- CONTAINER ---------- */
-        .site-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 10px;
-        }
+        .site-content { max-width: 1200px; margin: 0 auto; padding: 15px; }
         
         /* ---------- PROFILE HEADER ---------- */
         .profile-header {
             background: #fff;
             border-radius: 10px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #e8e8e8;
         }
-        .profile-header h2 { font-size: 18px; font-weight: 800; color: #E0006C; }
-        .profile-header .breadcrumb { font-size: 11px; color: #999; margin-top: 3px; }
+        .profile-header h2 { font-size: 19px; font-weight: 800; color: #E0006C; }
+        .profile-header .breadcrumb { font-size: 12px; color: #999; margin-top: 3px; }
         .profile-header .breadcrumb span { color: #E0006C; }
         
         /* ---------- STATUS BANNER ---------- */
         .status-banner {
             border-left: 4px solid #ffc107;
-            padding: 10px 14px;
+            padding: 10px 16px;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -165,18 +145,20 @@
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
-            min-height: 36px;
+            min-height: 34px;
+            transition: all 0.3s ease;
         }
+        .status-banner .btn-activate:hover { background: #b30057; }
         .status-banner .btn-activate:disabled { opacity: 0.5; cursor: not-allowed; }
         
-        /* ---------- WALLET SECTION - HORIZONTAL ---------- */
+        /* ---------- WALLET SECTION ---------- */
         .wallet-section {
             background: #fff;
             border-radius: 10px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #eee;
+            border: 1px solid #e8e8e8;
         }
         .wallet-header {
             display: flex;
@@ -186,11 +168,7 @@
             gap: 8px;
             margin-bottom: 10px;
         }
-        .wallet-header .wallet-balance {
-            font-size: 14px;
-            font-weight: 700;
-            color: #E0006C;
-        }
+        .wallet-header .wallet-balance { font-size: 14px; font-weight: 700; color: #E0006C; }
         .wallet-header .wallet-balance span { font-size: 20px; }
         .wallet-header .btn-add-fund {
             background: #28a745;
@@ -201,16 +179,16 @@
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
-            min-height: 36px;
+            min-height: 34px;
+            transition: all 0.3s ease;
         }
+        .wallet-header .btn-add-fund:hover { background: #1e7e34; }
         
-        /* WALLET STATS - HORIZONTAL ROW */
         .wallet-stats {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            gap: 6px;
-            margin-top: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .wallet-stats .stat-item {
@@ -221,19 +199,8 @@
             border-radius: 8px;
             min-width: 70px;
         }
-        .wallet-stats .stat-item label {
-            display: block;
-            font-size: 9px;
-            color: #999;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .wallet-stats .stat-item span {
-            font-size: 16px;
-            font-weight: 700;
-            color: #333;
-        }
+        .wallet-stats .stat-item label { display: block; font-size: 9px; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .wallet-stats .stat-item span { font-size: 16px; font-weight: 700; color: #333; }
         
         .wallet-footer {
             display: flex;
@@ -258,21 +225,16 @@
             cursor: pointer;
             min-height: 32px;
         }
-        .wallet-footer .inbox-link {
-            color: #E0006C;
-            font-weight: 600;
-            text-decoration: none;
-            font-size: 12px;
-        }
+        .wallet-footer .inbox-link { color: #E0006C; font-weight: 600; text-decoration: none; font-size: 12px; }
         
-        /* ---------- PHOTO SECTION - MULTIPLE UPLOAD ---------- */
+        /* ---------- PHOTO SECTION ---------- */
         .photo-section {
             background: #fff;
             border-radius: 10px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #eee;
+            border: 1px solid #e8e8e8;
         }
         .photo-section .photo-upload {
             display: flex;
@@ -303,9 +265,11 @@
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
-            min-height: 36px;
+            min-height: 34px;
+            transition: all 0.3s ease;
         }
-        .photo-section .photo-upload .file-name { font-size: 11px; color: #999; display: none; }
+        .photo-section .photo-upload .btn-upload:hover { background: #b30057; }
+        .photo-section .photo-upload .file-name { font-size: 11px; color: #999; }
         
         .photo-section .photo-grid {
             display: grid;
@@ -328,11 +292,7 @@
             cursor: pointer;
             min-height: 80px;
         }
-        .photo-section .photo-grid .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .photo-section .photo-grid .photo-item img { width: 100%; height: 100%; object-fit: cover; }
         .photo-section .photo-grid .photo-item .delete-photo {
             position: absolute;
             top: 4px;
@@ -350,12 +310,7 @@
             justify-content: center;
         }
         .photo-section .photo-grid .photo-item:hover .delete-photo { display: flex; }
-        .photo-section .photo-grid .photo-item .add-icon {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #ccc;
-        }
+        .photo-section .photo-grid .photo-item .add-icon { display: flex; flex-direction: column; align-items: center; color: #ccc; }
         .photo-section .photo-grid .photo-item .add-icon i { font-size: 24px; }
         .photo-section .photo-grid .photo-item .add-icon span { font-size: 9px; margin-top: 4px; }
         
@@ -387,13 +342,13 @@
         .nav-tabs {
             background: #fff;
             border-radius: 10px;
-            padding: 8px 10px;
-            margin-bottom: 10px;
+            padding: 8px 12px;
+            margin-bottom: 12px;
             display: flex;
             flex-wrap: nowrap;
             gap: 4px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #eee;
+            border: 1px solid #e8e8e8;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -406,9 +361,10 @@
             color: #666;
             text-decoration: none;
             white-space: nowrap;
-            min-height: 34px;
+            min-height: 32px;
             display: flex;
             align-items: center;
+            transition: all 0.3s ease;
         }
         .nav-tabs .tab-link:hover { background: #f5f5f5; color: #E0006C; }
         .nav-tabs .tab-link.active { background: #E0006C; color: #fff; }
@@ -417,242 +373,228 @@
         .profile-form {
             background: #fff;
             border-radius: 10px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #eee;
+            border: 1px solid #e8e8e8;
+            overflow: hidden;
         }
+        
         .profile-form .form-title {
             font-size: 15px;
             font-weight: 800;
             color: #E0006C;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
+            padding: 14px 18px;
             border-bottom: 2px solid #f0f0f0;
-        }
-        .profile-form .form-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        .profile-form .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        .profile-form .form-group label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 3px;
-        }
-        .profile-form .form-group label .required { color: #dc3545; }
-        .profile-form .form-group input,
-        .profile-form .form-group select,
-        .profile-form .form-group textarea {
-            padding: 8px 12px;
-            border: 2px solid #e8e8e8;
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: 'Open Sans', sans-serif;
             background: #fafafa;
-            min-height: 40px;
         }
-        .profile-form .form-group input:focus,
-        .profile-form .form-group select:focus,
-        .profile-form .form-group textarea:focus {
+        
+        /* ----- PROFILE FIELDS TABLE ----- */
+        .profile-fields {
+            width: 100%;
+            border: none;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        
+        .profile-fields tr {
+            border-bottom: 1px dotted #d6d6d6;
+        }
+        .profile-fields tr:last-child { border-bottom: none; }
+        
+        .profile-fields th {
+            width: 35%;
+            text-align: right;
+            padding: 10px 15px 10px 10px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #555;
+            background: #fafafa;
+            border: none;
+            vertical-align: middle;
+        }
+        
+        .profile-fields td {
+            width: 65%;
+            padding: 8px 15px 8px 10px;
+            text-align: left;
+            border: none;
+            vertical-align: middle;
+        }
+        
+        .profile-fields th .required {
+            color: #e74c3c;
+            margin-left: 3px;
+        }
+        
+        .profile-fields td input,
+        .profile-fields td select,
+        .profile-fields td textarea {
+            width: 100%;
+            padding: 7px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 13px;
+            font-family: 'Open Sans', Arial, sans-serif;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+        .profile-fields td input:focus,
+        .profile-fields td select:focus,
+        .profile-fields td textarea:focus {
             outline: none;
             border-color: #E0006C;
             background: #fff;
             box-shadow: 0 0 0 3px rgba(224,0,108,0.1);
         }
-        .profile-form .form-group textarea { resize: vertical; min-height: 60px; }
+        .profile-fields td textarea { resize: vertical; min-height: 50px; }
         
-        /* ---------- PROFILE TYPE SELECTOR ---------- */
-        .profile-type-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        /* ----- PROFILE TYPE - COMPACT ----- */
+        .type-selector {
+            display: flex;
             gap: 8px;
-            margin: 6px 0 12px 0;
+            flex-wrap: wrap;
         }
-        .profile-type-selector .type-option {
-            padding: 10px 8px;
-            border: 2px solid #e8e8e8;
-            border-radius: 10px;
-            text-align: center;
+        .type-selector .type-opt {
+            padding: 5px 14px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
             background: #fafafa;
-            min-height: 44px;
+            font-size: 12px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 6px;
+            gap: 5px;
+            min-height: 34px;
         }
-        .profile-type-selector .type-option:hover {
-            border-color: #E0006C;
-        }
-        .profile-type-selector .type-option.active {
+        .type-selector .type-opt:hover { border-color: #E0006C; }
+        .type-selector .type-opt.active {
             border-color: #E0006C;
             background: #fce4ec;
         }
-        .profile-type-selector .type-option .type-icon { font-size: 14px; }
-        .profile-type-selector .type-option .type-label { font-size: 12px; font-weight: 600; color: #333; }
-        .profile-type-selector .type-option.active .type-label { color: #E0006C; }
-        .profile-type-selector .type-option .type-badge {
+        .type-selector .type-opt .badge {
             font-size: 8px;
             padding: 1px 8px;
             border-radius: 10px;
             font-weight: 700;
             text-transform: uppercase;
         }
-        .type-badge.regular { background: #6c757d; color: #fff; }
-        .type-badge.vip { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
+        .badge-reg { background: #6c757d; color: #fff; }
+        .badge-vip { background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; }
         
-        /* ---------- MEMBERSHIP PLANS ---------- */
-        .membership-section {
-            margin: 12px 0;
-        }
-        .membership-section .section-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #555;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .membership-section .section-label i {
-            color: #E0006C;
-            margin-right: 4px;
-        }
-        
-        .membership-plans {
+        /* ----- MEMBERSHIP PLANS - COMPACT GRID ----- */
+        .plans-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 10px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 6px;
         }
-        .membership-plans .plan-option {
-            padding: 10px 8px;
-            border: 2px solid #e8e8e8;
-            border-radius: 10px;
-            text-align: center;
+        .plans-grid .plan-opt {
+            padding: 6px 4px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
             background: #fafafa;
+            text-align: center;
             min-height: 44px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        .membership-plans .plan-option:hover {
-            border-color: #E0006C;
-        }
-        .membership-plans .plan-option.active {
+        .plans-grid .plan-opt:hover { border-color: #E0006C; }
+        .plans-grid .plan-opt.active {
             border-color: #E0006C;
             background: #fce4ec;
         }
-        .membership-plans .plan-option .plan-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: #333;
-        }
-        .membership-plans .plan-option .plan-price {
-            font-size: 11px;
-            color: #E0006C;
-            font-weight: 600;
-        }
-        .membership-plans .plan-option .plan-badge {
+        .plans-grid .plan-opt .pname { font-size: 11px; font-weight: 700; color: #333; }
+        .plans-grid .plan-opt .pprice { font-size: 10px; color: #E0006C; font-weight: 600; }
+        .plans-grid .plan-opt .pbadge {
             font-size: 7px;
             padding: 1px 6px;
             border-radius: 8px;
             font-weight: 700;
             text-transform: uppercase;
-            margin-top: 2px;
+            margin-top: 1px;
         }
-        .plan-badge.regular-badge { background: #6c757d; color: #fff; }
-        .plan-badge.prime-badge { background: #007bff; color: #fff; }
-        .plan-badge.prime-vip-badge { background: #8b5cf6; color: #fff; }
-        .plan-badge.vip-badge { background: linear-gradient(135deg, #f7053e, #d60435); color: #fff; }
+        .pbadge-reg { background: #6c757d; color: #fff; }
+        .pbadge-prime { background: #007bff; color: #fff; }
+        .pbadge-pvip { background: #8b5cf6; color: #fff; }
+        .pbadge-vip { background: linear-gradient(135deg, #f7053e, #d60435); color: #fff; }
         
-        /* ---------- DURATION OPTIONS ---------- */
-        .duration-options {
+        /* ----- DURATION - COMPACT ROW ----- */
+        .duration-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
-            margin-top: 8px;
+            gap: 5px;
+            margin-top: 4px;
         }
-        .duration-options .duration-btn {
-            padding: 8px 6px;
-            border: 2px solid #e8e8e8;
-            border-radius: 8px;
+        .duration-row .dur-btn {
+            padding: 5px 4px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
             background: #fafafa;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s ease;
         }
-        .duration-options .duration-btn:hover {
-            border-color: #E0006C;
-        }
-        .duration-options .duration-btn.active {
+        .duration-row .dur-btn:hover { border-color: #E0006C; }
+        .duration-row .dur-btn.active {
             border-color: #E0006C;
             background: #fce4ec;
         }
-        .duration-options .duration-btn .days {
-            font-size: 11px;
-            font-weight: 700;
-            color: #333;
-        }
-        .duration-options .duration-btn .price {
-            font-size: 10px;
-            font-weight: 600;
-            color: #E0006C;
-        }
+        .duration-row .dur-btn .dday { font-size: 10px; font-weight: 700; color: #333; }
+        .duration-row .dur-btn .dprice { font-size: 9px; font-weight: 600; color: #E0006C; }
         
-        /* ---------- SERVICES CHECKBOXES ---------- */
+        /* ----- SERVICES - COMPACT ----- */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 6px;
-            margin: 8px 0 12px 0;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 4px;
         }
-        .services-grid .service-item {
+        .services-grid .svc-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
+            padding: 3px 0;
         }
-        .services-grid .service-item input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+        .services-grid .svc-item input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
             accent-color: #E0006C;
             cursor: pointer;
         }
-        .services-grid .service-item label { font-size: 12px; color: #555; cursor: pointer; }
+        .services-grid .svc-item label { font-size: 12px; color: #555; cursor: pointer; }
         
-        /* ---------- LISTING OPTIONS ---------- */
-        .listing-options {
+        /* ----- OTHER FIELDS ----- */
+        .listing-opt {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 10px 0 14px 0;
-            padding: 10px 14px;
-            background: #f8f9fa;
-            border-radius: 8px;
+            gap: 8px;
+            padding: 4px 0;
         }
-        .listing-options input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+        .listing-opt input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
             accent-color: #E0006C;
             cursor: pointer;
         }
-        .listing-options label { font-size: 12px; color: #555; cursor: pointer; }
+        .listing-opt label { font-size: 12px; color: #555; cursor: pointer; }
         
-        /* ---------- SAVE BUTTON ---------- */
+        /* ----- SAVE BUTTON ----- */
+        .form-actions {
+            padding: 12px 18px 18px 18px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+        }
         .btn-save {
             background: linear-gradient(135deg, #E0006C, #b30057);
             color: #fff;
             border: none;
-            padding: 10px 30px;
+            padding: 10px 35px;
             border-radius: 25px;
             font-size: 14px;
             font-weight: 700;
@@ -660,27 +602,25 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            min-height: 44px;
-            width: 100%;
-            justify-content: center;
+            min-height: 42px;
+            transition: all 0.3s ease;
         }
-        .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(224,0,108,0.3);
+        }
+        .btn-save:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         
         /* ---------- ABOUT SECTION ---------- */
         .about-section {
             background: #fff;
             border-radius: 10px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #eee;
+            border: 1px solid #e8e8e8;
         }
-        .about-section .about-title {
-            font-size: 14px;
-            font-weight: 800;
-            color: #E0006C;
-            margin-bottom: 8px;
-        }
+        .about-section .about-title { font-size: 14px; font-weight: 800; color: #E0006C; margin-bottom: 8px; }
         .about-section .about-content { font-size: 12px; line-height: 1.6; color: #666; }
         
         /* ---------- FOOTER ---------- */
@@ -694,7 +634,7 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 15px;
         }
         .site-footer .footer-content h4 { color: #fff; font-size: 13px; margin-bottom: 6px; }
@@ -715,7 +655,7 @@
             position: fixed;
             top: 60px;
             right: 10px;
-            padding: 10px 18px;
+            padding: 10px 16px;
             border-radius: 10px;
             color: #fff;
             font-weight: 600;
@@ -727,7 +667,7 @@
             max-width: 350px;
         }
         .toast.show { transform: translateX(0); }
-        .toast.success { background: linear-gradient(135deg, #28a745, #1e7e34); }
+        .toast.success { background: linear-gradient(135deg, #27ae60, #1e8449); }
         .toast.error { background: linear-gradient(135deg, #dc3545, #c82333); }
         .toast.info { background: linear-gradient(135deg, #17a2b8, #117a8b); }
         .toast .toast-close { float: right; margin-left: 10px; cursor: pointer; opacity: 0.8; font-size: 16px; }
@@ -753,16 +693,16 @@
             align-items: center;
             gap: 1px;
             color: #999;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 600;
             cursor: pointer;
-            padding: 4px 10px;
-            min-height: 40px;
+            padding: 4px 8px;
+            min-height: 36px;
             justify-content: center;
             transition: all 0.3s ease;
         }
         .bottom-nav .nav-item.active { color: #E0006C; }
-        .bottom-nav .nav-item i { font-size: 16px; }
+        .bottom-nav .nav-item i { font-size: 15px; }
         .bottom-nav .nav-item:active { transform: scale(0.9); }
         
         /* ---------- LOADER ---------- */
@@ -779,29 +719,79 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         /* ---------- RESPONSIVE ---------- */
-        @media (min-width: 600px) {
-            .profile-form .form-row { grid-template-columns: repeat(2, 1fr); }
-            .services-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
-            .site-content { padding: 15px; }
-            .photo-section .photo-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
-            .membership-plans { grid-template-columns: repeat(4, 1fr); }
-        }
-        @media (min-width: 768px) {
-            .bottom-nav { display: none; }
-            body { padding-bottom: 0; }
-            .wallet-stats .stat-item { min-width: 100px; }
-        }
-        @media (min-width: 992px) {
-            .site-content { padding: 20px; }
-            .profile-form { padding: 20px 25px; }
-            .photo-section .photo-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-        }
-        @media (max-width: 480px) {
-            .duration-options { grid-template-columns: repeat(2, 1fr); }
-            .membership-plans { grid-template-columns: 1fr 1fr; }
+        @media (max-width: 768px) {
+            .profile-fields th,
+            .profile-fields td {
+                display: block;
+                width: 100%;
+                text-align: left;
+                padding: 6px 12px;
+            }
+            .profile-fields th {
+                background: #f5f5f5;
+                border-bottom: none;
+                padding-bottom: 3px;
+            }
+            .profile-fields td {
+                padding-top: 3px;
+            }
+            .profile-fields tr {
+                border-bottom: 1px dotted #d6d6d6;
+            }
+            .plans-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .duration-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .site-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .wallet-stats {
+                flex-direction: column;
+            }
+            .wallet-stats .stat-item {
+                min-width: auto;
+            }
+            .site-footer .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .nav-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+            }
+            .nav-tabs::-webkit-scrollbar { display: none; }
+            .photo-section .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            }
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            }
+            .type-selector {
+                flex-wrap: wrap;
+            }
         }
         
-        /* ---------- SCROLLBAR ---------- */
+        @media (max-width: 480px) {
+            .site-content { padding: 10px; }
+            .profile-header { padding: 12px 14px; }
+            .wallet-section { padding: 12px 14px; }
+            .photo-section { padding: 12px 14px; }
+            .profile-form { padding: 0; }
+            .profile-fields th,
+            .profile-fields td { padding: 5px 10px; }
+            .plans-grid { grid-template-columns: 1fr 1fr; }
+            .duration-row { grid-template-columns: 1fr 1fr; }
+            .profile-form .form-title { padding: 10px 14px; font-size: 14px; }
+            .form-actions { padding: 10px 14px 14px 14px; }
+        }
+        
+        @media (min-width: 769px) {
+            .bottom-nav { display: none; }
+            body { padding-bottom: 0; }
+        }
+        
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #E0006C; border-radius: 10px; }
@@ -865,7 +855,7 @@
                 <button class="btn-activate" id="activateBtn">Activate Now</button>
             </div>
 
-            <!-- Wallet Section - HORIZONTAL -->
+            <!-- Wallet Section -->
             <div class="wallet-section">
                 <div class="wallet-header">
                     <div class="wallet-balance">
@@ -898,7 +888,7 @@
                 </div>
             </div>
 
-            <!-- Photo Section - MULTIPLE UPLOAD -->
+            <!-- Photo Section -->
             <div class="photo-section">
                 <div class="photo-upload">
                     <div class="file-input-wrapper">
@@ -935,274 +925,265 @@
                 <a href="#" class="tab-link">Photo Verification</a>
             </div>
 
-            <!-- Profile Form -->
+            <!-- ============================================================
+                 PROFILE FORM - TABLE STYLE
+                 ============================================================ -->
             <form class="profile-form" id="profileForm">
-                <div class="form-title">My Profile</div>
+                <div class="form-title"><i class="fas fa-user-edit"></i> My Profile</div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Name <span class="required">*</span></label>
-                        <input type="text" id="profileName" placeholder="Enter your full name">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="profilePhone" placeholder="Enter phone number">
-                    </div>
+                <table class="profile-fields">
+                    <tbody>
+                        <!-- Name -->
+                        <tr>
+                            <th>Full Name <span class="required">*</span></th>
+                            <td><input type="text" id="profileName" placeholder="Enter your full name"></td>
+                        </tr>
+                        
+                        <!-- Phone -->
+                        <tr>
+                            <th>Phone Number <span class="required">*</span></th>
+                            <td><input type="tel" id="profilePhone" placeholder="Enter phone number"></td>
+                        </tr>
+                        
+                        <!-- Gender -->
+                        <tr>
+                            <th>Gender</th>
+                            <td>
+                                <select id="profileGender">
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Transgender">Transgender</option>
+                                    <option value="Non-binary">Non-binary</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <!-- Sexual Orientation -->
+                        <tr>
+                            <th>Sexual Orientation</th>
+                            <td>
+                                <select id="profileOrientation">
+                                    <option value="Straight">Straight</option>
+                                    <option value="Gay">Gay</option>
+                                    <option value="Lesbian">Lesbian</option>
+                                    <option value="Bisexual">Bisexual</option>
+                                    <option value="Pansexual">Pansexual</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <!-- Age -->
+                        <tr>
+                            <th>Age</th>
+                            <td>
+                                <select id="profileAge">
+                                    <option value="18">18</option><option value="19">19</option>
+                                    <option value="20">20</option><option value="21">21</option>
+                                    <option value="22">22</option><option value="23">23</option>
+                                    <option value="24">24</option><option value="25">25</option>
+                                    <option value="26">26</option><option value="27">27</option>
+                                    <option value="28">28</option><option value="29">29</option>
+                                    <option value="30">30</option><option value="31">31</option>
+                                    <option value="32">32</option><option value="33">33</option>
+                                    <option value="34">34</option><option value="35">35</option>
+                                    <option value="36+">36+</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <!-- Nationality -->
+                        <tr>
+                            <th>Nationality</th>
+                            <td>
+                                <select id="profileNationality">
+                                    <option value="Kenyan">Kenyan</option>
+                                    <option value="Tanzanian">Tanzanian</option>
+                                    <option value="Ugandan">Ugandan</option>
+                                    <option value="Rwandan">Rwandan</option>
+                                    <option value="South African">South African</option>
+                                    <option value="Nigerian">Nigerian</option>
+                                    <option value="Ethiopian">Ethiopian</option>
+                                    <option value="European">European</option>
+                                    <option value="American">American</option>
+                                    <option value="Asian">Asian</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <!-- County -->
+                        <tr>
+                            <th>County</th>
+                            <td>
+                                <select id="profileCounty">
+                                    <option value="">-</option>
+                                    <option value="Nairobi">Nairobi</option>
+                                    <option value="Mombasa">Mombasa</option>
+                                    <option value="Kisumu">Kisumu</option>
+                                    <option value="Nakuru">Nakuru</option>
+                                    <option value="Kiambu">Kiambu</option>
+                                    <option value="Machakos">Machakos</option>
+                                    <option value="Kajiado">Kajiado</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <!-- City / Town -->
+                        <tr>
+                            <th>City / Town</th>
+                            <td>
+                                <select id="profileCity">
+                                    <option value="">-</option>
+                                    <option value="Nairobi CBD">Nairobi CBD</option>
+                                    <option value="Mombasa CBD">Mombasa CBD</option>
+                                    <option value="Kisumu CBD">Kisumu CBD</option>
+                                    <option value="Nakuru CBD">Nakuru CBD</option>
+                                    <option value="Westlands">Westlands</option>
+                                    <option value="Kilimani">Kilimani</option>
+                                    <option value="Kasarani">Kasarani</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <!-- Location -->
+                        <tr>
+                            <th>Location</th>
+                            <td><input type="text" id="profileLocation" placeholder="Enter your location"></td>
+                        </tr>
+                        
+                        <!-- Area -->
+                        <tr>
+                            <th>Area</th>
+                            <td><input type="text" id="profileArea" placeholder="Enter your area"></td>
+                        </tr>
+                        
+                        <!-- Nearby Places -->
+                        <tr>
+                            <th>Nearby Places</th>
+                            <td><input type="text" id="profileNearby" placeholder="Enter nearby landmarks"></td>
+                        </tr>
+                        
+                        <!-- ============================================================
+                             FIXED: PROFILE TYPE - COMPACT
+                             ============================================================ -->
+                        <tr>
+                            <th>Profile Type <span class="required">*</span></th>
+                            <td>
+                                <div class="type-selector" id="profileTypeSelector">
+                                    <div class="type-opt active" data-type="regular" onclick="selectProfileType('regular')">
+                                        <i class="fas fa-user" style="color:#6c757d;"></i> Regular
+                                        <span class="badge badge-reg">Std</span>
+                                    </div>
+                                    <div class="type-opt" data-type="vip" onclick="selectProfileType('vip')">
+                                        <i class="fas fa-crown" style="color:#f39c12;"></i> VIP
+                                        <span class="badge badge-vip">Prem</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="profileType" value="regular">
+                            </td>
+                        </tr>
+                        
+                        <!-- ============================================================
+                             FIXED: MEMBERSHIP PLAN - COMPACT GRID
+                             ============================================================ -->
+                        <tr>
+                            <th>Membership Plan <span class="required">*</span></th>
+                            <td>
+                                <div class="plans-grid" id="membershipPlans">
+                                    <div class="plan-opt active" data-plan="regular" onclick="selectPlan('regular')">
+                                        <span class="pname">Regular</span>
+                                        <span class="pprice">KSh400</span>
+                                        <span class="pbadge pbadge-reg">Basic</span>
+                                    </div>
+                                    <div class="plan-opt" data-plan="prime" onclick="selectPlan('prime')">
+                                        <span class="pname">Prime</span>
+                                        <span class="pprice">KSh500</span>
+                                        <span class="pbadge pbadge-prime">Popular</span>
+                                    </div>
+                                    <div class="plan-opt" data-plan="prime-vip" onclick="selectPlan('prime-vip')">
+                                        <span class="pname">Prime VIP</span>
+                                        <span class="pprice">KSh600</span>
+                                        <span class="pbadge pbadge-pvip">Best</span>
+                                    </div>
+                                    <div class="plan-opt" data-plan="vip" onclick="selectPlan('vip')">
+                                        <span class="pname">VIP</span>
+                                        <span class="pprice">KSh900</span>
+                                        <span class="pbadge pbadge-vip">Prem</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="selectedPlan" value="regular">
+                                
+                                <!-- Duration - COMPACT ROW -->
+                                <div class="duration-row" id="durationOptions">
+                                    <!-- Dynamically generated by JavaScript -->
+                                </div>
+                                <input type="hidden" id="selectedDuration" value="3">
+                                <input type="hidden" id="selectedPrice" value="400">
+                            </td>
+                        </tr>
+                        
+                        <!-- ============================================================
+                             FIXED: SERVICES
+                             ============================================================ -->
+                        <tr>
+                            <th>Services</th>
+                            <td>
+                                <div class="services-grid" id="servicesGrid">
+                                    <div class="svc-item"><input type="checkbox" value="Dinner Date"><label>Dinner Date</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="Travel Companion"><label>Travel Companion</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="Lesbian Show"><label>Lesbian Show</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="Rimming"><label>Rimming</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="Raw BJ"><label>Raw BJ</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="BJ"><label>BJ</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="GFE"><label>GFE</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="COB – Cum On Body"><label>COB</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="CIM – Cum In Mouth"><label>CIM</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="3 Some"><label>3 Some</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="Anal"><label>Anal</label></div>
+                                    <div class="svc-item"><input type="checkbox" value="Massage"><label>Massage</label></div>
+                                </div>
+                                <div style="margin-top:6px;">
+                                    <input type="text" id="profileOtherServices" placeholder="Add other services" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:5px; font-size:12px;">
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- ============================================================
+                             FIXED: RATES
+                             ============================================================ -->
+                        <tr>
+                            <th>Incalls Rate (KSh/hr)</th>
+                            <td><input type="number" id="profileIncallsRate" placeholder="Enter incalls rate" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:5px; font-size:13px;"></td>
+                        </tr>
+                        <tr>
+                            <th>Outcalls Rate (KSh/hr)</th>
+                            <td><input type="number" id="profileOutcallsRate" placeholder="Enter outcalls rate" style="width:100%; padding:6px 10px; border:1px solid #ddd; border-radius:5px; font-size:13px;"></td>
+                        </tr>
+                        
+                        <!-- ============================================================
+                             FIXED: LISTING OPTIONS
+                             ============================================================ -->
+                        <tr>
+                            <th>Listing Options</th>
+                            <td>
+                                <div class="listing-opt">
+                                    <input type="checkbox" id="listOtherCities">
+                                    <label for="listOtherCities">List me in other cities</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-save" id="saveProfileBtn">
+                        <span id="saveBtnText">Save Changes</span>
+                        <span class="loader" id="saveLoader"></span>
+                        <i class="fas fa-save" id="saveIcon"></i>
+                    </button>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select id="profileGender">
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
-                            <option value="Transgender">Transgender</option>
-                            <option value="Non-binary">Non-binary</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Sexual Orientation</label>
-                        <select id="profileOrientation">
-                            <option value="Straight">Straight</option>
-                            <option value="Gay">Gay</option>
-                            <option value="Lesbian">Lesbian</option>
-                            <option value="Bisexual">Bisexual</option>
-                            <option value="Pansexual">Pansexual</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Age</label>
-                        <select id="profileAge">
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="25">25</option>
-                            <option value="26">26</option>
-                            <option value="27">27</option>
-                            <option value="28">28</option>
-                            <option value="29">29</option>
-                            <option value="30">30</option>
-                            <option value="31">31</option>
-                            <option value="32">32</option>
-                            <option value="33">33</option>
-                            <option value="34">34</option>
-                            <option value="35">35</option>
-                            <option value="36+">36+</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Nationality</label>
-                        <select id="profileNationality">
-                            <option value="Kenyan">Kenyan</option>
-                            <option value="Tanzanian">Tanzanian</option>
-                            <option value="Ugandan">Ugandan</option>
-                            <option value="Rwandan">Rwandan</option>
-                            <option value="South African">South African</option>
-                            <option value="Nigerian">Nigerian</option>
-                            <option value="Ethiopian">Ethiopian</option>
-                            <option value="European">European</option>
-                            <option value="American">American</option>
-                            <option value="Asian">Asian</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>County</label>
-                        <select id="profileCounty">
-                            <option value="">-</option>
-                            <option value="Nairobi">Nairobi</option>
-                            <option value="Mombasa">Mombasa</option>
-                            <option value="Kisumu">Kisumu</option>
-                            <option value="Nakuru">Nakuru</option>
-                            <option value="Kiambu">Kiambu</option>
-                            <option value="Machakos">Machakos</option>
-                            <option value="Kajiado">Kajiado</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>City / Town</label>
-                        <select id="profileCity">
-                            <option value="">-</option>
-                            <option value="Nairobi CBD">Nairobi CBD</option>
-                            <option value="Mombasa CBD">Mombasa CBD</option>
-                            <option value="Kisumu CBD">Kisumu CBD</option>
-                            <option value="Nakuru CBD">Nakuru CBD</option>
-                            <option value="Westlands">Westlands</option>
-                            <option value="Kilimani">Kilimani</option>
-                            <option value="Kasarani">Kasarani</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" id="profileLocation" placeholder="Enter your location">
-                    </div>
-                    <div class="form-group">
-                        <label>Area</label>
-                        <input type="text" id="profileArea" placeholder="Enter your area">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Nearby Places</label>
-                        <input type="text" id="profileNearby" placeholder="Enter nearby landmarks">
-                    </div>
-                </div>
-
-                <!-- ============================================================
-                     PROFILE TYPE SELECTOR
-                     ============================================================ -->
-                <div style="margin-top:8px;">
-                    <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:6px;">Profile Type <span class="required">*</span></label>
-                    <div class="profile-type-selector" id="profileTypeSelector">
-                        <div class="type-option active" data-type="regular" onclick="selectProfileType('regular')">
-                            <i class="fas fa-user type-icon" style="color:#6c757d;"></i>
-                            <span class="type-label">Regular</span>
-                            <span class="type-badge regular">Standard</span>
-                        </div>
-                        <div class="type-option" data-type="vip" onclick="selectProfileType('vip')">
-                            <i class="fas fa-crown type-icon" style="color:#f39c12;"></i>
-                            <span class="type-label">VIP</span>
-                            <span class="type-badge vip">Premium</span>
-                        </div>
-                    </div>
-                    <input type="hidden" id="profileType" value="regular">
-                </div>
-
-                <!-- ============================================================
-                     MEMBERSHIP PLANS - NEW
-                     ============================================================ -->
-                <div class="membership-section">
-                    <label class="section-label"><i class="fas fa-crown"></i> Select Membership Plan</label>
-                    <div class="membership-plans" id="membershipPlans">
-                        <div class="plan-option active" data-plan="regular" onclick="selectPlan('regular')">
-                            <span class="plan-name">Regular</span>
-                            <span class="plan-price">KSh400 <small>from</small></span>
-                            <span class="plan-badge regular-badge">Basic</span>
-                        </div>
-                        <div class="plan-option" data-plan="prime" onclick="selectPlan('prime')">
-                            <span class="plan-name">Prime</span>
-                            <span class="plan-price">KSh500 <small>from</small></span>
-                            <span class="plan-badge prime-badge">Popular</span>
-                        </div>
-                        <div class="plan-option" data-plan="prime-vip" onclick="selectPlan('prime-vip')">
-                            <span class="plan-name">Prime VIP</span>
-                            <span class="plan-price">KSh600 <small>from</small></span>
-                            <span class="plan-badge prime-vip-badge">Best Value</span>
-                        </div>
-                        <div class="plan-option" data-plan="vip" onclick="selectPlan('vip')">
-                            <span class="plan-name">VIP</span>
-                            <span class="plan-price">KSh900 <small>from</small></span>
-                            <span class="plan-badge vip-badge">Premium</span>
-                        </div>
-                    </div>
-                    <input type="hidden" id="selectedPlan" value="regular">
-
-                    <!-- Duration Options -->
-                    <div class="duration-options" id="durationOptions">
-                        <!-- Dynamically generated by JavaScript -->
-                    </div>
-                    <input type="hidden" id="selectedDuration" value="3">
-                    <input type="hidden" id="selectedPrice" value="400">
-                </div>
-
-                <!-- Services -->
-                <div style="margin-top:12px;">
-                    <label style="font-size:12px; font-weight:600; color:#555; display:block; margin-bottom:6px;">Services</label>
-                    <div class="services-grid" id="servicesGrid">
-                        <div class="service-item">
-                            <input type="checkbox" value="Dinner Date">
-                            <label>Dinner Date</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="Travel Companion">
-                            <label>Travel Companion</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="Lesbian Show">
-                            <label>Lesbian Show</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="Rimming">
-                            <label>Rimming</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="Raw BJ">
-                            <label>Raw BJ</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="BJ">
-                            <label>BJ</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="GFE">
-                            <label>GFE</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="COB – Cum On Body">
-                            <label>COB – Cum On Body</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="CIM – Cum In Mouth">
-                            <label>CIM – Cum In Mouth</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="3 Some">
-                            <label>3 Some</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="Anal">
-                            <label>Anal</label>
-                        </div>
-                        <div class="service-item">
-                            <input type="checkbox" value="Massage">
-                            <label>Massage</label>
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-top:6px;">
-                        <label>Other Services</label>
-                        <input type="text" id="profileOtherServices" placeholder="Add other services">
-                    </div>
-                </div>
-
-                <!-- Rates -->
-                <div class="form-row" style="margin-top:12px;">
-                    <div class="form-group">
-                        <label>Incalls Rate (KSh/hr)</label>
-                        <input type="number" id="profileIncallsRate" placeholder="Enter incalls rate">
-                    </div>
-                    <div class="form-group">
-                        <label>Outcalls Rate (KSh/hr)</label>
-                        <input type="number" id="profileOutcallsRate" placeholder="Enter outcalls rate">
-                    </div>
-                </div>
-
-                <!-- Listing Options -->
-                <div class="listing-options">
-                    <input type="checkbox" id="listOtherCities">
-                    <label for="listOtherCities">List me in other cities</label>
-                </div>
-
-                <button type="submit" class="btn-save" id="saveProfileBtn">
-                    <span id="saveBtnText">Save Changes</span>
-                    <span class="loader" id="saveLoader"></span>
-                    <i class="fas fa-save" id="saveIcon"></i>
-                </button>
             </form>
 
             <!-- About Section -->
@@ -1224,20 +1205,16 @@
          ============================================================ -->
     <div class="bottom-nav">
         <div class="nav-item" onclick="window.location.href='index.html'">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
+            <i class="fas fa-home"></i><span>Home</span>
         </div>
         <div class="nav-item active" onclick="window.location.href='myprofile.html'">
-            <i class="fas fa-user"></i>
-            <span>Profile</span>
+            <i class="fas fa-user"></i><span>Profile</span>
         </div>
         <div class="nav-item" onclick="window.location.href='#'">
-            <i class="fas fa-heart"></i>
-            <span>Favorites</span>
+            <i class="fas fa-heart"></i><span>Favorites</span>
         </div>
         <div class="nav-item" onclick="window.location.href='login.html'">
-            <i class="fas fa-sign-in-alt"></i>
-            <span>Login</span>
+            <i class="fas fa-sign-in-alt"></i><span>Login</span>
         </div>
     </div>
 
@@ -1248,7 +1225,7 @@
         <div class="footer-content">
             <div>
                 <h4>Nairobi Vibe Escorts</h4>
-                <p>Mombasa escorts and call girls from Mombasa Kenya offering hot massage and escorts services at very affordable rates.</p>
+                <p>Mombasa escorts and call girls from Mombasa Kenya offering hot massage and escorts services.</p>
             </div>
             <div>
                 <h4>Quick Links</h4>
@@ -1279,7 +1256,7 @@
     </div>
 
     <!-- ============================================================
-     JAVASCRIPT - WITH MEMBERSHIP PLANS
+     JAVASCRIPT - FULL WORKING
      ============================================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1288,50 +1265,10 @@
             // MEMBERSHIP PLAN DATA
             // ============================================================
             const membershipData = {
-                regular: {
-                    name: 'Regular',
-                    badge: 'Basic',
-                    badgeClass: 'regular-badge',
-                    durations: [
-                        { days: 3, price: 400 },
-                        { days: 7, price: 700 },
-                        { days: 15, price: 1300 },
-                        { days: 30, price: 2000 }
-                    ]
-                },
-                prime: {
-                    name: 'Prime',
-                    badge: 'Popular',
-                    badgeClass: 'prime-badge',
-                    durations: [
-                        { days: 3, price: 500 },
-                        { days: 7, price: 950 },
-                        { days: 15, price: 1800 },
-                        { days: 30, price: 3000 }
-                    ]
-                },
-                'prime-vip': {
-                    name: 'Prime VIP',
-                    badge: 'Best Value',
-                    badgeClass: 'prime-vip-badge',
-                    durations: [
-                        { days: 3, price: 600 },
-                        { days: 7, price: 1250 },
-                        { days: 15, price: 2400 },
-                        { days: 30, price: 4000 }
-                    ]
-                },
-                vip: {
-                    name: 'VIP',
-                    badge: 'Premium',
-                    badgeClass: 'vip-badge',
-                    durations: [
-                        { days: 3, price: 900 },
-                        { days: 7, price: 1450 },
-                        { days: 15, price: 2800 },
-                        { days: 30, price: 5000 }
-                    ]
-                }
+                regular: { durations: [{ days: 3, price: 400 }, { days: 7, price: 700 }, { days: 15, price: 1300 }, { days: 30, price: 2000 }] },
+                prime: { durations: [{ days: 3, price: 500 }, { days: 7, price: 950 }, { days: 15, price: 1800 }, { days: 30, price: 3000 }] },
+                'prime-vip': { durations: [{ days: 3, price: 600 }, { days: 7, price: 1250 }, { days: 15, price: 2400 }, { days: 30, price: 4000 }] },
+                vip: { durations: [{ days: 3, price: 900 }, { days: 7, price: 1450 }, { days: 15, price: 2800 }, { days: 30, price: 5000 }] }
             };
 
             let currentPlan = 'regular';
@@ -1345,15 +1282,11 @@
                 currentPlan = plan;
                 document.getElementById('selectedPlan').value = plan;
                 
-                // Update UI
-                document.querySelectorAll('.plan-option').forEach(opt => {
+                document.querySelectorAll('.plan-opt').forEach(opt => {
                     opt.classList.remove('active');
-                    if (opt.dataset.plan === plan) {
-                        opt.classList.add('active');
-                    }
+                    if (opt.dataset.plan === plan) opt.classList.add('active');
                 });
                 
-                // Update durations
                 updateDurations(plan);
             };
 
@@ -1369,25 +1302,22 @@
                 
                 data.durations.forEach((d, index) => {
                     const btn = document.createElement('div');
-                    btn.className = 'duration-btn' + (index === 0 ? ' active' : '');
+                    btn.className = 'dur-btn' + (index === 0 ? ' active' : '');
                     btn.dataset.days = d.days;
                     btn.dataset.price = d.price;
                     btn.innerHTML = `
-                        <div class="days">${d.days} Days</div>
-                        <div class="price">KSh${d.price.toLocaleString()}</div>
+                        <div class="dday">${d.days}d</div>
+                        <div class="dprice">KSh${d.price}</div>
                     `;
-                    btn.onclick = function() {
-                        selectDuration(d.days, d.price);
-                    };
+                    btn.onclick = function() { selectDuration(d.days, d.price); };
                     container.appendChild(btn);
                 });
                 
-                // Set default duration
-                const firstDuration = data.durations[0];
-                currentDuration = firstDuration.days;
-                currentPrice = firstDuration.price;
-                document.getElementById('selectedDuration').value = firstDuration.days;
-                document.getElementById('selectedPrice').value = firstDuration.price;
+                const first = data.durations[0];
+                currentDuration = first.days;
+                currentPrice = first.price;
+                document.getElementById('selectedDuration').value = first.days;
+                document.getElementById('selectedPrice').value = first.price;
             }
 
             // ============================================================
@@ -1399,11 +1329,9 @@
                 document.getElementById('selectedDuration').value = days;
                 document.getElementById('selectedPrice').value = price;
                 
-                document.querySelectorAll('.duration-btn').forEach(btn => {
+                document.querySelectorAll('.dur-btn').forEach(btn => {
                     btn.classList.remove('active');
-                    if (parseInt(btn.dataset.days) === days) {
-                        btn.classList.add('active');
-                    }
+                    if (parseInt(btn.dataset.days) === days) btn.classList.add('active');
                 });
             }
 
@@ -1412,11 +1340,9 @@
             // ============================================================
             window.selectProfileType = function(type) {
                 document.getElementById('profileType').value = type;
-                document.querySelectorAll('.type-option').forEach(opt => {
+                document.querySelectorAll('.type-opt').forEach(opt => {
                     opt.classList.remove('active');
-                    if (opt.dataset.type === type) {
-                        opt.classList.add('active');
-                    }
+                    if (opt.dataset.type === type) opt.classList.add('active');
                 });
             };
 
@@ -1500,20 +1426,11 @@
                             updateStatusBanner('inactive');
                         }
                         
-                        // Load profile type
-                        if (data.profile_type) {
-                            selectProfileType(data.profile_type);
-                        }
-                        
-                        // Load membership plan
+                        if (data.profile_type) selectProfileType(data.profile_type);
                         if (data.membership_plan) {
                             selectPlan(data.membership_plan);
-                            if (data.membership_days) {
-                                selectDuration(data.membership_days, data.membership_price || 0);
-                            }
+                            if (data.membership_days) selectDuration(data.membership_days, data.membership_price || 0);
                         }
-                        
-                        // Load photos
                         if (data.photos && Array.isArray(data.photos)) {
                             uploadedPhotos = data.photos;
                             renderPhotos();
@@ -1546,17 +1463,11 @@
                 document.getElementById('profileOtherServices').value = data.other_services || '';
                 document.getElementById('listOtherCities').checked = data.list_in_other_cities || false;
                 
-                if (data.profile_type) {
-                    selectProfileType(data.profile_type);
-                }
-                
+                if (data.profile_type) selectProfileType(data.profile_type);
                 if (data.membership_plan) {
                     selectPlan(data.membership_plan);
-                    if (data.membership_days) {
-                        selectDuration(data.membership_days, data.membership_price || 0);
-                    }
+                    if (data.membership_days) selectDuration(data.membership_days, data.membership_price || 0);
                 }
-                
                 if (data.services) {
                     const services = Array.isArray(data.services) ? data.services : JSON.parse(data.services || '[]');
                     document.querySelectorAll('#servicesGrid input[type="checkbox"]').forEach(cb => {
@@ -1569,7 +1480,6 @@
                 document.getElementById('bidWager').textContent = 'KSh' + (data.bid_wager || 0);
                 document.getElementById('availableBalance').textContent = 'KSh' + (data.available_balance || 0);
                 document.getElementById('chatCount').textContent = data.chat_count || 0;
-                
                 updateAboutSection(data);
             }
             
@@ -1578,7 +1488,6 @@
             // ============================================================
             function renderPhotos() {
                 photoGrid.innerHTML = '';
-                
                 uploadedPhotos.forEach((photo, index) => {
                     const div = document.createElement('div');
                     div.className = 'photo-item';
@@ -1604,7 +1513,6 @@
                     addDiv.onclick = function() { photoInput.click(); };
                     photoGrid.appendChild(addDiv);
                 }
-                
                 photoCount.textContent = uploadedPhotos.length + ' photos';
             }
             
@@ -1626,7 +1534,6 @@
                 }
                 
                 const filesToUpload = Math.min(files.length, remainingSlots);
-                
                 for (let i = 0; i < filesToUpload; i++) {
                     const file = files[i];
                     const reader = new FileReader();
@@ -1639,7 +1546,6 @@
                     };
                     reader.readAsDataURL(file);
                 }
-                
                 this.value = '';
             });
             
@@ -1715,7 +1621,7 @@
             }
             
             // ============================================================
-            // SAVE PROFILE - WITH MEMBERSHIP PLAN
+            // SAVE PROFILE
             // ============================================================
             profileForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -1790,7 +1696,6 @@
                     showToast('✅ Profile saved! Pending admin approval.', 'success');
                     updateAboutSection(profileData);
                     
-                    // Log activity for admin
                     await window.supabaseFunctions.logActivity(
                         currentUser.id,
                         'profile_submitted',
@@ -1808,22 +1713,14 @@
             });
             
             // ============================================================
-            // ADD FUND
+            // OTHER BUTTONS
             // ============================================================
             document.getElementById('addFundBtn').addEventListener('click', function() {
                 showToast('💳 Fund feature coming soon!', 'info');
             });
-            
-            // ============================================================
-            // ACTIVATE CHAT
-            // ============================================================
             document.getElementById('activateChatBtn').addEventListener('click', function() {
                 showToast('💬 Chat feature coming soon!', 'info');
             });
-            
-            // ============================================================
-            // VERIFY ACCOUNT
-            // ============================================================
             document.getElementById('verifyBtn').addEventListener('click', function() {
                 showToast('✅ Verification feature coming soon!', 'info');
             });
@@ -1856,17 +1753,17 @@
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             
             // ============================================================
-            // INIT - Load default durations
+            // INIT
             // ============================================================
             checkSession();
             updateDurations('regular');
             
-            console.log('✅ My Profile - With Membership Plans Loaded!');
+            console.log('✅ My Profile - Complete Fixed Version Loaded!');
             console.log('📸 Multiple photo upload (10 max)');
             console.log('👤 Profile Type: Regular or VIP');
             console.log('📋 Membership Plans: Regular, Prime, Prime VIP, VIP');
             console.log('💰 Duration options: 3, 7, 15, 30 days');
-            console.log('📱 Mobile-first design');
+            console.log('📱 All fields visible and working!');
             
         });
     </script>
